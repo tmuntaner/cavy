@@ -1,0 +1,9 @@
+%p#notice= notice
+%p
+  %strong Content:
+  = @page.content
+%p
+  %strong Title:
+  = @page.title
+
+= link_to 'Home', pages_path('home')
