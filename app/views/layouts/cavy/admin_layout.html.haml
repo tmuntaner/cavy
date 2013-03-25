@@ -36,50 +36,21 @@
             %p.navbar-text.pull-right
               Logged in as
               %a.navbar-link{:href => "#"} Username
-            %ul.nav
-              %li.active
-                %a{:href => "/"} Home
-              %li
-                %a{:href => "/users"} Users
-              %li
-                %a{:href => "#contact"} Contact
-          / /.nav-collapse
     .container-fluid
       .row-fluid
         .span3
           .well.sidebar-nav
             %ul.nav.nav-list
-              %li.nav-header Sidebar
-              %li.active
-                %a{:href => "#"} Link
+              %li.nav-header Administration
               %li
-                %a{:href => "#"} Link
+                %a{href: admin_overview_path, id: "admin-overview"} Overview
               %li
-                %a{:href => "#"} Link
+                %a{href: admin_pages_path, id: "admin-pages"} Pages
               %li
-                %a{:href => "#"} Link
-              %li.nav-header Sidebar
-              %li
-                %a{:href => "#"} Link
-              %li
-                %a{:href => "#"} Link
-              %li
-                %a{:href => "#"} Link
-              %li
-                %a{:href => "#"} Link
-              %li
-                %a{:href => "#"} Link
-              %li
-                %a{:href => "#"} Link
-              %li.nav-header Sidebar
-              %li
-                %a{:href => "#"} Link
-              %li
-                %a{:href => "#"} Link
-              %li
-                %a{:href => "#"} Link
+                %a{href: admin_users_path, id: "admin-users"} Users
         .span9
           = yield
       %hr/
       %footer
-        %p © Company 2013
+        © Ruby Rainbows
+        = Time.now.year

@@ -1,0 +1,20 @@
+%h1 Website Pages
+
+%table.table
+  %thead
+    %tr
+      %th Page
+      %th Title
+      %th Content
+      %th Render
+      %th 
+      %th 
+  %tbody
+    - Cavy::Page.all.each do |page|
+      %tr
+        %th= page.id
+        %th= page.title
+        %th= page.content
+        %th= page.render
+        %th= link_to 'edit', '#'
+        %th= link_to 'destroy', '#'

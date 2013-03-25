@@ -4,16 +4,12 @@ module Cavy
   class PagesController < ApplicationController
 
     before_action :set_page, only: [:show, :edit, :update, :destroy]
-    layout 'layouts/cavy/admin_layout', only: [:admin]
 
     def page
       @page = params[:title]? get_page(params[:title]) : Page.find_by(title: Cavy.root)
       render @page.render || 'cavy/pages/page'
     end
 
-    def admin
-
-    end
 
     # GET /pages
     def index
