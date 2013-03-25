@@ -13761,7 +13761,7 @@ Showdown.converter = function() {
       url = (_ref = (_ref2 = this.saveUrl) != null ? _ref2 : Mercury.saveUrl) != null ? _ref : this.iframeSrc();
       data = this.serialize();
       Mercury.log('saving', data);
-      if (this.options.saveStyle !== 'form') data = jQuery.toJSON(data);
+      //if (this.options.saveStyle !== 'form') data = jQuery.toJSON(data);
       if (this.options.saveMethod === 'PUT') method = 'PUT';
       return jQuery.ajax(url, {
         headers: Mercury.ajaxHeaders(),

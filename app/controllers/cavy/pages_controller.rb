@@ -3,13 +3,12 @@ require_dependency "cavy/application_controller"
 module Cavy
   class PagesController < ApplicationController
 
-    before_action :set_page, only: [:show, :edit, :update, :destroy]
+    before_action :set_page, only: [:show, :update, :destroy]
 
     def page
       @page = params[:title]? get_page(params[:title]) : Page.find_by(title: Cavy.root)
       render @page.render || 'cavy/pages/page'
     end
-
 
     # GET /pages
     def index
@@ -27,6 +26,9 @@ module Cavy
 
     # GET /pages/1/edit
     def edit
+      @page = params[:title]? get_page(params[:title]) : Page.find_by(title: Cavy.root)
+      @edit = true
+      render @page.render || 'cavy/pages/page'
     end
 
     # POST /pages
@@ -42,11 +44,9 @@ module Cavy
 
     # PATCH/PUT /pages/1
     def update
-      if @page.update(page_params)
-        redirect_to @page, notice: 'Page was successfully updated.'
-      else
-        render action: 'edit'
-      end
+      @page = Page.find(params[:id])
+      @page.update(title: params[:content][:title][:value], content: params[:content][:content][:value])
+      render text: ""
     end
 
     # DELETE /pages/1

@@ -2,7 +2,7 @@
 %p
   %strong Content:
   #content{"data-mercury" => "full"}
-    = @page.content
+    = @page.content.html_safe
 %p
   %strong Title:
   #title{"data-mercury" => "full"}

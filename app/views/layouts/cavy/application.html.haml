@@ -3,11 +3,13 @@
   %head
     %title Cavy
     = stylesheet_link_tag    "cavy/application", media: "all"
+    = javascript_include_tag "cavy/application"
     = csrf_meta_tags
     %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
   %body
     = render 'layouts/cavy/header'
     = yield
-    - if can_edit?
-      = javascript_include_tag "cavy/mercury_loader"
-  = javascript_include_tag "cavy/application"
+    - if @edit
+      = link_to 'edit', cavy_update_page_path(@page.id), id: 'edit_link', data: {save_url: cavy_update_page_path(@page.id)}
+      = link_to 'Back to Content', pages_path(@page.title)
+      = javascript_include_tag "cavy/mercury_loader", "cavy/mercury_save"
