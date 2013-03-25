@@ -275,7 +275,7 @@ window.Mercury = {
       allowedMimeTypes: ['image/jpeg', 'image/gif', 'image/png'],
       maxFileSize: 1235242880,
       inputName: 'image[image]',
-      url: '/mercury/images',
+      url: '/mercury/image',
       handler: false
       },
 
@@ -18923,6 +18923,8 @@ Showdown.converter = function() {
           if (alignment = _this.element.find('#media_image_alignment').val()) {
             attrs['align'] = alignment;
           }
+          attrs['width'] = _this.element.find('#image_width').val();
+          attrs['height'] = _this.element.find('#image_height').val();
           Mercury.trigger('action', {
             action: 'insertImage',
             value: attrs
