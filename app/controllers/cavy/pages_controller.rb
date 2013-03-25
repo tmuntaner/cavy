@@ -8,7 +8,7 @@ module Cavy
 
     def page
       @page = params[:title]? get_page(params[:title]) : Page.find_by(title: Cavy.root)
-      render @page.render
+      render @page.render || 'cavy/pages/page'
     end
 
     def admin

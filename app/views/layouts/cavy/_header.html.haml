@@ -1,0 +1,5 @@
+%nav
+  %ul
+    %li
+      - Cavy::Page.all.each do |page|
+        = link_to page.title, pages_path(page.title)

@@ -5,7 +5,7 @@ module Cavy
       if page == Cavy.root
         "/"
       else
-        "/#{page.title}"
+        "/#{page}"
       end
     end
 
