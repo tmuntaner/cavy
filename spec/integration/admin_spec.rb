@@ -15,15 +15,6 @@ module Cavy
     end
 
     it "should be able to go to the list of pages" do
-      @page = Page.create(title: 'home-foo', content: 'foobar')
-      visit '/admin'
-      click_link 'admin-pages'
-      page.should have_content('Website Pages')
-      page.should have_content('home-foo')
-      @page.destroy
-    end
-
-    it "should be able to go to the list of pages" do
       visit '/admin'
       click_link 'admin-users'
       page.should have_content('Administration Users')

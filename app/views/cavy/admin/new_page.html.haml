@@ -1,2 +1,22 @@
-%h1 Admin#new_page
-%p Find me in app/views/cavy/admin/new_page.html.haml
+%h1 New Page
+
+= form_for(@page, url: admin_create_page_path, method: :post, html: {class: 'form-horizontal'}) do |f|
+  - if @page.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@page.errors.count, "error")
+        prohibited this page from being saved:
+      %ul
+        - @page.errors.full_messages.each do |msg|
+          %li= msg
+  .control-group
+    = f.label :title, class: 'control-label'
+    .controls
+      = f.text_field :title
+  .control-group
+    = f.label :render, class: 'control-label'
+    .controls
+      = f.text_field :render
+  .control-group
+    .controls
+      = f.submit( 'Submit', class: 'btn btn-primary', id: 'submit_page' )

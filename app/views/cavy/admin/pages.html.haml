@@ -1,6 +1,6 @@
 %h1 Website Pages
 
-%table.table
+%table.table.table-striped
   %thead
     %tr
       %th Page
@@ -13,7 +13,7 @@
     - Cavy::Page.all.each do |page|
       %tr
         %th= page.id
-        %th= page.title
+        %th= link_to page.title, admin_page_path(page.id), id: "page-#{page.title}"
         %th= page.content
         %th= page.render
         %th= link_to 'edit', '#'
