@@ -1,0 +1,15 @@
+before_install:
+  - gem update --system
+  - gem --version
+
+language: ruby
+
+rvm:
+  - 2.0.0
+
+gemfile: Gemfile
+
+script: rspec spec
+
+before_script:
+  - cp spec/dummy/config/database.travis.yml spec/dummy/config/database.yml
