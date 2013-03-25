@@ -1,9 +1,9 @@
 %p#notice= notice
 %p
   %strong Content:
-  = @page.content
+  #content{"data-mercury" => "full"}
+    = @page.content
 %p
   %strong Title:
-  = @page.title
-
-= link_to 'Home', pages_path('home')
+  #title{"data-mercury" => "full"}
+    = @page.title

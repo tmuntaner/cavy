@@ -2,6 +2,7 @@ Cavy::Engine.routes.draw do
   
   root to: 'pages#page'
 
+  get '/mercury/:type/:resource', to: "mercury#resource"
   get '/admin',     to: 'admin#overview',   as: 'admin_overview'
   
   get   '/pages',     to: 'admin#pages',        as: 'admin_pages'

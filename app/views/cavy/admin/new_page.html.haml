@@ -18,5 +18,9 @@
     .controls
       = f.text_field :render
   .control-group
+    = f.label :content, class: 'control-label'
+    .controls
+      = f.text_area :content
+  .control-group
     .controls
       = f.submit( 'Submit', class: 'btn btn-primary', id: 'submit_page' )

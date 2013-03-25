@@ -6,7 +6,6 @@ PATH
       haml
       jquery-rails
       rails (~> 4.0.0.beta1)
-      turbolinks
 
 GEM
   remote: https://rubygems.org/
@@ -139,7 +138,6 @@ GEM
     treetop (1.4.12)
       polyglot
       polyglot (>= 0.3.1)
-    turbolinks (0.5.1)
     tzinfo (0.3.37)
     websocket (1.0.7)
     xpath (1.0.0)
