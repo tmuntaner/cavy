@@ -10,6 +10,18 @@ module Cavy
       @page.destroy
     end
 
+    it "should make a route after saving" do
+      @page = Page.create(title: 'foo', content: 'bar')
+      @page.route.should eq('foo')
+      @page.destroy
+    end
+
+    it "should take care of spaces in routes" do
+      @page = Page.create(title: 'foo bar', content: 'bar')
+      @page.route.should eq('foo_bar')
+      @page.destroy
+    end
+
     it "should not be able to create two pages with same title" do
       @page1 = Page.create(title: 'foo', content: 'bar')
       @page2 = Page.create(title: 'foo', content: 'bar')

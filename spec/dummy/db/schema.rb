@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130324180219) do
+ActiveRecord::Schema.define(version: 20130326094906) do
 
   create_table "cavy_applications", force: true do |t|
     t.string   "root"
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 20130324180219) do
     t.string   "render"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "route"
   end
 
 end

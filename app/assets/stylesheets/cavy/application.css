@@ -9,5 +9,8 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- *= require_tree .
+ *= require cavy/bootstrap-and-overrides
+ *= require cavy/bootstrap
+ *= require cavy/mercury.bundle
+ *= require cavy/pages
  */

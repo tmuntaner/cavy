@@ -12,7 +12,7 @@ Cavy::Engine.routes.draw do
   post  '/page',            to: 'admin#create_page',  as: 'admin_create_page'
   get   '/page/:id',        to: 'admin#page',         as: 'admin_page'
   put   '/page/:id',        to: 'admin#update_page',  as: 'admin_update_page'
-
+  get   '/page/edit/:id',   to: 'admin#edit_page',    as: 'admin_edit_page'
   get   '/new_user',        to: 'admin#new_user',     as: 'admin_new_user'
   get   '/users',           to: 'admin#users',        as: 'admin_users'
 

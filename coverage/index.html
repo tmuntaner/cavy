@@ -14,27 +14,27 @@
       <img src="./assets/0.7.1/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2013-03-26T01:19:26+01:00">2013-03-26T01:19:26+01:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2013-03-26T10:52:27+01:00">2013-03-26T10:52:27+01:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
         <div class="file_list_container" id="AllFiles">
   <h2>
     <span class="group_name">All Files</span>
-    (<span class="covered_percent"><span class="green">96.8%</span></span>
+    (<span class="covered_percent"><span class="green">93.75%</span></span>
      covered at
      <span class="covered_strength">
        <span class="green">
-         1.39
+         1.61
        </span>
     </span> hits/line)
   </h2>
   <a name="AllFiles"></a>
   <div>
     <b>9</b> files in total.
-    <b>125</b> relevant lines. 
-    <span class="green"><b>121</b> lines covered</span> and
-    <span class="red"><b>4</b> lines missed </span>
+    <b>144</b> relevant lines. 
+    <span class="green"><b>135</b> lines covered</span> and
+    <span class="red"><b>9</b> lines missed </span>
   </div>
   <table class="file_list">
     <thead>
@@ -52,12 +52,12 @@
       
       <tr>
         <td class="strong"><a href="#accdb15ff8458d7fdbf51f52ec8b4f6c35d673a4" class="src_link" title="app/controllers/cavy/admin_controller.rb">app/controllers/cavy/admin_controller.rb</a></td>
-        <td class="green strong">100.0 %</td>
-        <td>50</td>
-        <td>21</td>
-        <td>21</td>
-        <td>0</td>
-        <td>1.3</td>
+        <td class="yellow strong">82.14 %</td>
+        <td>63</td>
+        <td>28</td>
+        <td>23</td>
+        <td>5</td>
+        <td>1.0</td>
       </tr>
       
       <tr>
@@ -103,11 +103,11 @@
       <tr>
         <td class="strong"><a href="#9bebba1050b3dafe4e61b246270aa3ad16da1de9" class="src_link" title="app/models/cavy/page.rb">app/models/cavy/page.rb</a></td>
         <td class="green strong">100.0 %</td>
-        <td>6</td>
-        <td>3</td>
-        <td>3</td>
+        <td>15</td>
+        <td>7</td>
+        <td>7</td>
         <td>0</td>
-        <td>1.0</td>
+        <td>3.3</td>
       </tr>
       
       <tr>
@@ -133,9 +133,9 @@
       <tr>
         <td class="strong"><a href="#8eb1d90a33e4b921bc3d9770c79b0ba9e1abae5a" class="src_link" title="spec/models/cavy/page_spec.rb">spec/models/cavy/page_spec.rb</a></td>
         <td class="green strong">100.0 %</td>
-        <td>46</td>
-        <td>30</td>
-        <td>30</td>
+        <td>58</td>
+        <td>38</td>
+        <td>38</td>
         <td>0</td>
         <td>1.0</td>
       </tr>
@@ -159,11 +159,11 @@
         <div class="source_table" id="accdb15ff8458d7fdbf51f52ec8b4f6c35d673a4">
   <div class="header">
     <h3>app/controllers/cavy/admin_controller.rb</h3>
-    <h4><span class="green">100.0 %</span> covered</h4>
+    <h4><span class="yellow">82.14 %</span> covered</h4>
     <div>
-      <b>21</b> relevant lines. 
-      <span class="green"><b>21</b> lines covered</span> and
-      <span class="red"><b>0</b> lines missed.</span>
+      <b>28</b> relevant lines. 
+      <span class="green"><b>23</b> lines covered</span> and
+      <span class="red"><b>5</b> lines missed.</span>
     </div>
   </div>
   
@@ -401,70 +401,148 @@
         <li class="covered" data-hits="1" data-linenumber="39">
           <span class="hits">1</span>
           
-          <code class="ruby">    def new_user</code>
+          <code class="ruby">    def update_page</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="40">
+        <li class="missed" data-hits="0" data-linenumber="40">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">      @page = Page.find(params[:id])</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="41">
+        <li class="missed" data-hits="0" data-linenumber="41">
           
           
-          <code class="ruby">    end</code>
+          <code class="ruby">      if @page.update(page_params)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="42">
+        <li class="missed" data-hits="0" data-linenumber="42">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">        redirect_to admin_page_path(@page), notice: &#39;Page was successfully created.&#39;</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="43">
-          <span class="hits">1</span>
+        <li class="never" data-hits="" data-linenumber="43">
           
-          <code class="ruby">    private</code>
+          
+          <code class="ruby">      else</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="44">
+        <li class="missed" data-hits="0" data-linenumber="44">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">        render action: &#39;edit_page&#39;</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="45">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      def page_params</code>
-        </li>
-      
-        <li class="covered" data-hits="2" data-linenumber="46">
-          <span class="hits">2</span>
-          
-          <code class="ruby">        params.require(:page).permit(:title, :render)</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="47">
+        <li class="never" data-hits="" data-linenumber="45">
           
           
           <code class="ruby">      end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="48">
+        <li class="never" data-hits="" data-linenumber="46">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="47">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="49">
+        <li class="covered" data-hits="1" data-linenumber="48">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    def edit_page</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="49">
+          
+          
+          <code class="ruby">      @page = Cavy::Page.find(params[:id])</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="50">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="51">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="52">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    def new_user</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="53">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="54">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="55">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="56">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    private</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="57">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="58">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      def page_params</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="59">
+          <span class="hits">2</span>
+          
+          <code class="ruby">        params.require(:page).permit(:title, :render)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="60">
+          
+          
+          <code class="ruby">      end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="61">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="62">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="50">
+        <li class="never" data-hits="" data-linenumber="63">
           
           
           <code class="ruby">end</code>
@@ -917,8 +995,8 @@
     <h3>app/models/cavy/page.rb</h3>
     <h4><span class="green">100.0 %</span> covered</h4>
     <div>
-      <b>3</b> relevant lines. 
-      <span class="green"><b>3</b> lines covered</span> and
+      <b>7</b> relevant lines. 
+      <span class="green"><b>7</b> lines covered</span> and
       <span class="red"><b>0</b> lines missed.</span>
     </div>
   </div>
@@ -953,10 +1031,64 @@
         <li class="never" data-hits="" data-linenumber="5">
           
           
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="6">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    after_save :make_route</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="7">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="8">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    private</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="9">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="10">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    def make_route</code>
+        </li>
+      
+        <li class="covered" data-hits="17" data-linenumber="11">
+          <span class="hits">17</span>
+          
+          <code class="ruby">      self.route = self.title.gsub(&#39; &#39;, &#39;_&#39;)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="12">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="13">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="14">
+          
+          
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="6">
+        <li class="never" data-hits="" data-linenumber="15">
           
           
           <code class="ruby">end</code>
@@ -1415,8 +1547,8 @@
     <h3>spec/models/cavy/page_spec.rb</h3>
     <h4><span class="green">100.0 %</span> covered</h4>
     <div>
-      <b>30</b> relevant lines. 
-      <span class="green"><b>30</b> lines covered</span> and
+      <b>38</b> relevant lines. 
+      <span class="green"><b>38</b> lines covered</span> and
       <span class="red"><b>0</b> lines missed.</span>
     </div>
   </div>
@@ -1499,25 +1631,25 @@
         <li class="covered" data-hits="1" data-linenumber="13">
           <span class="hits">1</span>
           
-          <code class="ruby">    it &quot;should not be able to create two pages with same title&quot; do</code>
+          <code class="ruby">    it &quot;should make a route after saving&quot; do</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="14">
           <span class="hits">1</span>
           
-          <code class="ruby">      @page1 = Page.create(title: &#39;foo&#39;, content: &#39;bar&#39;)</code>
+          <code class="ruby">      @page = Page.create(title: &#39;foo&#39;, content: &#39;bar&#39;)</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="15">
           <span class="hits">1</span>
           
-          <code class="ruby">      @page2 = Page.create(title: &#39;foo&#39;, content: &#39;bar&#39;)</code>
+          <code class="ruby">      @page.route.should eq(&#39;foo&#39;)</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="16">
           <span class="hits">1</span>
           
-          <code class="ruby">      @page2.should_not be_valid</code>
+          <code class="ruby">      @page.destroy</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="17">
@@ -1535,61 +1667,61 @@
         <li class="covered" data-hits="1" data-linenumber="19">
           <span class="hits">1</span>
           
-          <code class="ruby">    it &quot;should not allow the creation of a page without a title&quot; do</code>
+          <code class="ruby">    it &quot;should take care of spaces in routes&quot; do</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="20">
           <span class="hits">1</span>
           
-          <code class="ruby">      @page = Page.create(content: &#39;foobar&#39;)</code>
+          <code class="ruby">      @page = Page.create(title: &#39;foo bar&#39;, content: &#39;bar&#39;)</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="21">
           <span class="hits">1</span>
           
-          <code class="ruby">      @page.should_not be_valid</code>
+          <code class="ruby">      @page.route.should eq(&#39;foo_bar&#39;)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="22">
+        <li class="covered" data-hits="1" data-linenumber="22">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">    end</code>
+          <code class="ruby">      @page.destroy</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="23">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">    end</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="24">
-          <span class="hits">1</span>
+        <li class="never" data-hits="" data-linenumber="24">
           
-          <code class="ruby">    it &quot;should be able to have a title&quot; do</code>
+          
+          <code class="ruby"></code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="25">
           <span class="hits">1</span>
           
-          <code class="ruby">      Page.create(title: &#39;foo&#39;, content: &#39;bar&#39;)</code>
+          <code class="ruby">    it &quot;should not be able to create two pages with same title&quot; do</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="26">
           <span class="hits">1</span>
           
-          <code class="ruby">      @page = Page.find_by(title: &#39;foo&#39;)</code>
+          <code class="ruby">      @page1 = Page.create(title: &#39;foo&#39;, content: &#39;bar&#39;)</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="27">
           <span class="hits">1</span>
           
-          <code class="ruby">      @page.title.should eq(&#39;foo&#39;)</code>
+          <code class="ruby">      @page2 = Page.create(title: &#39;foo&#39;, content: &#39;bar&#39;)</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="28">
           <span class="hits">1</span>
           
-          <code class="ruby">      @page.destroy</code>
+          <code class="ruby">      @page2.should_not be_valid</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="29">
@@ -1607,94 +1739,166 @@
         <li class="covered" data-hits="1" data-linenumber="31">
           <span class="hits">1</span>
           
-          <code class="ruby">    it &quot;should be able to have content&quot; do</code>
+          <code class="ruby">    it &quot;should not allow the creation of a page without a title&quot; do</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="32">
           <span class="hits">1</span>
           
-          <code class="ruby">      Page.create(title: &#39;foo&#39;, content: &#39;bar&#39;)</code>
+          <code class="ruby">      @page = Page.create(content: &#39;foobar&#39;)</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="33">
           <span class="hits">1</span>
           
-          <code class="ruby">      @page = Page.find_by(title: &#39;foo&#39;)</code>
+          <code class="ruby">      @page.should_not be_valid</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="34">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      @page.content.should eq(&#39;bar&#39;)</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="35">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      @page.destroy</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="36">
+        <li class="never" data-hits="" data-linenumber="34">
           
           
           <code class="ruby">    end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="37">
+        <li class="never" data-hits="" data-linenumber="35">
           
           
           <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="36">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    it &quot;should be able to have a title&quot; do</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="37">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      Page.create(title: &#39;foo&#39;, content: &#39;bar&#39;)</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="38">
           <span class="hits">1</span>
           
-          <code class="ruby">    it &quot;should be able to specify a render page&quot; do</code>
+          <code class="ruby">      @page = Page.find_by(title: &#39;foo&#39;)</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="39">
           <span class="hits">1</span>
           
-          <code class="ruby">      Page.create(title: &#39;foo&#39;, content: &#39;bar&#39;, render: &#39;foobar&#39;)</code>
+          <code class="ruby">      @page.title.should eq(&#39;foo&#39;)</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="40">
           <span class="hits">1</span>
           
-          <code class="ruby">      @page = Page.find_by(title: &#39;foo&#39;)</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="41">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      @page.render.should eq(&#39;foobar&#39;)</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="42">
-          <span class="hits">1</span>
-          
           <code class="ruby">      @page.destroy</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="43">
+        <li class="never" data-hits="" data-linenumber="41">
           
           
           <code class="ruby">    end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="44">
+        <li class="never" data-hits="" data-linenumber="42">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="45">
+        <li class="covered" data-hits="1" data-linenumber="43">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    it &quot;should be able to have content&quot; do</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="44">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      Page.create(title: &#39;foo&#39;, content: &#39;bar&#39;)</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="45">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      @page = Page.find_by(title: &#39;foo&#39;)</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="46">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      @page.content.should eq(&#39;bar&#39;)</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="47">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      @page.destroy</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="48">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="49">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="50">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    it &quot;should be able to specify a render page&quot; do</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="51">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      Page.create(title: &#39;foo&#39;, content: &#39;bar&#39;, render: &#39;foobar&#39;)</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="52">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      @page = Page.find_by(title: &#39;foo&#39;)</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="53">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      @page.render.should eq(&#39;foobar&#39;)</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="54">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      @page.destroy</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="55">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="56">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="57">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="46">
+        <li class="never" data-hits="" data-linenumber="58">
           
           
           <code class="ruby">end</code>
