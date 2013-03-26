@@ -3,7 +3,7 @@ module Cavy
 
     validates :title, uniqueness: true, presence: true
 
-    after_save :make_route
+    before_save :make_route
 
     private
 

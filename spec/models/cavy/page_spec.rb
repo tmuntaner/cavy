@@ -17,7 +17,8 @@ module Cavy
     end
 
     it "should take care of spaces in routes" do
-      @page = Page.create(title: 'foo bar', content: 'bar')
+      Page.create(title: 'foo bar', content: 'bar')
+      @page = Page.find_by(title: 'foo bar')
       @page.route.should eq('foo_bar')
       @page.destroy
     end

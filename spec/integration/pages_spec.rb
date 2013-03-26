@@ -40,5 +40,19 @@ module Cavy
       page.should have_content(@page.title.upcase)
     end
 
+    it "should be able to go to non-root page through url" do
+      @about = Page.create(title: 'about', content: 'foo_about_bar')
+      visit '/about'
+      page.should have_content('foo_about_bar')
+      @about.destroy
+    end
+
+    it "should be able to go to non-root page through url with spaces in title" do
+      @about = Page.create(title: 'about us', content: 'foo_about_bar')
+      visit '/about_us'
+      page.should have_content('foo_about_bar')
+      @about.destroy
+    end
+
   end
 end
