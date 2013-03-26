@@ -35,7 +35,7 @@ module Cavy
     end
 
     it "should be able to change render" do
-      @page.update(render: 'cavy_test/pages/test')
+      @page.update(render: 'cavy/shared/test')
       visit '/'
       page.should have_content(@page.title.upcase)
     end
