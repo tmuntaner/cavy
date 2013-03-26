@@ -13,14 +13,11 @@
 
 ActiveRecord::Schema.define(version: 20130326132936) do
 
-  create_table "cavy_applications", force: true do |t|
-    t.string   "root"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "cavy_pages", force: true do |t|
-    t.text     "content",    limit: 255
+    t.text     "content"
     t.string   "title"
     t.string   "render"
     t.datetime "created_at"
