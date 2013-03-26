@@ -36,6 +36,12 @@ module Cavy
       end
     end
 
+    def delete_page
+      @page = Cavy::Page.find(params[:id])
+      @page.destroy
+      redirect_to admin_pages_path, notice: 'Page was successfully destroyed.'
+    end
+
     def update_page
       @page = Page.find(params[:id])
       if @page.update(page_params)

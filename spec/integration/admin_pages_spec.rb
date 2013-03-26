@@ -33,6 +33,15 @@ module Cavy
       @page.destroy
     end
 
+    it "should be able to edit a page" do
+      @page = Page.create(title: 'home-foo', content: 'foobar')
+      visit '/admin'
+      click_link 'admin-pages'
+      click_link "delete-page-#{@page.id}"
+      @pages = Cavy::Page.all
+      @pages.size.should eq(0)
+    end
+
     it "should not be able to add a new page with invalid info" do
       visit '/admin'
       click_link 'admin-new-page'

@@ -5,7 +5,7 @@ module Cavy
 
     before_action :set_page, only: [:page, :edit]
 
-    def page      
+    def page
       render @page.render || 'cavy/pages/page'
     end
 
