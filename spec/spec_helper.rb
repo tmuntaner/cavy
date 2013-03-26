@@ -7,6 +7,9 @@ require 'rspec/autorun'
 require 'factory_girl_rails'
 require 'capybara/rails'
 require 'capybara/rspec'
+require 'simplecov'
+
+SimpleCov.start
 
 Rails.backtrace_cleaner.remove_silencers!
 
