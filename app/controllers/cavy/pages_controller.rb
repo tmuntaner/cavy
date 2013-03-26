@@ -14,6 +14,12 @@ module Cavy
       render @page.render || 'cavy/pages/page'
     end
 
+    def update
+      @page = Page.find(params[:id])
+      @page.update(title: params[:content][:title][:value], content: params[:content][:content][:value])
+      render text: ''
+    end
+
     private
 
       def not_found

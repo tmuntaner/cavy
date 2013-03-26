@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130326094906) do
+ActiveRecord::Schema.define(version: 20130326132936) do
 
   create_table "cavy_applications", force: true do |t|
     t.string   "root"
@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 20130326094906) do
   end
 
   create_table "cavy_pages", force: true do |t|
-    t.string   "content"
+    t.text     "content",    limit: 255
     t.string   "title"
     t.string   "render"
     t.datetime "created_at"
