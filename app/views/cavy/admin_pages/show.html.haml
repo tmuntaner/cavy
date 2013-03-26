@@ -1,1 +1,5 @@
 %h1= @page.title
+
+= link_to 'Edit Page Settings', admin_edit_page_path(@page.id), id: 'edit-page-settings'
+%br/
+= link_to 'Edit Page Content', cavy_edit_page_path(@page.route), id: 'edit-page-content'

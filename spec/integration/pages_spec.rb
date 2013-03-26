@@ -54,5 +54,10 @@ module Cavy
       @about.destroy
     end
 
+    it "should give 404 for non pages" do
+      visit '/supercalifragilisticexpialidocious'
+      page.status_code.should eq(404)
+    end
+
   end
 end

@@ -10,6 +10,25 @@ module Cavy
       @page.destroy
     end
 
+    describe 'title' do
+      it "should not accept a blank string as a title" do
+        @page = Page.create(title: '', content: 'bar')
+        @page.should_not be_valid
+      end
+
+      it "should have a limit of 100 characters for a title" do
+        @title = 'a'*100
+        @page = Page.create(title: '', content: 'bar')
+        @page.should_not be_valid
+      end
+
+      it "should not accept a title over 100 characters" do
+        @title = 'a'*101
+        @page = Page.create(title: '', content: 'bar')
+        @page.should_not be_valid
+      end
+    end
+
     it "should make a route after saving" do
       @page = Page.create(title: 'foo', content: 'bar')
       @page.route.should eq('foo')
