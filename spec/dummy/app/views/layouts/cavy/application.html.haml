@@ -24,6 +24,10 @@
       }
   %body
     = render 'layouts/cavy/header'
+    - flash.each do |name, msg|
+      %div{:class => "alert-box #{name}","data-alert" => ""}
+        %a.close{:href => "#"} &times;
+        = msg if msg.is_a?(String)
     .container
       = yield
     - if @edit

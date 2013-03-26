@@ -1,5 +1,10 @@
 Cavy::Engine.routes.draw do
   
+  get "sessions/new"
+  get "sessions/create"
+  get "sessions/destroy"
+  resources :users
+
   root to: 'pages#page'
 
   get   '/mercury/:type/:resource', to: "mercury#resource"
@@ -15,6 +20,10 @@ Cavy::Engine.routes.draw do
   put   '/admin/page/:id',        to: 'admin_pages#update',  as: 'admin_update_page'
   delete '/admin/page/:id',       to: 'admin_pages#delete',  as: 'admin_delete_page'
   get   '/admin/page/edit/:id',   to: 'admin_pages#edit',    as: 'admin_edit_page'
+
+  get   '/admin/signin',          to: 'sessions#new',       as: 'admin_signin'
+  post  '/admin/signin',          to: 'sessions#create',    as: 'admin_create_session'
+  delete '/admin/signout',        to: 'sessions#destroy',   as: 'admin_destroy_session'
 
   get   '/admin/new_user',        to: 'admin#new_user',     as: 'admin_new_user'
   get   '/admin/users',           to: 'admin#users',        as: 'admin_users'

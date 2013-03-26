@@ -3,6 +3,14 @@ require 'spec_helper'
 module Cavy
   describe 'Admin Pages Interface' do
 
+    before(:each) do
+      log_in('admin')
+    end
+
+    after(:each) do
+      log_out
+    end
+    
     it "should be able to go to the new page page" do
       visit '/admin'
       click_link 'admin-new-page'

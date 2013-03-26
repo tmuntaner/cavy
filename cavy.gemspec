@@ -23,9 +23,12 @@ Gem::Specification.new do |s|
   s.add_dependency 'carrierwave'
   s.add_dependency 'mini_magick'
   s.add_dependency 'pg'
+  s.add_dependency 'bcrypt-ruby'
 
   s.add_development_dependency 'rspec-rails'
   s.add_development_dependency 'capybara'
+  s.add_development_dependency 'meta_request'
+  s.add_development_dependency 'unicorn'
   s.add_development_dependency 'factory_girl_rails'
   s.add_development_dependency 'better_errors'
   s.add_development_dependency 'binding_of_caller'

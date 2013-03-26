@@ -1,0 +1,9 @@
+%h1 Sign In
+
+= form_tag admin_create_session_path do
+  = text_field_tag :email, params[:email], placeholder: "Email", id: "user-email"
+  %br/
+  = password_field_tag :password, nil, placeholder: "Password", id: "user-password"
+  %br/
+  %br/
+  = submit_tag "Submit", class: "btn btn-primary", id: "sign-in"

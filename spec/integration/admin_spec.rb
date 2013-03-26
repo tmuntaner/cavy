@@ -3,6 +3,14 @@ require 'spec_helper'
 module Cavy
   describe 'Admin Interface' do
 
+    before(:each) do
+      log_in('admin')
+    end
+
+    after(:each) do
+      log_out
+    end
+    
     it "should be able to go to the home page" do
       visit '/admin'
       page.should have_content('Website Overview')

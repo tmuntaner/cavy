@@ -1,9 +1,0 @@
-%p#notice= notice
-
-%h1#title{"data-mercury" => "full"}
-  = @page.title
-
-%p
-  %strong Content:
-  #content{"data-mercury" => "full"}
-    = @page.content.html_safe

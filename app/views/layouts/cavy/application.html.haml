@@ -8,6 +8,10 @@
     %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
   %body
     = render 'layouts/cavy/header'
+    - flash.each do |name, msg|
+      %div{:class => "alert-box #{name}","data-alert" => ""}
+        %a.close{:href => "#"} &times;
+        = msg if msg.is_a?(String)
     = yield
     - if @edit
       = link_to 'edit', cavy_update_page_path(@page.id), id: 'edit_link', data: {save_url: cavy_update_page_path(@page.id)}

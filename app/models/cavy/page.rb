@@ -5,9 +5,14 @@ module Cavy
 
     before_save :make_route
     before_save :check_render
+    before_save :check_content
 
     private
 
+    def check_content
+      self.content = "" if self.content == nil
+    end
+    
     def make_route
       self.route = self.title.gsub(' ', '_')
     end
