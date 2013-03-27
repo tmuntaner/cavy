@@ -1,5 +1,24 @@
-%h1= @page.title
+%h1= "Page - #{@page.title}"
 
-= link_to 'Edit Page Settings', admin_edit_page_path(@page.id), id: 'edit-page-settings'
+%hr/
+
+= link_to 'Edit Page Settings', admin_edit_page_path(@page.id), id: 'edit-page-settings', class: 'btn'
+= link_to 'Edit Page Content', cavy_edit_page_path(@page.route), id: 'edit-page-content', class: 'btn'
+
 %br/
-= link_to 'Edit Page Content', cavy_edit_page_path(@page.route), id: 'edit-page-content'
+%br/
+%h3 Route
+= "/#{@page.route}"
+%br/
+%br/
+%h3 Meta Tags
+
+- unless @page.tags == nil
+  %ul
+    - @page.tags.each do |tag|
+      %li= tag
+
+%br/
+
+%h3 Meta Description
+= @page.description if @page.description

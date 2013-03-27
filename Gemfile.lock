@@ -5,6 +5,7 @@ PATH
       bcrypt-ruby
       carrierwave
       coffee-script
+      globalize3
       haml
       jquery-rails
       mini_magick
@@ -82,6 +83,9 @@ GEM
       factory_girl (~> 4.2.0)
       railties (>= 3.0.0)
     ffi (1.6.0)
+    globalize3 (0.1.0)
+      activemodel (>= 3.0.0)
+      activerecord (>= 3.0.0)
     haml (4.0.1)
       tilt
     hike (1.2.1)
