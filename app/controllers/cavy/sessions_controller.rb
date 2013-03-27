@@ -2,6 +2,7 @@ require_dependency "cavy/application_controller"
 
 module Cavy
   class SessionsController < ApplicationController
+    
     def new
     end
 

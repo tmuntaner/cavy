@@ -33,10 +33,5 @@ module Cavy
       render json: {image: {url: uploader.url} }
     end
 
-    private
-
-    # def authenticate
-    #   redirect_to "/#{params[:requested_uri]}" unless can_edit?
-    # end
   end
 end

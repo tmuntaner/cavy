@@ -8,7 +8,9 @@ require 'factory_girl_rails'
 require 'capybara/rails'
 require 'capybara/rspec'
 require 'simplecov'
+require 'coveralls'
 
+Coveralls.wear!
 SimpleCov.start
 
 Rails.backtrace_cleaner.remove_silencers!

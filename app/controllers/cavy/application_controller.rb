@@ -13,7 +13,8 @@ module Cavy
     private
 
     def can_edit?
-      true
+      return true if signed_in?
+      false
     end
 
     def current_user
