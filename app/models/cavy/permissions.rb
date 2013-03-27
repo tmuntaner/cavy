@@ -1,11 +1,15 @@
 module Cavy
   module Permissions
+
     def self.permission_for(user)
       if user == nil
         GuestPermission.new
-      else
+      elsif user.role == 'admin'
         AdminPermission.new(user)
+      elsif user.role == 'client'
+        ClientPermission.new(user)
       end
     end
+    
   end
 end

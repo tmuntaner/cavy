@@ -13,7 +13,6 @@ module Cavy
 
 
     def new_user
-
     end
 
   end
