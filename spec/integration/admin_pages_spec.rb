@@ -25,11 +25,10 @@ module Cavy
       click_on 'submit_page'
       @page = Cavy::Page.find_by(title: 'foobar')
       @page.render.should eq('cavy_test/pages/test')
-      @page.destroy
     end
 
     it "should be able to edit a page" do
-      @page = Page.create(title: 'home-foo', content: 'foobar')
+      @page = FactoryGirl.create(:cavy_page)
       visit '/admin'
       click_link 'admin-pages'
       click_link "edit-page-#{@page.id}"
@@ -38,23 +37,22 @@ module Cavy
       click_on 'submit_page'
       @page = Cavy::Page.find_by(title: 'foobar')
       @page.render.should eq('cavy_test/pages/test')
-      @page.destroy
     end
 
     it "shouldn't be able to edit a page without a title" do
-      @page = Page.create(title: 'home-foo', content: 'foobar')
+      @page = FactoryGirl.create(:cavy_page, title: 'home-foo')
       visit '/admin'
       click_link 'admin-pages'
       click_link "edit-page-#{@page.id}"
       fill_in 'page_title',   with: ''
       fill_in 'page_render',  with: 'cavy_test/pages/test'
       click_on 'submit_page'
-      @page = Page.find_by(content: 'foobar')
+      @page = Page.find_by(content: @page.content)
       @page.title.should eq('home-foo')
     end
 
-    it "should be able to edit a page" do
-      @page = Page.create(title: 'home-foo', content: 'foobar')
+    it "should be able to delete a page" do
+      @page = FactoryGirl.create(:cavy_page)
       visit '/admin'
       click_link 'admin-pages'
       click_link "delete-page-#{@page.id}"
@@ -71,25 +69,25 @@ module Cavy
     end
 
     it "should be able to go to the list of pages" do
-      @page = Page.create(title: 'home-foo', content: 'foobar')
+      @page = FactoryGirl.create(:cavy_page)
       visit '/admin'
       click_link 'admin-pages'
       page.should have_content('Website Pages')
-      page.should have_content('home-foo')
+      page.should have_content(@page.title)
       @page.destroy
     end
 
     it "should allow you go to the page page" do
-      @page = Page.create(title: 'home-foo', content: 'foobar')
+      @page = FactoryGirl.create(:cavy_page)
       visit '/admin'
       click_link 'admin-pages'
       click_link "page-#{@page.id}"
-      page.should have_content('home-foo')
+      page.should have_content(@page.content)
       @page.destroy
     end
 
     it "should allow you go to go to the edit settings page through the show page" do
-      @page = Page.create(title: 'home-foo', content: 'foobar')
+      @page = FactoryGirl.create(:cavy_page)
       visit '/admin'
       click_link 'admin-pages'
       click_link "page-#{@page.id}"
@@ -99,7 +97,7 @@ module Cavy
     end
 
     it "should allow you go to go to the edit content page through the show page" do
-      @page = Page.create(title: 'home-foo', content: 'foobar')
+      @page = FactoryGirl.create(:cavy_page)
       visit '/admin'
       click_link 'admin-pages'
       click_link "page-#{@page.id}"
