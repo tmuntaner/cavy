@@ -2,8 +2,9 @@ require 'spec_helper'
 
 module Cavy
   describe 'Pages' do
+    
     before(:each) do
-      @page = Page.create(title: 'home', content: 'foobar')
+      @page = FactoryGirl.create(:cavy_page, title: 'home')
     end
 
     after(:each) do
