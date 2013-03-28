@@ -35,7 +35,7 @@
           .nav-collapse.collapse
             %p.navbar-text.pull-right
               Logged in as
-              %a.navbar-link{:href => "#"} Username
+              %a.navbar-link{:href => "#"}= current_user.name
     .container-fluid
       .row-fluid
         .span3
