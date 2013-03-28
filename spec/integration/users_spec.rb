@@ -30,9 +30,34 @@ module Cavy
     end
 
     describe 'role check' do
-      it "should return true if developer while checking for developer" do
-        # @user = FactoryGirl.create(:cavy_user, password: 'secret', password_confirmation: 'secret')
+
+      describe 'dev team' do
+        after(:each) do
+          log_out
+        end
+
+        it "should return true in check for dev team member if developer" do
+          log_in('developer')
+          current_user.dev_team?.should be_true
+        end
+
+        it "should return true in check for dev team member if designer" do
+          log_in('designer')
+          current_user.dev_team?.should be_true
+        end
+
+        it "should return true in check for dev team member if admin" do
+          log_in('admin')
+          current_user.dev_team?.should be_true
+        end
+
+        it "should return false in check for dev team member if client" do
+          log_in('client')
+          current_user.dev_team?.should be_false
+        end
+
       end
+
     end
 
     # describe 'sign up process' do

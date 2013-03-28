@@ -11,7 +11,14 @@ module Cavy
     validates_presence_of :password, :on => :create
 
     before_create { generate_token(:auth_token)}
+
+    @@dev_team = ['developer','designer','admin']
     
+    def dev_team?
+      return true if @@dev_team.include?(self.role)
+      false
+    end
+
     private
 
     def generate_token(column)
