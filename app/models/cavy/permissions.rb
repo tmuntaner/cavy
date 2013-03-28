@@ -8,6 +8,8 @@ module Cavy
         AdminPermission.new(user)
       elsif user.role == 'developer'
         DeveloperPermission.new(user)
+      elsif user.role == 'designer'
+        DesignerPermission.new(user)
       elsif user.role == 'client'
         ClientPermission.new(user)
       end
