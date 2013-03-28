@@ -9,4 +9,4 @@
       .nav-collapse.collapse
         %ul.nav
           - Cavy::Page.all.each do |page|
-            %li= link_to page.title, pages_path(page.title)
+            %li= link_to page.title, pages_path(page.route)
