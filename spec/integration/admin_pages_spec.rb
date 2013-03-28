@@ -34,11 +34,11 @@ module Cavy
       click_link "edit-page-#{@page.id}"
       fill_in 'page_title',   with: 'foobar'
       fill_in 'page_render',  with: 'cavy_test/pages/test'
-      fill_in 'page_tags',    with: '{foo,bar}'
+      fill_in 'page_tag_string',    with: 'foo,bar'
       fill_in 'page_route',   with: 'foos'
       fill_in 'page_description', with: 'foo'
       click_on 'submit_page'
-      @page = Cavy::Page.find_by(title: 'foobar')
+      @page = Cavy::Page.find(@page.id)
       @page.render.should eq('cavy_test/pages/test')
       @page.tags.should eq(['foo','bar'])
       @page.route.should eq('foos')

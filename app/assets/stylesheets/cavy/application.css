@@ -13,4 +13,5 @@
  *= require cavy/bootstrap
  *= require cavy/mercury.bundle
  *= require cavy/pages
+ *= require cavy/token
  */

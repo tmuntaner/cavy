@@ -48,7 +48,7 @@ module Cavy
     private
 
       def page_params
-        params.require(:page).permit(:title, :render, :route, :tags, :description)
+        params.require(:page).permit(:title, :render, :route, :tag_string, :description)
       end
 
   end

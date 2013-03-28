@@ -26,7 +26,7 @@
   .control-group
     = f.label :meta_tags, class: 'control-label'
     .controls
-      = f.text_field :tags
+      = f.text_field :tag_string, value: "#{@page.tags.join(',') if @page.tags != ''}"
   .control-group
     = f.label :meta_description, class: 'control-label'
     .controls

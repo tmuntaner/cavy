@@ -15,3 +15,5 @@
 // require turbolinks
 //= require cavy/bootstrap
 //= require cavy/pages
+//= require cavy/token
+//= require cavy/tokens
