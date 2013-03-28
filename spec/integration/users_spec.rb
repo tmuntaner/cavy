@@ -58,6 +58,33 @@ module Cavy
 
       end
 
+      describe 'site managers' do
+        after(:each) do
+          log_out
+        end
+
+        it "should return true in check for manager member if developer" do
+          log_in('developer')
+          current_user.site_manager?.should be_true
+        end
+
+        it "should return true in check for manager member if designer" do
+          log_in('designer')
+          current_user.site_manager?.should be_true
+        end
+
+        it "should return true in check for manager member if admin" do
+          log_in('admin')
+          current_user.site_manager?.should be_true
+        end
+
+        it "should return true in check for manager member if client" do
+          log_in('client')
+          current_user.site_manager?.should be_true
+        end
+
+      end
+
     end
 
     # describe 'sign up process' do

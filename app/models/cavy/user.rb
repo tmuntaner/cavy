@@ -13,9 +13,15 @@ module Cavy
     before_create { generate_token(:auth_token)}
 
     @@dev_team = ['developer','designer','admin']
+    @@managers = @@dev_team + ['client']
     
     def dev_team?
       return true if @@dev_team.include?(self.role)
+      false
+    end
+
+    def site_manager?
+      return true if @@managers.include?(self.role)
       false
     end
 
