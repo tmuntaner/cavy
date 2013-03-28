@@ -9,6 +9,8 @@ module Cavy
         allow 'cavy/admin_pages', [:index, :show, :update, :edit]
         allow 'cavy/mercury',     [:edit, :resource, :snippet_options, :snippet_preview, :test_page, :image]
         allow 'cavy/users',       [:index, :show, :new, :edit, :create, :update]
+
+        allow_param :page, [:title, :description, :tags, :id]
       end
 
     end

@@ -14,7 +14,7 @@ module Cavy
     end
     
     def make_route
-      self.route = self.title.gsub(' ', '_')
+      self.route = self.title.gsub(' ', '_') if self.route == "" or self.route == nil
     end
 
     def check_render

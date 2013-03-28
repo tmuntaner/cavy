@@ -10,6 +10,9 @@ module Cavy
     delegate :allow?, to: :current_permission
     helper_method :allow?
 
+    delegate :allow_param?, to: :current_permission
+    helper_method :allow_param?
+
     private
 
     def can_edit?

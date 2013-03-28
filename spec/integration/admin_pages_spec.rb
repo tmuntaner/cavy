@@ -34,9 +34,15 @@ module Cavy
       click_link "edit-page-#{@page.id}"
       fill_in 'page_title',   with: 'foobar'
       fill_in 'page_render',  with: 'cavy_test/pages/test'
+      fill_in 'page_tags',    with: '{foo,bar}'
+      fill_in 'page_route',   with: 'foos'
+      fill_in 'page_description', with: 'foo'
       click_on 'submit_page'
       @page = Cavy::Page.find_by(title: 'foobar')
       @page.render.should eq('cavy_test/pages/test')
+      @page.tags.should eq(['foo','bar'])
+      @page.route.should eq('foos')
+      @page.description.should eq('foo')
     end
 
     it "shouldn't be able to edit a page without a title" do
@@ -82,7 +88,7 @@ module Cavy
       visit '/admin'
       click_link 'admin-pages'
       click_link "page-#{@page.id}"
-      page.should have_content(@page.content)
+      page.should have_content(@page.description)
       @page.destroy
     end
 

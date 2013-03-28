@@ -13,10 +13,24 @@
     = f.label :title, class: 'control-label'
     .controls
       = f.text_field :title
+  - if current_user.dev_team?
+    .control-group
+      = f.label :render, class: 'control-label'
+      .controls
+        = f.text_field :render
+    .control-group
+      = f.label :route, class: 'control-label'
+      .controls
+        = f.text_field :route
+      
   .control-group
-    = f.label :render, class: 'control-label'
+    = f.label :meta_tags, class: 'control-label'
     .controls
-      = f.text_field :render
+      = f.text_field :tags
+  .control-group
+    = f.label :meta_description, class: 'control-label'
+    .controls
+      = f.text_area :description
   .control-group
     .controls
       = f.submit( 'Submit', class: 'btn btn-primary', id: 'submit_page' )
