@@ -29,6 +29,12 @@ module Cavy
 
     end
 
+    describe 'role check' do
+      it "should return true if developer while checking for developer" do
+        # @user = FactoryGirl.create(:cavy_user, password: 'secret', password_confirmation: 'secret')
+      end
+    end
+
     # describe 'sign up process' do
     #   it "should allow a user to sign up to"
     # end
