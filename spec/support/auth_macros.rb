@@ -1,6 +1,6 @@
 module AuthMacros
   def log_in(role, attributes = {})
-    @_current_user = Cavy::User.create(email: 'user@mail.com', password: 'secret', password_confirmation: 'secret', role: role)
+    @_current_user = FactoryGirl.create(:cavy_user, role: role)
     visit '/admin/signin'
     fill_in "user-email", with: @_current_user.email
     fill_in "user-password", with: @_current_user.password

@@ -11,8 +11,8 @@ module Cavy
 
       it "should allow a user to sign into the website" do
         visit '/admin/signin'
-        @user = Cavy::User.create(email: 'foo@bar.com', password: 'secret', password_confirmation: 'secret')
-        fill_in 'user-email', with: 'foo@bar.com'
+        @user = FactoryGirl.create(:cavy_user, password: 'secret', password_confirmation: 'secret')
+        fill_in 'user-email', with: @user.email
         fill_in 'user-password', with: 'secret'
         click_button 'sign-in'
         page.should_not have_content('Email or password is invalid')
@@ -20,7 +20,7 @@ module Cavy
 
       it "should not allow a user to sign in with an invalid password" do
         visit '/admin/signin'
-        @user = Cavy::User.create(email: 'foo@bar.com', password: 'secret', password_confirmation: 'secret')
+        @user = FactoryGirl.create(:cavy_user, password: 'secret', password_confirmation: 'secret')
         fill_in 'user-email', with: 'foo@bar.com'
         fill_in 'user-password', with: 'secret1'
         click_button 'sign-in'
@@ -28,6 +28,10 @@ module Cavy
       end
 
     end
+
+    # describe 'sign up process' do
+    #   it "should allow a user to sign up to"
+    # end
 
   end
 end

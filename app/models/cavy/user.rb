@@ -6,6 +6,8 @@ module Cavy
     validates_presence_of :email
     validates_uniqueness_of :email
 
+    validates_presence_of :name
+    
     validates_presence_of :password, :on => :create
 
     before_create { generate_token(:auth_token)}
