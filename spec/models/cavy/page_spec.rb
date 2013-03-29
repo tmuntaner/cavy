@@ -63,6 +63,12 @@ module Cavy
         @page2 = Page.create(title: 'foo', content: 'bar')
         @page2.should_not be_valid
       end
+
+      it "should not be able to create two pages with the same route" do
+        @page1 = Page.create(title: 'foo', route: 'bar')
+        @page2 = Page.create(title: 'foo2', route: 'bar')
+        @page2.should_not be_valid
+      end
     
     end
 

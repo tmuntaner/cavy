@@ -2,7 +2,8 @@ module Cavy
   class Page < ActiveRecord::Base
 
     validates :title, uniqueness: true, presence: true
-
+    validates :route, uniqueness: true
+    
     attr_accessor :tag_string
 
     before_save :make_route
