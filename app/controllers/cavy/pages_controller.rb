@@ -6,7 +6,11 @@ module Cavy
     before_action :set_page, only: [:page, :edit]
 
     def page
-      render @page.render || 'cavy/pages/page'
+      if @page
+        render @page.render || 'cavy/pages/page'
+      else
+        render 'cavy/pages/page'
+      end
     end
 
     def edit

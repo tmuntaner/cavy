@@ -16,7 +16,7 @@ module Cavy
     private
 
     def can_edit?
-      return true if signed_in?
+      return true if signed_in? and current_user.site_manager?
       false
     end
 

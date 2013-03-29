@@ -11,8 +11,11 @@ require 'simplecov'
 require 'coveralls'
 require 'factory_girl_rails'
 
-Coveralls.wear!
-SimpleCov.start
+if ENV['TRAVIS'] == true
+  Coveralls.wear!
+else
+  SimpleCov.start
+end
 
 Rails.backtrace_cleaner.remove_silencers!
 
@@ -28,6 +31,7 @@ RSpec.configure do |config|
   config.include AuthMacros
   config.include MailerMacros
   config.include Capybara::DSL, :example_group => { :file_path => /\bspec\/integration\// }
+  config.include Cavy::Engine.routes.url_helpers
   config.before(:each) do
     reset_email
   end

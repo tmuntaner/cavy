@@ -7,6 +7,12 @@ module AuthMacros
     click_button "sign-in"
   end
 
+  def log_in_rack(role, attributes={})
+    @user = FactoryGirl.create(:cavy_user, password: 'secret', password_confirmation: 'secret')
+    @session = {email: @user.email, password: 'secret'}
+    post admin_create_session_path, @session
+  end
+
   def log_out
     Capybara.reset_sessions!
   end

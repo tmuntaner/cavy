@@ -56,6 +56,21 @@ module Cavy
       @about.destroy
     end
 
+    describe 'edits' do
+      it "should allow a signed in site manager to go to the edit page" do
+        log_in('admin')
+        @page = FactoryGirl.create(:cavy_page)
+        visit cavy_edit_page_path(@page.route)
+        page.should have_content('Back to Content')
+        log_out
+      end
+      it "should not allow a signed in site manager to go to the edit page" do
+        @page = FactoryGirl.create(:cavy_page)
+        visit cavy_edit_page_path(@page.route)
+        page.should_not have_content('Back to Content')
+      end
+    end
+
     it "should give 404 for non pages" do
       visit '/supercalifragilisticexpialidocious'
       page.status_code.should eq(404)
