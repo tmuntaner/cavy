@@ -11,7 +11,7 @@ require 'simplecov'
 require 'coveralls'
 require 'factory_girl_rails'
 
-if ENV['TRAVIS'] == true
+if ENV['TRAVIS']
   Coveralls.wear!
 else
   SimpleCov.start
