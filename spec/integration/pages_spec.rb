@@ -69,6 +69,18 @@ module Cavy
         visit cavy_edit_page_path(@page.route)
         page.should_not have_content('Back to Content')
       end
+
+      it "should allow the client to update the page" do
+        log_in_rack('client')
+        @page = FactoryGirl.create(:cavy_page)
+        @parameters = { content: { title: {value: 'ghost'}, content: {value: 'foo-ghost-bar-summer'}}}
+        put cavy_update_page_path(@page.id), @parameters
+        @page = Cavy::Page.find(@page.id)
+        @page.title.should eq('ghost')
+        @page.content.should eq('foo-ghost-bar-summer')
+        @page.destroy
+        log_out
+      end
     end
 
     it "should give 404 for non pages" do

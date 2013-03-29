@@ -32,10 +32,17 @@
             %span.icon-bar
             %span.icon-bar
           %a.brand{:href => "#"}= Cavy.title || "Cavy"
-          .nav-collapse.collapse
-            %p.navbar-text.pull-right
-              Logged in as
-              %a.navbar-link{:href => "#"}= current_user.name
+          %ul.nav.pull-right
+            %li.dropdown
+              %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+                = current_user.name
+                %b.caret
+              %ul.dropdown-menu
+                %li= link_to 'Sign Out', admin_destroy_session_path, method: :delete, id: 'log-out'
+          / .nav-collapse.collapse
+          /   %p.navbar-text.pull-right
+          /     Logged in as
+          /     %a.navbar-link{:href => "#"}= current_user.name
     .container-fluid
       .row-fluid
         .span3

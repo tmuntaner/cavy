@@ -10,7 +10,7 @@ module Cavy
         allow 'cavy/mercury',     [:edit, :resource, :snippet_options, :snippet_preview, :test_page, :image]
         allow 'cavy/users',       [:index, :show, :new, :edit, :create, :update]
 
-        allow_param :page, [:title, :description, :tag_string, :id]
+        allow_param :page, [:title, :description, :tag_string]
       end
 
     end

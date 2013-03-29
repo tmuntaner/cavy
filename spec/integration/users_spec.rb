@@ -29,6 +29,15 @@ module Cavy
 
     end
 
+    describe 'sign out process' do
+      it "should sign out signed in users" do
+        log_in('admin')
+        visit admin_overview_path
+        click_link 'log-out'
+        page.should have_content('Logged out')
+      end
+    end
+
     describe 'role check' do
 
       describe 'dev team' do

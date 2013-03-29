@@ -13,6 +13,8 @@ module Cavy
       should_not allow('cavy/admin_pages', :new)
       should_not allow('cavy/admin_pages', :create)
       should_not allow('cavy/admin_pages', :delete)
+      should_not allow_param(:page, :route)
+      should_not allow_param(:page, :render)
     end
 
     it "allows to view pages" do
