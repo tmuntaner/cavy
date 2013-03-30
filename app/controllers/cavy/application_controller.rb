@@ -22,7 +22,8 @@ module Cavy
     end
 
     def check_locale
-      if params[:locale].blank? and I18n.available_locales.count > 1
+      # there is a strange issue with redirect of root /en to /en/en, last check is an ugly fix
+      if params[:locale].blank? and I18n.available_locales.count > 1 and request.path_info != "/#{I18n.default_locale}"
         redirect_to "/#{I18n.default_locale}#{request.path_info}"
       end
     end

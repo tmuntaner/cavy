@@ -3,7 +3,7 @@ Cavy::Engine.routes.draw do
   resources :users
 
   if I18n.available_locales.count > 1
-    scope "(:locale)", locale: /en|de/ do
+    scope "(:locale)", locale: /#{I18n.available_locales.join('|')}/ do
       root to: 'pages#page'
 
       get     '/mercury/:type/:resource', to: "mercury#resource"
