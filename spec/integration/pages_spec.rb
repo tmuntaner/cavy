@@ -27,7 +27,7 @@ module Cavy
     it "should send the link for the root path back to the root when clicked" do
       visit '/'
       click_link 'home'
-      current_path.should == '/'
+      current_path.should == '/en/'
     end
 
     it "should render content with cavy/pages/render if no other render was specified" do
@@ -60,13 +60,13 @@ module Cavy
       it "should allow a signed in site manager to go to the edit page" do
         log_in('admin')
         @page = FactoryGirl.create(:cavy_page)
-        visit cavy_edit_page_path(@page.route)
+        visit cavy_edit_page_path({locale: :en, route: @page.route})
         page.should have_content('Back to Content')
         log_out
       end
       it "should not allow a signed in site manager to go to the edit page" do
         @page = FactoryGirl.create(:cavy_page)
-        visit cavy_edit_page_path(@page.route)
+        visit cavy_edit_page_path({locale: :en, route: @page.route})
         page.should_not have_content('Back to Content')
       end
 
@@ -74,7 +74,7 @@ module Cavy
         log_in_rack('client')
         @page = FactoryGirl.create(:cavy_page)
         @parameters = { content: { title: {value: 'ghost'}, content: {value: 'foo-ghost-bar-summer'}}}
-        put cavy_update_page_path(@page.id), @parameters
+        put cavy_update_page_path({locale: :en, id: @page.id}), @parameters
         @page = Cavy::Page.find(@page.id)
         @page.title.should eq('ghost')
         @page.content.should eq('foo-ghost-bar-summer')

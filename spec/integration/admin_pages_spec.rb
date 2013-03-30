@@ -129,7 +129,7 @@ module Cavy
         log_in_rack('client')
         @page = FactoryGirl.create(:cavy_page)
         @parameters = { page: { title: 'ghost', tag_string: 'foo,bar,s', description: 'fooghostbarsummer',route: 'ghostenbear'}}
-        put admin_update_page_path(@page.id), @parameters
+        put admin_update_page_path({locale: :en, id: @page.id}), @parameters
         @page = Cavy::Page.find(@page.id)
         @page.title.should eq('ghost')
         @page.tags.should eq(['foo','bar','s'])

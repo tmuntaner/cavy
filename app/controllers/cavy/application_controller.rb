@@ -18,7 +18,7 @@ module Cavy
     private
 
     def set_locale
-      I18n.locale = params[:locale] || I18n.default_locale
+      I18n.locale = params[:locale] || I18n.default_locale if I18n.available_locales.count > 1
     end
 
     def check_locale
@@ -28,7 +28,7 @@ module Cavy
     end
 
     def default_url_options(options = {})
-      {locale: I18n.locale}
+      {locale: I18n.locale} if I18n.available_locales.count > 1
     end
 
     def can_edit?
