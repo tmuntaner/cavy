@@ -2,6 +2,8 @@ module Cavy
   class ApplicationController < ActionController::Base
 
     before_action :authorize
+    before_action :set_locale
+    before_action :check_locale
 
     helper_method :can_edit?
     helper_method :current_user
@@ -14,6 +16,20 @@ module Cavy
     helper_method :allow_param?
 
     private
+
+    def set_locale
+      I18n.locale = params[:locale] || I18n.default_locale
+    end
+
+    def check_locale
+      if params[:locale].blank? and I18n.available_locales.count > 1
+        redirect_to "/#{I18n.default_locale}#{request.path_info}"
+      end
+    end
+
+    def default_url_options(options = {})
+      {locale: I18n.locale}
+    end
 
     def can_edit?
       return true if signed_in? and current_user.site_manager?
