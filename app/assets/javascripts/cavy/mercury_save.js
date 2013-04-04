@@ -4,6 +4,6 @@ jQuery(window).on('mercury:ready', function() {
       console.log('only set saveUrl if it exists');
       Mercury.saveUrl = link.data('save-url');
    }
-  console.log(Mercury.saveUrl); //<-- should be valid
+  Mercury.saveMethod = 'PUT';
   link.hide();
 });

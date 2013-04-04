@@ -26,7 +26,7 @@ Cavy::Engine.routes.draw do
       get     '/admin/new_user',          to: 'admin#new_user',     as: 'admin_new_user'
       get     '/admin/users',             to: 'admin#users',        as: 'admin_users'
 
-      post    '/cavy_update/:id',        to: 'pages#update',       as: 'cavy_update_page'
+      put     '/cavy_update/:id',        to: 'pages#update',       as: 'cavy_update_page'
       get     '/edit/:route',            to: 'pages#edit',         as: 'cavy_edit_page'
       get     ':route',                  to: 'pages#page',         as: 'cavy_page'
     end
@@ -51,7 +51,7 @@ Cavy::Engine.routes.draw do
     get     '/admin/new_user',          to: 'admin#new_user',     as: 'admin_new_user'
     get     '/admin/users',             to: 'admin#users',        as: 'admin_users'
 
-    post    '/cavy_update/:id',        to: 'pages#update',       as: 'cavy_update_page'
+    put     '/cavy_update/:id',        to: 'pages#update',       as: 'cavy_update_page'
     get     '/edit/:route',            to: 'pages#edit',         as: 'cavy_edit_page'
     get     ':route',                  to: 'pages#page',         as: 'cavy_page'
   end
