@@ -3,9 +3,9 @@ module Cavy
 
     def pages_path(page)
       if page == Cavy.root
-        "/"
+        I18n.available_locales.count > 1 ? "/#{params[:locale]}/" : '/'
       else
-        "/#{page}"
+        I18n.available_locales.count > 1 ? "/#{params[:locale]}/#{page}" : "/#{page}"
       end
     end
 
