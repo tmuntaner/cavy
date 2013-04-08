@@ -7,6 +7,14 @@ module Cavy
 
     validates :title, presence: true
     
+    def type
+      return title.downcase.gsub(' ', '_')
+    end
+
+    def items
+      Cavy::Item.where('data @> hstore(?,?)', 'type', type)
+    end
+
     private
 
     def set_params

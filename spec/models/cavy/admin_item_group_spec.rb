@@ -14,6 +14,12 @@ module Cavy
         @group.should_not be_valid
         @group.destroy
       end
+      it "should create a valid type from title" do
+        @group = create(:cavy_admin_item_group, title: 'foo Bar')
+        @group.type.should eq('foo_bar')
+        @group.destroy
+      end
+
     end
 
     describe 'params' do
@@ -28,7 +34,7 @@ module Cavy
         @group.destroy
       end
       it "should accept an array of params" do
-        @group = create(:cavy_admin_item_group, params: ['Ruby','Rainbows'])
+        @group = create(:cavy_admin_item_group, params: ['Ruby','Rainbows'], param_string: '')
         @group.params.should eq(['Ruby','Rainbows'])
         @group.should be_valid
         @group.destroy

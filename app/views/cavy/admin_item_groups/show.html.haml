@@ -10,3 +10,25 @@
 = link_to 'Edit', admin_edit_item_group_path(@admin_item_group)
 \|
 = link_to 'Back', admin_item_groups_path
+
+%br/
+%br/
+%h2 Group Items
+%br/
+%br/
+= link_to 'New Item', cavy_new_item_path(group_id: @admin_item_group.id), id: 'new-item'
+%br/
+%br/
+%table.table.table-striped
+  %tr
+    %th Title
+    %th
+    %th
+    %th
+
+  - @items.each do |item|
+    %tr
+      %td= item.name
+      %td= link_to 'Show', cavy_item_path(item.id)
+      %td= link_to 'Edit', cavy_edit_item_path(item.id)
+      %td= link_to 'Destroy', cavy_delete_item_path(item.id), :method => :delete, :data => { :confirm => 'Are you sure?' }, id: "delete-#{item.id}"

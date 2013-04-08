@@ -14,6 +14,7 @@ module Cavy
 
     # GET /admin_item_groups/1
     def show
+      @items = @admin_item_group.items
     end
 
     # GET /admin_item_groups/new

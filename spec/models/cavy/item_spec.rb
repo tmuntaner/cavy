@@ -9,12 +9,6 @@ module Cavy
         @item.should be_valid
         @item.destroy
       end
-
-      it "should not be able to accept an item without a name" do
-        @item = Item.create()
-        @item.should_not be_valid
-        @item.destroy
-      end
     end
 
     describe 'data' do
@@ -29,6 +23,12 @@ module Cavy
         @item.should be_valid
         @item.destroy
       end
+      it "should be able to create params from array" do
+        @item = create(:cavy_item, data: '')
+        @item.create_params('test',['Ruby', 'Rainbows'])
+        @item.data.should eq({"type" => 'test', "ruby" => '', "rainbows" => ''})
+      end
     end
+
   end
 end

@@ -12,10 +12,10 @@
     %tr
       %td= item.name
       %td= item.data
-      %td= link_to 'Show', item
-      %td= link_to 'Edit', edit_item_path(item)
-      %td= link_to 'Destroy', item, :method => :delete, :data => { :confirm => 'Are you sure?' }
+      %td= link_to 'Show', cavy_item_path(item.id)
+      %td= link_to 'Edit', cavy_edit_item_path(item.id)
+      %td= link_to 'Destroy', cavy_delete_item_path(item.id), :method => :delete, :data => { :confirm => 'Are you sure?' }
 
 %br
 
-= link_to 'New Item', new_item_path
+= link_to 'New Item', cavy_new_item_path
