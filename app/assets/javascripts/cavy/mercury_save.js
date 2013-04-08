@@ -6,4 +6,5 @@ jQuery(window).on('mercury:ready', function() {
    }
   Mercury.saveMethod = 'PUT';
   link.hide();
+
 });
