@@ -2,14 +2,6 @@ require 'spec_helper'
 
 module Cavy
   describe Item do
-    
-    describe 'name' do
-      it "should be able to accept a name" do
-        @item = Item.create(name: 'foo')
-        @item.should be_valid
-        @item.destroy
-      end
-    end
 
     describe 'data' do
       it "should be able to accept no data" do

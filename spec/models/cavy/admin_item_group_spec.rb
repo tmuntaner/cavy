@@ -46,5 +46,30 @@ module Cavy
         @group.destroy
       end
     end
+
+    describe "items" do
+      before(:each) do
+        @guineapigs = create(:cavy_admin_item_group, param_string: 'name,group')
+        @pig1 = @guineapigs.items.create(data: {name: 'ghost', group: 'team_ghost'})
+        @pig2 = @guineapigs.items.create(data: {name: 'summer', group: 'team_summer'})
+        @pig3 = @guineapigs.items.create(data: {name: 'pumpkin spice', group: 'team_ghost'})
+        @pig4 = @guineapigs.items.create(data: {name: 'greywind', group: 'team_summer'})
+      end
+      after(:each) do
+        @guineapigs.destroy
+        @pig1.destroy
+        @pig2.destroy
+        @pig3.destroy
+        @pig4.destroy
+      end
+
+      it "should list all guinea pigs" do
+        @guineapigs.items.map(&:id).should eq([@pig1.id,@pig2.id,@pig3.id,@pig4.id])
+      end
+
+      it "should only list team ghost" do
+        @guineapigs.items_with_key_value('group','team_ghost').map(&:id).should eq([@pig1.id,@pig3.id])
+      end
+    end
   end
 end

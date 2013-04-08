@@ -21,14 +21,16 @@
 %br/
 %table.table.table-striped
   %tr
-    %th Title
+    - @admin_item_group.params.each do |param|
+      %th= param
     %th
     %th
     %th
 
   - @items.each do |item|
     %tr
-      %td= item.name
+      - @admin_item_group.params.each do |param|
+        %td= item.data[param]
       %td= link_to 'Show', cavy_item_path(item.id)
       %td= link_to 'Edit', cavy_edit_item_path(item.id)
       %td= link_to 'Destroy', cavy_delete_item_path(item.id), :method => :delete, :data => { :confirm => 'Are you sure?' }, id: "delete-#{item.id}"

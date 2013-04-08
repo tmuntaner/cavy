@@ -25,7 +25,8 @@ module Cavy
 
     # POST /items
     def create
-      @item = Item.new(params[:item])
+      @group = Cavy::AdminItemGroup.find(params[:group_id])
+      @item = @group.items.new(params[:item])
 
       if @item.save
         redirect_to admin_item_group_path(params[:group_id]), notice: 'Item was successfully created.'

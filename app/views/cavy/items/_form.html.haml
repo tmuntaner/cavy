@@ -7,9 +7,6 @@
           %li= msg
 
   .field
-    = f.label :reference
-    = f.text_field :name
-    
     - @item.data.try(:each) do |key, value|
       - unless key == 'type'
         = f.label key

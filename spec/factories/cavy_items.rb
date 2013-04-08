@@ -2,7 +2,6 @@
 
 FactoryGirl.define do
   factory :cavy_item, class: Cavy::Item do
-    sequence(:name) { |n| "item#{n+Cavy::Item.count}"}
     data ""
   end
 end

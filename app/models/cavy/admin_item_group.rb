@@ -1,6 +1,8 @@
 module Cavy
   class AdminItemGroup < ActiveRecord::Base
 
+    has_many :items
+
     attr_accessor :param_string
 
     before_save :set_params
@@ -12,7 +14,11 @@ module Cavy
     end
 
     def items
-      Cavy::Item.where('data @> hstore(?,?)', 'type', type)
+      Cavy::Item.where(group_id: id)
+    end
+
+    def items_with_key_value(key,value)
+      Cavy::Item.where('group_id = ? AND data @> hstore(?,?)', id, key, value)
     end
 
     private
