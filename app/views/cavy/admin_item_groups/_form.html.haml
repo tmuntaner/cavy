@@ -1,0 +1,16 @@
+= form_for @admin_item_group do |f|
+  - if @admin_item_group.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@admin_item_group.errors.count, "error")} prohibited this admin_item_group from being saved:"
+      %ul
+        - @admin_item_group.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :title
+    = f.text_field :title
+  .field
+    = f.label :params
+    = f.text_field :param_string, value: "#{@admin_item_group.params.join(',') if @admin_item_group.params != '' and @admin_item_group.params != nil}", placeholder: 'add'
+  .actions
+    = f.submit 'Save'

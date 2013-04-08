@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Title:
+  = @admin_item_group.title
+%p
+  %b Params:
+  = @admin_item_group.params
+
+= link_to 'Edit', admin_edit_item_group_path(@admin_item_group)
+\|
+= link_to 'Back', admin_item_groups_path

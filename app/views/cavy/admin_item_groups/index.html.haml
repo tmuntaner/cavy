@@ -1,0 +1,21 @@
+%h1 Listing admin_item_groups
+
+%table
+  %tr
+    %th Title
+    %th Params
+    %th
+    %th
+    %th
+
+  - @admin_item_groups.each do |admin_item_group|
+    %tr
+      %td= admin_item_group.title
+      %td= admin_item_group.params
+      %td= link_to 'Show', admin_item_group
+      %td= link_to 'Edit', admin_edit_item_group_path(admin_item_group)
+      %td= link_to 'Destroy', admin_item_group, :method => :delete, :data => { :confirm => 'Are you sure?' }, id: "delete-#{admin_item_group.id}"
+
+%br
+
+= link_to 'New Admin item group', admin_new_item_group_path

@@ -17,3 +17,4 @@
 //= require cavy/pages
 //= require cavy/token
 //= require cavy/tokens
+//= require cavy/hstore

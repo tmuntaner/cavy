@@ -1,0 +1,55 @@
+= form_for @item do |f|
+  - if @item.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@item.errors.count, "error")} prohibited this item from being saved:"
+      %ul
+        - @item.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :name
+    = f.text_field :name
+    .attributeContainer
+      %label.label{for: "item_data"} Data Attributes
+      .row
+        %p.span3.underline Name
+        %p.span3.underline Value
+      - @item.data.try(:each) do |key, value|
+        .row
+          %p.span3
+            = text_field_tag key, key, class: 'text_field dynamicAttributeName', name: "item[data][#{key}]", id: "item[data][#{key}]"
+          %p.span3
+            = text_field_tag key, key, class: 'text_field', value: value, name: "item[data][#{key}]", id: "item[data][#{key}]"
+          %p.span1
+            %a.btn.removeRow{:herf => "#"} x
+
+      %div{class: "row attributeTemplate #{"hide" if @item.data.present?}"}
+        %p.span3
+          %input{class: "text_field  dynamicAttributeName", name: "", placeholder: "New Attribute name", size: "30", type: "text"}
+        %p.span3
+          %input#bar.text_field{name: "", placeholder: "value", size: "30", type: "text"}
+        %p.span1
+          %a.btn.removeRow{herf: "#"} x
+      = link_to 'Add Attribute', '#', class: 'btn addAttribute btn-primary'
+  .actions
+    = f.submit 'Save'
+
+:javascript
+  $('.attributeContainer').delegate('.dynamicAttributeName', 'keyup', function(event){
+    nameElem  = $(this);
+    valueElem = nameElem.closest('.row').children('p').children('.text_field')
+    value     = nameElem.val().toLowerCase();
+    valueElem.attr('id',          'item_data_' + value       );
+    valueElem.attr('name',        'item[data][' + value + ']');
+    valueElem.attr('placeholder', 'value for ' + value          );
+  })
+
+  $('.attributeContainer').delegate('.removeRow', 'click', function(){
+    console.log($(this).closest('.row'))
+    $(this).closest('.row').html('');
+  })
+
+  $('.addAttribute').on('click', function(){
+    contents = "<div class='row'>" + $('.attributeTemplate').html() + '</div>';
+    $(this).before(contents);
+  })

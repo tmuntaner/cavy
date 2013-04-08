@@ -95,13 +95,28 @@ module Cavy
     end
 
     describe 'seo' do
-
-      it "should accept an array of tage" do
+      it "should accept no tags" do
+        @page = Page.create(title: 'foo', tags: '')
+        @page.should be_valid
+        @page.destroy
+      end
+      it "should accept no tag string" do
+        @page = Page.create(title: 'foo', tag_string: '')
+        @page.should be_valid
+        @page.destroy
+      end
+      it "should accept an array of tags" do
         @page = Page.create(title: 'foo', tags: ['Ruby', 'Rainbows'])
         @page.should be_valid
         @page.destroy
       end
 
+      it "should accept an string of tags" do
+        @page = Page.create(title: 'foo', tag_string: 'Ruby,Rainbows')
+        @page.tags.should eq(['Ruby','Rainbows'])
+        @page.should be_valid
+        @page.destroy
+      end
     end
 
   end
