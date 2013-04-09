@@ -10,6 +10,7 @@ module Cavy
     before_save :check_render
     before_save :check_content
     before_save :check_tags
+    before_save :check_data
 
     def set_key_value(key,value)
       if self.data == nil
@@ -39,6 +40,10 @@ module Cavy
 
     def check_render
       self.render = nil if self.render == ""
+    end
+
+    def check_data
+      self.data = {} if self.data == nil
     end
 
   end
