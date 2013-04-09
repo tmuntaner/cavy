@@ -27,7 +27,7 @@ module Cavy
     end
 
     def create
-      @page = Page.new(page_params)
+      @page = Page.new(params[:page])
 
       if @page.save
         redirect_to admin_page_path(@page), notice: 'Page was successfully created.'
@@ -44,7 +44,7 @@ module Cavy
 
     def update
       @page = Page.find(params[:id])
-      if @page.update(page_params)
+      if @page.update(params[:page])
         redirect_to admin_page_path(@page), notice: 'Page was successfully created.'
       else
         render action: 'edit'
@@ -58,7 +58,8 @@ module Cavy
     private
 
       def page_params
-        params.require(:page).permit(:title, :render, :route, :tag_string, :description, :key, :value)
+        # having problem with hstore, so I will just be using params for now
+        params.require(:page).permit(:title, :render, :route, :tag_string, :description, :key, :value, :data)
       end
 
   end
