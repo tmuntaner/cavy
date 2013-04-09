@@ -2,9 +2,9 @@
 
 %hr/
 
-= link_to 'Edit Page Settings', admin_edit_page_path(@page.id), id: 'edit-page-settings', class: 'btn'
-= link_to 'Edit Page Content', cavy_edit_page_path(@page.route), id: 'edit-page-content', class: 'btn'
-
+= link_to 'Edit Settings', admin_edit_page_path(@page.id), id: 'edit-page-settings', class: 'btn'
+= link_to 'Edit Content', cavy_edit_page_path(@page.route), id: 'edit-page-content', class: 'btn'
+= link_to 'Add Data', admin_add_page_data_path(@page.id), id: 'add-data', class: 'btn'
 %br/
 %br/
 %h3 Route

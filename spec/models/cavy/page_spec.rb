@@ -119,5 +119,18 @@ module Cavy
       end
     end
 
+    describe 'data' do
+      it "should accept a hash of data" do
+        @page = Page.create(title: 'test', data: {name: 'ruby rainbows'})
+        @page.data[:name].should eq('ruby rainbows')
+      end
+      it "should accept a key and value to update data" do
+        @page = Page.create(title: 'test', data: {name: 'ruby rainbows'})
+        @page.set_key_value('foo','bar')
+        @page.data['foo'].should eq('bar')
+        @page.data[:name].should eq('ruby rainbows')
+      end
+    end
+
   end
 end

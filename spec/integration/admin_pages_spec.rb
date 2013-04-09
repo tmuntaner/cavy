@@ -113,6 +113,20 @@ module Cavy
         page.should have_content(@page.content)
         @page.destroy
       end
+
+      it "should be able to add data" do
+        @page = FactoryGirl.create(:cavy_page)
+        visit '/admin'
+        click_link 'admin-pages'
+        click_link "page-#{@page.id}"
+        click_link 'add-data'
+        fill_in 'page[key]', with: 'test'
+        fill_in 'page[value]', with: 'value'
+        click_button 'submit'
+        @page = Cavy::Page.find(@page.id)
+        @page.data['test'].should eq('value')
+        @page.destroy
+      end
     end
 
     describe 'client user role' do

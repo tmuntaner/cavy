@@ -25,7 +25,9 @@ Cavy::Engine.routes.draw do
       put     '/admin/page/:id',            to: 'admin_pages#update',       as: 'admin_update_page'
       delete  '/admin/page/:id',            to: 'admin_pages#delete',       as: 'admin_delete_page'
       get     '/admin/page/edit/:id',       to: 'admin_pages#edit',         as: 'admin_edit_page'
-
+      get     '/admin/page/data/:id',       to: 'admin_pages#add_data',     as: 'admin_add_page_data'
+      post    '/admin/page/data/:id',       to: 'admin_pages#create_data',  as: 'admin_create_page_data'
+      
       get     '/admin/item_group',          to: 'admin_item_groups#index',  as: 'admin_item_groups'
       get     '/admin/item_group/new',      to: 'admin_item_groups#new',    as: 'admin_new_item_group'
       get     '/admin/item_group/edit/:id', to: 'admin_item_groups#edit',   as: 'admin_edit_item_group'

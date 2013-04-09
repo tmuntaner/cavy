@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130408143236) do
+ActiveRecord::Schema.define(version: 20130408210356) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(version: 20130408143236) do
     t.text     "description"
     t.string   "tags",          array: true
     t.hstore   "page_elements"
+    t.hstore   "data"
   end
 
   create_table "cavy_users", force: true do |t|

@@ -8,6 +8,16 @@ module Cavy
     def index
     end
 
+    def add_data
+      @page = Cavy::Page.find(params[:id])
+    end
+
+    def create_data
+      @page = Cavy::Page.find(params[:id])
+      @page.set_key_value(page_params[:key],page_params[:value])
+      redirect_to admin_page_path(@page.id), notice: 'Page was successfully created.'
+    end
+
     def new
       @page = Cavy::Page.new
     end
@@ -48,7 +58,7 @@ module Cavy
     private
 
       def page_params
-        params.require(:page).permit(:title, :render, :route, :tag_string, :description)
+        params.require(:page).permit(:title, :render, :route, :tag_string, :description, :key, :value)
       end
 
   end
