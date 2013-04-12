@@ -1,7 +1,7 @@
 !!!
 %html
   %head
-    %title= can_edit? ? 'Edit' : 'Cavy'
+    %title= @page ? @page.title : "Cavy"
     = stylesheet_link_tag    "cavy/application", media: "all"
     = javascript_include_tag "cavy/application"
     = csrf_meta_tags
