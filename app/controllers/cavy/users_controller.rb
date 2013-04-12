@@ -4,6 +4,7 @@ module Cavy
   class UsersController < ApplicationController
 
     before_action :set_user, only: [:show, :edit, :update, :destroy]
+    layout 'layouts/cavy/admin_layout'
 
     def index
       @users = User.all
@@ -49,7 +50,8 @@ module Cavy
       end
 
       def user_params
-        params.require(:user).permit(:email, :password, :role)
+        @role = params[:user][:role]
+        params.require(:user).permit(:email, :password, :name)
       end
   end
 end

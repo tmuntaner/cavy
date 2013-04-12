@@ -10,11 +10,33 @@ module Cavy
       @page.destroy
     end
 
+    it "should translate content" do
+        I18n.locale = :en
+        @page = Page.create(title: 'home', content: 'bar')
+        Cavy::Page.find(@page.id).content.should eq('bar')
+        I18n.locale = :de
+        Cavy::Page.find(@page.id).update(content: 'foo')
+        Cavy::Page.find(@page.id).content.should eq('foo')
+        I18n.locale = :en
+        Cavy::Page.find(@page.id).content.should eq('bar')
+      end
+
     describe 'title' do
 
       it "should not accept a blank string as a title" do
         @page = Page.create(title: '', content: 'bar')
         @page.should_not be_valid
+      end
+
+      it "should translate title" do
+        I18n.locale = :en
+        @page = Page.create(title: 'home', content: 'bar')
+        Cavy::Page.find(@page.id).title.should eq('home')
+        I18n.locale = :de
+        Cavy::Page.find(@page.id).update(title: 'Haus')
+        Cavy::Page.find(@page.id).title.should eq('Haus')
+        I18n.locale = :en
+        Cavy::Page.find(@page.id).title.should eq('home')
       end
 
       it "should have a limit of 100 characters for a title" do

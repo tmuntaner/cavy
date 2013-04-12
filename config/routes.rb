@@ -47,8 +47,8 @@ Cavy::Engine.routes.draw do
       post    '/admin/signin',              to: 'sessions#create',          as: 'admin_create_session'
       delete  '/admin/signout',             to: 'sessions#destroy',         as: 'admin_destroy_session'
 
-      get     '/admin/new_user',            to: 'admin#new_user',           as: 'admin_new_user'
-      get     '/admin/users',               to: 'admin#users',              as: 'admin_users'
+      get     '/admin/new_user',            to: 'users#new',                as: 'cavy_admin_new_user'
+      get     '/admin/users',               to: 'users#index',              as: 'cavy_admin_users'
 
       post    '/cavy_update/:id',           to: 'pages#update',             as: 'cavy_update_page'
       get     '/edit/:route',               to: 'pages#edit',               as: 'cavy_edit_page'

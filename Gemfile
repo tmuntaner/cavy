@@ -15,3 +15,5 @@ gemspec
 
 gem 'simplecov', :require => false, :group => :test
 gem 'coveralls', require: false
+gem 'globalize3', github: 'svenfuchs/globalize3', branch: 'rails4'
+gem 'paper_trail', github: 'airblade/paper_trail', branch: 'rails4'

@@ -24,7 +24,6 @@ Gem::Specification.new do |s|
   s.add_dependency 'mini_magick'
   s.add_dependency 'pg'
   s.add_dependency 'bcrypt-ruby'
-  s.add_dependency 'globalize3'
   
   s.add_development_dependency 'rspec-rails'
   s.add_development_dependency 'capybara'

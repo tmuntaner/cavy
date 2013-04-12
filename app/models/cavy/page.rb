@@ -1,6 +1,8 @@
 module Cavy
   class Page < ActiveRecord::Base
 
+    translates :title, :content
+
     validates :title, uniqueness: true, presence: true
     validates :route, uniqueness: true
     

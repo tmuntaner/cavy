@@ -1,10 +1,14 @@
-%p#notice= notice
+%h1= "Item #{@item.id}"
 
-%p
-  %b Name:
-  = @item.name
-%p
-  %b Data:
-  = @item.data
+%table.table.table-striped
+  %thead
+    %tr
+      %th Key
+      %th Value
+  %tbody
+    - @item.data.try(:each) do |key, value|
+      %tr
+        %td= key
+        %td= value
 
 = link_to 'Edit', cavy_edit_item_path(@item.id)

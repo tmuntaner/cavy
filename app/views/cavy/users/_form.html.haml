@@ -7,14 +7,18 @@
           %li= msg
 
   .field
+    = f.label :name
+    = f.text_field :name
+  .field
     = f.label :email
     = f.text_field :email
-  .field
-    = f.label :password
-    = f.text_field :password
-  .field
-    = f.label :password_confirmation
-    = f.text_field :password_confirmation
+  - if current_user.role == 'admin'
+    .field
+      = f.label :password
+      = f.password_field :password
+    .field
+      = f.label :password_confirmation
+      = f.password_field :password_confirmation
   .field
     = f.label :role
     = f.text_field :role
