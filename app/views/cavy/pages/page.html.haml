@@ -10,9 +10,7 @@
 
 %p
   %strong test:
-  #test{"data-mercury" => "full"}
+  %div{id: "test_#{I18n.locale}", "data-mercury" => "full"}
     - if @page != nil
-      - if @page.page_elements['test'] != nil
-        = @page.page_elements['test'].html_safe
-      - else
-        = @page.page_elements['test']
+      - if @page.page_elements["test_#{I18n.locale}"] != nil
+        = @page.page_elements["test_#{I18n.locale}"].html_safe
