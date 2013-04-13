@@ -14,6 +14,19 @@ module Cavy
     before_save :check_tags
     before_save :check_data
 
+    def update_elements(params)
+      update_values = {page_elements: {}}
+
+      params.each do |key,value|
+        if key == :title or key == :content
+          update_values[key] = value
+        else
+          update_values[:page_elements][key] = value['value']
+        end
+      end
+      update(update_values) if update_values != {}
+    end
+
     def set_key_value(key,value)
       if self.data == nil
         self.data = {"#{key}" => "#{value}"}

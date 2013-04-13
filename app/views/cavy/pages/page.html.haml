@@ -7,3 +7,11 @@
   %strong Content:
   #content{"data-mercury" => "full"}
     = @page.content.html_safe if @page
+
+%p
+  %strong test:
+  #test{"data-mercury" => "full"}
+    - if @page.page_elements['test'] != nil
+      = @page.page_elements['test'].html_safe
+    - else
+      = @page.page_elements['test']

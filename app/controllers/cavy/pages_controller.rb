@@ -20,7 +20,7 @@ module Cavy
 
     def update
       @page = Page.find(params[:id])
-      @page.update(title: params[:content][:title][:value], content: params[:content][:content][:value])
+      @page.update_elements(params[:content])
       render text: ''
     end
 
