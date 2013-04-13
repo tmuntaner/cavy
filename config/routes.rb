@@ -36,9 +36,9 @@ Cavy::Engine.routes.draw do
       patch   '/admin/item_group/:id',      to: 'admin_item_groups#update', as: 'admin_update_item_group'
       delete  '/admin/item_group/:id',      to: 'admin_item_groups#destroy',as: 'admin_delete_item_group'
 
-      get     '/admin/item/:id',            to: 'items#show',               as: 'cavy_item'
       get     '/admin/item/new/:group_id',  to: 'items#new',                as: 'cavy_new_item'
       post    '/admin/item/new/:group_id',  to: 'items#create',             as: 'cavy_create_item'
+      get     '/admin/item/:id',            to: 'items#show',               as: 'cavy_item'
       patch   '/admin/item/:id',            to: 'items#update',             as: 'cavy_update_item'
       delete  '/admin/item/:id',            to: 'items#destroy',            as: 'cavy_delete_item'
       get     '/admin/item/edit/:id',       to: 'items#edit',               as: 'cavy_edit_item'

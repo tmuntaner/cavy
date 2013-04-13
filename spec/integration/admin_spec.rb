@@ -27,7 +27,7 @@ module Cavy
       it "should be able to go to the list of pages" do
         visit '/admin'
         click_link 'admin-users'
-        page.should have_content('Administration Users')
+        page.should have_content('Listing Users')
       end
     end
 

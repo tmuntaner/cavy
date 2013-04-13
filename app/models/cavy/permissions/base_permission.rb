@@ -41,7 +41,19 @@ module Cavy
         elsif @allowed_params
           @allowed_params.each do |resource, attributes|
             if params[resource].respond_to? :permit
+              
+              @hstore_data = {}
+              attributes.each do |attribute|
+                if attribute.class == Hash and params[resource][attribute.keys.first]
+                  @hstore_data[attribute.keys.first] = params[resource][attribute.keys.first]
+                end
+              end
+
               params[resource] = params[resource].permit(*attributes)
+              @hstore_data.each do |key,value|
+                params[resource][key] = value
+              end
+              params.permit!
             end
           end
         end

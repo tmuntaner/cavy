@@ -14,7 +14,7 @@ module Cavy
 
     def create_data
       @page = Cavy::Page.find(params[:id])
-      @page.set_key_value(page_params[:key],page_params[:value])
+      @page.set_key_value(params[:page][:key],params[:page][:value])
       redirect_to admin_page_path(@page.id), notice: 'Page was successfully created.'
     end
 
@@ -59,7 +59,7 @@ module Cavy
 
       def page_params
         # having problem with hstore, so I will just be using params for now
-        params.require(:page).permit(:title, :render, :route, :tag_string, :description, :key, :value, :data)
+        # params.require(:page).permit(:title, :render, :route, :tag_string, :description, :key, :value, :data)
       end
 
   end

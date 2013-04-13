@@ -6,7 +6,8 @@
     %th Parameters
     %th
     %th
-    %th
+    - if current_user.dev_team?
+      %th
 
   - @admin_item_groups.each do |admin_item_group|
     %tr
@@ -14,4 +15,5 @@
       %td= admin_item_group.params.join(', ') if admin_item_group.params
       %td= link_to 'Show', admin_item_group
       %td= link_to 'Edit', admin_edit_item_group_path(admin_item_group)
-      %td= link_to 'Destroy', admin_item_group, :method => :delete, :data => { :confirm => 'Are you sure?' }, id: "delete-#{admin_item_group.id}"
+      - if current_user.dev_team?
+        %td= link_to 'Destroy', admin_item_group, :method => :delete, :data => { :confirm => 'Are you sure?' }, id: "delete-#{admin_item_group.id}"
