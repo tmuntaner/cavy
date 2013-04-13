@@ -13,13 +13,14 @@ module Cavy
     before_save :check_content
     before_save :check_tags
     before_save :check_data
+    before_save :check_page_elements
 
     def update_elements(params)
       update_values = {page_elements: {}}
 
       params.each do |key,value|
-        if key == :title or key == :content
-          update_values[key] = value
+        if key == "title" or key == "content"
+          update_values[key] = value['value']
         else
           update_values[:page_elements][key] = value['value']
         end
@@ -37,6 +38,10 @@ module Cavy
     end
 
     private
+
+    def check_page_elements
+      self.page_elements = {} if self.page_elements == nil
+    end
 
     def check_tags
       unless tag_string == '' or tag_string == nil
