@@ -31,7 +31,7 @@ module Cavy
       end
 
       def set_page
-        @page = params[:route]? get_page(params[:route]) : Page.find_by(title: Cavy.root)
+        @page = params[:route]? get_page(params[:route]) : Page.find_by(route: Cavy.root)
       end
 
       def get_page(route)
