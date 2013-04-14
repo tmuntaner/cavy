@@ -11,7 +11,7 @@
  *= require_self
  *= require cavy/bootstrap-and-overrides
  *= require cavy/bootstrap
- *= require cavy/mercury.bundle
+ *= require cavy/mercury
  *= require cavy/pages
  *= require cavy/token
  */
