@@ -29,8 +29,8 @@
 // Some default packages are provided for you.  If you want to define your own, feel free to do so before including this
 // script.  These, or your own packages can be specified to the loader in query params (read below for details).
 if (!window.mercuryPackages) window.mercuryPackages = {
-  development: {javascripts: "<%= path_to_asset('mercury.js') %>", stylesheets: "<%= path_to_asset('mercury.css') %>"},
-  all: {javascripts: "<%= path_to_asset('mercury.js') %>", stylesheets: "<%= path_to_asset('mercury.css') %>"},
+  development: {javascripts: "<%= asset_digest_path('cavy/mercury.js', :type => :javascript) %>", stylesheets: "<%= asset_digest_path('cavy/mercury', :type => :css) %>"},
+  all: {javascripts: "<%= asset_digest_path('cavy/mercury.js', :type => :javascript) %>", stylesheets: "<%= asset_digest_path('mercury.css', :type => :javascript) %>"},
   bundled: {javascripts: 'javascripts/mercury.min.js,javascripts/mercury_dialogs.js', stylesheets: 'stylesheets/mercury.css'}
 };
 
