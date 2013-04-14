@@ -118,7 +118,7 @@ if (!window.mercuryPackages) window.mercuryPackages = {
         var stylesheets = pack.stylesheets.split(',');
         for (i = 0; i <= stylesheets.length - 1; i += 1) {
           var link = document.createElement('link');
-          link.href = options.src + stylesheets[i];
+          link.href = options.src + '/' + stylesheets[i];
           link.media = 'screen';
           link.rel = 'stylesheet';
           link.type = 'text/css';
@@ -130,7 +130,7 @@ if (!window.mercuryPackages) window.mercuryPackages = {
         var loaded = 0;
         function loadScript(src) {
           var script = document.createElement('script');
-          script.src = options.src + src;
+          script.src = options.src + '/' + src;
           script.type = 'text/javascript';
           script.charset = 'utf-8';
           head.appendChild(script);
