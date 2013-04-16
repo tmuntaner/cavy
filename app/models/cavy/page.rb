@@ -30,7 +30,7 @@ module Cavy
           update_values[:page_elements][key] = value['value']
         end
       end
-      puts update_values
+
       update(update_values) if update_values != {}
     end
 
