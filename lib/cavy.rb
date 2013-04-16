@@ -4,6 +4,11 @@ module Cavy
   
   mattr_accessor :root, :title, :locales, :default_locale
 
+  self.root           = 'home'
+  self.title          = 'cavy'
+  self.locales        = :en
+  self.default_locale = :en
+
   def self.config(&block)
     yield(self)
     set_locale
