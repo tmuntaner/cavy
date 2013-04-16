@@ -13,7 +13,7 @@ Cavy::Engine.routes.draw do
 
       resources :users
 
-      get     '/mercury/:type/:resource',   to: "mercury#resource"
+      get     '/mercury/:type/:resource',   to: 'mercury#resource'
       post    '/mercury/image',             to: 'mercury#image',            as: 'mercury_image'
 
       get     '/admin',                     to: 'admin#overview',           as: 'admin_overview'

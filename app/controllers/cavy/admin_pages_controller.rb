@@ -1,9 +1,9 @@
-require_dependency "cavy/application_controller"
+require_dependency 'cavy/application_controller'
 
 module Cavy
   class AdminPagesController < ApplicationController
 
-    layout 'layouts/cavy/admin_layout'
+    layout 'cavy/admin_layout'
 
     def index
     end
@@ -58,7 +58,7 @@ module Cavy
     private
 
       def page_params
-        # having problem with hstore, so I will just be using params for now
+        # TODO Find a way to use hstore with strong parameters
         # params.require(:page).permit(:title, :render, :route, :tag_string, :description, :key, :value, :data)
       end
 

@@ -18,13 +18,19 @@ module Cavy
     def update_elements(params)
       update_values = {page_elements: {}}
 
+      # todo find a cleaner way to update page elements, {page_elements: self.page_elements} didnt work
+      self.page_elements.try(:each) do |key,value|
+        update_values[:page_elements][key] = value
+      end
+
       params.each do |key,value|
-        if key == "title" or key == "content"
+        if key == 'title' or key == 'content'
           update_values[key] = value['value']
         else
           update_values[:page_elements][key] = value['value']
         end
       end
+      puts update_values
       update(update_values) if update_values != {}
     end
 
