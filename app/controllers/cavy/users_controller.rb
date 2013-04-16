@@ -4,7 +4,7 @@ module Cavy
   class UsersController < ApplicationController
 
     before_action :set_user, only: [:show, :edit, :update, :destroy]
-    layout 'layouts/cavy/admin_layout'
+    layout 'cavy/admin_layout'
 
     def index
       @users = User.all

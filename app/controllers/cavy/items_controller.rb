@@ -6,7 +6,7 @@ module Cavy
     before_action :set_item, only: [:show, :edit, :update, :destroy]
     before_action :set_group, only: [:create,:update]
 
-    layout 'layouts/cavy/admin_layout'
+    layout 'cavy/admin_layout'
 
     # GET /items/1
     def show

@@ -3,7 +3,7 @@ require_dependency "cavy/application_controller"
 module Cavy
   class AdminController < ApplicationController
 
-    layout 'layouts/cavy/admin_layout'
+    layout 'cavy/admin_layout'
 
     def overview
     end

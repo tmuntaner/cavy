@@ -5,7 +5,7 @@ module Cavy
     
     before_action :set_admin_item_group, only: [:show, :edit, :update, :destroy]
 
-    layout 'layouts/cavy/admin_layout'
+    layout 'cavy/admin_layout'
     
     # GET /admin_item_groups
     def index
