@@ -1,4 +1,5 @@
-require "cavy/engine"
+require 'cavy/engine'
+require 'cavy/railtie' if defined?(Rails)
 
 module Cavy
   

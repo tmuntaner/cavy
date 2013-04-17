@@ -1,7 +1,5 @@
 %p#notice= notice
 
-//%h1#title{"data-mercury" => "full"}
-//  = @page.title if @page
 
 %h1= page_element(id: 'title', content: @page.title) if @page
 
@@ -11,8 +9,4 @@
 
 %p
   %strong test:
-  //%div{id: "test_#{I18n.locale}", "data-mercury" => "full"}
-  //  - if @page != nil
-  //    - if @page.page_elements["test_#{I18n.locale}"] != nil
-  //      = @page.page_elements["test_#{I18n.locale}"].html_safe
-  = localized_page_element(id: 'test', page: @page)
+  = localized_page_element(id: 'test', page: @page) if @page
