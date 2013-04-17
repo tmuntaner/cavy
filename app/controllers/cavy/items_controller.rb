@@ -14,7 +14,7 @@ module Cavy
 
     # GET /items/new
     def new
-      @group = Cavy::AdminItemGroup.find(params[:group_id])
+      @group = Cavy::ItemGroup.find(params[:group_id])
       @item = Item.new
       @item.create_params(@group.title,@group.params)
     end
@@ -25,7 +25,7 @@ module Cavy
 
     # POST /items
     def create
-      @group = Cavy::AdminItemGroup.find(params[:group_id])
+      @group = Cavy::ItemGroup.find(params[:group_id])
       @item = @group.items.new(params[:item])
 
       if @item.save
@@ -43,7 +43,7 @@ module Cavy
     # DELETE /items/1
     def destroy
       @item.destroy
-      redirect_to cavy_items_path, notice: 'Item was successfully destroyed.'
+      redirect_to :back, notice: 'Item was successfully destroyed.'
     end
 
     private
@@ -56,7 +56,7 @@ module Cavy
         if @item
           params['item']['data']['type'] = @item.data['type']
         else
-          params['item']['data']['type'] = Cavy::AdminItemGroup.find(params[:group_id]).type
+          params['item']['data']['type'] = Cavy::ItemGroup.find(params[:group_id]).type
         end
       end
 

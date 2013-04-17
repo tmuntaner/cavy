@@ -1,0 +1,23 @@
+- if params[:action] == 'new' or params[:action] == 'create'
+  - url = cavy_create_item_group_path
+  - method = 'post'
+- else
+  - url = cavy_update_item_group_path(@item_group.id)
+  - method = 'patch'
+
+= form_for @item_group, url: url, method: method do |f|
+  - if @item_group.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@item_group.errors.count, "error")} prohibited this admin_item_group from being saved:"
+      %ul
+        - @item_group.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :title
+    = f.text_field :title
+  .field
+    = f.label :params
+    = f.text_field :param_string, value: "#{@item_group.params.join(',') if @item_group.params != '' and @item_group.params != nil}", placeholder: 'add'
+  .actions
+    = f.submit 'Save'

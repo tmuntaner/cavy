@@ -1,21 +1,21 @@
 require 'spec_helper'
 
 module Cavy
-  describe AdminItemGroup do
+  describe ItemGroup do
 
     describe 'title' do
       it "should accept a group with a title" do
-        @group = AdminItemGroup.create(title: 'foo')
+        @group = ItemGroup.create(title: 'foo')
         @group.should be_valid
         @group.destroy
       end
       it "should not accept a groupd without a title" do
-        @group = AdminItemGroup.create()
+        @group = ItemGroup.create()
         @group.should_not be_valid
         @group.destroy
       end
       it "should create a valid type from title" do
-        @group = create(:cavy_admin_item_group, title: 'foo Bar')
+        @group = create(:cavy_item_group, title: 'foo Bar')
         @group.type.should eq('foo_bar')
         @group.destroy
       end
@@ -24,23 +24,23 @@ module Cavy
 
     describe 'params' do
       it "should accept no params" do
-        @group = create(:cavy_admin_item_group, params: '')
+        @group = create(:cavy_item_group, params: '')
         @group.should be_valid
         @group.destroy
       end
       it "should accept no param string" do
-        @group = create(:cavy_admin_item_group, param_string: '')
+        @group = create(:cavy_item_group, param_string: '')
         @group.should be_valid
         @group.destroy
       end
       it "should accept an array of params" do
-        @group = create(:cavy_admin_item_group, params: ['Ruby','Rainbows'], param_string: '')
+        @group = create(:cavy_item_group, params: ['Ruby','Rainbows'], param_string: '')
         @group.params.should eq(['Ruby','Rainbows'])
         @group.should be_valid
         @group.destroy
       end
       it "should accept a string of params" do
-        @group = create(:cavy_admin_item_group, param_string: 'Ruby,Rainbows')
+        @group = create(:cavy_item_group, param_string: 'Ruby,Rainbows')
         @group.params.should eq(['Ruby','Rainbows'])
         @group.should be_valid
         @group.destroy
@@ -49,7 +49,7 @@ module Cavy
 
     describe "items" do
       before(:each) do
-        @guineapigs = create(:cavy_admin_item_group, param_string: 'name,group')
+        @guineapigs = create(:cavy_item_group, param_string: 'name,group')
         @pig1 = @guineapigs.items.create(data: {name: 'ghost', group: 'team_ghost'})
         @pig2 = @guineapigs.items.create(data: {name: 'summer', group: 'team_summer'})
         @pig3 = @guineapigs.items.create(data: {name: 'pumpkin spice', group: 'team_ghost'})

@@ -1,7 +1,7 @@
 module Cavy
   class Item < ActiveRecord::Base
 
-    belongs_to :admin_item_group
+    belongs_to :item_group
     
     def create_params(type,params)
       data = {}

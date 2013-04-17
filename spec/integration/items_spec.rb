@@ -23,7 +23,7 @@ describe 'items'  do
   describe "new" do
     before(:each) do
       log_in('admin')
-      @group = create(:cavy_admin_item_group)
+      @group = create(:cavy_item_group)
     end
 
     after(:each) do
@@ -45,7 +45,7 @@ describe 'items'  do
   describe "edit" do
     before(:each) do
       log_in('admin')
-      @group = create(:cavy_admin_item_group)
+      @group = create(:cavy_item_group)
     end
 
     after(:each) do
@@ -71,7 +71,7 @@ describe 'items'  do
   describe "destroy" do
     before(:each) do
       log_in('admin')
-      @group = create(:cavy_admin_item_group)
+      @group = create(:cavy_item_group)
     end
 
     after(:each) do

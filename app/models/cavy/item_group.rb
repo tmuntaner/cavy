@@ -1,5 +1,5 @@
 module Cavy
-  class AdminItemGroup < ActiveRecord::Base
+  class ItemGroup < ActiveRecord::Base
 
     has_many :items
 

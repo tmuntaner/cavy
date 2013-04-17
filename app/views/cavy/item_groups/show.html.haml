@@ -2,26 +2,26 @@
 
 %p
   %b Title:
-  = @admin_item_group.title
+  = @item_group.title
 %p
   %b Params:
-  = @admin_item_group.params
+  = @item_group.params
 
-= link_to 'Edit', admin_edit_item_group_path(@admin_item_group)
+= link_to 'Edit', admin_edit_item_group_path(@item_group)
 \|
-= link_to 'Back', admin_item_groups_path
+= link_to 'Back', item_groups_path
 
 %br/
 %br/
 %h2 Group Items
 %br/
 %br/
-= link_to 'New Item', cavy_new_item_path(group_id: @admin_item_group.id), id: 'new-item'
+= link_to 'New Item', cavy_new_item_path(group_id: @item_group.id), id: 'new-item'
 %br/
 %br/
 %table.table.table-striped
   %tr
-    - @admin_item_group.params.each do |param|
+    - @item_group.params.each do |param|
       %th= param
     %th
     %th
@@ -29,7 +29,7 @@
 
   - @items.each do |item|
     %tr
-      - @admin_item_group.params.each do |param|
+      - @item_group.params.each do |param|
         %td= item.data[param]
       %td= link_to 'Show', cavy_item_path(item.id)
       %td= link_to 'Edit', cavy_edit_item_path(item.id)
