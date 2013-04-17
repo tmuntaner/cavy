@@ -8,3 +8,10 @@ h1 {
 
 .row {
 }
+
+#admin-locale-links
+{
+    position: absolute;
+    top: 60px;
+    right: 20px;
+}

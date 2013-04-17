@@ -1,4 +1,7 @@
 %h1 Edit Page
+%hr
+
+= render 'cavy/shared/admin_locale_links'
 
 = form_for(@page, url: admin_update_page_path, method: :put, html: {class: 'form-horizontal'}) do |f|
   - if @page.errors.any?

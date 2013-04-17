@@ -1,0 +1,6 @@
+#admin-locale-links
+  - last = I18n.available_locales.last
+  - I18n.available_locales.each do |locale|
+    = link_to locale, url_for(locale: locale)
+    - if locale != last
+      = ' | '
