@@ -9,5 +9,6 @@ spec/dummy/tmp/
 spec/dummy/.sass-cache
 spec/dummy/public/uploads/
 .idea
+*.gem
 coverage/*
 rdoc/*
