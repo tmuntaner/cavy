@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'admin item groups' do
+describe 'item group' do
 
   describe 'index' do
     before(:each) do
@@ -41,7 +41,7 @@ describe 'admin item groups' do
 
     it "should should be able to go to the show path for a item" do
       @group = create(:cavy_item_group)
-      visit admin_item_group_path(locale: :en, id: @group.id)
+      visit cavy_item_group_path(locale: :en, id: @group.id)
       page.should have_content(@group.title)
       @group.destroy
     end
@@ -66,6 +66,7 @@ describe 'admin item groups' do
       fill_in 'item_group_title', with: 'testfoo'
       fill_in 'item_group_param_string', with: 'test,bar'
       click_button 'Save'
+      page.should have_content('testfoo')
       @group = Cavy::ItemGroup.find_by(title: 'testfoo')
       @group.params.should eq(['test','bar'])
       @group.destroy

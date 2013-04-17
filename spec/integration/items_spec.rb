@@ -32,7 +32,7 @@ describe 'items'  do
     end
 
     it "should be able to create a new item" do
-      visit admin_item_group_path(locale: :en, id: @group.id)
+      visit cavy_item_group_path(locale: :en, id: @group.id)
       click_link('new-item')
       fill_in 'item[data][name]', with: 'ruby rainbows'
       click_button 'submit-item'
@@ -54,7 +54,7 @@ describe 'items'  do
     end
 
     it "should be able to edit an item" do
-      visit admin_item_group_path(locale: :en, id: @group.id)
+      visit cavy_item_group_path(locale: :en, id: @group.id)
       click_link('new-item')
       fill_in 'item[data][name]', with: 'ruby rainbows'
       click_button 'submit-item'
@@ -80,11 +80,11 @@ describe 'items'  do
     end
 
     it "should be able to edit an item" do
-      visit admin_item_group_path(locale: :en, id: @group.id)
+      visit cavy_item_group_path(locale: :en, id: @group.id)
       click_link('new-item')
       fill_in 'item[data][name]', with: 'ruby rainbows'
       click_button 'submit-item'
-      visit admin_item_group_path(locale: :en, id: @group.id)
+      visit cavy_item_group_path(locale: :en, id: @group.id)
       count = Cavy::Item.count
       item = Cavy::Item.last
       click_link "delete-#{item.id}"

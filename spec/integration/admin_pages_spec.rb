@@ -99,7 +99,7 @@ module Cavy
         visit '/admin'
         click_link 'admin-pages'
         click_link "page-#{@page.id}"
-        click_link 'edit-page-settings'
+        click_on 'edit-page-settings'
         page.should have_content('Edit')
         @page.destroy
       end
@@ -109,7 +109,7 @@ module Cavy
         visit '/admin'
         click_link 'admin-pages'
         click_link "page-#{@page.id}"
-        click_link 'edit-page-content'
+        click_on 'edit-page-content'
         page.should have_content(@page.content)
         @page.destroy
       end
@@ -119,7 +119,7 @@ module Cavy
         visit '/admin'
         click_link 'admin-pages'
         click_link "page-#{@page.id}"
-        click_link 'add-data'
+        click_on 'add-data'
         fill_in 'page[key]', with: 'test'
         fill_in 'page[value]', with: 'value'
         click_button 'submit'

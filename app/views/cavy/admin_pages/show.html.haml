@@ -1,14 +1,13 @@
 %h1= "Page - #{@page.title}"
 
 %hr/
+
 = render 'cavy/shared/admin_locale_links'
-.btn-group
-  %btn{id: 'edit-page-settings', onclick: "window.location.href='#{admin_edit_page_path(@page.id)}'", class: 'btn'}
-    Edit Settings
-  %btn{id: 'edit-page-content', onclick: "window.location.href='#{cavy_edit_page_path(@page.route)}'", class: 'btn'}
-    Edit Content
-  %btn{id: 'add-data', onclick: "window.location.href='#{admin_add_page_data_path(@page.id)}'", class: 'btn'}
-    Add Data
+
+= link_to('Edit Settings', admin_edit_page_path(@page.id), class: 'btn', id: 'edit-page-settings' )
+= link_to('Edit Content', cavy_edit_page_path(@page.route), class: 'btn', id: 'edit-page-content' )
+= link_to('Add data', admin_add_page_data_path(@page.id), class: 'btn', id: 'add-data' )
+
 %br/
 %br/
 %h3 Route
