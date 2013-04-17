@@ -6,6 +6,9 @@
     = javascript_include_tag "cavy/application"
     = csrf_meta_tags
     %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
+    - if @page
+      %meta{name: 'keywords', content: @page.tags ? @page.tags.join(', ') : ''}
+      %meta{name: 'description', content: @page.description}
   %body
     = render 'layouts/cavy/header'
     - flash.each do |name, msg|

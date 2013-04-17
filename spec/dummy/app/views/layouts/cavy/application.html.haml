@@ -3,6 +3,9 @@
   %head
     %title= @page ? @page.title : "Cavy"
     %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}
+    - if @page
+      %meta{name: 'description',  content: @page.description}
+      %meta{name: 'keywords',     content: @page.tags ? @page.tags.join(', ') : ''}
     = stylesheet_link_tag    "cavy/application", media: "all"
     = javascript_include_tag "cavy/application"
     = csrf_meta_tags
