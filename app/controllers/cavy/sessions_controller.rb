@@ -3,7 +3,7 @@ require_dependency "cavy/application_controller"
 module Cavy
   class SessionsController < ApplicationController
 
-    layout 'cavy/admin_layout'
+    layout 'cavy/sessions'
 
     def new
     end
