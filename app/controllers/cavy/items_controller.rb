@@ -29,7 +29,7 @@ module Cavy
       @item = @group.items.new(params[:item])
 
       if @item.save
-        redirect_to admin_item_group_path(params[:group_id]), notice: 'Item was successfully created.'
+        redirect_to cavy_item_group_path(params[:group_id]), notice: 'Item was successfully created.'
       end
     end
 
