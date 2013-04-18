@@ -39,7 +39,7 @@ module Cavy
     it "should be able to change render" do
       @page.update(render: 'cavy/shared/test')
       visit '/'
-      page.should have_content(@page.title.upcase)
+      page.should have_content(@page.title)
     end
 
     it "should be able to go to non-root page through url" do

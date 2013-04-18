@@ -3,7 +3,6 @@
 %table.table.table-striped
   %thead
     %tr
-      %th Page
       %th Title
       %th Render
       %th
@@ -13,7 +12,6 @@
   %tbody
     - Cavy::Page.all.each do |page|
       %tr
-        %th= page.id
         %th= link_to page.title, admin_page_path(page.id), id: "page-#{page.id}"
         %th= page.render
         %th= link_to 'show', admin_page_path(page.id), id: "page-show-#{page.id}"

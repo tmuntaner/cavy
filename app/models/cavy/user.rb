@@ -1,6 +1,16 @@
 module Cavy
-  class User < ActiveRecord::Base
+  class User
 
+    include Mongoid::Document
+    include ActiveModel::SecurePassword
+
+    field :email
+    field :name
+    field :password_digest
+    field :auth_token
+    field :role
+
+    has_secure_password
     has_secure_password
 
     validates :email, uniqueness: true, presence: true

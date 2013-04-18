@@ -1,5 +1,10 @@
 module Cavy
-  class ItemGroup < ActiveRecord::Base
+  class ItemGroup
+
+    include Mongoid::Document
+
+    field :title
+    field :params, type: Array
 
     has_many :items
 
@@ -18,7 +23,8 @@ module Cavy
     end
 
     def items_with_key_value(key,value)
-      Cavy::Item.where('group_id = ? AND data @> hstore(?,?)', id, key, value)
+      item_group = Cavy::ItemGroup.find(id)
+      item_group.items.where("data.#{key}" => value)
     end
 
     private

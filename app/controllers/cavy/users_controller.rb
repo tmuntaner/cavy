@@ -4,7 +4,7 @@ module Cavy
   class UsersController < ApplicationController
 
     before_action :set_user, only: [:show, :edit, :update, :destroy]
-    layout 'cavy/sessions'
+    layout 'cavy/admin_layout'
 
     def index
       @users = User.all
@@ -31,7 +31,7 @@ module Cavy
     end
 
     def update
-      if @user.update(user_params)
+      if @user.update_attributes(user_params)
         redirect_to @user, notice: 'User was successfully updated.'
       else
         render action: 'edit'
@@ -51,7 +51,7 @@ module Cavy
 
       def user_params
         @role = params[:user][:role]
-        params.require(:user).permit(:email, :password, :name)
+        params.require(:user).permit(:email, :password, :password_confirmation, :name, :role)
       end
   end
 end

@@ -1,21 +1,12 @@
 GIT
-  remote: git://github.com/airblade/paper_trail.git
-  revision: 009d3bd4a371f6c93c765fb4ee754ed98608437e
-  branch: rails4
+  remote: git://github.com/mongoid/mongoid.git
+  revision: 674cc37b769054d5b3bea81230a8d90271d78ba6
   specs:
-    paper_trail (2.7.1)
-      activerecord (>= 4.0.0.beta, < 5.0)
-      railties (>= 4.0.0.beta, < 5.0)
-
-GIT
-  remote: git://github.com/svenfuchs/globalize3.git
-  revision: d0204649d52c5f5c130e1ea2807742a065c4b544
-  branch: rails4
-  specs:
-    globalize3 (0.3.0)
-      activemodel (>= 4.0.0.beta)
-      activerecord (>= 4.0.0.beta)
-      paper_trail (~> 2)
+    mongoid (4.0.0)
+      activemodel (~> 4.0.0.beta)
+      moped (~> 1.4.2)
+      origin (~> 1.0)
+      tzinfo (~> 0.3.22)
 
 PATH
   remote: .
@@ -27,7 +18,6 @@ PATH
       haml
       jquery-rails
       mini_magick
-      pg
       rails (~> 4.0.0.beta1)
 
 GEM
@@ -88,6 +78,7 @@ GEM
       rest-client
       simplecov (>= 0.7)
       thor
+    database_cleaner (0.9.1)
     debug_inspector (0.0.2)
     diff-lcs (1.2.3)
     erubis (2.7.0)
@@ -120,9 +111,10 @@ GEM
     mini_magick (3.5.0)
       subexec (~> 0.2.1)
     minitest (4.7.1)
+    moped (1.4.5)
     multi_json (1.7.2)
     nokogiri (1.5.9)
-    pg (0.15.1)
+    origin (1.0.11)
     polyglot (0.3.3)
     rack (1.5.2)
     rack-contrib (1.1.0)
@@ -198,11 +190,11 @@ DEPENDENCIES
   capybara
   cavy!
   coveralls
+  database_cleaner
   factory_girl_rails
-  globalize3!
   launchy
   meta_request
-  paper_trail!
+  mongoid!
   rspec-rails
   simplecov
   unicorn

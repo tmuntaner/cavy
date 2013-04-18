@@ -2,6 +2,6 @@
 
 FactoryGirl.define do
   factory :cavy_item, class: Cavy::Item do
-    data ""
+    data {}
   end
 end

@@ -36,7 +36,7 @@ module Cavy
         @page = Page.create(title: 'home', content: 'bar')
         Cavy::Page.find(@page.id).title.should eq('home')
         I18n.locale = :de
-        Cavy::Page.find(@page.id).update(title: 'Haus')
+        Cavy::Page.find(@page.id).update_attributes(title: 'Haus')
         Cavy::Page.find(@page.id).title.should eq('Haus')
         I18n.locale = :en
         Cavy::Page.find(@page.id).title.should eq('home')
@@ -55,7 +55,7 @@ module Cavy
       end
 
       it 'should not allow the creation of a page without a title' do
-        @page = Page.create(content: 'foobar')
+        @page = Page.new(title: '', content: 'foobar')
         @page.should_not be_valid
       end
 
@@ -100,7 +100,7 @@ module Cavy
         @page = Page.create(title: 'home', content: 'bar')
         Cavy::Page.find(@page.id).content.should eq('bar')
         I18n.locale = :de
-        Cavy::Page.find(@page.id).update(content: 'foo')
+        Cavy::Page.find(@page.id).update_attributes(content: 'foo')
         Cavy::Page.find(@page.id).content.should eq('foo')
         I18n.locale = :en
         Cavy::Page.find(@page.id).content.should eq('bar')

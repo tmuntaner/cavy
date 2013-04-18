@@ -13,7 +13,6 @@ gemspec
 # To use debugger
 # gem 'debugger'
 
-gem 'simplecov', :require => false, :group => :test
-gem 'coveralls', require: false
-gem 'globalize3', github: 'svenfuchs/globalize3', branch: 'rails4'
-gem 'paper_trail', github: 'airblade/paper_trail', branch: 'rails4'
+gem 'simplecov',  require: false, :group => :test
+gem 'coveralls',  require: false
+gem 'mongoid',    github: 'mongoid/mongoid'

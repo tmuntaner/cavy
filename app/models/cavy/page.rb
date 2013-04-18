@@ -1,7 +1,16 @@
 module Cavy
-  class Page < ActiveRecord::Base
+  class Page
 
-    translates :title, :content
+    include Mongoid::Document
+
+    field :title, localize: true
+    field :content, localize: true
+    field :render
+    field :route
+    field :description
+    field :tags, type: Array
+    field :data, type: Hash
+    field :page_elements, type: Hash
 
     validates :title, uniqueness: true, presence: true
     validates :route, uniqueness: true
@@ -31,7 +40,7 @@ module Cavy
         end
       end
 
-      update(update_values) if update_values != {}
+      set(update_values) if update_values != {}
     end
 
     def set_key_value(key,value)
@@ -40,7 +49,7 @@ module Cavy
       else
         self.data[key] = value
       end
-      Cavy::Page.find(id).update(data: self.data)
+      Cavy::Page.find(id).set(data: self.data)
     end
 
     private

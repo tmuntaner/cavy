@@ -43,8 +43,8 @@ module Cavy
     end
 
     def update
-      @page = Page.find(params[:id])
-      if @page.update(params[:page])
+      @page = Cavy::Page.find(params[:id])
+      if @page.update_attributes(params[:page])
         redirect_to admin_page_path(@page), notice: 'Page was successfully created.'
       else
         render action: 'edit'

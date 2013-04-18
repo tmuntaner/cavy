@@ -22,7 +22,6 @@ Gem::Specification.new do |s|
   s.add_dependency 'haml'
   s.add_dependency 'carrierwave'
   s.add_dependency 'mini_magick'
-  s.add_dependency 'pg'
   s.add_dependency 'bcrypt-ruby'
   
   s.add_development_dependency 'rspec-rails'
@@ -33,5 +32,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'launchy'
   s.add_development_dependency 'better_errors'
   s.add_development_dependency 'binding_of_caller'
+  s.add_development_dependency 'database_cleaner'
 
 end

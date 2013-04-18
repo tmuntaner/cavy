@@ -1,7 +1,11 @@
 module Cavy
-  class Item < ActiveRecord::Base
+  class Item
 
-    belongs_to :item_group
+    include Mongoid::Document
+
+    field :data, type: Hash
+
+    belongs_to :item_group, inverse_of: :items
     
     def create_params(type,params)
       data = {}
@@ -9,7 +13,7 @@ module Cavy
       params.try(:each) do |param|
         data["#{param.downcase.gsub(' ', '_')}"] = ''
       end
-      update(data: data)
+      self.data = data
     end
   end
 end

@@ -11,7 +11,10 @@ gemfile: Gemfile
 
 script: rspec spec
 
-before_script:
-  - psql -c 'create database cavy_test;' -U postgres
-  - cp spec/dummy/config/database.travis.yml spec/dummy/config/database.yml
-  - RAILS_ENV=test bundle exec rake db:migrate --trace
+services:
+  - mongodb
+
+#before_script:
+#  - psql -c 'create database cavy_test;' -U postgres
+#  - cp spec/dummy/config/database.travis.yml spec/dummy/config/database.yml
+#  - RAILS_ENV=test bundle exec rake db:migrate --trace

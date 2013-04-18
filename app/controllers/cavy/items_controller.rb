@@ -14,8 +14,8 @@ module Cavy
 
     # GET /items/new
     def new
-      @group = Cavy::ItemGroup.find(params[:group_id])
-      @item = Item.new
+      @group = Cavy::ItemGroup.find_by(id: params[:group_id])
+      @item = @group.items.new
       @item.create_params(@group.title,@group.params)
     end
 
@@ -25,8 +25,8 @@ module Cavy
 
     # POST /items
     def create
-      @group = Cavy::ItemGroup.find(params[:group_id])
-      @item = @group.items.new(params[:item])
+      @group = Cavy::ItemGroup.find_by(id: params[:group_id])
+      @item = @group.items.create(params[:item])
 
       if @item.save
         redirect_to cavy_item_group_path(params[:group_id]), notice: 'Item was successfully created.'
@@ -35,7 +35,7 @@ module Cavy
 
     # PATCH/PUT /items/1
     def update
-      if @item.update(params[:item])
+      if @item.update_attributes(params[:item])
         redirect_to cavy_item_path(@item.id), notice: 'Item was successfully updated.'
       end
     end

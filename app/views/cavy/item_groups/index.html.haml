@@ -13,7 +13,7 @@
     %tr
       %td= item_group.title
       %td= item_group.params.join(', ') if item_group.params
-      %td= link_to 'Show', cavy_item_path(item_group.id)
+      %td= link_to 'Show', cavy_item_group_path(item_group.id)
       %td= link_to 'Edit', admin_edit_item_group_path(item_group.id)
       - if current_user.dev_team?
         %td= link_to 'Destroy', cavy_delete_item_group_path(item_group.id), :method => :delete, :data => { :confirm => 'Are you sure?' }, id: "delete-#{item_group.id}"
