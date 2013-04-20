@@ -8,6 +8,8 @@ end
 
 Cavy::Engine.routes.draw do
   
+  resources :item_sections
+
   scope(cavy_locale_scope, locale: /#{I18n.available_locales.join('|')}/) do
       root to: 'pages#page'
 

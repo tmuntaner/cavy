@@ -6,6 +6,8 @@ module Cavy
     field :title
     field :params, type: Array
 
+    belongs_to :item_section, inverse_of: :item_groups
+
     has_many :items
 
     attr_accessor :param_string

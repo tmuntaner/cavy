@@ -33,6 +33,8 @@ RSpec.configure do |config|
   config.include MailerMacros
   config.include Capybara::DSL, :example_group => { :file_path => /\bspec\/integration\// }
   config.include Cavy::Engine.routes.url_helpers
+  config.before(:each, type: :controller) { @routes = Cavy::Engine.routes }
+  config.before(:each, type: :routing)    { @routes = Cavy::Engine.routes }
 
   config.before(:each) do
     reset_email

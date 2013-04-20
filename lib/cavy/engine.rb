@@ -6,6 +6,7 @@ module Cavy
       g.test_framework      :rspec,        :fixture => false
       g.template_engine     :haml
       g.fixture_replacement :factory_girl, :dir => 'spec/factories'
+      g.format              :mongoid
       g.assets false
       g.helper false
     end

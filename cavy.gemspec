@@ -1,20 +1,20 @@
-$:.push File.expand_path("../lib", __FILE__)
+$:.push File.expand_path('../lib', __FILE__)
 
 # Maintain your gem's version:
-require "cavy/version"
+require 'cavy/version'
 
 # Describe your gem and declare its dependencies:
 Gem::Specification.new do |s|
-  s.name        = "cavy"
+  s.name        = 'cavy'
   s.version     = Cavy::VERSION
-  s.authors     = ["Thomas Muntaner", "Susanne Schmidt"]
-  s.email       = ["thomas.muntaner@rubyrainbows.com", "susanne.schmidt@rubyrainbows.com"]
-  s.homepage    = "http://www.rubyrainbows.com"
-  s.summary     = "A simple CMS for rails"
-  s.description = "A cms bootstrap for localized client websites."
+  s.authors     = ['Thomas Muntaner', 'Susanne Schmidt']
+  s.email       = ['thomas.muntaner@rubyrainbows.com', 'susanne.schmidt@rubyrainbows.com']
+  s.homepage    = 'http://www.rubyrainbows.com'
+  s.summary     = 'A simple CMS for rails'
+  s.description = 'A cms bootstrap for localized client websites.'
 
-  s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
-  s.test_files = Dir["spec/**/*"]
+  s.files =       Dir['{app,config,db,lib}/**/*', 'MIT-LICENSE', 'Rakefile', 'README.rdoc']
+  s.test_files =  Dir['spec/**/*']
 
   s.add_dependency 'rails',       '~> 4.0.0.beta1'
   s.add_dependency 'jquery-rails'

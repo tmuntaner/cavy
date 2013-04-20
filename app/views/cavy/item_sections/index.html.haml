@@ -1,0 +1,19 @@
+%h1 Listing item_sections
+
+%table
+  %tr
+    %th Title
+    %th
+    %th
+    %th
+
+  - @item_sections.each do |item_section|
+    %tr
+      %td= item_section.title
+      %td= link_to 'Show', item_section
+      %td= link_to 'Edit', edit_item_section_path(item_section)
+      %td= link_to 'Destroy', item_section, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Item section', new_item_section_path

@@ -11,7 +11,6 @@ module Cavy
     def users
     end
 
-
     def new_user
     end
 
