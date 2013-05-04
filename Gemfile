@@ -16,3 +16,18 @@ gemspec
 gem 'simplecov',  require: false, :group => :test
 gem 'coveralls',  require: false
 gem 'mongoid',    github: 'mongoid/mongoid'
+
+# because of https://github.com/rails/rails/issues/9582
+# will remove in next release of rails 4
+gem 'rails',      '4.0.0.rc1'
+
+platform :jruby do
+  gem 'therubyrhino', group: :asssets
+  gem 'puma'
+end
+
+platform :ruby do
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'unicorn'
+end
