@@ -38,10 +38,10 @@ module Cavy
       end
     end
 
-    def destroy
-      @user.destroy
-      redirect_to users_url, notice: 'User was successfully destroyed.'
-    end
+    # def destroy
+    #   @user.destroy
+    #   redirect_to users_url, notice: 'User was successfully destroyed.'
+    # end
 
     private
 
