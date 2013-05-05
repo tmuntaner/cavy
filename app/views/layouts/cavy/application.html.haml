@@ -4,7 +4,7 @@
     %title= @page ? @page.title : "Cavy"
     = stylesheet_link_tag    "cavy/application", media: "all"
     = javascript_include_tag "cavy/application"
-    = meta_tags(@page) - if @page
+    = meta_tags(@page) if @page
     = csrf_meta_tags
     %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
     - if @page

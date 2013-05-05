@@ -21,5 +21,14 @@ module Cavy
         element.should eq("<div id='title_en' data-mercury='full'>foobar_en</div>")
       end
     end
+
+    describe 'seo' do
+      it 'should give proper seo tags for a page' do
+        page = Cavy::Page.create(title: 'home', tags: ['ghost', 'summer'], description: 'first piggies')
+        element = meta_tags(page)
+        element.should eq("<meta content='first piggies' name='description'> <meta content='ghost, summer' name='keywords'>")
+        page.destroy
+      end
+    end
   end
 end
