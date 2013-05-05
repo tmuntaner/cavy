@@ -123,29 +123,45 @@ module Cavy
     end
 
     describe 'seo' do
-      it 'should accept no tags' do
-        @page = Page.create(title: 'foo', tags: '')
-        @page.should be_valid
-        @page.destroy
-      end
+      describe 'tags' do
+        it 'should accept no tags' do
+          @page = Page.create(title: 'foo', tags: '')
+          @page.should be_valid
+          @page.destroy
+        end
 
-      it 'should accept no tag string' do
-        @page = Page.create(title: 'foo', tag_string: '')
-        @page.should be_valid
-        @page.destroy
-      end
+        it 'should accept no tag string' do
+          @page = Page.create(title: 'foo', tag_string: '')
+          @page.should be_valid
+          @page.destroy
+        end
 
-      it 'should accept an array of tags' do
-        @page = Page.create(title: 'foo', tags: ['Ruby', 'Rainbows'])
-        @page.should be_valid
-        @page.destroy
-      end
+        it 'should accept an array of tags' do
+          @page = Page.create(title: 'foo', tags: ['Ruby', 'Rainbows'])
+          @page.tags.should eq(['Ruby','Rainbows'])
+          @page.should be_valid
+          @page.destroy
+        end
 
-      it 'should accept an string of tags' do
-        @page = Page.create(title: 'foo', tag_string: 'Ruby,Rainbows')
-        @page.tags.should eq(['Ruby','Rainbows'])
-        @page.should be_valid
-        @page.destroy
+        it 'should accept an string of tags' do
+          @page = Page.create(title: 'foo', tag_string: 'Ruby,Rainbows')
+          @page.tags.should eq(['Ruby','Rainbows'])
+          @page.should be_valid
+          @page.destroy
+        end
+      end
+      describe 'description' do
+        it "should allow a page to have a description" do
+          @page = Page.create(title: 'foo', description: 'foobar')
+          @page.description.should eq('foobar')
+          @page.should be_valid
+          @page.destroy
+        end
+        it "should allow a page to have no description" do
+          @page = Page.create(title: 'foo', description: '')
+          @page.should be_valid
+          @page.destroy
+        end
       end
     end
 

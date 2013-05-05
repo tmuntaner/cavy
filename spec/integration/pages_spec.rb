@@ -83,6 +83,16 @@ module Cavy
       end
     end
 
+    describe 'seo' do
+      it 'should display the page desciption and meta tags' do
+        @page = FactoryGirl.create(:cavy_page, title: 'seo', description: 'guinea pigs are awesome', tags: ['Ghost', 'Summer', 'Pumpkin Spice', 'Greywind'])
+        visit "/#{@page.route}"
+        page.find "meta[content='#{@page.description}']", visible: 'false'
+        page.find "meta[content='#{@page.tags.join(', ')}']", visible: 'false'
+        @page.destroy
+      end
+    end
+
     it "should give 404 for non pages" do
       visit '/supercalifragilisticexpialidocious'
       page.status_code.should eq(404)
