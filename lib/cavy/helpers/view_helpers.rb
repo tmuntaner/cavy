@@ -25,10 +25,25 @@ module Cavy
       page_element(id: localized_title(opts[:id]), content: opts[:page].page_elements[localized_title(opts[:id])])
     end
 
+    ##
+    # This method gives the user SEO meta tags
+    #
+    # = Example
+    #
+    #   meta_tags(page)
+
+    def meta_tags(page)
+      return "<meta content='#{page.description}' name='description'> <meta content='#{page_tags(page)}' name='keywords'>".html_safe
+    end
+
     private
 
     def localized_title(id)
       "#{id}_#{I18n.locale}"
+    end
+
+    def page_tags(page)
+      page.tags ? page.tags.join(', ') : ''
     end
 
   end
