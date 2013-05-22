@@ -15,7 +15,6 @@ module Cavy
 
       if route == Cavy.root
         href = I18n.available_locales.count > 1 ? "/#{params[:locale]}/" : '/'
-        params[:route] = route # route param is not present for root path
       else
         href = I18n.available_locales.count > 1 ? "/#{params[:locale]}/#{route}" : "/#{route}"
       end
@@ -62,8 +61,9 @@ module Cavy
     #   link_active(route)
 
     def link_active(route)
-      return true if params[:controller] == 'cavy/pages' and params[:action] == 'page' and params[:route] == route
-      return false
+      current_path = params[:route] || Cavy.root
+      return true if params[:controller] == 'cavy/pages' and params[:action] == 'page' and current_path == route
+      false
     end
 
   end
