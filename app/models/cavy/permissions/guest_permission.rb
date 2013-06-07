@@ -4,6 +4,7 @@ module Cavy
       def initialize
         allow 'cavy/pages', [:page]
         allow 'cavy/sessions', [:new,:create,:destroy]
+        allow 'cavy/admin',     [:first_time]
       end
     end
   end

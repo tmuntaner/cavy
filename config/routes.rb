@@ -19,7 +19,7 @@ Cavy::Engine.routes.draw do
       post    '/mercury/image',             to: 'mercury#image',            as: 'mercury_image'
 
       get     '/admin',                     to: 'admin#overview',           as: 'admin_overview'
-
+      get     '/first_time',                to: 'admin#first_time',         as: 'cavy_first_time'
       get     '/admin/pages',               to: 'admin_pages#index',        as: 'admin_pages'
       get     '/admin/new_page',            to: 'admin_pages#new',          as: 'admin_new_page'
       post    '/admin/page',                to: 'admin_pages#create',       as: 'admin_create_page'
@@ -37,6 +37,7 @@ Cavy::Engine.routes.draw do
       get     '/admin/item_group/:id',      to: 'item_groups#show',         as: 'cavy_item_group'
       patch   '/admin/item_group/:id',      to: 'item_groups#update',       as: 'cavy_update_item_group'
       delete  '/admin/item_group/:id',      to: 'item_groups#destroy',      as: 'cavy_delete_item_group'
+      post    '/admin/item_group/order',    to: 'item_groups#update_order', as: 'cavy_update_order_item_group'
 
       get     '/admin/item/new/:group_id',  to: 'items#new',                as: 'cavy_new_item'
       post    '/admin/item/new/:group_id',  to: 'items#create',             as: 'cavy_create_item'

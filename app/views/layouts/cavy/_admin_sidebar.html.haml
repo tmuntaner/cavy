@@ -7,18 +7,18 @@
     %li.nav-header Pages
     %li
       %a{href: admin_pages_path, id: "admin-pages"} Pages
-    - if current_user.dev_team?
+    - if current_user and current_user.dev_team?
       %li
         %a{href: admin_new_page_path, id: "admin-new-page"} New Page
 
-    - if current_user.site_manager?
+    - if current_user and current_user.site_manager?
       %li.nav-header Users
       %li
         %a{href: cavy_admin_users_path, id: "admin-users"} Users
-    - if current_user.dev_team?
+    - if current_user and current_user.dev_team?
       %li
         %a{href: cavy_admin_new_user_path, id: "admin-new-users"} New User
-    - if current_user.dev_team?
+    - if current_user and current_user.dev_team?
       %li.nav-header Items
       %li
         %a{href: item_groups_path, id: "admin-item-groups"} Item Groups

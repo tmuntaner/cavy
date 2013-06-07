@@ -11,6 +11,7 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery
+//= require jquery-ui
 //= require jquery_ujs
 // require turbolinks
 //= require cavy/bootstrap
@@ -18,3 +19,4 @@
 //= require cavy/token
 //= require cavy/tokens
 //= require cavy/hstore
+//= require cavy/sortable

@@ -5,6 +5,8 @@ module Cavy
     before_action :set_locale
     before_action :check_locale
 
+    before_action :check_first_time
+
     helper_method :can_edit?
     helper_method :current_user
     helper_method :signed_in?
@@ -51,6 +53,10 @@ module Cavy
 
     def current_resource
       nil
+    end
+
+    def check_first_time
+      redirect_to cavy_first_time_path if Cavy::User.count == 0 and !(params[:controller] == 'cavy/admin' and params[:action] == 'first_time')
     end
 
     def authorize

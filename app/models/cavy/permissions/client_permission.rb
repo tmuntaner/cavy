@@ -11,6 +11,7 @@ module Cavy
         allow 'cavy/users',             [:index, :show, :edit, :update, :new, :create]
         allow 'cavy/item_groups',       [:index, :show, :edit, :update]
         allow 'cavy/items',             [:index, :show, :new, :edit, :create, :update, :destroy]
+        allow 'cavy/item_sections',     [:index, :show]
         allow_param :page, [:title, :description, :tag_string, :key, :value, data: :hstore]
         allow_param :item, [data: :hstore]
       end

@@ -14,5 +14,8 @@ module Cavy
     def new_user
     end
 
+    def first_time
+    end
+
   end
 end

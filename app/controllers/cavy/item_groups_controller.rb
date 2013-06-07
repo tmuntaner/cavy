@@ -14,7 +14,7 @@ module Cavy
 
     # GET /item_groups/1
     def show
-      @items = @item_group.items
+      @items = @item_group.items.order_by(:position.asc)
     end
 
     # GET /item_groups/new
@@ -44,6 +44,13 @@ module Cavy
       else
         render action: 'edit'
       end
+    end
+
+    def update_order
+      params[:item].each_with_index do |id, index|
+        Cavy::Item.find(id).set(position: index+1)
+      end
+      render nothing: true
     end
 
     # DELETE /item_groups/1

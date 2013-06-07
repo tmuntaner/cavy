@@ -1,5 +1,12 @@
-%nav
-  %ul
-    %li
-      - Cavy::Page.all.each do |page|
-        = cavy_page(page.route, page.title)
+.navbar.navbar-inverse.navbar-fixed-top
+  .navbar-inner
+    .container
+      %button.btn.btn-navbar{"data-target" => ".nav-collapse", "data-toggle" => "collapse", :type => "button"}
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      %a.brand{:href => "#"} Project name
+      .nav-collapse.collapse
+        %ul.nav
+          - Cavy::Page.all.each do |page|
+            %li= cavy_page(page.route, page.title, id: page.route)
