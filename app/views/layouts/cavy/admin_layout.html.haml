@@ -4,50 +4,19 @@
     %meta{:charset => "utf-8"}/
     %title= @page ? @page.title : "Cavy"
     %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}
+
     = stylesheet_link_tag    "cavy/application", media: "all"
     = javascript_include_tag "cavy/application"
+
     = csrf_meta_tags
-    :css
-      body {
-        padding-top: 60px;
-        padding-bottom: 40px;
-      }
-      .sidebar-nav {
-        padding: 9px 0;
-      }
-
-      @media (max-width: 980px) {
-        .navbar-text.pull-right {
-          float: none;
-          padding-left: 5px;
-          padding-right: 5px;
-        }
-      }
   %body
-    .navbar.navbar-inverse.navbar-fixed-top
-      .navbar-inner
-        .container-fluid
-          %button.btn.btn-navbar{"data-target" => ".nav-collapse", "data-toggle" => "collapse", :type => "button"}
-            %span.icon-bar
-            %span.icon-bar
-            %span.icon-bar
-          %a.brand{:href => "#"}= Cavy.title || "Cavy"
-          %ul.nav.pull-right
-            - if current_user
-              %li.dropdown
-                %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-                  = current_user.name
-                  %b.caret
-                %ul.dropdown-menu
-                  %li= link_to 'Sign Out', admin_destroy_session_path, method: :delete, id: 'log-out'
+    = render 'layouts/cavy/admin_header'
     .container-fluid
-      .row-fluid
-        .span3
-          = render 'layouts/cavy/admin_sidebar'
-
-        .span9
+      .row
+        .col-lg-9
           = yield
-      %hr/
-      %footer
-        © Ruby Rainbows
-        = Time.now.year
+      .row
+        %hr/
+        %footer
+          © Ruby Rainbows
+          = Time.now.year

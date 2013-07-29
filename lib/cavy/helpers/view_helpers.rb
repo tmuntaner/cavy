@@ -36,6 +36,22 @@ module Cavy
       return "<meta content='#{page.description}' name='description'> <meta content='#{page_tags(page)}' name='keywords'>".html_safe
     end
 
+    ##
+    # This method creates a chart tag for the charts api´
+    #
+    # = Example
+    #
+    #   chart_tag ('page_vies', 300)
+    def chart_tag (action, height, params = {})
+      params[:format] ||= :json
+      path = url_for controller: :statistics, action: action
+      
+      content_tag(:div, :'data-chart' => path, :style => "height: #{height}px;") do
+        image_tag('', :size => '24x24', :class => 'spinner')
+      end
+      
+    end
+
     private
 
     def localized_title(id)

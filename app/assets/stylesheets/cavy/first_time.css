@@ -1,0 +1,33 @@
+article.first-time {
+  max-width: 800px;
+  margin: 0 auto 0 auto;
+}
+
+article.first-time .page-header {
+  text-align: center;
+}
+
+.jumbotron {
+  background-color: #D1DBBD;
+}
+
+.jumbotron h1 {
+  color: #3E606F;
+}
+
+.jumbotron p {
+  color: #3E606F;
+}
+
+input[type="text"], input[type="password"]  {
+  max-width: 300px;
+}
+
+form#first_time_user {
+  margin: 0 auto;
+  max-width: 300px;
+}
+
+form#first_time_user button {
+  width: 300px;
+}

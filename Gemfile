@@ -19,7 +19,7 @@ gem 'mongoid',    github: 'mongoid/mongoid'
 
 # because of https://github.com/rails/rails/issues/9582
 # will remove in next release of rails 4
-gem 'rails',      '4.0.0.rc1'
+gem 'rails',      '4.0.0'
 
 platform :jruby do
   gem 'therubyrhino', group: :asssets

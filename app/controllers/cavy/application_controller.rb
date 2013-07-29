@@ -56,7 +56,7 @@ module Cavy
     end
 
     def check_first_time
-      redirect_to cavy_first_time_path if Cavy::User.count == 0 and !(params[:controller] == 'cavy/admin' and params[:action] == 'first_time')
+      redirect_to cavy_first_time_welcome_path if Cavy::User.count == 0 and !(params[:controller] == 'cavy/first_time')
     end
 
     def authorize

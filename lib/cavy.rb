@@ -4,10 +4,15 @@ require 'mongoid'
 
 module Cavy
   
-  mattr_accessor :root, :title, :locales, :default_locale, :raise_not_found_error
+  mattr_accessor :root, :title, :locales, :default_locale, :raise_not_found_error, :google_analytics_username, :google_analytics_password, :google_analytics_property_id
 
   self.root           = 'home'
   self.title          = 'cavy'
+  
+  self.google_analytics_username    = ''
+  self.google_analytics_password    = ''
+  self.google_analytics_property_id =''
+
   self.locales        = :en
   self.default_locale = :en
   self.raise_not_found_error = false

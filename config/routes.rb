@@ -15,11 +15,15 @@ Cavy::Engine.routes.draw do
 
       resources :users
 
+      get     '/admin/dash/page_views',     to: 'statistics#page_views'
       get     '/mercury/:type/:resource',   to: 'mercury#resource'
       post    '/mercury/image',             to: 'mercury#image',            as: 'mercury_image'
 
+      get     '/first_time/welcome',        to: 'first_time#welcome',       as: "cavy_first_time_welcome"
+      get     '/first_time/user',           to: 'first_time#new_user',      as: 'cavy_first_time_new_user'
+      post    '/first_time/user',           to: 'first_time#create_user',   as: 'cavy_first_time_create_user'
+
       get     '/admin',                     to: 'admin#overview',           as: 'admin_overview'
-      get     '/first_time',                to: 'admin#first_time',         as: 'cavy_first_time'
       get     '/admin/pages',               to: 'admin_pages#index',        as: 'admin_pages'
       get     '/admin/new_page',            to: 'admin_pages#new',          as: 'admin_new_page'
       post    '/admin/page',                to: 'admin_pages#create',       as: 'admin_create_page'

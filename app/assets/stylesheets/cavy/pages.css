@@ -1,12 +1,9 @@
-.form-horizontal textarea, .form-horizontal input[type="text"] {
+.form-horizontal textarea {
   margin-bottom: 10px;
 }
 
 h1 {
   margin-bottom: 40px;
-}
-
-.row {
 }
 
 #admin-locale-links
@@ -16,18 +13,29 @@ h1 {
     right: 20px;
 }
 
+html, body {
+  background-color: #FCFFF5;
+}
+
 body {
   padding-top: 60px;
   padding-bottom: 40px;
 }
-.sidebar-nav {
-  padding: 9px 0;
+
+footer {
+  text-align: center;
 }
 
-@media (max-width: 980px) {
-  .navbar-text.pull-right {
-    float: none;
-    padding-left: 5px;
-    padding-right: 5px;
-  }
+body {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+article {
+  min-height: 400px;
+  color: #193441;
+}
+
+article h1 {
+  color: #193441;
 }
