@@ -34,7 +34,10 @@ body {
 article {
   min-height: 400px;
   color: #193441;
+  max-width: 960px;
+  margin: 0 auto;
 }
+
 
 article h1 {
   color: #193441;

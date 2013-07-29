@@ -6,47 +6,52 @@ module Cavy
 
     before_action :login
 
-    def page_views
-
-      page_views = []
-      Cavy::PageViews.results(@profile).each do |r|
-        page_views << [r.day.to_i, r.pageviews.to_i]
-      end
-
+    def visitor_history
+      history = load_visitor_history
+      
       if google_analytics_setup?
-        
         render json: {
           type: 'AreaChart',
-          cols: [['number','day'],['number', 'Page Visits']],
-          rows: page_views,
+          cols: [['string','date'],['number', 'Page Visits']],
+          rows: history,
           options: {
-            chartArea: { width: '90%', height: '75%' },
-            hAxis: { showTextEvery: 30 },
-            legend: 'bottom'
+            title: 'Visits vs Day for Last 30 Days',
+            legend: 'none',
+            hAxis: {
+              slantedText:true,
+              showTextEvery: 2
+            }
           }
         }
-
-        # render json: {
-        #   "type" => "AreaChart",
-        #   "cols" => [["number","day"],["number","visits"]],
-        #   "rows" => [["01","0"],["02","9"],["03","1"],["04","0"],["05","5"],["06","2"],["07","8"],["08","0"],["09","9"],["10","34"],["11","20"],["12","2"],["13","5"],["14","5"],["15","4"],["16","1"],["17","1"],["18","14"],["19","11"],["20","0"],["21","7"],["22","3"],["23","2"],["24","0"],["25","2"],["26","3"],["27","5"],["28","2"],["29","7"],["29","0"],["30","0"]],
-        #   "options" => {
-        #     "chartArea"=>{"width" => "90%","height" => "75%"},
-        #     "hAxis"=>{"showTextEvery" =>30},
-        #     "legend" =>"bottom"}
-        # }
       else
-        render json: {
-        }
+        render json: {}
       end
 
+    end
+
+    def page_view_history
+      history = build_page_view_history
+      
+      if google_analytics_setup?
+        render json: {
+          type: 'PieChart',
+          cols: [['string','Path'],['number', 'Page Visits']],
+          rows: history,
+          options: {
+            pieSliceText: 'none',
+            title: 'Percentage of Page Visits for Last 30 Days',
+          }
+        }
+      else
+        render json: {}
+      end
     end
 
     private
 
     def login
-      @garb = Garb::Session.login(Cavy.google_analytics_username,Cavy.google_analytics_password)
-      @profile = Garb::Management::Profile.all.detect { |p| p.web_property_id == Cavy.google_analytics_property_id}
+      @garb     ||= Garb::Session.login(Cavy.google_analytics_username,Cavy.google_analytics_password)
+      @profile  ||= Garb::Management::Profile.all.detect { |p| p.web_property_id == Cavy.google_analytics_property_id}
     end
 
     def google_analytics_setup?
@@ -54,6 +59,42 @@ module Cavy
         return true
       end
       return false
+    end
+
+    def load_visitor_history
+      Rails.cache.fetch('visitor_history', expires_in: 1.day) {
+        result = []
+        Cavy::PageViews.results(@profile).each do |r|
+          result << ["#{r.day}.#{r.month}", r.pageviews.to_i]
+        end
+        result
+      }
+    end
+
+    def load_page_data
+      Rails.cache.fetch('page_data', expires_in: 1.day) {
+        result = []
+        Cavy::PageData.results(@profile).each do |r|
+          result << [r.exits.to_i, r.pageviews.to_i, r.page_path]
+        end
+        result
+      }
+    end
+
+    def build_page_view_history
+      data = load_page_data
+      
+      history = Rails.cache.fetch('page_view_history', expires_in: 1.day) {
+        result = []
+
+        data.each do |r|
+          result << [r[2], r[0]]
+        end
+
+        result
+      }
+
+      return history
     end
 
   end

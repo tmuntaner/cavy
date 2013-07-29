@@ -6,7 +6,7 @@ module Cavy
     extend Garb::Model
 
     metrics :exits, :pageviews
-    dimensions :page_path, :source
+    dimensions :page_path
 
   end
 end

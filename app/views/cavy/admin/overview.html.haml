@@ -1,5 +1,22 @@
-%article
+%article#overview
   .page-header
     %h1 Website Overview
+  
+  %ul.nav.nav-tabs#chart-tab
+    %li
+      %a{"href" => "#visitor"} Visitor History
+    %li
+      %a{"href" => "#page_view"} Views per Page
 
-    = chart_tag 'page_views', 300, {:days => 14}
+  .tab-content
+    #visitor.tab-pane
+      = chart_tag 'visitor_history'
+    #page_view.tab-pane
+      = chart_tag 'page_view_history'
+
+  :javascript
+    $('#chart-tab a').click(function (e) {
+      e.preventDefault();
+      $(this).tab('show');
+    })
+    $('#chart-tab a:first').tab('show');

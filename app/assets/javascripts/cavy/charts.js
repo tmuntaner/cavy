@@ -6,7 +6,6 @@ $(document).ready(function() {
       google.load('visualization', '1.0', { 'packages': ['corechart'], 'callback': function () {
         // Google visualization library loaded
 
-        console.log ("s");
         $('[data-chart]').each(function () {
           var div = $(this)
           // Fetch chart data
@@ -22,8 +21,13 @@ $(document).ready(function() {
             chart.setChartType(data.type);
             chart.setDataTable(table);
             chart.setOptions(data.options);
-            chart.setOption('width', div.width());
-            chart.setOption('height', div.height());
+
+            var width   = $('#overview').width();
+            var height  = width*0.40;
+
+            chart.setOption('backgroundColor', $('body').css('background-color') );
+            chart.setOption('width', width);
+            chart.setOption('height', height);
             chart.draw(div.get(0));
           });
         });
