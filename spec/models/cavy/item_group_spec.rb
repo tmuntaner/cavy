@@ -50,10 +50,10 @@ module Cavy
     describe "items" do
       before(:each) do
         @guineapigs = create(:cavy_item_group, param_string: 'name,group')
-        @pig1 = @guineapigs.items.create(data: {name: 'ghost', group: 'team_ghost'})
-        @pig2 = @guineapigs.items.create(data: {name: 'summer', group: 'team_summer'})
-        @pig3 = @guineapigs.items.create(data: {name: 'pumpkin spice', group: 'team_ghost'})
-        @pig4 = @guineapigs.items.create(data: {name: 'greywind', group: 'team_summer'})
+        @pig1 = @guineapigs.items.create(data: {name: 'ghost',          group: 'team_ghost'})
+        @pig2 = @guineapigs.items.create(data: {name: 'summer',         group: 'team_summer'})
+        @pig3 = @guineapigs.items.create(data: {name: 'pumpkin spice',  group: 'team_ghost'})
+        @pig4 = @guineapigs.items.create(data: {name: 'greywind',       group: 'team_summer'})
       end
       after(:each) do
         @guineapigs.destroy

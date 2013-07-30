@@ -21,7 +21,7 @@ module Cavy
     end
 
     def items
-      Cavy::Item.where(group_id: id)
+      Cavy::Item.where(item_group_id: id)
     end
 
     def items_with_key_value(key,value)

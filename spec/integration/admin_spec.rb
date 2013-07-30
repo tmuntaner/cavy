@@ -33,6 +33,14 @@ module Cavy
 
     describe 'non signed in user' do
 
+      before(:each) do
+        @user = FactoryGirl.create(:cavy_user, password: 'secret', password_confirmation: 'secret')
+      end
+
+      after(:each) do
+        @user.destroy
+      end
+      
       it "should prevent a non signed in user from reaching the admin page and send it to sign in" do
         visit '/admin'
         page.should have_content('Please log in first to view the previous page.')

@@ -8,6 +8,7 @@ describe 'localizations' do
       config.locales = [:en,:de]
       config.default_locale = :en
     end
+    @user = FactoryGirl.create(:cavy_user, password: 'secret', password_confirmation: 'secret')
   end
 
   # reset locales
@@ -16,6 +17,7 @@ describe 'localizations' do
       config.locales = [:en,:de]
       config.default_locale = :en
     end
+    @user.destroy
   end
 
   it "should be able to set localizations" do
@@ -38,6 +40,7 @@ describe 'localizations' do
       config.locales = [:en,:de, :wk]
       config.default_locale = :wk
     end
+    
     @home = Cavy::Page.create(title: 'home', content: 'foo_about_bar')
     visit '/'
     current_path.should == '/wk/'

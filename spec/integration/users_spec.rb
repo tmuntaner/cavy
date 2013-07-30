@@ -4,6 +4,15 @@ module Cavy
   describe 'Users' do
 
     describe 'sign in process' do
+
+      before(:each) do
+        @user = FactoryGirl.create(:cavy_user, password: 'secret', password_confirmation: 'secret')
+      end
+      
+      after(:each) do
+        @user = FactoryGirl.create(:cavy_user, password: 'secret', password_confirmation: 'secret')
+      end
+
       it "should allow a user to go to the signin page" do
         visit '/admin/signin'
         page.driver.status_code.should eq(200)

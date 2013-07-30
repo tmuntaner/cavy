@@ -9,7 +9,7 @@ rvm:
 
 gemfile: Gemfile
 
-script: rspec spec
+script: bundle exec rspec spec
 
 services:
   - mongodb

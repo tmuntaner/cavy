@@ -1,6 +1,7 @@
 module Cavy
   module Permissions
     class BasePermission
+
       def allow?(controller, action, resource = nil)
         allowed = @allow_all || @allowed_actions[[controller.to_s, action.to_s]]
         allowed && (allowed == true || resource && allowed.call(resource))
@@ -61,6 +62,7 @@ module Cavy
         end
         return hstore_data
       end
+      
     end
   end
 end

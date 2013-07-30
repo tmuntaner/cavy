@@ -5,10 +5,12 @@ module Cavy
 
     before(:each) do
       @page = FactoryGirl.create(:cavy_page, title: 'home')
+      @user = FactoryGirl.create(:cavy_user, password: 'secret', password_confirmation: 'secret')
     end
 
     after(:each) do
       @page.destroy
+      @user.destroy
     end
 
     it "should be able to go to the home page" do
