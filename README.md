@@ -6,12 +6,13 @@
 
 Cavy is a Ruby on Rails Mountable Engine CMS that strives to make it easier for developers to make better websites for their clients.
 
-**Cavy is still in development and in an unpolished state.  Use at your own risk.**
-
 **Warning 1:**
-*This is not an engine for the non-developer, it requires you to go into the guts of the system to make your pages and add new features.*
+*Cavy is still in development and in an unpolished state.  Use at your own risk.*
 
 **Warning 2:**
+*This is not an engine designed for the non-developer, it requires you to go into the guts of the CMS to make your pages and add new features.*
+
+**Warning 3:**
 *You will have to remove active record if you don't want to have a secondary useless database.*
 
 ## Features
@@ -47,15 +48,15 @@ Go into your `config/routes.rb` file and add the following line near the top.
 
 ### Mongoid Config
 
-Make a mongoid config file `mongoid.yml` with your information.  You can make a config file with the following command in your console:
+Cavy uses MongoDB with Mongoid as a wrapper. In order to connect to your database, a mongoid config file `mongoid.yml` is needed.  You can make a config file with the following command in your console:
 
     rails g mongoid:config
 
-You can then add your mongodb connection information.
+You can then add your mongodb connection information in the config file.
 
 ### Cavy Configuration
 
-Make a configuration file such as `config/initializers/cavy.rb` so that you can configure your install. Here is an example configuration file taken from the dummy application.
+You are able to configure some aspects of Cavy to personalize your install and to enable certain features.  In order to do this, you need to make a configuration file such as `config/initializers/cavy.rb`. Here is an example configuration file taken from the dummy application.
 
     Cavy.config do |config|
       config.root = 'home'
@@ -67,13 +68,20 @@ Make a configuration file such as `config/initializers/cavy.rb` so that you can 
       config.google_analytics_property_id = ENV['GOOGLE_ANALYTICS_PROPERTY_ID']
     end
 
+Here is the explanation of the configuration variables.
+
 * `config.root` is the root page of the app that you want to load when a user hits your application.
 * `config.title` is the title of your application.  It is not really needed but it will show the name in the backend.
-* `config.locales` is the list of your supported locales in an array.
-* `config.default_locale` is the default locale for your application.
-* `config.google_analytics_username` is the username for your Google Analytics account.
-* `config.google_analytics_password` is the password for your Google Analytics account.
-* `config.google_analytics_property_id` is the property id for your website for Google Analytics.
+
+#### Configuration of Features
+
+* Google Analytics
+    * `config.google_analytics_username` is the username for your Google Analytics account.
+    * `config.google_analytics_password` is the password for your Google Analytics account.
+    * `config.google_analytics_property_id` is the property id for your website for Google Analytics.
+* Localization
+    * `config.locales` is the list of your supported locales in an array.
+    * `config.default_locale` is the default locale for your application.
 
 ### Everything Else
 
