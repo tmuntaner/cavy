@@ -47,7 +47,7 @@ module Cavy
 
       path = url_for controller: :statistics, action: action
       
-      content_tag(:div, :'data-chart' => path, :style => "margin-top: 20px; height: #{height}px;") do
+      content_tag(:div, :'data-chart' => path, :style => "height: #{height}px;") do
         image_tag('', :size => '24x24', :class => 'spinner')
       end
       
