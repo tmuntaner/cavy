@@ -14,7 +14,7 @@ module Cavy
     end
 
     def create_user
-      @user = Cavy::User.new(name: params[:name], email: params[:email], password: params[:password], confirmation: params[:confirmation], role: "admin")
+      @user = Cavy::User.new(name: params[:name], email: params[:email], password: params[:password], password_confirmation: params[:password_confirmation], role: "admin")
       if @user.save
         set_cookie_and_redirect(@user)
       else
