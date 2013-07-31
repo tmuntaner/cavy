@@ -9,9 +9,10 @@ module Cavy
   self.root           = 'home'
   self.title          = 'cavy'
   
-  self.google_analytics_username    = ''
-  self.google_analytics_password    = ''
-  self.google_analytics_property_id =''
+  # need to set strings to something
+  self.google_analytics_username    = ' '
+  self.google_analytics_password    = ' '
+  self.google_analytics_property_id = ' '
 
   self.locales        = :en
   self.default_locale = :en
