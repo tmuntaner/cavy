@@ -4,7 +4,7 @@
       %span.icon-bar
       %span.icon-bar
       %span.icon-bar
-    %a{:href => admin_overview_path, class: "navbar-brand"}= Cavy.title || "Cavy"
+    %a{:href => admin_dashboard_path, class: "navbar-brand"}= Cavy.title || "Cavy"
     .nav-collapse.collapse.bs-navbar-collapse
       %ul.nav.navbar-nav
         
@@ -14,7 +14,7 @@
             %b.caret
           %ul.dropdown-menu
             %li
-              %a{href: admin_overview_path, id: "admin-overview"} Overview
+              %a{href: admin_dashboard_path, id: "admin-overview"} Dashboard
         
         %li.dropdown
           %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}

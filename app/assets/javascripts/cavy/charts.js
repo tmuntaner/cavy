@@ -25,7 +25,7 @@ $(document).ready(function() {
             var width   = $('#overview').width();
             var height  = width*0.40;
 
-            // chart.setOption('backgroundColor', $('body').css('background-color') );
+            chart.setOption('backgroundColor', $('body').css('background-color') );
             chart.setOption('width', width);
             chart.setOption('height', height);
             chart.draw(div.get(0));

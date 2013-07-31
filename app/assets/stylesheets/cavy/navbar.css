@@ -13,3 +13,7 @@
 .navbar-inverse .navbar-nav > li > a:hover {
   color: #FCFFF5;
 }
+
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover {
+  background-color: #FCFFF5;
+}

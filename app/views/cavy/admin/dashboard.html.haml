@@ -1,0 +1,82 @@
+%article#overview
+  .page-header
+    %h1 Website Dashboard
+  
+  %ul.nav.nav-tabs#chart-tab
+    %li
+      %a{'href' => '#overview-pane'} Overview
+    - if google_analytics_setup?
+      %li
+        %a{'href' => '#visitor'} Visitor History
+      %li
+        %a{'href' => '#page_view'} Views per Page
+
+  .tab-content
+    #overview-pane.tab-pane
+      //%h3 Recent Changes:
+
+      %h3 Pages:
+      %br/
+
+      // check if we have any pages
+      - if @pages.count >= 1
+        %table.table.table-striped
+          %thead
+            %tr
+              %th Title
+              %th Render
+              %th
+              %th
+              - if current_user.dev_team?
+                %th 
+          %tbody
+            - @pages.each do |page|
+              %tr
+                %th= link_to page.title, admin_page_path(page.id), id: "page-#{page.id}"
+                %th= page.render
+                %th= link_to 'show', admin_page_path(page.id), id: "page-show-#{page.id}"
+                %th= link_to 'edit', admin_edit_page_path(page.id), id: "edit-page-#{page.id}"
+                - if current_user.dev_team?
+                  %th= link_to 'destroy', admin_delete_page_path(page.id), id: "delete-page-#{page.id}", method: :delete, data: {confirm: "Are you sure you want to delete the page?"}
+      - else
+        The area no pages.
+
+      %hr
+
+      %h3 Users:
+      %br/
+
+      %table.table.table-striped
+        %tablehead
+          %tr
+            %th Email
+            %th Password
+            %th Role
+            %th
+            - if current_user.dev_team?
+              %th
+              %th
+        %tablebody
+          - @users.each do |user|
+            %tr
+              %td= user.email
+              %td= user.password
+              %td= user.role
+              %td= link_to 'Show', user
+              - if current_user.dev_team?
+                %td= link_to 'Edit', edit_user_path(user)
+                %td= link_to 'Destroy', user, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+
+    - if google_analytics_setup?
+      #visitor.tab-pane
+        = chart_tag 'visitor_history'
+      #page_view.tab-pane
+        = chart_tag 'page_view_history'
+
+  :javascript
+    $('#chart-tab a').click(function (e) {
+      e.preventDefault();
+      $(this).tab('show');
+    })
+    $('#chart-tab a:first').tab('show');

@@ -54,13 +54,6 @@ module Cavy
       @profile  ||= Garb::Management::Profile.all.detect { |p| p.web_property_id == Cavy.google_analytics_property_id}
     end
 
-    def google_analytics_setup?
-      if Cavy.google_analytics_username || Cavy.google_analytics_password || Cavy.google_analytics_property_id
-        return true
-      end
-      return false
-    end
-
     def load_visitor_history
       Rails.cache.fetch('visitor_history', expires_in: 1.day) {
         result = []

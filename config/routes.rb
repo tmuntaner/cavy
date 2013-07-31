@@ -25,7 +25,7 @@ Cavy::Engine.routes.draw do
       get     '/first_time/user',           to: 'first_time#new_user',      as: 'cavy_first_time_new_user'
       post    '/first_time/user',           to: 'first_time#create_user',   as: 'cavy_first_time_create_user'
 
-      get     '/admin',                     to: 'admin#overview',           as: 'admin_overview'
+      get     '/admin',                     to: 'admin#dashboard',          as: 'admin_dashboard'
       get     '/admin/pages',               to: 'admin_pages#index',        as: 'admin_pages'
       get     '/admin/new_page',            to: 'admin_pages#new',          as: 'admin_new_page'
       post    '/admin/page',                to: 'admin_pages#create',       as: 'admin_create_page'

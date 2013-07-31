@@ -5,7 +5,9 @@ module Cavy
 
     layout 'cavy/admin_layout'
 
-    def overview
+    def dashboard
+      @users = Cavy::User.all
+      @pages = Cavy::Page.all
     end
 
     def users
