@@ -1,11 +1,11 @@
 .navbar.navbar-inverse.navbar-fixed-top
-  .container
-    %button{"type" => "button", "data-target" => ".navbar-responsive-collapse", "data-toggle" => "collapse", "class" => "navbar-toggle"}
+  .container-fluid
+    %button{"type" => "button", "data-target" => ".bs-navbar-collapse", "data-toggle" => "collapse", "class" => "navbar-toggle"}
       %span.icon-bar
       %span.icon-bar
       %span.icon-bar
-    %a{:href => "#", class: "navbar-brand"} Project name
-    .nav-collapse.collapse.navbar-responsive-collapse
-      %ul.nav
+    %a{:href => admin_dashboard_path, class: "navbar-brand"}= Cavy.title || "Cavy"
+    .nav-collapse.collapse.bs-navbar-collapse
+      %ul.nav.navbar-nav
         - Cavy::Page.all.each do |page|
           %li= cavy_page(page.route, page.title, id: page.route)

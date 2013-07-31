@@ -91,4 +91,4 @@ Now when you start the application, you will be asked to make an administration 
 
 ## Tutorials
 
-I still need to make the tutorials.  When I finalize more aspects of Cavy, then I will make some.
+You can view the tutorials at our [wiki](/tmuntan1/cavy/wiki).
