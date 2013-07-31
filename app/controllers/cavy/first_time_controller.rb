@@ -26,7 +26,7 @@ module Cavy
 
     def set_cookie_and_redirect(user)
       cookies[:auth_token] = user.auth_token
-      redirect_to(admin_overview_path, notice: "Logged in!")
+      redirect_to(admin_dashboard_path, notice: "Logged in!")
     end
 
   end
