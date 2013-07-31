@@ -91,4 +91,4 @@ Now when you start the application, you will be asked to make an administration 
 
 ## Tutorials
 
-You can view the tutorials at our [wiki](/tmuntan1/cavy/wiki).
+You can view the tutorials at our [wiki](http://www.github.com/tmuntan1/cavy/wiki).
