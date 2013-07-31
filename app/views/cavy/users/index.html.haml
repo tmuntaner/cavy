@@ -1,4 +1,8 @@
-%h1 Listing Users
+.page-header#with-button
+  %h1 Listing Users
+  %a{href: new_user_path, class: 'btn btn-primary pull-right'} New User
+
+%br/
 
 %table.table.table-striped
   %tablehead
@@ -20,7 +24,3 @@
         - if current_user.dev_team?
           %td= link_to 'Edit', edit_user_path(user)
           %td= link_to 'Destroy', user, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
-%br
-- if current_user.dev_team?
-  = link_to 'New User', new_user_path 

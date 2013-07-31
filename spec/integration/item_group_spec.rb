@@ -65,7 +65,7 @@ describe 'item group' do
       visit admin_new_item_group_path(locale: :en)
       fill_in 'item_group_title', with: 'testfoo'
       fill_in 'item_group_param_string', with: 'test,bar'
-      click_button 'Save'
+      click_button 'Create'
       page.should have_content('testfoo')
       @group = Cavy::ItemGroup.find_by(title: 'testfoo')
       @group.params.should eq(['test','bar'])
@@ -74,7 +74,7 @@ describe 'item group' do
     it "shouldn't be able to create a new item group without a title" do
       visit admin_new_item_group_path(locale: :en)
       fill_in 'item_group_param_string', with: 'test, bar'
-      click_button 'Save'
+      click_button 'Create'
       page.should have_content('error')
     end
   end
@@ -99,7 +99,7 @@ describe 'item group' do
       visit admin_edit_item_group_path(locale: :en, id: @group.id)
       fill_in 'item_group_title', with: 'testfoo'
       fill_in 'item_group_param_string', with: 'test,bar'
-      click_button 'Save'
+      click_button 'Create'
       @group = Cavy::ItemGroup.find(@group.id)
       @group.params.should eq(['test','bar'])
       @group.destroy
@@ -108,7 +108,7 @@ describe 'item group' do
       visit admin_edit_item_group_path(locale: :en, id: @group.id)
       fill_in 'item_group_title', with: ''
       fill_in 'item_group_param_string', with: 'test, bar'
-      click_button 'Save'
+      click_button 'Create'
       page.should have_content('error')
     end
   end

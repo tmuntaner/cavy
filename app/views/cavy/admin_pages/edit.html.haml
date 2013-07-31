@@ -3,7 +3,7 @@
 
 = render 'cavy/shared/admin_locale_links'
 
-= form_for(@page, url: admin_update_page_path, method: :put, html: {class: 'form-horizontal'}) do |f|
+= form_for(@page, url: admin_update_page_path, method: :put) do |f|
   - if @page.errors.any?
     #error_explanation
       %h2
@@ -12,34 +12,30 @@
       %ul
         - @page.errors.full_messages.each do |msg|
           %li= msg
-  .control-group
+  .form-group
     = f.label :title, class: 'control-label'
-    .controls
-      = f.text_field :title
+    = f.text_field :title, class: 'form-control'
+
   - if current_user.dev_team?
-    .control-group
+    .form-group
       = f.label :render, class: 'control-label'
-      .controls
-        = f.text_field :render
-    .control-group
+      = f.text_field :render, class: 'form-control'
+
+    .form-group
       = f.label :route, class: 'control-label'
-      .controls
-        = f.text_field :route
+      = f.text_field :route, class: 'form-control'
   
   - @page.data.try(:each) do |key, value|
-    .control-group
+    .form-group
       = f.label key, class: 'control-label'
-      .controls
-        = f.text_field key, class: 'text_field', value: value, name: "page[data][#{key}]", id: "item[data][#{key}]"
+      = f.text_field key, class: 'form-control', value: value, name: "page[data][#{key}]", id: "item[data][#{key}]"
   
-  .control-group
+  .form-group
     = f.label :meta_tags, class: 'control-label'
-    .controls
-      = f.text_field :tag_string, value: "#{@page.tags.join(',') if @page.tags != '' and @page.tags != nil}"
-  .control-group
+    = f.text_field :tag_string, value: "#{@page.tags.join(',') if @page.tags != '' and @page.tags != nil}", class: 'form-control'
+
+  .form-group
     = f.label :meta_description, class: 'control-label'
-    .controls
-      = f.text_area :description
-  .control-group
-    .controls
-      = f.submit( 'Submit', class: 'btn btn-primary', id: 'submit_page' )
+    = f.text_area :description, class: 'form-control'
+  
+  = f.submit( 'Submit', class: 'btn btn-primary', id: 'submit_page' )

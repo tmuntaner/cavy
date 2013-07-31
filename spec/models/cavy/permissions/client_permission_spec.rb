@@ -30,7 +30,7 @@ module Cavy
     end
 
     it "should allow admin panel" do
-      should allow('cavy/admin', :overview)
+      should allow('cavy/admin', :dashboard)
       should allow('cavy/admin', :users)
       should allow('cavy/admin', :new_user)
     end

@@ -6,6 +6,7 @@ module Cavy
     layout 'cavy/admin_layout'
 
     def index
+      @pages = Cavy::Page.all
     end
 
     def add_data

@@ -38,6 +38,14 @@ article {
   margin: 0 auto;
 }
 
+.page-header#with-button
+{
+  overflow: hidden;
+}
+
+.page-header#with-button h1 {
+  float: left;
+}
 
 article h1 {
   color: #193441;

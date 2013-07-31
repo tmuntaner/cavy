@@ -12,7 +12,7 @@ describe 'signed in client' do
 
   it "should allow the user to go to the admin page" do
     visit '/admin'
-    page.should have_content('Website Overview')
+    page.should have_content('Website Dashboard')
   end
 
   it "should allow the user to go to the pages page" do

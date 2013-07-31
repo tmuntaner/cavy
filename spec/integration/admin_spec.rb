@@ -15,13 +15,13 @@ module Cavy
 
       it "should be able to go to the home page" do
         visit '/admin'
-        page.should have_content('Website Overview')
+        page.should have_content('Website Dashboard')
       end
 
       it "should be able to click the hompage link in sidebar" do
         visit '/admin'
         click_link 'admin-overview'
-        page.should have_content('Website Overview')
+        page.should have_content('Website Dashboard')
       end
 
       it "should be able to go to the list of pages" do

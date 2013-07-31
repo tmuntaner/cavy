@@ -49,15 +49,6 @@
             %li
               %a{href: admin_new_item_group_path, id: "admin-item-groups"} New Item Group
 
-
-        %li.dropdown
-          %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-            Item Groups
-            %b.caret
-          %ul.dropdown-menu
-            - Cavy::ItemSection.all.try(:each) do |section|
-              %li= link_to section.title, section
-
       %ul.nav.navbar-nav.pull-right
         - if current_user
           %li.dropdown

@@ -40,7 +40,7 @@ module Cavy
     describe 'sign out process' do
       it "should sign out signed in users" do
         log_in('admin')
-        visit admin_overview_path
+        visit admin_dashboard_path
         click_link 'log-out'
         page.should have_content('Logged out')
       end
