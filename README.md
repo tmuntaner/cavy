@@ -59,7 +59,7 @@ You can then add your mongodb connection information in the config file.
 You are able to configure some aspects of Cavy to personalize your install and to enable certain features.  In order to do this, you need to make a configuration file such as `config/initializers/cavy.rb`. Here is an example configuration file taken from the dummy application.
 
 ```ruby
-  Cavy.config do |config|
+Cavy.config do |config|
     config.root = 'home'
     config.title = 'Cavy Test'
     config.locales = [:en,:de]
@@ -67,7 +67,7 @@ You are able to configure some aspects of Cavy to personalize your install and t
     config.google_analytics_username    = ENV['GOOGLE_ANALYTICS_USERNAME']
     config.google_analytics_password    = ENV['GOOGLE_ANALYTICS_PASSWORD']
     config.google_analytics_property_id = ENV['GOOGLE_ANALYTICS_PROPERTY_ID']
-  end
+end
 ```
 
 Here is the explanation of the configuration variables.

@@ -10,7 +10,6 @@ module Cavy
     helper_method :can_edit?
     helper_method :current_user
     helper_method :signed_in?
-    helper_method :google_analytics_setup?
     
     delegate :allow?, to: :current_permission
     helper_method :allow?
@@ -19,13 +18,6 @@ module Cavy
     helper_method :allow_param?
 
     private
-
-    def google_analytics_setup?
-      if Cavy.google_analytics_username || Cavy.google_analytics_password || Cavy.google_analytics_property_id
-        return true
-      end
-      return false
-    end
 
     def set_locale
       I18n.locale = params[:locale] || I18n.default_locale if I18n.available_locales.count > 1
