@@ -1,3 +1,3 @@
-.btn-group.pull-right
+.btn-group
   - I18n.available_locales.each do |locale|
-    = link_to locale, url_for(locale: locale), class: 'btn btn-primary'
+    = link_to locale.upcase, url_for(locale: locale), class: 'btn btn-default btn-small'

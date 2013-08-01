@@ -1,16 +1,14 @@
-%h1= "Page - #{@page.title}"
+.page-header
+  %h1= "Page - #{@page.title}"
 
-%hr/
+  .button-toolbar
+    .btn-group
+      = link_to('Page List', admin_pages_path, class: 'btn btn-default btn-small')
+      = link_to('Page Settings', admin_edit_page_path(@page.id), class: 'btn btn-default btn-small', id: 'edit-page-settings' )
+      = link_to('Page Content', cavy_edit_page_path(@page.route), class: 'btn btn-default btn-small', id: 'edit-page-content' )
+      = link_to('Add Page Data Field', admin_add_page_data_path(@page.id), class: 'btn btn-default btn-small', id: 'add-data' )
+    = render 'cavy/shared/admin_locale_links'
 
-= render 'cavy/shared/admin_locale_links'
-
-.btn-group
-  = link_to('Edit Settings', admin_edit_page_path(@page.id), class: 'btn btn-default', id: 'edit-page-settings' )
-  = link_to('Edit Content', cavy_edit_page_path(@page.route), class: 'btn btn-default', id: 'edit-page-content' )
-  = link_to('Add data', admin_add_page_data_path(@page.id), class: 'btn btn-default', id: 'add-data' )
-
-%br/
-%br/
 %h3 Route
 = "/#{@page.route}"
 %br/

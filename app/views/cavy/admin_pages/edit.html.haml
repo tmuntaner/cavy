@@ -1,6 +1,9 @@
-.page-header#with-button
+.page-header
   %h1 Edit Page
-  = render 'cavy/shared/admin_locale_links'
+  .btn-toolbar
+    .btn-group
+      = link_to('Page List', admin_pages_path, class: 'btn btn-default  btn-small')
+    = render 'cavy/shared/admin_locale_links'
 
 = form_for(@page, url: admin_update_page_path, method: :put) do |f|
   - if @page.errors.any?

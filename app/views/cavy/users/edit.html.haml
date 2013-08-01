@@ -1,4 +1,8 @@
 .page-header
   %h1 Editing user
+  .btn-toolbar
+    .btn-group
+      = link_to('User List', cavy_admin_users_path, class: 'btn btn-default  btn-small')
+    = render 'cavy/shared/admin_locale_links'
 
 = render 'form'

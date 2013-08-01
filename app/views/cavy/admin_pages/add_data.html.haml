@@ -1,5 +1,7 @@
-%h1 Add Data
-
+.page-header
+  %h1 Add Data
+  .btn-group
+    = link_to('Page List', admin_pages_path, class: 'btn btn-default  btn-small')
 = form_for(@page, url: admin_create_page_data_path(@page.id), method: :post) do |f|
   
   .form-group

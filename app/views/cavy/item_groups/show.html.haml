@@ -1,6 +1,11 @@
 .page-header#with-button
   %h1= @item_group.title
-  = link_to 'New Item', cavy_new_item_path(group_id: @item_group.id), id: 'new-item', class: 'btn btn-primary pull-right'
+  .btn-toolbar
+    .btn-group
+      = link_to 'New Item', cavy_new_item_path(group_id: @item_group.id), id: 'new-item', class: 'btn btn-primary btn-small'
+    .btn-group
+      = link_to('Item Group List', item_groups_path, class: 'btn btn-default  btn-small')
+    = render 'cavy/shared/admin_locale_links'
 
 %h3 Group Parameters
 %br/

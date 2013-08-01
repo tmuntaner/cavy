@@ -1,5 +1,9 @@
 .page-header
   %h1 New Page
+  .btn-toolbar
+    .btn-group
+      = link_to('Page List', admin_pages_path, class: 'btn btn-default  btn-small')
+    = render 'cavy/shared/admin_locale_links'
 
 = form_for(@page, url: admin_create_page_path, method: :post) do |f|
   - if @page.errors.any?

@@ -1,8 +1,9 @@
 .page-header#with-button
   %h1 Listing Users
-  %a{href: new_user_path, class: 'btn btn-primary pull-right'} New User
-
-%br/
+  .btn-toolbar
+    .btn-group
+      %a{href: new_user_path, class: 'btn btn-primary btn-small'} New User
+    = render 'cavy/shared/admin_locale_links'
 
 %table.table.table-striped
   %tablehead
