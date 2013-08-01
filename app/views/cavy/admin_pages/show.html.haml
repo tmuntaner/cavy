@@ -4,9 +4,10 @@
 
 = render 'cavy/shared/admin_locale_links'
 
-= link_to('Edit Settings', admin_edit_page_path(@page.id), class: 'btn', id: 'edit-page-settings' )
-= link_to('Edit Content', cavy_edit_page_path(@page.route), class: 'btn', id: 'edit-page-content' )
-= link_to('Add data', admin_add_page_data_path(@page.id), class: 'btn', id: 'add-data' )
+.btn-group
+  = link_to('Edit Settings', admin_edit_page_path(@page.id), class: 'btn btn-default', id: 'edit-page-settings' )
+  = link_to('Edit Content', cavy_edit_page_path(@page.route), class: 'btn btn-default', id: 'edit-page-content' )
+  = link_to('Add data', admin_add_page_data_path(@page.id), class: 'btn btn-default', id: 'add-data' )
 
 %br/
 %br/

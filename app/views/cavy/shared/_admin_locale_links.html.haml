@@ -1,6 +1,3 @@
-#admin-locale-links
-  - last = I18n.available_locales.last
+.btn-group.pull-right
   - I18n.available_locales.each do |locale|
-    = link_to locale, url_for(locale: locale)
-    - if locale != last
-      = ' | '
+    = link_to locale, url_for(locale: locale), class: 'btn btn-primary'

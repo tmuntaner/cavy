@@ -1,11 +1,13 @@
 %h1 Add Data
 
-= form_for(@page, url: admin_create_page_data_path(@page.id), method: :post, html: {class: 'form-horizontal'}) do |f|
-  = f.label :key
-  = f.text_field :key
+= form_for(@page, url: admin_create_page_data_path(@page.id), method: :post) do |f|
+  
+  .form-group
+    = f.label :key, class: 'control-label'
+    = f.text_field :key, class: 'form-control'
 
-  = f.label :value
-  = f.text_field :value
-  %br/
-  %br/
-  = f.submit 'Submit',  id: 'submit'
+  .form-group
+    = f.label :value, class: 'control-label'
+    = f.text_field :value, class: 'form-control'
+
+  = f.submit 'Submit',  id: 'submit', class: 'btn btn-primary'
