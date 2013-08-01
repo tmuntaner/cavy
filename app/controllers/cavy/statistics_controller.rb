@@ -90,6 +90,13 @@ module Cavy
       return history
     end
 
+    private
 
+    def google_analytics_setup?
+      if Cavy.google_analytics_username != ' ' || Cavy.google_analytics_password != ' ' || Cavy.google_analytics_property_id != ' '
+        return true
+      end
+      return false
+    end
   end
 end
