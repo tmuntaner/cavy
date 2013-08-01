@@ -8,7 +8,7 @@
 %br/
 
 - if @item_groups.count >= 1
-  %table.table.table-striped
+  %table.table.table-striped#item_group_items{'data-update-url' => cavy_update_order_item_group_path}
     %tr
       %th Title
       %th Parameters

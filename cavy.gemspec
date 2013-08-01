@@ -24,6 +24,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'mini_magick'
   s.add_dependency 'bcrypt-ruby', '~> 3.0.0'
   s.add_dependency 'garb'
+  s.add_dependency 'jquery-ui-rails'
 
   #s.add_development_dependency 'rspec-rails'
   s.add_development_dependency 'capybara'
