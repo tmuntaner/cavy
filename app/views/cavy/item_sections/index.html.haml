@@ -1,6 +1,11 @@
-%h1 Listing item_sections
+.page-header
+  %h1 Item Sections
+  .btn-toolbar
+    .btn-group
+      = link_to 'New Item Section', cavy_new_item_section_path, class: 'btn btn-primary btn-small'
+    = render 'cavy/shared/admin_locale_links'
 
-%table
+%table.table.table-striped
   %tr
     %th Title
     %th
@@ -10,10 +15,8 @@
   - @item_sections.each do |item_section|
     %tr
       %td= item_section.title
-      %td= link_to 'Show', item_section
-      %td= link_to 'Edit', edit_item_section_path(item_section)
-      %td= link_to 'Destroy', item_section, :method => :delete, :data => { :confirm => 'Are you sure?' }
+      %td= link_to 'Show', cavy_item_section_path(item_section)
+      %td= link_to 'Edit', cavy_edit_item_section_path(item_section)
+      %td= link_to 'Destroy', cavy_item_section_path(item_section), :method => :delete, :data => { :confirm => 'Are you sure?' }
 
 %br
-
-= link_to 'New Item section', new_item_section_path

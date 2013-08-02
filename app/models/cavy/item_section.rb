@@ -4,8 +4,7 @@ module Cavy
     include Mongoid::Document
 
     field :title
-
-    has_many :item_groups
+    field :item_groups, type: Array
 
     validates :title, presence: true, uniqueness: true
   end

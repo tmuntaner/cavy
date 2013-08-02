@@ -15,11 +15,14 @@
             Admin
             %b.caret
           %ul.dropdown-menu
-            %li= link_to 'Dashboard',   admin_dashboard_path, id: 'admin-overview'
-            %li= link_to 'Pages',       admin_pages_path,     id: 'admin-pages'
-            %li= link_to 'Item Groups', item_groups_path,     id: 'admin-item-groups'
+            %li= link_to 'Dashboard',     admin_dashboard_path,     id: 'admin-overview'
+            %li= link_to 'Pages',         admin_pages_path,         id: 'admin-pages'
+            %li= link_to 'Item Groups',   item_groups_path,         id: 'admin-item-groups'
+            %li= link_to 'Item Sections', cavy_item_sections_path,  id: 'admin-item-sections'
             - if current_user and current_user.site_manager?
               %li= link_to 'Users', cavy_admin_users_path, id: 'admin-users'
+        - Cavy::ItemSection.all.each do |section|
+          %li= link_to section.title, cavy_item_section_path(section.id)
 
       %ul.nav.navbar-nav.pull-right
         - if current_user

@@ -13,7 +13,7 @@ module Cavy
 
     # GET /item_sections/1
     def show
-      @item_groups = @item_section.item_groups
+      @item_groups =  Cavy::ItemGroup.find ( @item_section.item_groups )
     end
 
     # GET /item_sections/new
@@ -27,10 +27,10 @@ module Cavy
 
     # POST /item_sections
     def create
-      @item_section = ItemSection.new(item_section_params)
+      @item_section = ItemSection.new( title: item_section_params[:title], item_groups: params[:item_section][:item_groups] )
 
       if @item_section.save
-        redirect_to @item_section, notice: 'Item section was successfully created.'
+        redirect_to cavy_item_section_path(@item_section), notice: 'Item section was successfully created.'
       else
         render action: 'new'
       end
@@ -38,8 +38,8 @@ module Cavy
 
     # PATCH/PUT /item_sections/1
     def update
-      if @item_section.update(item_section_params)
-        redirect_to @item_section, notice: 'Item section was successfully updated.'
+      if @item_section.update( title: item_section_params[:title], item_groups: params[:item_section][:item_groups] )
+        redirect_to cavy_item_section_path(@item_section), notice: 'Item section was successfully updated.'
       else
         render action: 'edit'
       end
@@ -48,7 +48,7 @@ module Cavy
     # DELETE /item_sections/1
     def destroy
       @item_section.destroy
-      redirect_to item_sections_url, notice: 'Item section was successfully destroyed.'
+      redirect_to cavy_item_sections_url, notice: 'Item section was successfully destroyed.'
     end
 
     private
