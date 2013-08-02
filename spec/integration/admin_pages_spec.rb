@@ -15,12 +15,14 @@ module Cavy
       
       it 'should be able to go to the new page page' do
         visit '/admin'
+        click_link 'admin-pages'
         click_link 'admin-new-page'
         page.should have_content('New Page')
       end
 
       it 'should be able to add a new page' do
         visit '/admin'
+        click_link 'admin-pages'
         click_link 'admin-new-page'
         fill_in 'page_title',   with: 'foobar'
         fill_in 'page_render',  with: 'cavy_test/pages/test'
@@ -70,6 +72,7 @@ module Cavy
 
       it 'should not be able to add a new page with invalid info' do
         visit '/admin'
+        click_link 'admin-pages'
         click_link 'admin-new-page'
         fill_in 'page_render',  with: 'cavy_test/pages/test'
         click_on 'submit_page'
