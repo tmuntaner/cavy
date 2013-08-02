@@ -9,20 +9,18 @@
 
 - if @pages.count >= 1
   %table.table.table-striped
-    %tablehead
+    %thead
       %tr
-        %th Title
-        %th Render
-        %th
+        %th Webpage
+        %th Rendered Page
         %th
         - if current_user.dev_team?
           %th 
-    %tablebody
+    %tbody
       - @pages.each do |page|
         %tr
           %th= link_to page.title, admin_page_path(page.id), id: "page-#{page.id}"
           %th= page.render
-          %th= link_to 'show', admin_page_path(page.id), id: "page-show-#{page.id}"
           %th= link_to 'edit', admin_edit_page_path(page.id), id: "edit-page-#{page.id}"
           - if current_user.dev_team?
             %th= link_to 'destroy', admin_delete_page_path(page.id), id: "delete-page-#{page.id}", method: :delete, data: {confirm: "Are you sure you want to delete the page?"}

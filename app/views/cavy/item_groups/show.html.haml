@@ -21,7 +21,7 @@
         %th
         %th
     %tbody
-      - @items.each do |item|
+      - @items.each do |item|    
         = content_tag_for :tr, item do
           - @item_group.params.each do |param|
             %td= item.data[param]

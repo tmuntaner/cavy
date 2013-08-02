@@ -6,17 +6,19 @@
     = render 'cavy/shared/admin_locale_links'
 
 %table.table.table-striped
-  %tablehead
+  %thead
     %tr
+      %th Name
       %th Email
       %th Role
       %th
       - if current_user.dev_team?
         %th
         %th
-  %tablebody
+  %tbody
     - @users.each do |user|
       %tr
+        %td= user.name
         %td= user.email
         %td= user.role
         %td= link_to 'Show', user

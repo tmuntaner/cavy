@@ -3,24 +3,25 @@
   .btn-toolbar
     .btn-group
       = link_to "Edit #{@item_section.title}", cavy_edit_item_section_path(@item_section.id), class: 'btn btn-primary btn-small'
-    .btn-group
-      = link_to 'Item Sections', cavy_item_sections_path, class: 'btn btn-default btn-small'
+    - if current_user.role == 'admin'
+      .btn-group
+        = link_to 'Item Sections', cavy_item_sections_path, class: 'btn btn-default btn-small'
     = render 'cavy/shared/admin_locale_links'
 
 %table.table.table-striped
-  %tr
+  %thead
     %th Title
     %th Parameters
     %th
     %th
     - if current_user.dev_team?
       %th
-
-  - @item_groups.each do |item_group|
-    %tr
-      %td= item_group.title
-      %td= item_group.params.join(', ') if item_group.params
-      %td= link_to 'Show', cavy_item_group_path(item_group.id)
-      %td= link_to 'Edit', admin_edit_item_group_path(item_group.id)
-      - if current_user.dev_team?
-        %td= link_to 'Destroy', cavy_delete_item_group_path(item_group.id), :method => :delete, :data => { :confirm => 'Are you sure?' }, id: "delete-#{item_group.id}"
+  %tbody
+    - @item_groups.each do |item_group|
+      %tr
+        %td= item_group.title
+        %td= item_group.params.join(', ') if item_group.params
+        %td= link_to 'Show', cavy_item_group_path(item_group.id)
+        %td= link_to 'Edit', admin_edit_item_group_path(item_group.id)
+        - if current_user.dev_team?
+          %td= link_to 'Destroy', cavy_delete_item_group_path(item_group.id), :method => :delete, :data => { :confirm => 'Are you sure?' }, id: "delete-#{item_group.id}"

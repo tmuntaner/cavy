@@ -6,17 +6,18 @@
     = render 'cavy/shared/admin_locale_links'
 
 %table.table.table-striped
-  %tr
+  %thead
     %th Title
     %th
     %th
     %th
 
-  - @item_sections.each do |item_section|
-    %tr
-      %td= item_section.title
-      %td= link_to 'Show', cavy_item_section_path(item_section)
-      %td= link_to 'Edit', cavy_edit_item_section_path(item_section)
-      %td= link_to 'Destroy', cavy_item_section_path(item_section), :method => :delete, :data => { :confirm => 'Are you sure?' }
+  %tbody
+    - @item_sections.each do |item_section|
+      %tr
+        %td= item_section.title
+        %td= link_to 'Show', cavy_item_section_path(item_section)
+        %td= link_to 'Edit', cavy_edit_item_section_path(item_section)
+        %td= link_to 'Destroy', cavy_item_section_path(item_section), :method => :delete, :data => { :confirm => 'Are you sure?' }
 
 %br
