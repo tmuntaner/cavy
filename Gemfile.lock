@@ -1,4 +1,12 @@
 GIT
+  remote: git://github.com/joliss/jquery-ui-rails.git
+  revision: 61a5a520ba4ae3413d18101bc4b32584a5f50fae
+  specs:
+    jquery-ui-rails (4.0.4)
+      jquery-rails
+      railties (>= 3.1.0)
+
+GIT
   remote: git://github.com/mongoid/mongoid.git
   revision: 88599cf64c3d6df9a1277178ced69cd45d30c2f1
   specs:
@@ -200,6 +208,7 @@ DEPENDENCIES
   coveralls
   database_cleaner
   factory_girl_rails
+  jquery-ui-rails!
   launchy
   meta_request
   mongoid!

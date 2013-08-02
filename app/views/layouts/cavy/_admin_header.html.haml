@@ -1,58 +1,30 @@
 .navbar.navbar-inverse.navbar-fixed-top
   .container-fluid
-    %button{"type" => "button", "data-target" => ".bs-navbar-collapse", "data-toggle" => "collapse", "class" => "navbar-toggle"}
+
+    %button{ 'type' => 'button', 'data-target' => '.bs-navbar-collapse', 'data-toggle' => 'collapse', 'class' => 'navbar-toggle' }
       %span.icon-bar
       %span.icon-bar
       %span.icon-bar
-    %a{:href => admin_dashboard_path, class: "navbar-brand"}= Cavy.title || "Cavy"
+
+    %a{ href: admin_dashboard_path, class: 'navbar-brand' }= Cavy.title || 'Cavy'
     .nav-collapse.collapse.bs-navbar-collapse
+      
       %ul.nav.navbar-nav
-        
         %li.dropdown
-          %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+          %a.dropdown-toggle{ 'data-toggle' => 'dropdown', href: '#' }
             Admin
             %b.caret
           %ul.dropdown-menu
-            %li
-              %a{href: admin_dashboard_path, id: "admin-overview"} Dashboard
-        
-        %li.dropdown
-          %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-            Pages
-            %b.caret
-          %ul.dropdown-menu
-            %li
-              %a{href: admin_pages_path, id: "admin-pages"} Pages
-            - if current_user and current_user.dev_team?
-              %li
-                %a{href: admin_new_page_path, id: "admin-new-page"} New Page
-        
-        - if current_user and current_user.site_manager?  
-          %li.dropdown
-            %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-              Users
-              %b.caret
-            %ul.dropdown-menu
-              %li
-                %a{href: cavy_admin_users_path, id: "admin-users"} Users
-              - if current_user and current_user.dev_team?
-                %li
-                  %a{href: cavy_admin_new_user_path, id: "admin-new-users"} New User
-
-        %li.dropdown
-          %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-            Items
-            %b.caret
-          %ul.dropdown-menu
-            %li
-              %a{href: item_groups_path, id: "admin-item-groups"} Item Groups
-            %li
-              %a{href: admin_new_item_group_path, id: "admin-item-groups"} New Item Group
+            %li= link_to 'Dashboard',   admin_dashboard_path, id: 'admin-overview'
+            %li= link_to 'Pages',       admin_pages_path,     id: 'admin-pages'
+            %li= link_to 'Item Groups', item_groups_path,     id: 'admin-item-groups'
+            - if current_user and current_user.site_manager?
+              %li= link_to 'Users', cavy_admin_users_path, id: 'admin-users'
 
       %ul.nav.navbar-nav.pull-right
         - if current_user
           %li.dropdown
-            %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+            %a.dropdown-toggle{ 'data-toggle' => 'dropdown', href: '#' }
               = current_user.name
               %b.caret
             %ul.dropdown-menu

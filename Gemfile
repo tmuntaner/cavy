@@ -16,7 +16,7 @@ gemspec
 gem 'simplecov',  require: false, :group => :test
 gem 'coveralls',  require: false
 gem 'mongoid',    github: 'mongoid/mongoid'
-
+gem 'jquery-ui-rails', github: 'joliss/jquery-ui-rails'
 # because of https://github.com/rails/rails/issues/9582
 # will remove in next release of rails 4
 gem 'rails',      '4.0.0'

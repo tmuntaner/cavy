@@ -7,34 +7,20 @@
       = link_to('Item Group List', item_groups_path, class: 'btn btn-default  btn-small')
     = render 'cavy/shared/admin_locale_links'
 
-%h3 Group Parameters
-%br/
-%table.table.table-striped{style: 'max-width: 400px;'}
-  %tablehead
-    %th #
-    %th Parameter
-  %tablebody
-    - i = 0
-    - @item_group.params.each do |p|
-      %tr
-        %td= i = i + 1
-        %td= p
 
-%hr
-
-%h3 Group Items
+%h3 Items:
 %br/
 
 - if @items.count >= 1
-  %table.table.table-striped#item_group_items{'data-update-url' => cavy_update_order_item_group_path}
-    %tablehead
+  %table.table.table-striped#item_group_items{ 'data-update-url' => cavy_update_order_item_group_path }
+    %thead
       %tr
         - @item_group.params.each do |param|
           %th= param
         %th
         %th
         %th
-    %tablebody
+    %tbody
       - @items.each do |item|
         = content_tag_for :tr, item do
           - @item_group.params.each do |param|
