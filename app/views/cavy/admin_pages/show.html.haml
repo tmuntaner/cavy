@@ -3,24 +3,26 @@
 
   .button-toolbar
     .btn-group
+      = link_to('Page Settings', admin_edit_page_path(@page.id), class: 'btn btn-primary btn-small', id: 'edit-page-settings' )
+      = link_to('Page Content', cavy_edit_page_path(@page.route), class: 'btn btn-primary btn-small', id: 'edit-page-content' )
+      = link_to('Add Page Data Field', admin_add_page_data_path(@page.id), class: 'btn btn-primary btn-small', id: 'add-data' )
+    .btn-group
       = link_to('Page List', admin_pages_path, class: 'btn btn-default btn-small')
-      = link_to('Page Settings', admin_edit_page_path(@page.id), class: 'btn btn-default btn-small', id: 'edit-page-settings' )
-      = link_to('Page Content', cavy_edit_page_path(@page.route), class: 'btn btn-default btn-small', id: 'edit-page-content' )
-      = link_to('Add Page Data Field', admin_add_page_data_path(@page.id), class: 'btn btn-default btn-small', id: 'add-data' )
     = render 'cavy/shared/admin_locale_links'
 
 %h3 Route
 = "/#{@page.route}"
 %br/
 %br/
-%h3 Meta Tags
 
-- unless @page.tags == nil
+- if @page.tags != nil
+  %h3 Meta Tags
   %ul
     - @page.tags.each do |tag|
       %li= tag
 
 %br/
 
-%h3 Meta Description
-= @page.description if @page.description
+- if @page.description
+  %h3 Meta Description
+  = @page.description 

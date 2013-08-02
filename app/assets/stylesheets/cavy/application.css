@@ -15,4 +15,5 @@
  *= require cavy/token
  *= require cavy/sidebar
  *= require cavy/first_time
+ *= require cavy/session
  */

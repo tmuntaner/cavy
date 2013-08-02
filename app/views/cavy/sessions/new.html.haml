@@ -1,7 +1,13 @@
-= form_tag( admin_create_session_path, class: 'form-signin') do
-  %h2.form-signin-heading Please sign in
+%article.session
+  .page-header
+    %h1
+      Please Sign In to Continue
+  = form_tag( admin_create_session_path, id: 'session_form' ) do
+    %fieldset
+      .form-group
+        = text_field_tag :email, params[:email], placeholder: "Email", id: "user-email", class: 'form-control'
+      .form-group
+        = password_field_tag :password, nil, placeholder: "Password", id: "user-password", class: 'form-control'
 
-  = text_field_tag :email, params[:email], placeholder: "Email", id: "user-email", class: 'input-block-level'
-  = password_field_tag :password, nil, placeholder: "Password", id: "user-password", class: 'input-block-level'
-
-  = submit_tag "Submit", class: "btn btn-large btn-primary", id: "sign-in"
+      .form-group
+        %button.btn.btn-primary{:type => "submit"} Sign In

@@ -2,9 +2,10 @@
   %h1= @item_group.title
   .btn-toolbar
     .btn-group
-      = link_to 'New Item', cavy_new_item_path(group_id: @item_group.id), id: 'new-item', class: 'btn btn-primary btn-small'
-    .btn-group
-      = link_to('Item Group List', item_groups_path, class: 'btn btn-default  btn-small')
+      = link_to "New #{@item_group.title}", cavy_new_item_path(group_id: @item_group.id), id: 'new-item', class: 'btn btn-primary btn-small'
+    - if current_user.role == 'admin'
+      .btn-group
+        = link_to('Item Group List', item_groups_path, class: 'btn btn-default  btn-small')
     = render 'cavy/shared/admin_locale_links'
 
 
