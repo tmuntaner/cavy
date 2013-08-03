@@ -30,5 +30,6 @@ module Cavy
       redirect_to(session[:return_to] || root_path, notice: "Logged in!")
       session.delete(:return_to)
     end
+
   end
 end

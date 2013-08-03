@@ -5,6 +5,8 @@ module Cavy
 
     layout 'cavy/first_time'
     
+    before_action :check_if_first_time
+    
     def new_user
 
     end
@@ -27,6 +29,10 @@ module Cavy
     def set_cookie_and_redirect(user)
       cookies[:auth_token] = user.auth_token
       redirect_to(admin_dashboard_path, notice: "Logged in!")
+    end
+
+    def check_if_first_time
+      redirect_to( root_path ) if Cavy::User.count > 0
     end
 
   end
