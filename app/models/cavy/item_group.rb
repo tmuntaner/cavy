@@ -33,7 +33,7 @@ module Cavy
 
     def set_params
       unless param_string == '' or param_string == nil
-        self.params = param_string.split(',')
+        self.params = param_string.gsub(', ', ',').split(',')
       end
     end
     

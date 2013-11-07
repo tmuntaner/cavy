@@ -9,12 +9,5 @@ module Cavy
       @users = Cavy::User.all
       @pages = Cavy::Page.all
     end
-
-    def users
-    end
-
-    def new_user
-    end
-
   end
 end

@@ -45,6 +45,12 @@ module Cavy
         @group.should be_valid
         @group.destroy
       end
+      it "should accept a string of params and handle spaces" do
+        @group = create(:cavy_item_group, param_string: 'Ruby, Rainbows')
+        @group.params.should eq(['Ruby','Rainbows'])
+        @group.should be_valid
+        @group.destroy
+      end
     end
 
     describe "items" do
