@@ -125,7 +125,7 @@ module Cavy
     describe 'seo' do
       describe 'tags' do
         it 'should accept no tags' do
-          @page = Page.create(title: 'foo', tags: '')
+          @page = Page.create(title: 'foo', tags: [])
           @page.should be_valid
           @page.destroy
         end

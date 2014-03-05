@@ -17,12 +17,19 @@ module Cavy
     
     attr_accessor :tag_string, :key, :value
 
-    before_save :make_route
-    before_save :check_render
-    before_save :check_content
-    before_save :check_tags
-    before_save :check_data
-    before_save :check_page_elements
+    methods = [:make_route, :check_render, :check_content, :check_tags, :check_data, :check_page_elements]
+
+    methods.each do |method|
+      before_save method
+      before_create method
+    end
+     
+    # before_save :make_route
+    # before_save :check_render
+    # before_save :check_content
+    # before_save :check_tags
+    # before_save :check_data
+    # before_save :check_page_elements
 
     def update_elements(params)
       update_values = {page_elements: {}}
@@ -61,6 +68,10 @@ module Cavy
     def check_tags
       unless tag_string == '' or tag_string == nil
         self.tags = tag_string.split(',')
+      end
+
+      if self.tags.kind_of? String
+        self.tags = []
       end
     end
 

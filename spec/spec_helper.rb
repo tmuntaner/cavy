@@ -11,6 +11,7 @@ require 'simplecov'
 require 'coveralls'
 require 'factory_girl_rails'
 require 'database_cleaner'
+require 'pry'
 
 if ENV['TRAVIS']
   Coveralls.wear!

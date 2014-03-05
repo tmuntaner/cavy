@@ -24,7 +24,7 @@ module Cavy
 
     describe 'params' do
       it "should accept no params" do
-        @group = create(:cavy_item_group, params: '')
+        @group = create(:cavy_item_group, params: [])
         @group.should be_valid
         @group.destroy
       end

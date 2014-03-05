@@ -122,6 +122,7 @@ GEM
       callsite
       rack-contrib
       railties
+    method_source (0.8.2)
     mime-types (1.25)
     mini_magick (3.6.0)
       subexec (~> 0.2.1)
@@ -136,6 +137,10 @@ GEM
     optionable (0.1.1)
     origin (1.1.0)
     polyglot (0.3.3)
+    pry (0.9.12.6)
+      coderay (~> 1.0)
+      method_source (~> 0.8)
+      slop (~> 3.4)
     rack (1.5.2)
     rack-contrib (1.1.0)
       rack (>= 0.9.1)
@@ -175,6 +180,7 @@ GEM
       multi_json
       simplecov-html (~> 0.8.0)
     simplecov-html (0.8.0)
+    slop (3.4.7)
     sprockets (2.10.0)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -218,6 +224,7 @@ DEPENDENCIES
   launchy
   meta_request
   mongoid!
+  pry
   puma
   rails (= 4.0.1)
   rspec-rails (= 2.13.2)
