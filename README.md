@@ -34,10 +34,6 @@ I don't have the gem in alpha yet, so you will have to pull it off the github re
 
     gem 'cavy', github: 'tmuntan1/cavy'
 
-Because Cavy uses Rails 4, you will also have to add the repository version of mongoid because the Rails 4 compatible version has not been published yet.
-
-    gem 'mongoid', github: 'mongoid/mongoid'
-
 ### Mounting the Engine to your Application
 
 Go into your `config/routes.rb` file and add the following line near the top.
