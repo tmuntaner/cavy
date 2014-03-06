@@ -8,7 +8,9 @@ PATH
       garb
       haml
       jquery-rails
+      jquery-ui-rails (~> 4.2.0)
       mini_magick
+      mongoid (>= 4.0.0.beta1)
       rails (~> 4.0.0)
 
 GEM
@@ -212,13 +214,11 @@ DEPENDENCIES
   coveralls
   database_cleaner
   factory_girl_rails
-  jquery-ui-rails (~> 4.2.0)
   launchy
   meta_request
-  mongoid (>= 4.0.0.beta1)
   pry
   puma
-  rails (>= 4.0.1)
+  rails (= 4.0.1)
   rspec-rails (= 2.13.2)
   simplecov
   therubyrhino
