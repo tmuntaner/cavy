@@ -16,7 +16,7 @@ gemspec
 gem 'simplecov',        require: false, :group => :test
 gem 'coveralls',        require: false
 gem 'mongoid',          '>= 4.0.0.beta1'
-gem 'jquery-ui-rails',  github: 'joliss/jquery-ui-rails'
+gem 'jquery-ui-rails',  '~> 4.2.0'
 gem 'rails',            '>= 4.0.1'
 gem "rspec-rails",      "2.13.2", :group => [:test, :development]
 
