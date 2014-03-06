@@ -5,16 +5,6 @@ GIT
     jquery-ui-rails (4.1.0)
       railties (>= 3.1.0)
 
-GIT
-  remote: git://github.com/mongoid/mongoid.git
-  revision: 1e480cf0df948375b220c29ce9602d13fb5430f8
-  specs:
-    mongoid (4.0.0)
-      activemodel (~> 4.0.0)
-      moped (~> 2.0.beta3)
-      origin (~> 1.0)
-      tzinfo (~> 0.3.37)
-
 PATH
   remote: .
   specs:
@@ -64,7 +54,7 @@ GEM
       erubis (>= 2.6.6)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
-    bson (2.0.0.rc3)
+    bson (2.2.1)
     builder (3.1.4)
     callsite (0.0.11)
     capybara (2.1.0)
@@ -82,6 +72,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.6.3)
+    connection_pool (1.2.0)
     coveralls (0.7.0)
       multi_json (~> 1.3)
       rest-client
@@ -128,14 +119,20 @@ GEM
       subexec (~> 0.2.1)
     mini_portile (0.5.2)
     minitest (4.7.5)
-    moped (2.0.0.beta3)
-      bson (~> 2.0.0.rc3)
-      optionable (~> 0.1.1)
+    mongoid (4.0.0.beta1)
+      activemodel (>= 4.0.0)
+      moped (~> 2.0.beta6)
+      origin (~> 2.1)
+      tzinfo (>= 0.3.37)
+    moped (2.0.0.beta6)
+      bson (~> 2.2)
+      connection_pool (~> 1.2)
+      optionable (~> 0.2.0)
     multi_json (1.8.2)
     nokogiri (1.6.0)
       mini_portile (~> 0.5.0)
-    optionable (0.1.1)
-    origin (1.1.0)
+    optionable (0.2.0)
+    origin (2.1.0)
     polyglot (0.3.3)
     pry (0.9.12.6)
       coderay (~> 1.0)
@@ -223,10 +220,10 @@ DEPENDENCIES
   jquery-ui-rails!
   launchy
   meta_request
-  mongoid!
+  mongoid (>= 4.0.0.beta1)
   pry
   puma
-  rails (= 4.0.1)
+  rails (>= 4.0.1)
   rspec-rails (= 2.13.2)
   simplecov
   therubyrhino
