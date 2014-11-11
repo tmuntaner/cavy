@@ -12,7 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require jquery.ui.sortable
+//= require jquery-ui/sortable
 // require turbolinks
 //= require cavy/charts
 //= require cavy/pages

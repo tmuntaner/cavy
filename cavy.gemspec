@@ -25,7 +25,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'mini_magick'
   s.add_dependency 'bcrypt-ruby'
   s.add_dependency 'garb'
-  s.add_dependency 'mongoid',         '>= 4.0.0.beta1'
+  s.add_dependency 'mongoid',         '>= 4.0.0'
   s.add_dependency 'jquery-ui-rails'
 
   s.add_development_dependency 'capybara'
