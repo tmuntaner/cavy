@@ -16,7 +16,11 @@ module Cavy
     def create_data
       @page = Cavy::Page.find(params[:id])
       @page.set_key_value(params[:page][:key],params[:page][:value])
-      redirect_to admin_page_path(@page.id), notice: 'Page was successfully created.'
+      if @page.save
+        redirect_to admin_page_path(@page.id), notice: 'Page was successfully created.'
+      else
+        render action :create_data
+      end
     end
 
     def new
@@ -29,7 +33,7 @@ module Cavy
 
     def create
       @page = Page.new(params[:page])
-
+      @page.set_title params[:page][:title]
       if @page.save
         redirect_to admin_page_path(@page), notice: 'Page was successfully created.'
       else
@@ -45,7 +49,9 @@ module Cavy
 
     def update
       @page = Cavy::Page.find(params[:id])
-      if @page.update_attributes(params[:page])
+      @page.set_title params[:page][:title]
+
+      if @page.update_attributes(params[:page].except(:title))
         redirect_to admin_page_path(@page), notice: 'Page was successfully created.'
       else
         render action: 'edit'

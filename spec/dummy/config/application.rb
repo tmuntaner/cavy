@@ -9,6 +9,10 @@ require "sprockets/railtie"
 require "jquery-rails"
 require "carrierwave"
 # require "turbolinks"
+require "bson"
+require "moped"
+
+Moped::BSON = BSON
 
 Bundler.require(*Rails.groups)
 require "cavy"
@@ -16,6 +20,6 @@ require "cavy"
 module Dummy
   class Application < Rails::Application
     config.assets.precompile += ["cavy/mercury.css", "cavy/mercury_loader.js", "cavy/mercury_save.js", "cavy/mercury.js"]
-    I18n.enforce_available_locales = true
+    I18n.enforce_available_locales = false
   end
 end

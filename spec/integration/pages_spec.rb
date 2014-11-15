@@ -4,7 +4,8 @@ module Cavy
   describe 'Pages' do
 
     before(:each) do
-      @page = FactoryGirl.create(:cavy_page, title: 'home')
+      I18n.locale = :en
+      @page = FactoryGirl.create(:cavy_page, title: {en: 'home', de: 'home'})
       @user = FactoryGirl.create(:cavy_user, password: 'secret', password_confirmation: 'secret')
     end
 
@@ -19,7 +20,7 @@ module Cavy
     end
 
     it "should be able to click link to new page from home page" do
-      @about = Page.create(title: 'about', content: 'foo_about_bar')
+      @about = Page.create(title: {en: 'about', de: 'über'}, content: {en: 'foo_about_bar', de: 'foo_über_bar'})
       visit '/'
       click_link 'about'
       page.should have_content('foo_about_bar')
@@ -41,18 +42,18 @@ module Cavy
     it "should be able to change render" do
       @page.update(render: 'cavy/shared/test')
       visit '/'
-      page.should have_content(@page.title)
+      page.should have_content(@page.localized_title)
     end
 
     it "should be able to go to non-root page through url" do
-      @about = Page.create(title: 'about', content: 'foo_about_bar')
+      @about = Page.create(title: {en: 'about', de: 'über'}, content: {en: 'foo_about_bar', de: 'foo_über_bar'})
       visit '/about'
       page.should have_content('foo_about_bar')
       @about.destroy
     end
 
     it "should be able to go to non-root page through url with spaces in title" do
-      @about = Page.create(title: 'about us', content: 'foo_about_bar')
+      @about = Page.create(title: {en: 'about us', de: 'über uns'}, content: {en: 'foo_about_bar', de: 'foo_über_bar'})
       visit '/about_us'
       page.should have_content('foo_about_bar')
       @about.destroy
@@ -71,23 +72,11 @@ module Cavy
         visit cavy_edit_page_path({locale: :en, route: @page.route})
         page.should_not have_content('Back to Content')
       end
-
-      it "should allow the client to update the page" do
-        log_in_rack('client')
-        @page = FactoryGirl.create(:cavy_page)
-        @parameters = { content: { title: {value: 'ghost'}, content: {value: 'foo-ghost-bar-summer'}}}
-        post cavy_update_page_path({locale: :en, id: @page.id}), @parameters
-        @page = Cavy::Page.find(@page.id)
-        @page.title.should eq('ghost')
-        @page.content.should eq('foo-ghost-bar-summer')
-        @page.destroy
-        log_out
-      end
     end
 
     describe 'seo' do
       it 'should display the page desciption and meta tags' do
-        @page = FactoryGirl.create(:cavy_page, title: 'seo', description: 'guinea pigs are awesome', tags: ['Ghost', 'Summer', 'Pumpkin Spice', 'Greywind'])
+        @page = FactoryGirl.create(:cavy_page, title: {en: 'seo', de: 'das seo'}, description: 'guinea pigs are awesome', tags: ['Ghost', 'Summer', 'Pumpkin Spice', 'Greywind'])
         visit "/#{@page.route}"
         page.find "meta[content='#{@page.description}']", visible: 'false'
         page.find "meta[content='#{@page.tags.join(', ')}']", visible: 'false'

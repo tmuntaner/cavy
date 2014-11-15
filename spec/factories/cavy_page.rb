@@ -1,6 +1,9 @@
 FactoryGirl.define do
   factory :cavy_page, class: Cavy::Page do
-    title       "page #{Cavy::Page.count}"
+    title {{
+      en: "page #{Cavy::Page.count}",
+      de: "seite #{Cavy::Page.count}"
+    }}
     render      'cavy/pages/page'
     content     'foo'
     tags        ['foo','bar']

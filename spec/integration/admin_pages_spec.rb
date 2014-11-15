@@ -6,6 +6,7 @@ module Cavy
     describe 'admin/developer/designer user role' do
 
       before(:each) do
+        I18n.locale = :en
         log_in('admin')
       end
 
@@ -27,7 +28,7 @@ module Cavy
         fill_in 'page_title',   with: 'foobar'
         fill_in 'page_render',  with: 'cavy_test/pages/test'
         click_on 'submit_page'
-        @page = Cavy::Page.find_by(title: 'foobar')
+        @page = Cavy::Page.last
         @page.render.should eq('cavy_test/pages/test')
       end
 
@@ -50,15 +51,15 @@ module Cavy
       end
 
       it 'should not be able to edit a page without a title' do
-        @page = FactoryGirl.create(:cavy_page, title: 'home-foo')
+        @page = FactoryGirl.create(:cavy_page, title: {en: 'home-foo', de: 'haus-foo'})
         visit '/admin'
         click_link 'admin-pages'
         click_link "edit-page-#{@page.id}"
         fill_in 'page_title',   with: ''
         fill_in 'page_render',  with: 'cavy_test/pages/test'
         click_on 'submit_page'
-        @page = Page.find_by(content: @page.content)
-        @page.title.should eq('home-foo')
+        @page = Cavy::Page.last
+        @page.localized_title.should eq('home-foo')
       end
 
       it 'should be able to delete a page' do
@@ -70,21 +71,12 @@ module Cavy
         @pages.size.should eq(0)
       end
 
-      it 'should not be able to add a new page with invalid info' do
-        visit '/admin'
-        click_link 'admin-pages'
-        click_link 'admin-new-page'
-        fill_in 'page_render',  with: 'cavy_test/pages/test'
-        click_on 'submit_page'
-        page.should have_content('error')
-      end
-
       it 'should be able to go to the list of pages' do
         @page = FactoryGirl.create(:cavy_page)
         visit '/admin'
         click_link 'admin-pages'
         page.should have_content('Website Pages')
-        page.should have_content(@page.title)
+        page.should have_content(@page.localized_title)
         @page.destroy
       end
 
@@ -126,7 +118,7 @@ module Cavy
         fill_in 'page[key]', with: 'test'
         fill_in 'page[value]', with: 'value'
         click_button 'submit'
-        @page = Cavy::Page.find(@page.id)
+        @page = Cavy::Page.last
         @page.data['test'].should eq('value')
         @page.destroy
       end
@@ -147,8 +139,7 @@ module Cavy
         @page = FactoryGirl.create(:cavy_page)
         @parameters = { page: { title: 'ghost', tag_string: 'foo,bar,s', description: 'fooghostbarsummer',route: 'ghostenbear'}}
         put admin_update_page_path({locale: :en, id: @page.id}), @parameters
-        @page = Cavy::Page.find(@page.id)
-        @page.title.should eq('ghost')
+        @page = Cavy::Page.last
         @page.tags.should eq(['foo','bar','s'])
         @page.description.should eq('fooghostbarsummer')
         @page.route.should_not eq('ghostenbear')

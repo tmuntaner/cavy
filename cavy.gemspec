@@ -27,12 +27,12 @@ Gem::Specification.new do |s|
   s.add_dependency 'garb'
   s.add_dependency 'mongoid',         '>= 4.0.0'
   s.add_dependency 'jquery-ui-rails'
-
+  s.add_dependency 'globalize',       '~> 4.0.2'
   s.add_development_dependency 'capybara'
   s.add_development_dependency 'meta_request'
   s.add_development_dependency 'factory_girl_rails'
   s.add_development_dependency 'launchy'
   s.add_development_dependency 'database_cleaner'
   s.add_development_dependency 'pry'
-
+  s.add_development_dependency 'awesome_print'
 end
