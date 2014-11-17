@@ -52,14 +52,14 @@ module Cavy
     end
 
     private
-      # Use callbacks to share common setup or constraints between actions.
-      def set_item_section
-        @item_section = ItemSection.find(params[:id])
-      end
+    # Use callbacks to share common setup or constraints between actions.
+    def set_item_section
+      @item_section = ItemSection.find(params[:id])
+    end
 
-      # Never trust parameters from the scary internet, only allow the white list through.
-      def item_section_params
-        params.require(:item_section).permit(:title)
-      end
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def item_section_params
+      params.require(:item_section).permit(:title)
+    end
   end
 end

@@ -15,7 +15,7 @@ describe 'items'  do
     end
 
     it "should be able to show an item" do
-      @item.set(data: {name: 'name'})
+      @item.update(data: {name: 'name'})
       visit cavy_item_path(locale: :en, id: @item.id)
       page.should have_content(@item.data['name'])
     end

@@ -11,7 +11,7 @@ module Cavy
       end
       it "should be able to accept a hash of data" do
         @item = create(:cavy_item, data: {foo:'bar',bar:'foo'})
-        @item.data.should eq({foo:'bar',bar:'foo'})
+        @item.data.should eq({'foo' =>'bar','bar' =>'foo'})
         @item.should be_valid
         @item.destroy
       end

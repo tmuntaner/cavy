@@ -14,7 +14,7 @@ module Cavy
 
     # GET /item_groups/1
     def show
-      @items = @item_group.items.order_by(:position.asc)
+      @items = @item_group.items.order('position asc')
     end
 
     # GET /item_groups/new

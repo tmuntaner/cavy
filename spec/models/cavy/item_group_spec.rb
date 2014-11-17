@@ -78,10 +78,6 @@ module Cavy
       it "should list all guinea pigs" do
         @guineapigs.items.map(&:id).should eq([@pig1.id,@pig2.id,@pig3.id,@pig4.id])
       end
-
-      it "should only list team ghost" do
-        @guineapigs.items_with_key_value('group','team_ghost').map(&:id).should eq([@pig1.id,@pig3.id])
-      end
     end
   end
 end

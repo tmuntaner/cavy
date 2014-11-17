@@ -18,7 +18,7 @@
     = f.text_field :title, class: 'form-control'
   .form-group
     = f.label 'Item Groups', class: 'control-label'
-    - Cavy::ItemGroup.each do |group|
+    - Cavy::ItemGroup.all.each do |group|
       .checkbox
         %input{ 'type' => 'checkbox', 'name' => 'item_section[item_groups][]', 'value' => group.id }= group.title
 

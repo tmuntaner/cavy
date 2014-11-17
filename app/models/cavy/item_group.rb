@@ -1,19 +1,11 @@
 module Cavy
-  class ItemGroup
-
-    include Mongoid::Document
-
-    field :title
-    field :params, type: Array
-
-    belongs_to :item_section, inverse_of: :item_groups
-
-    has_many :items
+  class ItemGroup < ::ActiveRecord::Base
 
     attr_accessor :param_string
 
-    before_save :set_params
+    has_many :items
 
+    before_save :set_params
     validates :title, presence: true
     
     def type

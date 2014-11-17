@@ -11,11 +11,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141114211928) do
+ActiveRecord::Schema.define(version: 20141116193508) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "hstore"
+
+  create_table "cavy_item_groups", force: true do |t|
+    t.string "title"
+    t.string "params", array: true
+  end
+
+  create_table "cavy_item_sections", force: true do |t|
+    t.string  "title"
+    t.integer "item_groups", array: true
+  end
+
+  create_table "cavy_items", force: true do |t|
+    t.hstore  "data"
+    t.integer "position"
+    t.integer "item_group_id"
+  end
 
   create_table "cavy_pages", force: true do |t|
     t.hstore "title"
