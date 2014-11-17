@@ -34,7 +34,7 @@
   
   .form-group
     = f.label :meta_tags, class: 'control-label'
-    = f.text_field :tag_string, value: "#{@page.tags.join(',') if @page.tags != '' and @page.tags != nil}", class: 'form-control'
+    = f.text_field :tag_string, value: "#{@page.tags.join(',') if @page.tags.to_s != ''}", class: 'form-control', id: 'page_tag_string'
 
   .form-group
     = f.label :meta_description, class: 'control-label'
