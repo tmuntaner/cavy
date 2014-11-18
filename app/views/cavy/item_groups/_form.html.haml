@@ -16,9 +16,9 @@
   .form-group
     = f.label :title, class: 'control-label'
     = f.text_field :title, class: 'form-control'
-  
+
   .form-group
     = f.label :params, class: 'control-label'
-    = f.text_field :param_string, value: "#{@item_group.params.join(',') if @item_group.params.to_s != ''}", placeholder: 'add', class: 'form-control', id: 'admin_item_group_param_string'
-  
+    = f.text_field :param_string, value: "#{@item_group.params.join(',') if @item_group.params.to_s != ''}", placeholder: 'add', class: 'form-control', id: 'item_group_param_string'
+
   = f.submit 'Create', class: 'btn btn-primary'
