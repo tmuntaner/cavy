@@ -2,11 +2,11 @@ require_dependency "cavy/application_controller"
 
 module Cavy
   class ItemGroupsController < ApplicationController
-    
+
     before_action :set_item_group, only: [:show, :edit, :update, :destroy]
 
     layout 'cavy/admin_layout'
-    
+
     # GET /item_groups
     def index
       @item_groups = ItemGroup.all

@@ -3,11 +3,11 @@ module Cavy
 
     attr_accessor :param_string
 
-    has_many :items
+    has_many :cavy_items
 
     before_save :set_params
     validates :title, presence: true
-    
+
     def type
       return title.downcase.gsub(' ', '_')
     end
@@ -28,6 +28,6 @@ module Cavy
         self.params = param_string.gsub(/[,][ ]*/, ',').split(',')
       end
     end
-    
+
   end
 end

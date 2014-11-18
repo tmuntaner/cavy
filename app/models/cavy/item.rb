@@ -1,6 +1,8 @@
 module Cavy
   class Item < ::ActiveRecord::Base
-    
+
+    belongs_to :cavy_item_group
+
     def create_params(type,params)
       data = {}
       data['type'] = type
@@ -9,6 +11,6 @@ module Cavy
       end
       self.data = data
     end
-    
+
   end
 end

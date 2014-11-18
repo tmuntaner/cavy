@@ -2,7 +2,7 @@ require_dependency "cavy/application_controller"
 
 module Cavy
   class ItemsController < ApplicationController
-    
+
     before_action :set_item, only: [:show, :edit, :update, :destroy]
     before_action :set_group, only: [:create,:update]
 
