@@ -1,5 +1,5 @@
 .page-header
-  %h1= "Page - #{@page.title}"
+  %h1= "Page - #{@page.localized_title}"
 
   .button-toolbar
     .btn-group
@@ -25,4 +25,4 @@
 
 - if @page.description
   %h3 Meta Description
-  = @page.description 
+  = @page.description

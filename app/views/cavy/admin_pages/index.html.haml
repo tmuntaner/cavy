@@ -1,7 +1,7 @@
 .page-header
   %h1 Website Pages
   .btn-toolbar
-    
+
     - if current_user.role == 'admin'
       .btn-group
         %a{href: admin_new_page_path, class: 'btn btn-primary btn-small', id: 'admin-new-page' } New Page
@@ -17,11 +17,11 @@
         %th Rendered Page
         %th
         - if current_user.dev_team?
-          %th 
+          %th
     %tbody
       - @pages.each do |page|
         %tr
-          %th= link_to page.title, admin_page_path(page.id), id: "page-#{page.id}"
+          %th= link_to page.localized_title, admin_page_path(page.id), id: "page-#{page.id}"
           %th= page.render
           %th= link_to 'edit', admin_edit_page_path(page.id), id: "edit-page-#{page.id}"
           - if current_user.dev_team?

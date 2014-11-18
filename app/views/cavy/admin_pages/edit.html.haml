@@ -16,7 +16,7 @@
           %li= msg
   .form-group
     = f.label :title, class: 'control-label'
-    = f.text_field :title, class: 'form-control'
+    = f.text_field :title, class: 'form-control', value: @page.localized_title
 
   - if current_user.dev_team?
     .form-group
@@ -26,12 +26,12 @@
     .form-group
       = f.label :route, class: 'control-label'
       = f.text_field :route, class: 'form-control'
-  
+
   - @page.data.try(:each) do |key, value|
     .form-group
       = f.label key, class: 'control-label'
       = f.text_field key, class: 'form-control', value: value, name: "page[data][#{key}]", id: "item[data][#{key}]"
-  
+
   .form-group
     = f.label :meta_tags, class: 'control-label'
     = f.text_field :tag_string, value: "#{@page.tags.join(',') if @page.tags.to_s != ''}", class: 'form-control', id: 'page_tag_string'
@@ -39,5 +39,5 @@
   .form-group
     = f.label :meta_description, class: 'control-label'
     = f.text_area :description, class: 'form-control'
-  
+
   = f.submit( 'Submit', class: 'btn btn-primary', id: 'submit_page' )
