@@ -1,16 +1,16 @@
 module Cavy
   class ApplicationController < ActionController::Base
 
+    before_action :check_first_time
+
     before_action :authorize
     before_action :set_locale
     before_action :check_locale
 
-    before_action :check_first_time
-
     helper_method :can_edit?
     helper_method :current_user
     helper_method :signed_in?
-    
+
     delegate :allow?, to: :current_permission
     helper_method :allow?
 
@@ -25,7 +25,7 @@ module Cavy
 
     def check_locale
       # there is a strange issue with redirect of root /en to /en/en, last check is an ugly fix
-      if params[:locale].blank? and I18n.available_locales.count > 1 and request.path_info != "/#{I18n.default_locale}" 
+      if params[:locale].blank? and I18n.available_locales.count > 1 and request.path_info != "/#{I18n.default_locale}"
         redirect_to "/#{I18n.default_locale}#{request.path_info}"
       end
     end
