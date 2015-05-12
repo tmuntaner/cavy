@@ -65,6 +65,8 @@ module Cavy
       else
         if signed_in?
           redirect_to root_url, alert: "I am sorry, you are not authorized for this page."
+        elsif Cavy::User.count == 0
+          return
         else
           session[:return_to] = request.fullpath
           redirect_to admin_signin_path, alert: "Please log in first to view the previous page."
