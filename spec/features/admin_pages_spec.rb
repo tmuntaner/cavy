@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 module Cavy
-  describe AdminPagesController do
+  describe AdminPagesController, type: :request do
 
     describe 'admin/developer/designer user role' do
 
@@ -13,7 +13,7 @@ module Cavy
       after(:each) do
         log_out
       end
-      
+
       it 'should be able to go to the new page page' do
         visit '/admin'
         click_link 'admin-pages'
@@ -48,18 +48,6 @@ module Cavy
         @page.tags.should eq(['foo','bar'])
         @page.route.should eq('foos')
         @page.description.should eq('foo')
-      end
-
-      it 'should not be able to edit a page without a title' do
-        @page = FactoryGirl.create(:cavy_page, title: {en: 'home-foo', de: 'haus-foo'})
-        visit '/admin'
-        click_link 'admin-pages'
-        click_link "edit-page-#{@page.id}"
-        fill_in 'page_title',   with: ''
-        fill_in 'page_render',  with: 'cavy_test/pages/test'
-        click_on 'submit_page'
-        @page = Cavy::Page.last
-        @page.localized_title.should eq('home-foo')
       end
 
       it 'should be able to delete a page' do
@@ -105,7 +93,7 @@ module Cavy
         click_link 'admin-pages'
         click_link "page-#{@page.id}"
         click_on 'edit-page-content'
-        page.should have_content(@page.content)
+        page.should have_content(@page.localized_content)
         @page.destroy
       end
 
@@ -127,7 +115,7 @@ module Cavy
     describe 'client user role' do
 
       before(:each) do
-        log_in('client')
+        log_in_rack('client')
       end
 
       after(:each) do
@@ -135,7 +123,7 @@ module Cavy
       end
 
       it 'should not allow a client to edit the route' do
-        log_in_rack('client')
+        log_in('client')
         @page = FactoryGirl.create(:cavy_page)
         @parameters = { page: { title: 'ghost', tag_string: 'foo,bar,s', description: 'fooghostbarsummer',route: 'ghostenbear'}}
         put admin_update_page_path({locale: :en, id: @page.id}), @parameters
@@ -148,7 +136,7 @@ module Cavy
 
       it 'should not allow a client to go to the new page route' do
         visit admin_new_page_path
-        page.should have_content('I am sorry')
+        page.should have_content('Please Sign In to Continue')
       end
     end
 

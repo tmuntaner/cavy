@@ -4,7 +4,7 @@ module Cavy
   describe 'First Time' do
 
     describe 'welcome screen' do
-      
+
       it 'should redirect users to welcome screen when not going to a FirstTimeController action' do
         visit '/'
         page.should have_content('Welcome')
@@ -29,7 +29,7 @@ module Cavy
     end
 
     describe 'new user screen' do
-      
+
       it "should create a new user" do
         visit '/'
         click_on 'new-user'
@@ -45,7 +45,7 @@ module Cavy
 
         user.name.should eq('foo')
         user.email.should eq('foo@bar.com')
-        user.authenticate('secret').should be_true
+        expect(user.authenticate('secret')).to be_truthy
 
       end
 

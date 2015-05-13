@@ -9,10 +9,6 @@ require "sprockets/railtie"
 require "jquery-rails"
 require "carrierwave"
 # require "turbolinks"
-require "bson"
-require "moped"
-
-Moped::BSON = BSON
 
 Bundler.require(*Rails.groups)
 require "cavy"

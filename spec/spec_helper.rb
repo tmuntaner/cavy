@@ -2,9 +2,7 @@ ENV['RAILS_ENV'] ||= 'test'
 
 require File.expand_path("../dummy/config/environment.rb",  __FILE__)
 
-require 'minitest/autorun'
 require 'rspec/rails'
-require 'rspec/autorun'
 require 'factory_girl_rails'
 require 'capybara/rails'
 require 'capybara/rspec'
@@ -27,13 +25,12 @@ Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
 
 RSpec.configure do |config|
   config.mock_with :rspec
-  #config.use_transactional_fixtures = false
   config.infer_base_class_for_anonymous_controllers = false
   config.order = "random"
   config.include FactoryGirl::Syntax::Methods
+  config.include Capybara::DSL
   config.include AuthMacros
   config.include MailerMacros
-  config.include Capybara::DSL, :example_group => { :file_path => /\bspec\/integration\// }
   config.include Cavy::Engine.routes.url_helpers
   config.before(:each, type: :controller) { @routes = Cavy::Engine.routes }
   config.before(:each, type: :routing)    { @routes = Cavy::Engine.routes }
@@ -41,7 +38,6 @@ RSpec.configure do |config|
   config.before(:each) do
     reset_email
     DatabaseCleaner.strategy = :truncation
-    DatabaseCleaner[:mongoid].strategy = :truncation
     DatabaseCleaner.start
   end
 

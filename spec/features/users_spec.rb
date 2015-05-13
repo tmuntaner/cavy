@@ -8,7 +8,7 @@ module Cavy
       before(:each) do
         @user = FactoryGirl.create(:cavy_user, password: 'secret', password_confirmation: 'secret')
       end
-      
+
       after(:each) do
         @user = FactoryGirl.create(:cavy_user, password: 'secret', password_confirmation: 'secret')
       end
@@ -54,22 +54,22 @@ module Cavy
 
         it "should return true in check for dev team member if developer" do
           log_in('developer')
-          current_user.dev_team?.should be_true
+          current_user.dev_team?.should be_truthy
         end
 
         it "should return true in check for dev team member if designer" do
           log_in('designer')
-          current_user.dev_team?.should be_true
+          current_user.dev_team?.should be_truthy
         end
 
         it "should return true in check for dev team member if admin" do
           log_in('admin')
-          current_user.dev_team?.should be_true
+          current_user.dev_team?.should be_truthy
         end
 
         it "should return false in check for dev team member if client" do
           log_in('client')
-          current_user.dev_team?.should be_false
+          current_user.dev_team?.should be_falsey
         end
       end
 
@@ -80,22 +80,22 @@ module Cavy
 
         it "should return true in check for manager member if developer" do
           log_in('developer')
-          current_user.site_manager?.should be_true
+          expect(current_user.site_manager?).to be_truthy
         end
 
         it "should return true in check for manager member if designer" do
           log_in('designer')
-          current_user.site_manager?.should be_true
+          expect(current_user.site_manager?).to be_truthy
         end
 
         it "should return true in check for manager member if admin" do
           log_in('admin')
-          current_user.site_manager?.should be_true
+          expect(current_user.site_manager?).to be_truthy
         end
 
         it "should return true in check for manager member if client" do
           log_in('client')
-          current_user.site_manager?.should be_true
+          expect(current_user.site_manager?).to be_truthy
         end
       end
 

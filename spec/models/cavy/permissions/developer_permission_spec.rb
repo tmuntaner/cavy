@@ -5,8 +5,8 @@ module Cavy
     subject { Permissions.permission_for(build(:cavy_user, role: 'developer')) }
 
     it "allows anything" do
-      should allow(:any, :thing)
-      should allow_param(:any, :thing)
+      expect allow(:any, :thing)
+      expect allow_param(:any, :thing)
     end
 
   end

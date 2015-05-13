@@ -34,7 +34,7 @@ Cavy::Engine.routes.draw do
       get     '/admin/page/edit/:id',       to: 'admin_pages#edit',         as: 'admin_edit_page'
       get     '/admin/page/data/:id',       to: 'admin_pages#add_data',     as: 'admin_add_page_data'
       post    '/admin/page/data/:id',       to: 'admin_pages#create_data',  as: 'admin_create_page_data'
-      
+
       get     '/admin/sections',            to: 'item_sections#index',      as: 'cavy_item_sections'
       get     '/admin/sections/new',        to: 'item_sections#new',        as: 'cavy_new_item_section'
       get     '/admin/sections/edit/:id',   to: 'item_sections#edit',       as: 'cavy_edit_item_section'

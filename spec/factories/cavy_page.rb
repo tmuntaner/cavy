@@ -5,7 +5,12 @@ FactoryGirl.define do
       de: "seite #{Cavy::Page.count}"
     }}
     render      'cavy/pages/page'
-    content     'foo'
+    content     {{
+      en: 'foo en',
+      de: 'foo de'
+    }}
+    data        {}
+    page_elements {}
     tags        ['foo','bar']
     description "bacon ipsum dolor sit amet #{Cavy::Page.count}"
   end

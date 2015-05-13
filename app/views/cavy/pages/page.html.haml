@@ -1,11 +1,10 @@
 %p#notice= notice
 
-
-%h1= page_element(id: 'title', content: @page.title) if @page
+%h1= @page.localized_title if @page
 
 %p
   %strong Content:
-  = page_element(id: 'content', content: @page.content) if @page
+  = @page.localized_content if @page
 
 %p
   %strong test:

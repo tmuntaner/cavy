@@ -5,52 +5,52 @@ module Cavy
     subject { Permissions.permission_for(build(:cavy_user, role: 'client')) }
 
     it "allows admin pages" do
-      should allow('cavy/admin_pages', :index)
-      should allow('cavy/admin_pages', :show)
-      should allow('cavy/admin_pages', :update)
-      should allow('cavy/admin_pages', :edit)
+      expect allow('cavy/admin_pages', :index)
+      expect allow('cavy/admin_pages', :show)
+      expect allow('cavy/admin_pages', :update)
+      expect allow('cavy/admin_pages', :edit)
 
-      should_not allow('cavy/admin_pages', :new)
-      should_not allow('cavy/admin_pages', :create)
-      should_not allow('cavy/admin_pages', :delete)
-      should_not allow_param(:page, :route)
-      should_not allow_param(:page, :render)
+      expect(subject).not_to allow('cavy/admin_pages', :new)
+      expect(subject).not_to allow('cavy/admin_pages', :create)
+      expect(subject).not_to allow('cavy/admin_pages', :delete)
+      expect(subject).not_to allow_param(:page, :route)
+      expect(subject).not_to allow_param(:page, :render)
     end
 
     it "allows to view pages" do
-      should allow('cavy/pages', :page)
-      should allow('cavy/pages', :edit)
-      should allow('cavy/pages', :update)
+      expect allow('cavy/pages', :page)
+      expect allow('cavy/pages', :edit)
+      expect allow('cavy/pages', :update)
     end
 
-    it "should allow sessions" do
-      should allow('cavy/sessions', :new)
-      should allow('cavy/sessions', :create)
-      should allow('cavy/sessions', :destroy)
+    it "expect allow sessions" do
+      expect allow('cavy/sessions', :new)
+      expect allow('cavy/sessions', :create)
+      expect allow('cavy/sessions', :destroy)
     end
 
-    it "should allow admin panel" do
-      should allow('cavy/admin', :dashboard)
-      should allow('cavy/admin', :users)
-      should allow('cavy/admin', :new_user)
+    it "expect allow admin panel" do
+      expect allow('cavy/admin', :dashboard)
+      expect allow('cavy/admin', :users)
+      expect allow('cavy/admin', :new_user)
     end
 
-    it "should allow mercury" do
-      should allow('cavy/mercury', :edit)
-      should allow('cavy/mercury', :resource)
-      should allow('cavy/mercury', :snippet_options)
-      should allow('cavy/mercury', :snippet_preview)
-      should allow('cavy/mercury', :test_page)
-      should allow('cavy/mercury', :image)
+    it "expect allow mercury" do
+      expect allow('cavy/mercury', :edit)
+      expect allow('cavy/mercury', :resource)
+      expect allow('cavy/mercury', :snippet_options)
+      expect allow('cavy/mercury', :snippet_preview)
+      expect allow('cavy/mercury', :test_page)
+      expect allow('cavy/mercury', :image)
     end
 
-    it "should allow users" do
-      should allow('cavy/users', :index)
-      should allow('cavy/users', :show)
-      should allow('cavy/users', :new)
-      should allow('cavy/users', :edit)
-      should allow('cavy/users', :create)
-      should allow('cavy/users', :update)
+    it "expect allow users" do
+      expect allow('cavy/users', :index)
+      expect allow('cavy/users', :show)
+      expect allow('cavy/users', :new)
+      expect allow('cavy/users', :edit)
+      expect allow('cavy/users', :create)
+      expect allow('cavy/users', :update)
     end
 
   end

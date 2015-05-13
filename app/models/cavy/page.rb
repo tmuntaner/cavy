@@ -2,7 +2,7 @@ module Cavy
   class Page < ::ActiveRecord::Base
 
     validates :route, uniqueness: true
-    
+
     attr_accessor :tag_string, :key, :value
 
     methods = [:make_route, :check_tags, :check_page_elements]
@@ -62,7 +62,7 @@ module Cavy
         self.tags = []
       end
     end
-    
+
     def make_route
       self.route = self.localized_title.gsub(' ', '_').downcase if self.route.to_s == ''
     end

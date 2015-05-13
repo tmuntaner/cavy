@@ -16,7 +16,7 @@ module Cavy
 
     it "should be able to go to the home page" do
       visit '/'
-      page.should have_content(@page.content)
+      page.should have_content(@page.localized_content)
     end
 
     it "should be able to click link to new page from home page" do
@@ -36,7 +36,7 @@ module Cavy
     it "should render content with cavy/pages/render if no other render was specified" do
       visit '/'
       @page.update(render: '')
-      page.should have_content(@page.content)
+      page.should have_content(@page.localized_content)
     end
 
     it "should be able to change render" do

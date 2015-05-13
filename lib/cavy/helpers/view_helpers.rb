@@ -1,6 +1,8 @@
 module Cavy
   module ViewHelpers
 
+    extend self
+
     ##
     # This method makes a editable page element
     #
@@ -8,7 +10,6 @@ module Cavy
     # = Example
     #
     #   page_element(id: 'title', content: @page.title)
-
     def page_element(opts) # :args: id, content
       "<div id='#{opts[:id]}' data-mercury='full'>#{opts[:content]}</div>".html_safe
     end
@@ -20,9 +21,19 @@ module Cavy
     # = Example
     #
     #   localized_page_element(id: 'title', page: @page)
-
     def localized_page_element(opts) # :args: id, page
-      page_element(id: localized_title(opts[:id]), content: opts[:page].page_elements[localized_title(opts[:id])])
+      page_element(id: localized_title_id(opts[:id]), content: localized_text(opts))
+    end
+
+    ##
+    # This method gets a localized text
+    #
+    #
+    # = Example
+    #
+    #   localized_text(id: 'title', page: @page)
+    def localized_text(opts)
+        opts[:page].page_elements[localized_title_id(opts[:id])]
     end
 
     ##
@@ -31,7 +42,6 @@ module Cavy
     # = Example
     #
     #   meta_tags(page)
-
     def meta_tags(page)
       return "<meta content='#{page.description}' name='description'> <meta content='#{page_tags(page)}' name='keywords'>".html_safe
     end
@@ -46,11 +56,11 @@ module Cavy
       params[:format] ||= :json
 
       path = url_for controller: :statistics, action: action
-      
+
       content_tag(:div, :'data-chart' => path, :style => "height: #{height}px;") do
         image_tag('', :size => '24x24', :class => 'spinner')
       end
-      
+
     end
 
     def google_analytics_setup?
@@ -62,7 +72,7 @@ module Cavy
 
     private
 
-    def localized_title(id)
+    def localized_title_id(id)
       "#{id}_#{I18n.locale}"
     end
 

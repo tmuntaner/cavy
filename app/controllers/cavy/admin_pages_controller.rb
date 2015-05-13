@@ -50,7 +50,6 @@ module Cavy
     def update
       @page = Cavy::Page.find(params[:id])
       @page.set_title params[:page][:title]
-
       if @page.update_attributes(params[:page].except(:title))
         redirect_to admin_page_path(@page), notice: 'Page was successfully created.'
       else

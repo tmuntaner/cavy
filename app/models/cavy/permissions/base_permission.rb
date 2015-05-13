@@ -62,7 +62,7 @@ module Cavy
         end
         return hstore_data
       end
-      
+
     end
   end
 end

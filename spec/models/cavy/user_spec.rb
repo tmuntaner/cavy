@@ -2,7 +2,7 @@ require 'spec_helper'
 
 module Cavy
   describe User do
-    
+
     it "should make a user with proper stuff" do
       @user = FactoryGirl.create(:cavy_user)
       @user.should be_valid
@@ -32,12 +32,12 @@ module Cavy
 
       it "should authenticate user with proper password" do
         @user = FactoryGirl.build(:cavy_user, password: 'secret', password_confirmation: 'secret')
-        @user.authenticate('secret').should be_true
+        expect(@user.authenticate('secret')).to be_truthy
       end
 
       it "should not authenticate user with proper password" do
         @user = FactoryGirl.build(:cavy_user, password: 'secret', password_confirmation: 'secret')
-        @user.authenticate('secret1').should_not be_true
+        expect(@user.authenticate('secret1')).not_to be_truthy
       end
     end
 
