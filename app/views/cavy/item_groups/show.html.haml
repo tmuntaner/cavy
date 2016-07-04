@@ -22,13 +22,13 @@
         %th
         %th
     %tbody
-      - @items.each do |item|    
-        = content_tag_for :tr, item do
-          - @item_group.params.each do |param|
-            %td= item.data[param]
-          %td= link_to 'Show', cavy_item_path(item.id)
-          %td= link_to 'Edit', cavy_edit_item_path(item.id)
-          %td= link_to 'Destroy', cavy_delete_item_path(item.id), :method => :delete, :data => { :confirm => 'Are you sure?' }, id: "delete-#{item.id}"
+      - @items.each do |item|
+        %tr
+        - @item_group.params.each do |param|
+          %td= item.data[param]
+        %td= link_to 'Show', cavy_item_path(item.id)
+        %td= link_to 'Edit', cavy_edit_item_path(item.id)
+        %td= link_to 'Destroy', cavy_delete_item_path(item.id), :method => :delete, :data => { :confirm => 'Are you sure?' }, id: "delete-#{item.id}"
 
 - else
   You don't have any items in this group yet.

@@ -16,8 +16,7 @@ gemspec
 gem 'simplecov',        require: false, :group => :test
 gem 'coveralls',        require: false
 gem 'jquery-ui-rails'
-gem 'rails',            '~> 4.2.0'
-gem 'rspec-rails',      :group => [:test, :development]
+gem 'rspec-rails',      :group => [:test]
 
 platform :ruby do
   gem 'better_errors'

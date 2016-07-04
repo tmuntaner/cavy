@@ -1,14 +1,15 @@
 require File.expand_path('../boot', __FILE__)
 
 # Pick the frameworks you want:
+require 'rails/all'
 # require 'krypt/ossl'
-require "active_record/railtie"
-require "action_controller/railtie"
-require "action_mailer/railtie"
-require "sprockets/railtie"
+#require "active_record/railtie"
+#require "action_controller/railtie"
+#require "action_mailer/railtie"
+#require "sprockets/railtie"
 require "jquery-rails"
 require "carrierwave"
-# require "turbolinks"
+#require "turbolinks"
 
 Bundler.require(*Rails.groups)
 require "cavy"

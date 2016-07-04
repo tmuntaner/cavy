@@ -37,7 +37,7 @@ RSpec.configure do |config|
 
   config.before(:each) do
     reset_email
-    DatabaseCleaner.strategy = :truncation
+    DatabaseCleaner.clean_with :truncation, except: [ActiveRecord::InternalMetadata.table_name]
     DatabaseCleaner.start
   end
 
