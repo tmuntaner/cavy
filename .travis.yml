@@ -9,7 +9,5 @@ before_script:
   - psql -c 'create database cavy_test;' -U postgres
   - RAILS_ENV=test bundle exec rake db:migrate
 script: bundle exec rspec spec
-services:
-  - mongodb
 addons:
   postgresql: "9.3"
