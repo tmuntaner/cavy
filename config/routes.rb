@@ -13,9 +13,6 @@ Cavy::Engine.routes.draw do
 
       resources :users
 
-      get     '/admin/dash/visitor_history',    to: 'statistics#visitor_history'
-      get     '/admin/dash/page_view_history',  to: 'statistics#page_view_history'
-
       get     '/mercury/:type/:resource',   to: 'mercury#resource'
       post    '/mercury/image',             to: 'mercury#image',            as: 'mercury_image'
 

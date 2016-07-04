@@ -43,7 +43,7 @@ module Cavy
     #
     #   meta_tags(page)
     def meta_tags(page)
-      return "<meta content='#{page.description}' name='description'> <meta content='#{page_tags(page)}' name='keywords'>".html_safe
+      "<meta content='#{page.description}' name='description'> <meta content='#{page_tags(page)}' name='keywords'>".html_safe
     end
 
     ##
@@ -61,13 +61,6 @@ module Cavy
         image_tag('', :size => '24x24', :class => 'spinner')
       end
 
-    end
-
-    def google_analytics_setup?
-      if Cavy.google_analytics_username != ' ' || Cavy.google_analytics_password != ' ' || Cavy.google_analytics_property_id != ' '
-        return true
-      end
-      return false
     end
 
     private
