@@ -1,6 +1,6 @@
 def cavy_locale_scope
   if I18n.available_locales.count > 1
-    return "(:locale)"
+    return '(:locale)'
   else
     return ''
   end
