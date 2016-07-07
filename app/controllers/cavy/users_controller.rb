@@ -1,9 +1,9 @@
-require_dependency "cavy/application_controller"
+require_dependency 'cavy/application_controller'
 
 module Cavy
   class UsersController < ApplicationController
 
-    before_action :set_user, only: [:show, :edit, :update, :destroy]
+    before_action :set_user, only: [:show, :edit, :update]
     layout 'cavy/admin_layout'
 
     def index
@@ -38,20 +38,15 @@ module Cavy
       end
     end
 
-    # def destroy
-    #   @user.destroy
-    #   redirect_to users_url, notice: 'User was successfully destroyed.'
-    # end
-
     private
 
-      def set_user
-        @user = User.find(params[:id])
-      end
+    def set_user
+      @user = User.find(params[:id])
+    end
 
-      def user_params
-        @role = params[:user][:role]
-        params.require(:user).permit(:email, :password, :password_confirmation, :name, :role)
-      end
+    def user_params
+      @role = params[:user][:role]
+      params.require(:user).permit(:email, :password, :password_confirmation, :name, :role)
+    end
   end
 end

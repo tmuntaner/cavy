@@ -26,8 +26,8 @@ module Cavy
         end
       end
 
-      html_class  = active    ? 'active'    : nil
-      html_id     = opts[:id] ?  opts[:id]  : nil
+      html_class = active ? 'active' : nil
+      html_id = opts[:id] ? opts[:id] : nil
 
       make_link(href, text, class: html_class, id: html_id)
     end

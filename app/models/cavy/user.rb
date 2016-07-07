@@ -7,11 +7,11 @@ module Cavy
     validates :name, presence: true
     validates :password, presence: true, on: :create
 
-    before_create { generate_token(:auth_token)}
+    before_create { generate_token(:auth_token) }
 
-    @@dev_team = ['developer','designer','admin']
+    @@dev_team = ['developer', 'designer', 'admin']
     @@managers = @@dev_team + ['client']
-    
+
     def dev_team?
       return true if @@dev_team.include?(self.role)
       false

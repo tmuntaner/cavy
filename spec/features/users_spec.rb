@@ -13,12 +13,12 @@ module Cavy
         @user = FactoryGirl.create(:cavy_user, password: 'secret', password_confirmation: 'secret')
       end
 
-      it "should allow a user to go to the signin page" do
+      it 'should allow a user to go to the signin page' do
         visit '/admin/signin'
         page.driver.status_code.should eq(200)
       end
 
-      it "should allow a user to sign into the website" do
+      it 'should allow a user to sign into the website' do
         visit '/admin/signin'
         @user = FactoryGirl.create(:cavy_user, password: 'secret', password_confirmation: 'secret')
         fill_in 'user-email', with: @user.email
@@ -27,7 +27,7 @@ module Cavy
         page.should_not have_content('Email or password is invalid')
       end
 
-      it "should not allow a user to sign in with an invalid password" do
+      it 'should not allow a user to sign in with an invalid password' do
         visit '/admin/signin'
         @user = FactoryGirl.create(:cavy_user, password: 'secret', password_confirmation: 'secret')
         fill_in 'user-email', with: 'foo@bar.com'
@@ -38,7 +38,7 @@ module Cavy
     end
 
     describe 'sign out process' do
-      it "should sign out signed in users" do
+      it 'should sign out signed in users' do
         log_in('admin')
         visit admin_dashboard_path
         click_link 'log-out'
@@ -52,22 +52,22 @@ module Cavy
           log_out
         end
 
-        it "should return true in check for dev team member if developer" do
+        it 'should return true in check for dev team member if developer' do
           log_in('developer')
           current_user.dev_team?.should be_truthy
         end
 
-        it "should return true in check for dev team member if designer" do
+        it 'should return true in check for dev team member if designer' do
           log_in('designer')
           current_user.dev_team?.should be_truthy
         end
 
-        it "should return true in check for dev team member if admin" do
+        it 'should return true in check for dev team member if admin' do
           log_in('admin')
           current_user.dev_team?.should be_truthy
         end
 
-        it "should return false in check for dev team member if client" do
+        it 'should return false in check for dev team member if client' do
           log_in('client')
           current_user.dev_team?.should be_falsey
         end
@@ -78,22 +78,22 @@ module Cavy
           log_out
         end
 
-        it "should return true in check for manager member if developer" do
+        it 'should return true in check for manager member if developer' do
           log_in('developer')
           expect(current_user.site_manager?).to be_truthy
         end
 
-        it "should return true in check for manager member if designer" do
+        it 'should return true in check for manager member if designer' do
           log_in('designer')
           expect(current_user.site_manager?).to be_truthy
         end
 
-        it "should return true in check for manager member if admin" do
+        it 'should return true in check for manager member if admin' do
           log_in('admin')
           expect(current_user.site_manager?).to be_truthy
         end
 
-        it "should return true in check for manager member if client" do
+        it 'should return true in check for manager member if client' do
           log_in('client')
           expect(current_user.site_manager?).to be_truthy
         end
@@ -149,10 +149,6 @@ module Cavy
       end
 
     end
-
-    # describe 'sign up process' do
-    #   it "should allow a user to sign up to"
-    # end
 
   end
 end

@@ -25,8 +25,8 @@ module Cavy
         visit '/admin'
         click_link 'admin-pages'
         click_link 'admin-new-page'
-        fill_in 'page_title',   with: 'foobar'
-        fill_in 'page_render',  with: 'cavy_test/pages/test'
+        fill_in 'page_title', with: 'foobar'
+        fill_in 'page_render', with: 'cavy_test/pages/test'
         click_on 'submit_page'
         @page = Cavy::Page.last
         @page.render.should eq('cavy_test/pages/test')
@@ -37,15 +37,15 @@ module Cavy
         visit '/admin'
         click_link 'admin-pages'
         click_link "edit-page-#{@page.id}"
-        fill_in 'page_title',   with: 'foobar'
-        fill_in 'page_render',  with: 'cavy_test/pages/test'
-        fill_in 'page_tag_string',    with: 'foo,bar'
-        fill_in 'page_route',   with: 'foos'
+        fill_in 'page_title', with: 'foobar'
+        fill_in 'page_render', with: 'cavy_test/pages/test'
+        fill_in 'page_tag_string', with: 'foo,bar'
+        fill_in 'page_route', with: 'foos'
         fill_in 'page_description', with: 'foo'
         click_on 'submit_page'
         @page = Cavy::Page.find(@page.id)
         @page.render.should eq('cavy_test/pages/test')
-        @page.tags.should eq(['foo','bar'])
+        @page.tags.should eq(%w(foo bar))
         @page.route.should eq('foos')
         @page.description.should eq('foo')
       end
@@ -125,10 +125,10 @@ module Cavy
       it 'should not allow a client to edit the route' do
         log_in('client')
         @page = FactoryGirl.create(:cavy_page)
-        @parameters = { page: { title: 'ghost', tag_string: 'foo,bar,s', description: 'fooghostbarsummer',route: 'ghostenbear'}}
+        @parameters = {page: {title: 'ghost', tag_string: 'foo,bar,s', description: 'fooghostbarsummer', route: 'ghostenbear'}}
         put admin_update_page_path({locale: :en, id: @page.id}), @parameters
         @page = Cavy::Page.last
-        @page.tags.should eq(['foo','bar','s'])
+        @page.tags.should eq(%w(foo bar s))
         @page.description.should eq('fooghostbarsummer')
         @page.route.should_not eq('ghostenbear')
         @page.destroy

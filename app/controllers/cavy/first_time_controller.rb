@@ -1,18 +1,15 @@
-require_dependency "cavy/application_controller"
+require_dependency 'cavy/application_controller'
 
 module Cavy
   class FirstTimeController < ApplicationController
 
     layout 'cavy/first_time'
-    
     before_action :check_if_first_time
-    
-    def new_user
 
+    def new_user
     end
 
     def welcome
-
     end
 
     def create_user
@@ -32,7 +29,7 @@ module Cavy
     end
 
     def check_if_first_time
-      redirect_to( root_path ) if Cavy::User.count > 0
+      redirect_to(root_path) if Cavy::User.count > 0
     end
 
   end

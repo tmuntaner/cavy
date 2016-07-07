@@ -30,7 +30,7 @@ module Cavy
 
     describe 'new user screen' do
 
-      it "should create a new user" do
+      it 'should create a new user' do
         visit '/'
         click_on 'new-user'
         page.should have_content('Create a New User')

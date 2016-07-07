@@ -42,7 +42,7 @@ module Cavy
         elsif @allowed_params
           @allowed_params.each do |resource, attributes|
             if params[resource].respond_to? :permit
-              hstore_data = get_hstore_data(attributes,params[resource])
+              hstore_data = get_hstore_data(attributes, params[resource])
               params[resource] = params[resource].permit(*attributes)
               params[resource].merge!(hstore_data)
               params.permit!
@@ -53,7 +53,7 @@ module Cavy
 
       private
 
-      def get_hstore_data(attributes,resource)
+      def get_hstore_data(attributes, resource)
         hstore_data = {}
         attributes.each do |attribute|
           if attribute.class == Hash and resource[attribute.keys.first]

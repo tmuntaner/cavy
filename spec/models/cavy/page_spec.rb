@@ -6,8 +6,8 @@ module Cavy
     describe 'page elements' do
       it 'should be able to add page content' do
         I18n.locale = :en
-        page = Cavy::Page.create(title: {en: 'foo bar', de: 'das foo bar'}, content: {en: 'bar', de: 'das bar'})
-        elements = {title: 'bar', content: 'foo', 'page' => {'value' => 'element'}}
+        page = Cavy::Page.create('title' => {'en' => 'foo bar', 'de' => 'das foo bar'}, 'content' => {'en' => 'bar', 'de' => 'das bar'})
+        elements = {'title' => 'bar', 'content' => 'foo', 'page' => {'value' => 'element'}}
         page.update_elements(elements)
         page = Cavy::Page.find(page.id)
         page.localized_title.should eq('foo bar')
@@ -16,8 +16,8 @@ module Cavy
       end
       it 'should not replace past page content when saving, just override' do
         I18n.locale = :en
-        page = Cavy::Page.create(title: {en: 'foo bar', de: 'das foo bar'}, content: {en: 'bar', de: 'das bar'}, page_elements: {'foo' => 'foo'})
-        elements = {title: 'bar', content: 'foo', 'bar' => {'value' => 'bar'}}
+        page = Cavy::Page.create('title' => {'en' => 'foo bar', 'de' => 'das foo bar'}, 'content' => {'en' => 'bar', 'de' => 'das bar'}, 'page_elements' => {'foo' => 'foo'})
+        elements = {'title' => 'bar', 'content' => 'foo', 'bar' => {'value' => 'bar'}}
         page.update_elements(elements)
         page = Cavy::Page.find(page.id)
         page.localized_title.should eq('foo bar')
@@ -115,27 +115,27 @@ module Cavy
         end
 
         it 'should accept an array of tags' do
-          @page = Page.create(title: {en: 'foo bar', de: 'das foo bar'}, tags: ['Ruby', 'Rainbows'])
-          @page.tags.should eq(['Ruby','Rainbows'])
+          @page = Page.create(title: {en: 'foo bar', de: 'das foo bar'}, tags: %w(Ruby Rainbows))
+          @page.tags.should eq(%w(Ruby Rainbows))
           @page.should be_valid
           @page.destroy
         end
 
         it 'should accept an string of tags' do
           @page = Page.create(title: {en: 'foo bar', de: 'das foo bar'}, tag_string: 'Ruby,Rainbows')
-          @page.tags.should eq(['Ruby','Rainbows'])
+          @page.tags.should eq(%w(Ruby Rainbows))
           @page.should be_valid
           @page.destroy
         end
       end
       describe 'description' do
-        it "should allow a page to have a description" do
+        it 'should allow a page to have a description' do
           @page = Page.create(title: {en: 'foo bar', de: 'das foo bar'}, description: 'foobar')
           @page.description.should eq('foobar')
           @page.should be_valid
           @page.destroy
         end
-        it "should allow a page to have no description" do
+        it 'should allow a page to have no description' do
           @page = Page.create(title: {en: 'foo bar', de: 'das foo bar'}, description: '')
           @page.should be_valid
           @page.destroy
@@ -151,7 +151,7 @@ module Cavy
 
       it 'should accept a key and value to update data' do
         @page = Page.create(title: {en: 'foo bar', de: 'das foo bar'}, data: {name: 'ruby rainbows'})
-        @page.set_key_value('foo','bar')
+        @page.set_key_value('foo', 'bar')
         @page.data['foo'].should eq('bar')
         @page.data['name'].should eq('ruby rainbows')
       end

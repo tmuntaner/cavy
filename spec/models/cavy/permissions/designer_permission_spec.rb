@@ -1,10 +1,10 @@
-require "spec_helper"
+require 'spec_helper'
 
 module Cavy
   describe Permissions::DesignerPermission do
     subject { Permissions.permission_for(build(:cavy_user, role: 'designer')) }
 
-    it "allows anything" do
+    it 'allows anything' do
       expect allow(:any, :thing)
       expect allow_param(:any, :thing)
     end

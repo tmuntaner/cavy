@@ -16,7 +16,7 @@ module Cavy
       self.title[I18n.locale.to_s].to_s
     end
 
-    def set_title ( new_title )
+    def set_title (new_title)
       self.title[I18n.locale.to_s] = new_title
     end
 
@@ -24,25 +24,25 @@ module Cavy
       self.content[I18n.locale.to_s].to_s
     end
 
-    def set_content ( new_content )
+    def set_content (new_content)
       self.content[I18n.locale.to_s] = new_content
     end
 
     def update_elements(params)
       update_values = {page_elements: {}}
 
-      self.page_elements.try(:each) do |key,value|
+      self.page_elements.try(:each) do |key, value|
         update_values[:page_elements][key] = value
       end
 
-      params.each do |key,value|
+      params.each do |key, value|
         update_values[:page_elements][key] = value['value']
       end
 
       self.update(update_values) if update_values != {}
     end
 
-    def set_key_value(key,value)
+    def set_key_value(key, value)
       self.data = {} if self.data == nil
       self.data[key] = value
     end

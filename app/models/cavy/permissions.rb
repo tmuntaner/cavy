@@ -14,6 +14,6 @@ module Cavy
         ClientPermission.new(user)
       end
     end
-    
+
   end
 end

@@ -13,18 +13,18 @@ module Cavy
         log_out
       end
 
-      it "should be able to go to the home page" do
+      it 'should be able to go to the home page' do
         visit '/admin'
         page.should have_content('Website Dashboard')
       end
 
-      it "should be able to click the hompage link in sidebar" do
+      it 'should be able to click the hompage link in sidebar' do
         visit '/admin'
         click_link 'admin-overview'
         page.should have_content('Website Dashboard')
       end
 
-      it "should be able to go to the list of pages" do
+      it 'should be able to go to the list of pages' do
         visit '/admin'
         click_link 'admin-users'
         page.should have_content('Listing Users')
@@ -40,8 +40,8 @@ module Cavy
       after(:each) do
         @user.destroy
       end
-      
-      it "should prevent a non signed in user from reaching the admin page and send it to sign in" do
+
+      it 'should prevent a non signed in user from reaching the admin page and send it to sign in' do
         visit '/admin'
         page.should have_content('Please log in first to view the previous page.')
       end

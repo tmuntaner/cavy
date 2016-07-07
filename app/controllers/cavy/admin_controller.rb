@@ -1,4 +1,4 @@
-require_dependency "cavy/application_controller"
+require_dependency 'cavy/application_controller'
 
 module Cavy
   class AdminController < ApplicationController
@@ -9,5 +9,6 @@ module Cavy
       @users = Cavy::User.all
       @pages = Cavy::Page.all
     end
+
   end
 end

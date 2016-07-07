@@ -9,14 +9,14 @@ module Cavy
     validates :title, presence: true
 
     def type
-      return title.downcase.gsub(' ', '_')
+      title.downcase.gsub(' ', '_')
     end
 
     def items
       Cavy::Item.where(item_group_id: id)
     end
 
-    def items_with_key_value(key,value)
+    def items_with_key_value(key, value)
       item_group = Cavy::ItemGroup.find(id)
       item_group.items.where("data.#{key}" => value)
     end

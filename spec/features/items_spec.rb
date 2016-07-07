@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe 'items'  do
-  
-  describe "show" do
+describe 'items' do
+
+  describe 'show' do
 
     before(:each) do
       log_in('admin')
@@ -14,14 +14,14 @@ describe 'items'  do
       @item.destroy
     end
 
-    it "should be able to show an item" do
+    it 'should be able to show an item' do
       @item.update(data: {name: 'name'})
       visit cavy_item_path(locale: :en, id: @item.id)
       page.should have_content(@item.data['name'])
     end
   end
 
-  describe "new" do
+  describe 'new' do
     before(:each) do
       log_in('admin')
       @group = create(:cavy_item_group)
@@ -32,7 +32,7 @@ describe 'items'  do
       @group.destroy
     end
 
-    it "should be able to create a new item" do
+    it 'should be able to create a new item' do
       visit cavy_item_group_path(locale: :en, id: @group.id)
       click_link('new-item')
       fill_in 'item[data][name]', with: 'ruby rainbows'
@@ -43,7 +43,7 @@ describe 'items'  do
     end
   end
 
-  describe "edit" do
+  describe 'edit' do
     before(:each) do
       log_in('admin')
       @group = create(:cavy_item_group)
@@ -54,7 +54,7 @@ describe 'items'  do
       @group.destroy
     end
 
-    it "should be able to edit an item" do
+    it 'should be able to edit an item' do
       visit cavy_item_group_path(locale: :en, id: @group.id)
       click_link('new-item')
       fill_in 'item[data][name]', with: 'ruby rainbows'
@@ -69,7 +69,7 @@ describe 'items'  do
     end
   end
 
-  describe "destroy" do
+  describe 'destroy' do
     before(:each) do
       log_in('admin')
       @group = create(:cavy_item_group)
@@ -80,7 +80,7 @@ describe 'items'  do
       @group.destroy
     end
 
-    it "should be able to edit an item" do
+    it 'should be able to edit an item' do
       visit cavy_item_group_path(locale: :en, id: @group.id)
       click_link('new-item')
       fill_in 'item[data][name]', with: 'ruby rainbows'

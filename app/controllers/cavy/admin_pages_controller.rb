@@ -15,7 +15,7 @@ module Cavy
 
     def create_data
       @page = Cavy::Page.find(params[:id])
-      @page.set_key_value(params[:page][:key],params[:page][:value])
+      @page.set_key_value(params[:page][:key], params[:page][:value])
       if @page.save
         redirect_to admin_page_path(@page.id), notice: 'Page was successfully created.'
       else
@@ -63,10 +63,10 @@ module Cavy
 
     private
 
-      def page_params
-        # TODO Find a way to use hstore with strong parameters
-        # params.require(:page).permit(:title, :render, :route, :tag_string, :description, :key, :value, :data)
-      end
+    def page_params
+      # TODO Find a way to use hstore with strong parameters
+      # params.require(:page).permit(:title, :render, :route, :tag_string, :description, :key, :value, :data)
+    end
 
   end
 end

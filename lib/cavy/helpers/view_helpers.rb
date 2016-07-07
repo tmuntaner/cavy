@@ -33,7 +33,7 @@ module Cavy
     #
     #   localized_text(id: 'title', page: @page)
     def localized_text(opts)
-        opts[:page].page_elements[localized_title_id(opts[:id])]
+      opts[:page].page_elements[localized_title_id(opts[:id])]
     end
 
     ##

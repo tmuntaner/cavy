@@ -14,9 +14,9 @@ module Cavy
       it 'should give a localized page element div' do
         page = create(:cavy_page)
         I18n.locale = :en
-        page.update_elements('title_en' => {'value' => 'foobar_en'})
+        page.update_elements(title_en: {'value' => 'foobar_en'})
         I18n.locale = :de
-        page.update_elements('title_de' => {'value' => 'foobar_de'})
+        page.update_elements(title_de: {'value' => 'foobar_de'})
         element = dummy_class.localized_page_element(id: 'title', page: page)
         element.should eq("<div id='title_de' data-mercury='full'>foobar_de</div>")
         I18n.locale = :en
@@ -27,7 +27,7 @@ module Cavy
 
     describe 'seo' do
       it 'should give proper seo tags for a page' do
-        page = Cavy::Page.create(title: {en: 'foo bar', de: 'das foo bar'}, tags: ['ghost', 'summer'], description: 'first piggies')
+        page = Cavy::Page.create(title: {en: 'foo bar', de: 'das foo bar'}, tags: %w(ghost summer), description: 'first piggies')
         element = dummy_class.meta_tags(page)
         element.should eq("<meta content='first piggies' name='description'> <meta content='ghost, summer' name='keywords'>")
         page.destroy

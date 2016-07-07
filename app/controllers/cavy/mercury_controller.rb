@@ -29,8 +29,7 @@ module Cavy
     def image
       uploader = ImageUploader.new
       uploader.store!(params[:image][:image])
-      # uploader.resize(params[:images])
-      render json: {image: {url: uploader.url} }
+      render json: {image: {url: uploader.url}}
     end
 
   end

@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.name = 'cavy'
   s.version = Cavy::VERSION
   s.authors = ['Thomas Muntaner', 'Susanne Schmidt']
-  s.email = ['thomas.muntaner@rubyrainbows.com', 'susanne.schmidt@rubyrainbows.com']
+  s.email = %w(thomas.muntaner@rubyrainbows.com susanne.schmidt@rubyrainbows.com)
   s.homepage = 'http://www.rubyrainbows.com'
   s.summary = 'A simple CMS for rails'
   s.description = 'A cms bootstrap for localized client websites.'
