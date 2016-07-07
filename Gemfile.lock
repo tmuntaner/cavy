@@ -231,6 +231,7 @@ DEPENDENCIES
   launchy
   meta_request
   pry
+  rails (~> 5.0.0)
   rspec-rails
   simplecov
 
