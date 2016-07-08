@@ -13,10 +13,7 @@ Cavy::Engine.routes.draw do
 
       resources :users
 
-      get     '/mercury/:type/:resource',   to: 'mercury#resource'
-      post    '/mercury/image',             to: 'mercury#image',            as: 'mercury_image'
-
-      get     '/first_time/welcome',        to: 'first_time#welcome',       as: "cavy_first_time_welcome"
+      get     '/first_time/welcome',        to: 'first_time#welcome',       as: 'cavy_first_time_welcome'
       get     '/first_time/user',           to: 'first_time#new_user',      as: 'cavy_first_time_new_user'
       post    '/first_time/user',           to: 'first_time#create_user',   as: 'cavy_first_time_create_user'
 

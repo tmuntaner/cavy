@@ -9,11 +9,7 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- *= require cavy/bootstrap
- *= require cavy/navbar
- *= require cavy/pages
- *= require cavy/token
- *= require cavy/sidebar
- *= require cavy/first_time
- *= require cavy/session
+ *= require cavy/app
+ *= require cavy/patches
  */
+

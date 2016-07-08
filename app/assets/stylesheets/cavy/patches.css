@@ -1,0 +1,4 @@
+/**
+ * TODO: Remove patch with foundation 6.3.0
+ */
+.top-bar .top-bar-left, .top-bar .top-bar-right { flex: none; }

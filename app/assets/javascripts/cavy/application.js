@@ -10,14 +10,9 @@
 // WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
 // GO AFTER THE REQUIRES BELOW.
 //
-//= require jquery
-//= require jquery_ujs
-//= require jquery-ui/sortable
-// require turbolinks
-//= require cavy/charts
-//= require cavy/pages
-//= require cavy/token
-//= require cavy/tokens
-//= require cavy/hstore
-//= require cavy/sortable
-//= require cavy/bootstrap
+//= require cavy/jquery
+//= require cavy/foundation
+
+$(document).ready(function () {
+    $(document).foundation();
+});

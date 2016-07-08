@@ -12,3 +12,8 @@ spec/dummy/public/uploads/
 *.gem
 coverage/*
 rdoc/*
+
+.DS_Store
+bower_components
+node_modules
+npm-debug.log

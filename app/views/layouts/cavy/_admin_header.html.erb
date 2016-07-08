@@ -1,0 +1,57 @@
+<div class="top-bar">
+
+  <div class="top-bar-left">
+    <ul class="dropdown menu" data-dropdown-menu>
+      <li class="menu-text">
+        <%= Cavy.title || 'Cavy' %>
+      </li>
+      <li>
+        <%= link_to 'Dashboard', admin_dashboard_path, id: 'admin-overview' %>
+      </li>
+      <% if current_user and current_user.role == 'admin' %>
+          <li>
+            <a>Admin</a>
+            <ul class="menu vertical">
+              <li>
+                <%= link_to 'Item Groups', item_groups_path, id: 'admin-item-groups' %>
+              </li>
+              <li>
+                <%= link_to 'Item Sections', cavy_item_sections_path, id: 'admin-item-sections' %>
+              </li>
+              <% if current_user&.site_manager? %>
+                  <li>
+                    <%= link_to 'Users', cavy_admin_users_path, id: 'admin-users' %>
+                  </li>
+              <% end %>
+            </ul>
+          </li>
+      <% end %>
+      <li>
+        <%= link_to 'Pages', admin_pages_path, id: 'admin-pages' %>
+      </li>
+      <% Cavy::ItemSection.all.each do |section| %>
+          <li>
+            <%= link_to section.title, cavy_item_section_path(section.id) %>
+          </li>
+      <% end %>
+    </ul>
+  </div>
+
+  <div class="top-bar-right">
+    <ul class="dropdown menu" data-dropdown-menu>
+      <% if current_user %>
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+              <%= current_user.name %>
+            </a>
+            <ul class="menu vertical">
+              <li>
+                <%= link_to 'Sign Out', admin_destroy_session_path, method: :delete, id: 'log-out' %>
+              </li>
+            </ul>
+          </li>
+      <% end %>
+    </ul>
+  </div>
+
+</div>
