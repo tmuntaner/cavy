@@ -21,7 +21,11 @@ module Cavy
     end
 
     def localized_content
-      self.content[I18n.locale.to_s].to_s
+      if self.content
+        self.content[I18n.locale.to_s].to_s
+      else
+        ''
+      end
     end
 
     def set_content (new_content)

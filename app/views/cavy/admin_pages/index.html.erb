@@ -1,0 +1,46 @@
+<div class="page-header">
+  <h1>Website Pages</h1>
+  <div class="button-group">
+    <% if current_user.role == 'admin' %>
+        <a class="button" href="<%= admin_new_page_path %>" id="admin-new-page">New Page</a>
+    <% end %>
+  </div>
+</div>
+
+<% if @pages.count >= 1 %>
+  <table>
+    <thead>
+      <tr>
+        <th>Webpage</th>
+        <th>Rendered Page</th>
+        <th></th>
+        <% if current_user.dev_team? %>
+          <th></th>
+        <% end %>
+      </tr>
+    </thead>
+    <tbody>
+      <% @pages.each do |page| %>
+        <tr>
+          <th>
+            <%= link_to page.localized_title, admin_page_path(page.id), id: "page-#{page.id}" %>
+          </th>
+          <th>
+            <%= page.render %>
+          </th>
+          <th>
+            <%= link_to 'Edit Page', admin_edit_page_path(page.id), id: "edit-page-#{page.id}" %>
+          </th>
+          <% if current_user.dev_team? %>
+            <th>
+              <%= link_to 'destroy', admin_delete_page_path(page.id), id: "delete-page-#{page.id}", method: :delete, data: {confirm: "Are you sure you want to delete the page?"} %>
+            </th>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <b>You don't have any pages yet.</b>
+<% end %>
+
