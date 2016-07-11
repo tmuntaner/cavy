@@ -10,24 +10,29 @@
   <%= stylesheet_link_tag 'cavy/application', media: 'all' %>
   <%= javascript_include_tag 'cavy/application' %>
   <%= csrf_meta_tags %>
-
 </head>
-
 <body>
-<%= render 'layouts/cavy/admin_header' %>
-<div class="row">
-  <div class="large-12 columns">
-    <%= yield %>
+
+<header>
+  <%= render 'layouts/cavy/admin_header' %>
+</header>
+
+<div class="content">
+  <div class="row">
+    <div class="large-12 columns">
+      <%= yield %>
+    </div>
   </div>
 </div>
 
-<div class="row">
-  <div class="large-12 columns">
-    <footer>
+<footer>
+  <div class="row">
+    <div class="large-12 columns">
       &copy; Ruby Rainbows <%= Time.now.year %>
-    </footer>
 
+    </div>
   </div>
-</div>
+</footer>
+
 </body>
 </html>
