@@ -1,46 +1,52 @@
 <div class="page-header">
   <h1>Website Pages</h1>
-  <div class="button-group">
+  <div class="small button-group">
     <% if current_user.role == 'admin' %>
-        <a class="button" href="<%= admin_new_page_path %>" id="admin-new-page">New Page</a>
+        <a class="button" href="<%= admin_new_page_path %>" id="admin-new-page">
+          <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+          New Page
+        </a>
     <% end %>
   </div>
 </div>
 
 <% if @pages.count >= 1 %>
-  <table>
-    <thead>
-      <tr>
-        <th>Webpage</th>
-        <th>Rendered Page</th>
-        <th></th>
-        <% if current_user.dev_team? %>
-          <th></th>
-        <% end %>
-      </tr>
-    </thead>
-    <tbody>
+    <div class="row small-up-1 medium-up-2 large-up-4">
       <% @pages.each do |page| %>
-        <tr>
-          <th>
-            <%= link_to page.localized_title, admin_page_path(page.id), id: "page-#{page.id}" %>
-          </th>
-          <th>
-            <%= page.render %>
-          </th>
-          <th>
-            <%= link_to 'Edit Page', admin_edit_page_path(page.id), id: "edit-page-#{page.id}" %>
-          </th>
-          <% if current_user.dev_team? %>
-            <th>
-              <%= link_to 'destroy', admin_delete_page_path(page.id), id: "delete-page-#{page.id}", method: :delete, data: {confirm: "Are you sure you want to delete the page?"} %>
-            </th>
-          <% end %>
-        </tr>
+          <div class="page-list column">
+
+            <div class="page-list-title">
+              <a href="<%= admin_page_path(page.id) %>" id="page-<%= page.id %>"><%= page.localized_title %></a>
+            </div>
+
+            <ul class="menu vertical">
+              <li>
+                <a href="<%= cavy_edit_page_path(page.route) %>" id="edit-page-content-<%= page.id %>">
+                  <i class="fa fa-file-text" aria-hidden="true"></i>
+                  <span>Edit Content</span>
+                </a>
+              </li>
+              <% if current_user.dev_team? %>
+                  <li>
+                    <a href="<%= admin_edit_page_path(page.id) %>" id="edit-page-<%= page.id %>">
+                      <i class="fa fa-cog" aria-hidden="true"></i>
+                      Edit Settings
+                    </a>
+                  </li>
+              <% end %>
+              <% if current_user.dev_team? %>
+                  <li>
+                    <a href="<%= admin_add_page_data_path(page.id) %>" id="edit-page-data-<%= page.id %>">
+                      <i class="fa fa-database" aria-hidden="true"></i>
+                      Edit Data
+                    </a>
+                  </li>
+              <% end %>
+            </ul>
+          </div>
       <% end %>
-    </tbody>
-  </table>
+    </div>
 <% else %>
-  <b>You don't have any pages yet.</b>
+    <b>You don't have any pages yet.</b>
 <% end %>
 

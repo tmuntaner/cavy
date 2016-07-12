@@ -6,28 +6,46 @@
         <%= Cavy.title || 'Cavy' %>
       </li>
       <li>
-        <%= link_to 'Dashboard', admin_dashboard_path, id: 'admin-overview' %>
+        <a href="<%= admin_dashboard_path %>" id="admin-overview">
+          <i class="fa fa-tachometer" aria-hidden="true"></i>
+          Dashboard
+        </a>
       </li>
       <% if current_user and current_user.role == 'admin' %>
           <li>
-            <a>Admin</a>
+            <a>
+              <i class="fa fa-university" aria-hidden="true"></i>
+              Admin
+            </a>
             <ul class="menu vertical">
               <li>
-                <%= link_to 'Item Groups', item_groups_path, id: 'admin-item-groups' %>
+                <a href="<%= cavy_item_sections_path %>" id="admin-item-sections">
+                  <i class="fa fa-sitemap" aria-hidden="true"></i>
+                  Item Sections
+                </a>
               </li>
               <li>
-                <%= link_to 'Item Sections', cavy_item_sections_path, id: 'admin-item-sections' %>
+                <a href="<%= item_groups_path %>" id="admin-item-groups">
+                  <i class="fa fa-object-group" aria-hidden="true"></i>
+                  Item Groups
+                </a>
               </li>
               <% if current_user&.site_manager? %>
                   <li>
-                    <%= link_to 'Users', cavy_admin_users_path, id: 'admin-users' %>
+                    <a href="<%= cavy_admin_users_path %>" id="admin-users">
+                      <i class="fa fa-users" aria-hidden="true"></i>
+                      Users
+                    </a>
                   </li>
               <% end %>
             </ul>
           </li>
       <% end %>
       <li>
-        <%= link_to 'Pages', admin_pages_path, id: 'admin-pages' %>
+        <a href="<%= admin_pages_path %>" id="admin-pages">
+          <i class="fa fa-files-o" aria-hidden="true"></i>
+          Pages
+        </a>
       </li>
       <% Cavy::ItemSection.all.each do |section| %>
           <li>
@@ -42,11 +60,15 @@
       <% if current_user %>
           <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+              <i class="fa fa-user" aria-hidden="true"></i>
               <%= current_user.name %>
             </a>
             <ul class="menu vertical">
               <li>
-                <%= link_to 'Sign Out', admin_destroy_session_path, method: :delete, id: 'log-out' %>
+                <a href="<%= admin_destroy_session_path %>" id="log-out">
+                  <i class="fa fa-sign-out" aria-hidden="true"></i>
+                  Sign Out
+                </a>
               </li>
             </ul>
           </li>

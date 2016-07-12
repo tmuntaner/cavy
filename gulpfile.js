@@ -9,7 +9,9 @@ var sassPaths = [
 ];
 
 gulp.task('sass', function () {
-    return gulp.src('app/assets/stylesheets/cavy/scss/app.scss')
+    return gulp.src([
+        'app/assets/stylesheets/cavy/scss/app.scss',
+        'app/assets/stylesheets/cavy/scss/font-awesome/font-awesome.scss'])
         .pipe($.sass({
             includePaths: sassPaths,
             outputStyle: 'compressed' // if css compressed **file size**

@@ -11,5 +11,6 @@
  *= require_self
  *= require cavy/app
  *= require cavy/patches
+ *= require cavy/font-awesome
  */
 
