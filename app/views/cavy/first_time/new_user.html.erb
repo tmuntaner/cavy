@@ -1,0 +1,18 @@
+<article id="firstTime">
+  <div class="card" style="width: 700px">
+    <div class="card-divider">
+      <h1>Create a New User</h1>
+    </div>
+    <div class="card-section">
+      <form action="<%= cavy_first_time_create_user_path %>" id="first_time_user" method="POST">
+        <input class="form-control" id="inputName" name="name" placeholder="Name" type="text"/>
+        <input class="form-control" id="inputEmail" name="email" placeholder="Email" type="text"/>
+        <input class="form-control" id="inputPassword" name="password" placeholder="Password" type="password"/>
+        <input class="form-control" id="inputPasswordConfirmation" name="password_confirmation"
+               placeholder="Password Confirmation" type="password"/>
+        <button class="button success" id="signin" type="submit">Create User</button>
+      </form>
+    </div>
+
+  </div>
+</article>

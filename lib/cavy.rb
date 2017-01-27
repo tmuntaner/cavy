@@ -3,7 +3,7 @@ require 'cavy/railtie' if defined?(Rails)
 
 module Cavy
 
-  mattr_accessor :root, :title, :locales, :default_locale, :raise_not_found_error
+  mattr_accessor :root, :title, :locales, :default_locale, :raise_not_found_error, :at_least_one_user
 
   self.root = 'home'
   self.title = 'cavy'
@@ -11,10 +11,17 @@ module Cavy
   self.locales = :en
   self.default_locale = :en
   self.raise_not_found_error = false
+  self.at_least_one_user = false
 
   def self.config(&block)
     yield(self)
     set_locale
+  end
+
+  def self.is_first_time?
+    return false if at_least_one_user
+    self.at_least_one_user = Cavy::User.count != 0
+    !self.at_least_one_user
   end
 
   private

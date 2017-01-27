@@ -17,6 +17,8 @@ gem 'simplecov',        require: false, :group => :test
 gem 'coveralls',        require: false
 gem 'rspec-rails',      :group => [:test]
 gem 'rails', '~> 5.0.0'
+gem 'capybara-screenshot'
+gem 'capybara-webkit'
 
 platform :ruby do
   gem 'better_errors'

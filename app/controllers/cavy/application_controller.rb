@@ -5,29 +5,26 @@ module Cavy
 
     before_action :authorize
     before_action :set_locale
-    before_action :check_locale
+    before_action :redirect_to_localized_url
 
     helper_method :can_edit?
     helper_method :current_user
     helper_method :signed_in?
 
     delegate :allow?, to: :current_permission
-    helper_method :allow?
+    helper_method 'allow?'
 
     delegate :allow_param?, to: :current_permission
-    helper_method :allow_param?
+    helper_method 'allow_param?'
 
     private
 
     def set_locale
-      I18n.locale = params[:locale] || I18n.default_locale if I18n.available_locales.count > 1
+      I18n.locale = params[:locale] || I18n.default_locale
     end
 
-    def check_locale
-      # there is a strange issue with redirect of root /en to /en/en, last check is an ugly fix
-      if params[:locale].blank? and I18n.available_locales.count > 1 and request.path_info != "/#{I18n.default_locale}"
-        redirect_to "/#{I18n.default_locale}#{request.path_info}"
-      end
+    def redirect_to_localized_url
+      redirect_to "/#{I18n.default_locale}#{request.path_info}" if params[:locale].blank?
     end
 
     def default_url_options(options = {})
@@ -35,8 +32,7 @@ module Cavy
     end
 
     def can_edit?
-      return true if signed_in? and current_user.site_manager?
-      false
+      signed_in? and current_user.site_manager?
     end
 
     def current_user
@@ -44,7 +40,16 @@ module Cavy
     end
 
     def signed_in?
-      current_user ? true : false
+      !current_user.nil?
+    end
+
+    def check_first_time
+      return if signed_in? || !(Cavy.is_first_time? and !is_in_first_time_controller?)
+      redirect_to cavy_first_time_welcome_path
+    end
+
+    def is_in_first_time_controller?
+      params[:controller] == 'cavy/first_time'
     end
 
     def current_permission
@@ -55,19 +60,13 @@ module Cavy
       nil
     end
 
-    def check_first_time
-      redirect_to cavy_first_time_welcome_path if Cavy::User.count == 0 and !(params[:controller] == 'cavy/first_time')
-    end
-
     def authorize
       if current_permission.allow?(params[:controller], params[:action], current_resource)
         current_permission.permit_params! params
       else
         if signed_in?
           redirect_to root_url, alert: 'I am sorry, you are not authorized for this page.'
-        elsif Cavy::User.count == 0
-          return
-        else
+        elsif !Cavy.is_first_time?
           session[:return_to] = request.fullpath
           redirect_to admin_signin_path, alert: 'Please log in first to view the previous page.'
         end

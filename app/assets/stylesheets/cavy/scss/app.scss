@@ -17,13 +17,14 @@
 @include foundation-breadcrumbs;
 @include foundation-button-group;
 @include foundation-callout;
+@include foundation-card;
 @include foundation-close-button;
 @include foundation-menu;
 @include foundation-menu-icon;
 @include foundation-drilldown-menu;
 @include foundation-dropdown;
 @include foundation-dropdown-menu;
-@include foundation-flex-video;
+@include foundation-responsive-embed;
 @include foundation-label;
 @include foundation-media-object;
 @include foundation-off-canvas;
@@ -44,39 +45,30 @@
 @include foundation-top-bar;
 @include foundation-visibility-classes;
 @include foundation-float-classes;
-@include foundation-flex-classes;
+// @include foundation-flex-classes;
 
 @include motion-ui-transitions;
 @include motion-ui-animations;
 
-body {
+#site {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
+
+  main#content {
+    display: flex;
+    flex: 1 1 auto;
+  }
+
+  footer {
+    text-align: center;
+    margin: 2em;
+  }
 }
 
-body .content {
-  flex: 1;
-}
-
-body footer {
-  text-align: center;
-  padding: 1em 0;
-}
-
-.page-list.column {
-  border: 1px #E6E6E6 solid;
-  padding-top: 1em;
-  padding-bottom: 1em;
-}
-
-.page-list .page-list-title {
-  text-align: center;
-  font-weight: bold;
-  margin-bottom: 1em;
-}
-
-.page-header {
-  margin-bottom: 2em;
-  border-bottom: 1px #E6E6E6 solid;
+article#firstTime {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1 1 auto;
 }

@@ -13,20 +13,18 @@
 
 </head>
 
-<body>
-<div class="row">
-  <div class="large-12 columns">
-    <%= yield %>
-  </div>
-</div>
+<body id="site">
 
-<div class="row">
-  <div class="large-12 columns">
-    <footer>
-      &copy; Ruby Rainbows <%= Time.now.year %>
-    </footer>
+<header></header>
 
-  </div>
-</div>
+<main id="content">
+  <%= yield %>
+</main>
+
+<footer>
+  &copy; Ruby Rainbows <%= Time.now.year %>
+</footer>
+
+
 </body>
 </html>
