@@ -30,6 +30,7 @@ RSpec.configure do |config|
   config.infer_spec_type_from_file_location!
   config.order = 'random'
   config.include FactoryGirl::Syntax::Methods
+  config.include Capybara::DSL
   config.include AuthMacros
   config.include MailerMacros
   config.include Cavy::Engine.routes.url_helpers
@@ -40,6 +41,7 @@ RSpec.configure do |config|
     reset_email
     DatabaseCleaner.clean_with :truncation, except: [ActiveRecord::InternalMetadata.table_name]
     DatabaseCleaner.start
+    Cavy.at_least_one_user = false
   end
 
   config.after(:each) do

@@ -50,15 +50,6 @@ module Cavy
         @page.description.should eq('foo')
       end
 
-      it 'should be able to delete a page' do
-        @page = FactoryGirl.create(:cavy_page)
-        visit '/admin'
-        click_link 'admin-pages'
-        click_link "delete-page-#{@page.id}"
-        @pages = Cavy::Page.all
-        @pages.size.should eq(0)
-      end
-
       it 'should be able to go to the list of pages' do
         @page = FactoryGirl.create(:cavy_page)
         visit '/admin'
@@ -126,7 +117,7 @@ module Cavy
         log_in('client')
         @page = FactoryGirl.create(:cavy_page)
         @parameters = {page: {title: 'ghost', tag_string: 'foo,bar,s', description: 'fooghostbarsummer', route: 'ghostenbear'}}
-        put admin_update_page_path({locale: :en, id: @page.id}), @parameters
+        put admin_update_page_path({locale: :en, id: @page.id}), params: @parameters
         @page = Cavy::Page.last
         @page.tags.should eq(%w(foo bar s))
         @page.description.should eq('fooghostbarsummer')

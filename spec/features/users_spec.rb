@@ -15,7 +15,7 @@ module Cavy
 
       it 'should allow a user to go to the signin page' do
         visit '/admin/signin'
-        page.driver.status_code.should eq(200)
+        expect(page.driver.status_code).to eq(200)
       end
 
       it 'should allow a user to sign into the website' do
@@ -24,7 +24,7 @@ module Cavy
         fill_in 'user-email', with: @user.email
         fill_in 'user-password', with: 'secret'
         click_button 'sign-in'
-        page.should_not have_content('Email or password is invalid')
+        expect(page).to_not have_content('Email or password is invalid')
       end
 
       it 'should not allow a user to sign in with an invalid password' do
@@ -33,7 +33,7 @@ module Cavy
         fill_in 'user-email', with: 'foo@bar.com'
         fill_in 'user-password', with: 'secret1'
         click_button 'sign-in'
-        page.should have_content('Email or password is invalid')
+        expect(page).to have_content('Email or password is invalid')
       end
     end
 
@@ -42,7 +42,7 @@ module Cavy
         log_in('admin')
         visit admin_dashboard_path
         click_link 'log-out'
-        page.should have_content('Logged out')
+        expect(page).to have_content('Logged out')
       end
     end
 
@@ -54,22 +54,22 @@ module Cavy
 
         it 'should return true in check for dev team member if developer' do
           log_in('developer')
-          current_user.dev_team?.should be_truthy
+          expect(current_user.dev_team?).to be_truthy
         end
 
         it 'should return true in check for dev team member if designer' do
           log_in('designer')
-          current_user.dev_team?.should be_truthy
+          expect(current_user.dev_team?).to be_truthy
         end
 
         it 'should return true in check for dev team member if admin' do
           log_in('admin')
-          current_user.dev_team?.should be_truthy
+          expect(current_user.dev_team?).to be_truthy
         end
 
         it 'should return false in check for dev team member if client' do
           log_in('client')
-          current_user.dev_team?.should be_falsey
+          expect(current_user.dev_team?).to be_falsey
         end
       end
 
@@ -110,7 +110,7 @@ module Cavy
           fill_in 'user_role', with: 'admin'
           click_button 'Save'
           user = Cavy::User.last
-          user.name.should eq('user name')
+          expect(user.name).to eq('user name')
           user.destroy
         end
         it 'should not be able to create a new user without a matching password' do
@@ -123,7 +123,7 @@ module Cavy
           fill_in 'user_password_confirmation', with: 'secret1'
           fill_in 'user_role', with: 'admin'
           click_button 'Save'
-          Cavy::User.count.should eq(count)
+          expect(Cavy::User.count).to eq(count)
         end
 
         it 'should be able to update a user' do
@@ -132,7 +132,7 @@ module Cavy
           visit edit_user_path(locale: :en, id: user.id)
           fill_in 'user_name', with: 'user name test'
           click_button 'Save'
-          Cavy::User.last.name.should eq('user name test')
+          expect(Cavy::User.last.name).to eq('user name test')
           user.destroy
         end
         it 'should not be able to update a user without a matching password' do
@@ -143,7 +143,7 @@ module Cavy
           fill_in 'user_password', with: 'secret'
           fill_in 'user_password_confirmation', with: 'secret1'
           click_button 'Save'
-          Cavy::User.last.password_digest.should eq(user.password_digest)
+          expect(Cavy::User.last.password_digest).to eq(digest)
           user.destroy
         end
       end

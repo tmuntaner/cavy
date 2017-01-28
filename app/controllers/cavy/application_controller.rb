@@ -24,7 +24,7 @@ module Cavy
     end
 
     def redirect_to_localized_url
-      redirect_to "/#{I18n.default_locale}#{request.path_info}" if params[:locale].blank?
+      redirect_to "/#{I18n.default_locale}#{request.path_info}" if params[:locale].blank? and I18n.available_locales.count > 1
     end
 
     def default_url_options(options = {})

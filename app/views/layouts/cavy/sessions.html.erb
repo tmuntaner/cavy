@@ -15,6 +15,11 @@
 <body>
 <div class="row">
   <div class="large-12 columns">
+
+    <% flash.each do |key, value| %>
+        <div class="alert alert-<%= key %>"><%= value %></div>
+    <% end %>
+
     <%= yield %>
   </div>
 </div>

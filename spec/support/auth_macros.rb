@@ -10,7 +10,7 @@ module AuthMacros
   def log_in_rack(role, attributes={})
     @user = FactoryGirl.create(:cavy_user, password: 'secret', password_confirmation: 'secret')
     @session = {email: @user.email, password: 'secret'}
-    post admin_create_session_path(locale: :en), @session
+    post admin_create_session_path(locale: :en), params: @session
   end
 
   def log_out

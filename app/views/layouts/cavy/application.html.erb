@@ -10,6 +10,9 @@
   <%= stylesheet_link_tag 'cavy/application', media: 'all' %>
   <%= javascript_include_tag 'cavy/application' %>
   <%= csrf_meta_tags %>
+  <% unless @page.nil?  %>
+      <%= meta_tags(@page) %>
+  <% end %>
 
 </head>
 
@@ -17,6 +20,11 @@
 <%= render 'layouts/cavy/header' %>
 <div class="row">
   <div class="large-12 columns">
+
+    <% flash.each do |key, value| %>
+        <div class="alert alert-<%= key %>"><%= value %></div>
+    <% end %>
+
     <%= yield %>
   </div>
 </div>
