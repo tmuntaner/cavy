@@ -6,17 +6,17 @@ module Cavy
     describe 'title' do
       it 'should accept a group with a title' do
         @group = ItemGroup.create(title: 'foo')
-        @group.should be_valid
+        expect(@group).to be_valid
         @group.destroy
       end
       it 'should not accept a groupd without a title' do
         @group = ItemGroup.create
-        @group.should_not be_valid
+        expect(@group).not_to be_valid
         @group.destroy
       end
       it 'should create a valid type from title' do
         @group = create(:cavy_item_group, title: 'foo Bar')
-        @group.type.should eq('foo_bar')
+        expect(@group.type).to eq('foo_bar')
         @group.destroy
       end
 
@@ -25,36 +25,36 @@ module Cavy
     describe 'params' do
       it 'should accept no params' do
         @group = create(:cavy_item_group, params: [])
-        @group.should be_valid
+        expect(@group).to be_valid
         @group.destroy
       end
       it 'should accept no param string' do
         @group = create(:cavy_item_group, param_string: '')
-        @group.should be_valid
+        expect(@group).to be_valid
         @group.destroy
       end
       it 'should accept an array of params' do
         @group = create(:cavy_item_group, params: ['Ruby', 'Rainbows'], param_string: '')
-        @group.params.should eq(['Ruby', 'Rainbows'])
-        @group.should be_valid
+        expect(@group.params).to eq(['Ruby', 'Rainbows'])
+        expect(@group).to be_valid
         @group.destroy
       end
       it 'should accept a string of params' do
         @group = create(:cavy_item_group, param_string: 'Ruby,Rainbows')
-        @group.params.should eq(['Ruby', 'Rainbows'])
-        @group.should be_valid
+        expect(@group.params).to eq(['Ruby', 'Rainbows'])
+        expect(@group).to be_valid
         @group.destroy
       end
       it 'should accept a string of params and a space' do
         @group = create(:cavy_item_group, param_string: 'Ruby, Rainbows')
-        @group.params.should eq(['Ruby', 'Rainbows'])
-        @group.should be_valid
+        expect(@group.params).to eq(['Ruby', 'Rainbows'])
+        expect(@group).to be_valid
         @group.destroy
       end
       it 'should accept a string of params and handle spaces' do
         @group = create(:cavy_item_group, param_string: 'Ruby,      Rainbows')
-        @group.params.should eq(['Ruby', 'Rainbows'])
-        @group.should be_valid
+        expect(@group.params).to eq(['Ruby', 'Rainbows'])
+        expect(@group).to be_valid
         @group.destroy
       end
     end
@@ -76,7 +76,7 @@ module Cavy
       end
 
       it 'should list all guinea pigs' do
-        @guineapigs.items.map(&:id).should eq([@pig1.id, @pig2.id, @pig3.id, @pig4.id])
+        expect(@guineapigs.items.map(&:id)).to eq([@pig1.id, @pig2.id, @pig3.id, @pig4.id])
       end
     end
   end

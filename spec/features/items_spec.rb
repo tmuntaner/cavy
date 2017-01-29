@@ -17,7 +17,7 @@ describe 'items' do
     it 'should be able to show an item' do
       @item.update(data: {name: 'name'})
       visit cavy_item_path(locale: :en, id: @item.id)
-      page.should have_content(@item.data['name'])
+      expect(page).to have_content(@item.data['name'])
     end
   end
 
@@ -38,7 +38,7 @@ describe 'items' do
       fill_in 'item[data][name]', with: 'ruby rainbows'
       click_button 'submit-item'
       @item = Cavy::Item.last
-      @item.data['name'].should eq('ruby rainbows')
+      expect(@item.data['name']).to eq('ruby rainbows')
       @item.destroy
     end
   end
@@ -64,7 +64,7 @@ describe 'items' do
       fill_in 'item[data][name]', with: 'diamond rainbows'
       click_button 'submit-item'
       @item = Cavy::Item.last
-      @item.data['name'].should eq('diamond rainbows')
+      expect(@item.data['name']).to eq('diamond rainbows')
       @item.destroy
     end
   end
@@ -89,7 +89,7 @@ describe 'items' do
       count = Cavy::Item.count
       item = Cavy::Item.last
       click_link "delete-#{item.id}"
-      Cavy::Item.count.should eq(count-1)
+      expect(Cavy::Item.count).to eq(count-1)
     end
   end
 end

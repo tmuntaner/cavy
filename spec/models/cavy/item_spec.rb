@@ -6,19 +6,19 @@ module Cavy
     describe 'data' do
       it 'should be able to accept no data' do
         @item = create(:cavy_item, data: {})
-        @item.should be_valid
+        expect(@item).to be_valid
         @item.destroy
       end
       it 'should be able to accept a hash of data' do
         @item = create(:cavy_item, data: {foo: 'bar', bar: 'foo'})
-        @item.data.should eq({'foo' => 'bar', 'bar' => 'foo'})
-        @item.should be_valid
+        expect(@item.data).to eq({'foo' => 'bar', 'bar' => 'foo'})
+        expect(@item).to be_valid
         @item.destroy
       end
       it 'should be able to create params from array' do
         @item = create(:cavy_item, data: {})
         @item.create_params('test', %w(Ruby Rainbows))
-        @item.data.should eq({'type' => 'test', 'ruby' => '', 'rainbows' => ''})
+        expect(@item.data).to eq({'type' => 'test', 'ruby' => '', 'rainbows' => ''})
       end
     end
 

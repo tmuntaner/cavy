@@ -10,9 +10,9 @@ module Cavy
         elements = {'title' => 'bar', 'content' => 'foo', 'page' => {'value' => 'element'}}
         page.update_elements(elements)
         page = Cavy::Page.find(page.id)
-        page.localized_title.should eq('foo bar')
-        page.localized_content.should eq('bar')
-        page.page_elements['page'].should eq('element')
+        expect(page.localized_title).to eq('foo bar')
+        expect(page.localized_content).to eq('bar')
+        expect(page.page_elements['page']).to eq('element')
       end
       it 'should not replace past page content when saving, just override' do
         I18n.locale = :en
@@ -20,10 +20,10 @@ module Cavy
         elements = {'title' => 'bar', 'content' => 'foo', 'bar' => {'value' => 'bar'}}
         page.update_elements(elements)
         page = Cavy::Page.find(page.id)
-        page.localized_title.should eq('foo bar')
-        page.localized_content.should eq('bar')
-        page.page_elements['foo'].should eq('foo')
-        page.page_elements['bar'].should eq('bar')
+        expect(page.localized_title).to eq('foo bar')
+        expect(page.localized_content).to eq('bar')
+        expect(page.page_elements['foo']).to eq('foo')
+        expect(page.page_elements['bar']).to eq('bar')
       end
     end
 
@@ -31,19 +31,19 @@ module Cavy
       it 'should translate title' do
         I18n.locale = :en
         @page = Page.create(title: {en: 'home', de: 'Haus'}, content: 'bar')
-        Cavy::Page.find(@page.id).title[I18n.locale.to_s].should eq('home')
+        expect(Cavy::Page.find(@page.id).title[I18n.locale.to_s]).to eq('home')
         I18n.locale = :de
         Cavy::Page.find(@page.id).set_title 'Hause'
-        Cavy::Page.find(@page.id).title[I18n.locale.to_s].should eq('Haus')
+        expect(Cavy::Page.find(@page.id).title[I18n.locale.to_s]).to eq('Haus')
         I18n.locale = :en
-        Cavy::Page.find(@page.id).title[I18n.locale.to_s].should eq('home')
+        expect(Cavy::Page.find(@page.id).title[I18n.locale.to_s]).to eq('home')
       end
 
       it 'should be able to have a title' do
         Page.create(title: {en: 'foo', de: 'das foo'}, content: {en: 'bar', de: 'das bar'})
         @page = Page.last
         I18n.locale = :en
-        @page.title[I18n.locale.to_s].should eq('foo')
+        expect(@page.title[I18n.locale.to_s]).to eq('foo')
         @page.destroy
       end
     end
@@ -52,21 +52,21 @@ module Cavy
       it 'should make a route after saving' do
         Page.create(title: {en: 'foo', de: 'das foo'}, content: {en: 'bar', de: 'das bar'})
         @page = Page.last
-        @page.route.should eq('foo')
+        expect(@page.route).to eq('foo')
         @page.destroy
       end
 
       it 'should take care of spaces in routes' do
         Page.create(title: {en: 'foo bar', de: 'das foo bar'}, content: {en: 'bar', de: 'das bar'})
         @page = Page.last
-        @page.route.should eq('foo_bar')
+        expect(@page.route).to eq('foo_bar')
         @page.destroy
       end
 
       it 'should not be able to create two pages with the same route' do
         @page1 = Page.create(title: {en: 'foo bar', de: 'das foo bar'}, route: 'bar')
         @page2 = Page.create(title: {en: 'foo bar2', de: 'das foo bar2'}, route: 'bar')
-        @page2.should_not be_valid
+        expect(@page2).not_to be_valid
       end
     end
 
@@ -74,19 +74,19 @@ module Cavy
       it 'should translate content' do
         I18n.locale = :en
         @page = Page.create(title: {en: 'foo bar', de: 'das foo bar'}, content: {en: 'bar', de: 'das bar'})
-        @page.localized_content.should eq('bar')
+        expect(@page.localized_content).to eq('bar')
         I18n.locale = :de
         @page.set_content('foo')
-        @page.localized_content.should eq('foo')
+        expect(@page.localized_content).to eq('foo')
         I18n.locale = :en
-        @page.localized_content.should eq('bar')
+        expect(@page.localized_content).to eq('bar')
       end
 
       it 'should be able to have content' do
         Page.create(title: {en: 'foo bar', de: 'das foo bar'}, content: {en: 'bar', de: 'das bar'})
         @page = Page.last
         I18n.locale = :en
-        @page.localized_content.should eq('bar')
+        expect(@page.localized_content).to eq('bar')
         @page.destroy
       end
     end
@@ -95,7 +95,7 @@ module Cavy
       it 'should be able to specify a render page' do
         Page.create(title: {en: 'foo bar', de: 'das foo bar'}, content: 'bar', render: 'foobar')
         @page = Page.last
-        @page.render.should eq('foobar')
+        expect(@page.render).to eq('foobar')
         @page.destroy
       end
     end
@@ -104,40 +104,40 @@ module Cavy
       describe 'tags' do
         it 'should accept no tags' do
           @page = Page.create(title: {en: 'foo bar', de: 'das foo bar'}, tags: [])
-          @page.should be_valid
+          expect(@page).to be_valid
           @page.destroy
         end
 
         it 'should accept no tag string' do
           @page = Page.create(title: {en: 'foo bar', de: 'das foo bar'}, tag_string: '')
-          @page.should be_valid
+          expect(@page).to be_valid
           @page.destroy
         end
 
         it 'should accept an array of tags' do
           @page = Page.create(title: {en: 'foo bar', de: 'das foo bar'}, tags: %w(Ruby Rainbows))
-          @page.tags.should eq(%w(Ruby Rainbows))
-          @page.should be_valid
+          expect(@page.tags).to eq(%w(Ruby Rainbows))
+          expect(@page).to be_valid
           @page.destroy
         end
 
         it 'should accept an string of tags' do
           @page = Page.create(title: {en: 'foo bar', de: 'das foo bar'}, tag_string: 'Ruby,Rainbows')
-          @page.tags.should eq(%w(Ruby Rainbows))
-          @page.should be_valid
+          expect(@page.tags).to eq(%w(Ruby Rainbows))
+          expect(@page).to be_valid
           @page.destroy
         end
       end
       describe 'description' do
         it 'should allow a page to have a description' do
           @page = Page.create(title: {en: 'foo bar', de: 'das foo bar'}, description: 'foobar')
-          @page.description.should eq('foobar')
-          @page.should be_valid
+          expect(@page.description).to eq('foobar')
+          expect(@page).to be_valid
           @page.destroy
         end
         it 'should allow a page to have no description' do
           @page = Page.create(title: {en: 'foo bar', de: 'das foo bar'}, description: '')
-          @page.should be_valid
+          expect(@page).to be_valid
           @page.destroy
         end
       end
@@ -146,14 +146,14 @@ module Cavy
     describe 'data' do
       it 'should accept a hash of data' do
         @page = Page.create(title: {en: 'foo bar', de: 'das foo bar'}, data: {name: 'ruby rainbows'})
-        @page.data['name'].should eq('ruby rainbows')
+        expect(@page.data['name']).to eq('ruby rainbows')
       end
 
       it 'should accept a key and value to update data' do
         @page = Page.create(title: {en: 'foo bar', de: 'das foo bar'}, data: {name: 'ruby rainbows'})
         @page.set_key_value('foo', 'bar')
-        @page.data['foo'].should eq('bar')
-        @page.data['name'].should eq('ruby rainbows')
+        expect(@page.data['foo']).to eq('bar')
+        expect(@page.data['name']).to eq('ruby rainbows')
       end
     end
 

@@ -18,7 +18,7 @@ module Cavy
         visit '/admin'
         click_link 'admin-pages'
         click_link 'admin-new-page'
-        page.should have_content('New Page')
+        expect(page).to have_content('New Page')
       end
 
       it 'should be able to add a new page' do
@@ -29,7 +29,7 @@ module Cavy
         fill_in 'page_render', with: 'cavy_test/pages/test'
         click_on 'submit_page'
         @page = Cavy::Page.last
-        @page.render.should eq('cavy_test/pages/test')
+        expect(@page.render).to eq('cavy_test/pages/test')
       end
 
       it 'should be able to edit a page' do
@@ -44,18 +44,18 @@ module Cavy
         fill_in 'page_description', with: 'foo'
         click_on 'submit_page'
         @page = Cavy::Page.find(@page.id)
-        @page.render.should eq('cavy_test/pages/test')
-        @page.tags.should eq(%w(foo bar))
-        @page.route.should eq('foos')
-        @page.description.should eq('foo')
+        expect(@page.render).to eq('cavy_test/pages/test')
+        expect(@page.tags).to eq(%w(foo bar))
+        expect(@page.route).to eq('foos')
+        expect(@page.description).to eq('foo')
       end
 
       it 'should be able to go to the list of pages' do
         @page = FactoryGirl.create(:cavy_page)
         visit '/admin'
         click_link 'admin-pages'
-        page.should have_content('Website Pages')
-        page.should have_content(@page.localized_title)
+        expect(page).to have_content('Website Pages')
+        expect(page).to have_content(@page.localized_title)
         @page.destroy
       end
 
@@ -64,7 +64,7 @@ module Cavy
         visit '/admin'
         click_link 'admin-pages'
         click_link "page-#{@page.id}"
-        page.should have_content(@page.description)
+        expect(page).to have_content(@page.description)
         @page.destroy
       end
 
@@ -74,7 +74,7 @@ module Cavy
         click_link 'admin-pages'
         click_link "page-#{@page.id}"
         click_on 'edit-page-settings'
-        page.should have_content('Edit')
+        expect(page).to have_content('Edit')
         @page.destroy
       end
 
@@ -84,7 +84,7 @@ module Cavy
         click_link 'admin-pages'
         click_link "page-#{@page.id}"
         click_on 'edit-page-content'
-        page.should have_content(@page.localized_content)
+        expect(page).to have_content(@page.localized_content)
         @page.destroy
       end
 
@@ -98,7 +98,7 @@ module Cavy
         fill_in 'page[value]', with: 'value'
         click_button 'submit'
         @page = Cavy::Page.last
-        @page.data['test'].should eq('value')
+        expect(@page.data['test']).to eq('value')
         @page.destroy
       end
     end
@@ -119,15 +119,15 @@ module Cavy
         @parameters = {page: {title: 'ghost', tag_string: 'foo,bar,s', description: 'fooghostbarsummer', route: 'ghostenbear'}}
         put admin_update_page_path({locale: :en, id: @page.id}), params: @parameters
         @page = Cavy::Page.last
-        @page.tags.should eq(%w(foo bar s))
-        @page.description.should eq('fooghostbarsummer')
-        @page.route.should_not eq('ghostenbear')
+        expect(@page.tags).to eq(%w(foo bar s))
+        expect(@page.description).to eq('fooghostbarsummer')
+        expect(@page.route).not_to eq('ghostenbear')
         @page.destroy
       end
 
       it 'should not allow a client to go to the new page route' do
         visit admin_new_page_path
-        page.should have_content('Please Sign In to Continue')
+        expect(page).to have_content('Please Sign In to Continue')
       end
     end
 
