@@ -3,7 +3,6 @@
   .btn-toolbar
     .btn-group
       %a{href: new_user_path, class: 'btn btn-primary btn-small'} New User
-    = render 'cavy/shared/admin_locale_links'
 
 %table.table.table-striped
   %thead
@@ -24,4 +23,3 @@
         %td= link_to 'Show', user
         - if current_user.dev_team?
           %td= link_to 'Edit', edit_user_path(user)
-          %td= link_to 'Destroy', user, :method => :delete, :data => { :confirm => 'Are you sure?' }

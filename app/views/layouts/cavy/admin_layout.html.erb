@@ -11,27 +11,22 @@
   <%= javascript_include_tag 'cavy/application' %>
   <%= csrf_meta_tags %>
 </head>
-<body>
+<body id="site">
 
 <header>
   <%= render 'layouts/cavy/admin_header' %>
 </header>
 
-<div class="content">
+<main id="content">
   <div class="row">
     <div class="large-12 columns">
       <%= yield %>
     </div>
   </div>
-</div>
+</main>
 
 <footer>
-  <div class="row">
-    <div class="large-12 columns">
-      &copy; Ruby Rainbows <%= Time.now.year %>
-
-    </div>
-  </div>
+  &copy; Ruby Rainbows <%= Time.now.year %>
 </footer>
 
 </body>

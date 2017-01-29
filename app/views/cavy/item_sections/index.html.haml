@@ -4,7 +4,6 @@
     - if current_user.role == 'admin'
       .btn-group
         = link_to 'New Item Section', cavy_new_item_section_path, class: 'btn btn-primary btn-small'
-    = render 'cavy/shared/admin_locale_links'
 
 %table.table.table-striped
   %thead
