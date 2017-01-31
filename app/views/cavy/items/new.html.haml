@@ -1,10 +1,4 @@
 .page-header
   %h1= "New #{@group.title}"
-  .btn-toolbar
-    .btn-group
-      = link_to("#{@group.title} List", item_groups_path, class: 'btn btn-default  btn-small')
 
-      - if current_user.role == 'admin'
-        %a{href: admin_new_item_group_path, class: 'btn btn-default btn-small'} New Item Group
-        
 = render 'form'

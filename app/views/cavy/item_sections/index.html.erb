@@ -1,0 +1,33 @@
+<div class="page-header">
+  <h1>Item Sections</h1>
+  <div class="btn-toolbar">
+    <% if current_user.role == 'admin' %>
+      <div class="btn-group">
+        <%= link_to 'New Item Section', cavy_new_item_section_path, class: 'button primary small' %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <th>Title</th>
+    <th></th>
+    <th></th>
+  </thead>
+  <tbody>
+    <% @item_sections.each do |item_section| %>
+      <tr>
+        <td>
+          <%= link_to item_section.title, cavy_item_section_path(item_section) %>
+        </td>
+        <td>
+          <%= link_to 'Edit', cavy_edit_item_section_path(item_section), class: 'button primary small' %>
+        </td>
+        <td>
+          <%= link_to 'Destroy', cavy_item_section_path(item_section), class: 'button alert small', :method => :delete, :data => { :confirm => 'Are you sure?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

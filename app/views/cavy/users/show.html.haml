@@ -1,8 +1,6 @@
 .page-header
   %h1= @user.name
-  .btn-toolbar
-    .btn-group
-      = link_to('User List', cavy_admin_users_path, class: 'btn btn-default  btn-small')
+
 %p
   %b Email:
   = @user.email

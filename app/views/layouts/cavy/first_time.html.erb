@@ -1,30 +1,27 @@
 <!doctype html>
 
 <html lang="<%= I18n.locale %>">
+
 <head>
   <meta charset="utf-8">
-
   <title><%= @title ? @title : 'Cavy' %></title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
   <%= stylesheet_link_tag 'cavy/application', media: 'all' %>
   <%= javascript_include_tag 'cavy/application' %>
   <%= csrf_meta_tags %>
-
 </head>
 
 <body id="site">
 
 <header></header>
 
-<main id="content">
+<main id="centeredContent">
   <%= yield %>
 </main>
 
 <footer>
   &copy; Ruby Rainbows <%= Time.now.year %>
 </footer>
-
 
 </body>
 </html>

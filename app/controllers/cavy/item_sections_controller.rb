@@ -11,7 +11,7 @@ module Cavy
     end
 
     def show
-      @item_groups = Cavy::ItemGroup.find (@item_section.item_groups)
+      @item_groups = if @item_section.item_groups.nil? then [] else Cavy::ItemGroup.find (@item_section.item_groups) end
     end
 
     def new

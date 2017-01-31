@@ -6,13 +6,11 @@
     %th Data
     %th
     %th
-    %th
 
   - @items.each do |item|
     %tr
       %td= item.name
       %td= item.data
-      %td= link_to 'Show', cavy_item_path(item.id)
       %td= link_to 'Edit', cavy_edit_item_path(item.id)
       %td= link_to 'Destroy', cavy_delete_item_path(item.id), :method => :delete, :data => { :confirm => 'Are you sure?' }
 

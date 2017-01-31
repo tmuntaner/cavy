@@ -1,0 +1,12 @@
+<div class="card" style="width: 700px">
+  <div class="card-divider">
+    <h1>Please Sign In to Continue</h1>
+  </div>
+  <div class="card-section">
+    <%= form_tag(admin_create_session_path, id: 'session_form') do %>
+        <%= text_field_tag :email, params[:email], placeholder: "Email", id: "user-email", class: 'form-control' %>
+        <%= password_field_tag :password, nil, placeholder: "Password", id: "user-password", class: 'form-control' %>
+        <button class="button success" id="sign-in" type="submit">Sign In</button>
+    <% end %>
+  </div>
+</div>

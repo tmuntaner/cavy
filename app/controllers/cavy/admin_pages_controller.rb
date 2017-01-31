@@ -51,7 +51,7 @@ module Cavy
       @page = Cavy::Page.find(params[:id])
       @page.set_title params[:page][:title]
       if @page.update_attributes(params[:page].except(:title))
-        redirect_to admin_page_path(@page), notice: 'Page was successfully created.'
+        redirect_to admin_page_path(@page), flash: {success: 'Successfully updated page.'}
       else
         render action: 'edit'
       end

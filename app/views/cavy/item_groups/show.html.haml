@@ -1,22 +1,15 @@
-.page-header#with-button
-  %h1= @item_group.title
+.page-header
+  %h1= "#{@item_group.title} Items"
   .btn-toolbar
     .btn-group
-      = link_to "New #{@item_group.title}", cavy_new_item_path(group_id: @item_group.id), id: 'new-item', class: 'btn btn-primary btn-small'
-    - if current_user.role == 'admin'
-      .btn-group
-        = link_to('Item Group List', item_groups_path, class: 'btn btn-default  btn-small')
-
-%h3 Items:
-%br/
+      = link_to "New #{@item_group.title} item", cavy_new_item_path(group_id: @item_group.id), id: 'new-item', class: 'button primary small'
 
 - if @items.count >= 1
-  %table.table.table-striped#item_group_items{ 'data-update-url' => cavy_update_order_item_group_path }
+  %table#item_group_items{ 'data-update-url' => cavy_update_order_item_group_path }
     %thead
       %tr
         - @item_group.params.each do |param|
           %th= param
-        %th
         %th
         %th
     %tbody
@@ -24,7 +17,6 @@
         %tr
         - @item_group.params.each do |param|
           %td= item.data[param]
-        %td= link_to 'Show', cavy_item_path(item.id)
         %td= link_to 'Edit', cavy_edit_item_path(item.id)
         %td= link_to 'Destroy', cavy_delete_item_path(item.id), :method => :delete, :data => { :confirm => 'Are you sure?' }, id: "delete-#{item.id}"
 

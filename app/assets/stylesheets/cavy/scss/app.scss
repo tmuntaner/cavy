@@ -55,19 +55,52 @@
   min-height: 100vh;
   flex-direction: column;
 
+  main#centeredContent {
+    display: flex;
+    flex: 1 1 auto;
+    align-items: center;
+    justify-content: center;
+  }
+
   main#content {
     flex: 1 1 auto;
+    display: flex;
+  }
+
+  #sidebar {
+    background-color: rgb(250,250,250);
+    padding: 0;
+
+    ul {
+      list-style: none;
+      margin: 0;
+
+      li {
+        padding: 1em;
+        border-bottom: 1px solid darken(rgb(250,250,250), 10%);
+
+      }
+    }
+  }
+
+  #contentRow {
+    flex: 1 0 auto;
+    width: 100%;
+  }
+  .menu {
+    color: #FCFFF5;
+  }
+  .menu a {
+    color: #FCFFF5;
+  }
+  .dropdown.menu>li.is-dropdown-submenu-parent>a::after {
+    border-color: #FCFFF5 transparent transparent;
   }
 
   footer {
     text-align: center;
-    margin: 2em;
+    padding: 1em;
+    color: #193441;
+    background-color: rgb(250, 250, 250);
   }
-}
-
-article#firstTime {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex: 1 1 auto;
 }

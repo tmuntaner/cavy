@@ -1,8 +1,8 @@
 .page-header#with-button
-  %h1 Listing Item Groups
+  %h1 Item Groups
   .btn-toolbar
     .btn-group
-      %a{href: admin_new_item_group_path, class: 'btn btn-primary btn-small'} New Item Group
+      %a{href: admin_new_item_group_path, class: 'button primary small'} New Item Group
 
 %br/
 
@@ -19,8 +19,8 @@
         %tr
           %td= link_to item_group.title, cavy_item_group_path(item_group.id)
           %td= item_group.params.join(', ') if item_group.params
-          %td= link_to 'Edit', admin_edit_item_group_path(item_group.id)
+          %td= link_to 'Edit', admin_edit_item_group_path(item_group.id), class: 'button small primary'
           - if current_user.dev_team?
-            %td= link_to 'Destroy', cavy_delete_item_group_path(item_group.id), :method => :delete, :data => { :confirm => 'Are you sure?' }, id: "delete-#{item_group.id}"
+            %td= link_to 'Destroy', cavy_delete_item_group_path(item_group.id), class: 'button small alert', :method => :delete, :data => { :confirm => 'Are you sure?' }, id: "delete-#{item_group.id}"
 - else
   You dont have any item groups yet.

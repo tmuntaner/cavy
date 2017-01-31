@@ -15,11 +15,23 @@
 
 <header>
   <%= render 'layouts/cavy/admin_header' %>
+  <% flash.each do |key, value| %>
+      <div class="callout <%= key %>" data-closable>
+        <%= value %>
+
+        <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+  <% end %>
 </header>
 
 <main id="content">
-  <div class="row">
-    <div class="large-12 columns">
+  <div class="expanded row" id="contentRow">
+    <div class="large-2 columns" id="sidebar">
+      <%= render 'layouts/cavy/admin_sidebar' %>
+    </div>
+    <div class="large-10 columns">
       <%= yield %>
     </div>
   </div>

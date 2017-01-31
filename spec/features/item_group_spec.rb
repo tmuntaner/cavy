@@ -99,7 +99,7 @@ describe 'item group' do
       visit admin_edit_item_group_path(locale: :en, id: @group.id)
       fill_in 'item_group_title', with: 'testfoo'
       fill_in 'item_group_param_string', with: 'test,bar'
-      click_button 'Create'
+      click_button 'Update'
       @group = Cavy::ItemGroup.find(@group.id)
       expect(@group.params).to eq(%w(test bar))
       @group.destroy
@@ -108,7 +108,7 @@ describe 'item group' do
       visit admin_edit_item_group_path(locale: :en, id: @group.id)
       fill_in 'item_group_title', with: ''
       fill_in 'item_group_param_string', with: 'test, bar'
-      click_button 'Create'
+      click_button 'Update'
       expect(page).to have_content('error')
     end
   end
