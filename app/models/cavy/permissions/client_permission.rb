@@ -3,8 +3,9 @@ module Cavy
     class ClientPermission < BasePermission
 
       def initialize(user)
-        allow 'cavy/pages', [:page, :edit, :update]
         allow 'cavy/sessions', [:new, :create, :destroy]
+
+        allow 'cavy/pages', [:page, :edit, :update]
         allow 'cavy/admin', [:dashboard, :users, :new_user]
         allow 'cavy/admin_pages', [:index, :show, :update, :edit, :add_data, :create_data]
         allow 'cavy/mercury', [:edit, :resource, :snippet_options, :snippet_preview, :test_page, :image]

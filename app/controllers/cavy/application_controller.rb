@@ -36,7 +36,7 @@ module Cavy
     end
 
     def current_user
-      @current_user ||= User.find_by(auth_token: cookies[:auth_token]) if cookies[:auth_token]
+      @current_user ||= User.includes(cavy_groups: [:cavy_policies]).find_by(auth_token: cookies[:auth_token]) if cookies[:auth_token]
     end
 
     def signed_in?

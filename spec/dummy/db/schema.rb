@@ -10,11 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170118093132) do
+ActiveRecord::Schema.define(version: 20170206144114) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "hstore"
+
+  create_table "cavy_groups", force: :cascade do |t|
+    t.string   "name"
+    t.boolean  "is_super_admin"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["name"], name: "index_cavy_groups_on_name", unique: true, using: :btree
+  end
+
+  create_table "cavy_groups_policies", id: false, force: :cascade do |t|
+    t.integer "cavy_group_id",  null: false
+    t.integer "cavy_policy_id", null: false
+  end
+
+  create_table "cavy_groups_users", id: false, force: :cascade do |t|
+    t.integer "cavy_user_id",  null: false
+    t.integer "cavy_group_id", null: false
+  end
 
   create_table "cavy_item_groups", force: :cascade do |t|
     t.string "title"
@@ -41,6 +59,11 @@ ActiveRecord::Schema.define(version: 20170118093132) do
     t.text   "description"
     t.string "tags",          array: true
     t.json   "page_elements"
+  end
+
+  create_table "cavy_policies", force: :cascade do |t|
+    t.string "name"
+    t.index ["name"], name: "index_cavy_policies_on_name", unique: true, using: :btree
   end
 
   create_table "cavy_users", force: :cascade do |t|
