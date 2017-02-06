@@ -11,11 +11,11 @@ module Cavy
         @allow_all = true
       end
 
-      def allow(controllers, actions, &block)
+      def allow(controllers, actions)
         @allowed_actions ||= {}
         Array(controllers).each do |controller|
           Array(actions).each do |action|
-            @allowed_actions[[controller.to_s, action.to_s]] = block || true
+            @allowed_actions[[controller.to_s, action.to_s]] = true
           end
         end
       end
@@ -42,7 +42,7 @@ module Cavy
         elsif @allowed_params
           @allowed_params.each do |resource, attributes|
             if params[resource].respond_to? :permit
-              hstore_data = get_hstore_data(attributes, params[resource])
+              hstore_data      = get_hstore_data(attributes, params[resource])
               params[resource] = params[resource].permit(*attributes)
               params[resource].merge!(hstore_data)
               params.permit!
@@ -60,7 +60,7 @@ module Cavy
             hstore_data[attribute.keys.first] = resource[attribute.keys.first]
           end
         end
-        return hstore_data
+        hstore_data
       end
 
     end
