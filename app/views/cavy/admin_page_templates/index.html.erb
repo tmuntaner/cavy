@@ -1,0 +1,38 @@
+<div class="page-header" id="with-button">
+  <h1>Page Templates</h1>
+  <a class="button primary small" href="<%= admin_new_page_template_path %>">New Page Template</a>
+</div>
+
+<br/>
+
+<% if @page_templates.count >= 1 %>
+    <table class="table table-striped">
+      <thead>
+      <th>Name</th>
+      <th>Template to Render</th>
+      <th></th>
+      </thead>
+      <tbody>
+      <% @page_templates.each do |page_template| %>
+          <tr>
+            <td>
+              <%= page_template.name %>
+            </td>
+            <td>
+              <%= page_template.template %>
+            </td>
+            <td>
+              <%= link_to 'Edit', admin_edit_page_template_path(page_template.id), class: 'button small primary' %>
+            </td>
+            <% if current_user.dev_team? %>
+                <td>
+                  <%= link_to 'Destroy', admin_delete_page_template_path(page_template.id), class: 'button small alert', :method => :delete, :data => {:confirm => 'Are you sure?'}, id: "delete-#{page_template.id}" %>
+                </td>
+            <% end %>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+<% else %>
+    You dont have any page templates yet.
+<% end %>

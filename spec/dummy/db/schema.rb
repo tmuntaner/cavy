@@ -50,6 +50,14 @@ ActiveRecord::Schema.define(version: 20170206144114) do
     t.integer "item_group_id"
   end
 
+  create_table "cavy_page_templates", force: :cascade do |t|
+    t.string   "name"
+    t.string   "template"
+    t.hstore   "fields"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "cavy_pages", force: :cascade do |t|
     t.hstore "title"
     t.hstore "content"

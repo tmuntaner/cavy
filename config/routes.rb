@@ -15,6 +15,13 @@ Cavy::Engine.routes.draw do
 
     get '/admin', to: 'admin#dashboard', as: 'admin_dashboard'
 
+    get '/admin/page_templates', to: 'admin_page_templates#index', as: 'admin_page_templates'
+    get '/admin/page_template/new', to: 'admin_page_templates#new', as: 'admin_new_page_template'
+    post '/admin/page_template', to: 'admin_page_templates#create', as: 'admin_create_page_template'
+    get '/admin/page_template/:id/edit', to: 'admin_page_templates#edit', as: 'admin_edit_page_template'
+    patch '/admin/page_template/:id', to: 'admin_page_templates#update', as: 'admin_update_page_template'
+    delete '/admin/page_template/:id', to: 'admin_page_templates#delete', as: 'admin_delete_page_template'
+
     get '/admin/pages', to: 'admin_pages#index', as: 'admin_pages'
     get '/admin/new_page', to: 'admin_pages#new', as: 'admin_new_page'
     post '/admin/page', to: 'admin_pages#create', as: 'admin_create_page'
