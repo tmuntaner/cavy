@@ -1,5 +1,6 @@
 module Cavy
   class PageTemplate < ApplicationRecord
+
     @options = [
         {name: 'string', type: 'STRING'},
         {name: 'text', type: 'TEXT'}
@@ -10,13 +11,16 @@ module Cavy
     end
 
     def add_field(field, type)
+      self.fields ||= {}
       fields[field] = type
       save
     end
 
     def remove_field(field)
+      self.fields ||= {}
       fields.delete field
       save
     end
+
   end
 end
