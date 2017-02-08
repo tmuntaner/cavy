@@ -1,0 +1,65 @@
+<div class="page-header">
+  <h1>Page Template: <%= @page_template.name %></h1>
+</div>
+
+<h4>Fields:</h4>
+
+<table>
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Type</th>
+    <th></th>
+    <th></th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @page_template.fields.each do |name, value| %>
+      <tr>
+
+        <td><%= name %></td>
+        <td><%= value %></td>
+        <td>
+          <%= form_tag admin_create_page_template_field_path(@page_template.id), method: :post do %>
+              <%= hidden_field_tag 'page_template[name]', name %>
+              <div class="row">
+                <div class="large-6 columns">
+                  <%= select_tag 'page_template[type]', options_for_select(Cavy::PageTemplate.get_field_options_for_select, value), id: :type %>
+                </div>
+                <div class="large-4 columns">
+                  <%= submit_tag 'Update', class: 'button small success' %>
+                </div>
+              </div>
+          <% end %>
+        </td>
+        <td>
+          <%= link_to 'Destroy', admin_delete_page_template_field_path(@page_template.id, name), class: 'button small alert', method: :delete, data: {:confirm => 'Are you sure?'}, id: "delete-#{@page_template.id}" %>
+        </td>
+      </tr>
+  <% end %>
+
+  </tbody>
+</table>
+
+<br/>
+<br/>
+
+<h4>Add Field:</h4>
+<%= form_tag admin_create_page_template_field_path(@page_template.id), method: :post do %>
+
+    <div class="row">
+      <div class="large-4 columns">
+        <%= label_tag :name %>
+        <%= text_field_tag 'page_template[name]', nil, id: :name %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="large-4 columns">
+        <%= label_tag :type %>
+        <%= select_tag 'page_template[type]', options_for_select(Cavy::PageTemplate.get_field_options_for_select), id: :type %>
+      </div>
+    </div>
+
+    <%= submit_tag 'Add', class: 'button small success' %>
+<% end %>

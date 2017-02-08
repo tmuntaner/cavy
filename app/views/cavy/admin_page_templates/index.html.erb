@@ -8,15 +8,18 @@
 <% if @page_templates.count >= 1 %>
     <table class="table table-striped">
       <thead>
-      <th>Name</th>
-      <th>Template to Render</th>
-      <th></th>
+      <tr>
+        <th>Name</th>
+        <th>Template to Render</th>
+        <th></th>
+        <th></th>
+      </tr>
       </thead>
       <tbody>
       <% @page_templates.each do |page_template| %>
           <tr>
             <td>
-              <%= page_template.name %>
+              <%= link_to page_template.name, admin_show_page_template_path(page_template.id) %>
             </td>
             <td>
               <%= page_template.template %>

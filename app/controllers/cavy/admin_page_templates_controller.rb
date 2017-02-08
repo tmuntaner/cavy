@@ -13,6 +13,12 @@ module Cavy
       @page_template = Cavy::PageTemplate.new
     end
 
+    def show
+      @page_template = Cavy::PageTemplate.find(params[:id])
+      #@page_template.fields = {title: 'string', content: 'text'}
+      #@page_template.save
+    end
+
     def create
       @page_template = Cavy::PageTemplate.new(page_template_params)
       if @page_template.save

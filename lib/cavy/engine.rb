@@ -1,6 +1,7 @@
 module Cavy
   class Engine < ::Rails::Engine
     isolate_namespace Cavy
+    require 'jquery-rails'
 
     config.assets.paths << File.expand_path('../../assets/fonts/cavy', __FILE__)
 

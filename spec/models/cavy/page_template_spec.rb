@@ -2,6 +2,14 @@ require 'spec_helper'
 
 module Cavy
   RSpec.describe PageTemplate, type: :model do
-    pending "add some examples to (or delete) #{__FILE__}"
+
+    describe 'field options' do
+
+      it 'should be able to provide a options array for select boxes' do
+        options = [%w(string STRING), %w(text TEXT)]
+        expect(Cavy::PageTemplate.get_field_options_for_select).to eq(options)
+      end
+
+    end
   end
 end

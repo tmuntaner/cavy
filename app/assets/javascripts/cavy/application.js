@@ -11,6 +11,7 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require cavy/jquery
+//= require jquery_ujs
 //= require cavy/foundation
 
 $(document).ready(function () {

@@ -1,0 +1,44 @@
+<% if params[:action] == 'new' or params[:action] == 'create' %>
+    <% url = admin_create_page_template_path %>
+    <% method = 'post' %>
+    <% submit_text = 'Create' %>
+<% else %>
+    <% url = admin_update_page_template_path(@page_template.id) %>
+    <% method = 'patch' %>
+    <% submit_text = 'Update' %>
+<% end %>
+
+<div class="row">
+  <div class="large-12 columns">
+    <%= form_for @page_template, url: url, method: method do |f| %>
+        <% if @page_template.errors.any? %>
+            <div id="error_explanation">
+              <h2>
+                <%= "#{pluralize(@page_template.errors.count, "error")} prohibited this page template from being saved:" %>
+              </h2>
+              <ul>
+                <% @page_template.errors.full_messages.each do |msg| %>
+                    <li>
+                      <%= msg %>
+                    </li>
+                <% end %>
+              </ul>
+            </div>
+        <% end %>
+        <div class="row">
+          <div class="large-4 columns">
+            <%= f.label :name, class: 'control-label' %>
+            <%= f.text_field :name, class: 'form-control' %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="large-4 columns">
+            <%= f.label :template, class: 'control-label' %>
+            <%= f.text_field :template, class: 'form-control' %>
+          </div>
+        </div>
+        <%= f.submit submit_text, class: 'button small success' %>
+    <% end %>
+  </div>
+</div>
+
