@@ -32,7 +32,7 @@ module Cavy
       self.content[I18n.locale.to_s] = new_content
     end
 
-    def update_elements(params)
+    def update_elements(params, locale = '')
       update_values = {page_elements: {}}
 
       self.page_elements.try(:each) do |key, value|
@@ -40,7 +40,8 @@ module Cavy
       end
 
       params.each do |key, value|
-        update_values[:page_elements][key] = value['value']
+        localized_key = locale != '' ? key + '_' + locale : key
+        update_values[:page_elements][localized_key] = (value.kind_of? String) ? value : value['value']
       end
 
       self.update(update_values) if update_values != {}

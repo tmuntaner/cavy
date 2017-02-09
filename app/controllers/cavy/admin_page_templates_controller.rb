@@ -15,7 +15,6 @@ module Cavy
 
     def show
       @page_template = Cavy::PageTemplate.find(params[:id])
-      @page_template.fields
     end
 
     def create
