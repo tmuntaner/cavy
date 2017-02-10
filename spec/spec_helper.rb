@@ -20,7 +20,7 @@ else
 end
 
 Capybara.default_max_wait_time = 10
-Capybara.javascript_driver = :webkit
+Capybara.javascript_driver     = :webkit
 
 # Load support files
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
@@ -35,16 +35,19 @@ RSpec.configure do |config|
   config.include MailerMacros
   config.include Cavy::Engine.routes.url_helpers
   config.before(:each, type: :controller) { @routes = Cavy::Engine.routes }
-  config.before(:each, type: :routing)    { @routes = Cavy::Engine.routes }
+  config.before(:each, type: :routing) { @routes = Cavy::Engine.routes }
 
   config.before(:each) do
     reset_email
     DatabaseCleaner.clean_with :truncation, except: [ActiveRecord::InternalMetadata.table_name]
     DatabaseCleaner.start
     Cavy.at_least_one_user = false
+    I18n.default_locale    = :en
+    I18n.locale            = :en
   end
 
   config.after(:each) do
     DatabaseCleaner.clean
+    Capybara.reset_sessions!
   end
 end

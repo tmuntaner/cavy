@@ -39,8 +39,8 @@ module Cavy
         update_values[:page_elements][key] = value
       end
 
-      params.each do |key, value|
-        localized_key = locale != '' ? key + '_' + locale : key
+      params.try(:each) do |key, value|
+        localized_key                                = locale != '' ? key + '_' + locale : key
         update_values[:page_elements][localized_key] = (value.kind_of? String) ? value : value['value']
       end
 
@@ -48,7 +48,7 @@ module Cavy
     end
 
     def set_key_value(key, value)
-      self.data = {} if self.data == nil
+      self.data      = {} if self.data == nil
       self.data[key] = value
     end
 
