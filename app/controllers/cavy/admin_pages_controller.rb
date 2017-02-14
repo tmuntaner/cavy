@@ -50,6 +50,7 @@ module Cavy
     def update
       @page = Cavy::Page.find(params[:id])
       @page_template = Cavy::PageTemplate.first
+      @page_templates = Cavy::PageTemplate.all
       @page.set_title params[:page][:title]
       @page.update_elements(params[:page][:page_elements], params[:locale])
       if @page.update_attributes(params[:page].except(:title, :page_elements))
@@ -62,6 +63,7 @@ module Cavy
     def edit
       @page = Cavy::Page.find(params[:id])
       @page_template = Cavy::PageTemplate.first
+      @page_templates = Cavy::PageTemplate.all
     end
 
     private

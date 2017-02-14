@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170206144114) do
+ActiveRecord::Schema.define(version: 20170214073143) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,14 +59,15 @@ ActiveRecord::Schema.define(version: 20170206144114) do
   end
 
   create_table "cavy_pages", force: :cascade do |t|
-    t.hstore "title"
-    t.hstore "content"
-    t.hstore "data"
-    t.string "render"
-    t.string "route"
-    t.text   "description"
-    t.string "tags",          array: true
-    t.json   "page_elements"
+    t.hstore  "title"
+    t.hstore  "content"
+    t.hstore  "data"
+    t.string  "render"
+    t.string  "route"
+    t.text    "description"
+    t.string  "tags",                  array: true
+    t.json    "page_elements"
+    t.integer "cavy_page_template_id"
   end
 
   create_table "cavy_policies", force: :cascade do |t|
@@ -84,4 +85,5 @@ ActiveRecord::Schema.define(version: 20170206144114) do
     t.datetime "updated_at"
   end
 
+  add_foreign_key "cavy_pages", "cavy_page_templates"
 end
