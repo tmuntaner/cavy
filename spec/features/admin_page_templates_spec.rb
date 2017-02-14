@@ -26,7 +26,7 @@ module Cavy
         click_link 'admin-new-page-template'
         fill_in 'page_template_name', with: 'foobar'
         fill_in 'page_template_template', with: 'cavy_test/pages/test'
-        click_button 'submit'
+        click_button 'add'
         expect(Cavy::PageTemplate.count).to eq(1)
         @page_template = Cavy::PageTemplate.last
         expect(@page_template.name).to eq('foobar')
@@ -40,10 +40,10 @@ module Cavy
       it 'should be able to add edit page template' do
         visit '/admin'
         click_link 'admin-page-templates'
-        click_link "edit-page-template#{@page_template.id}"
+        click_link "edit-page-template-#{@page_template.id}"
         fill_in 'page_template_name', with: 'foobar1'
         fill_in 'page_template_template', with: 'cavy_test/pages/test1'
-        click_button 'submit'
+        click_button 'add'
         @page_template = Cavy::PageTemplate.last
         expect(@page_template.name).to eq('foobar1')
         expect(@page_template.template).to eq('cavy_test/pages/test1')
@@ -56,21 +56,12 @@ module Cavy
         expect(Cavy::PageTemplate.count).to eq(0)
       end
 
-      it 'should be able to show page template' do
-        visit '/admin'
-        click_link 'admin-page-templates'
-        click_link "show-page-template-#{@page_template.id}"
-        expect(page).to have_current_path(admin_show_page_template_path(locale: 'en', id: @page_template.id))
-        expect(page).to have_content('Page Template')
-      end
-
-
       describe 'page template fields' do
         before(:each) do
           expect(@page_template.fields.nil?).to be_truthy
           visit '/admin'
           click_link 'admin-page-templates'
-          click_link "show-page-template-#{@page_template.id}"
+          click_link "edit-page-template-#{@page_template.id}"
           fill_in 'name', with: 'foobar'
           select 'string', from: 'type'
           click_button 'submit'
@@ -83,7 +74,7 @@ module Cavy
         it 'should be able to delete page template field' do
           visit '/admin'
           click_link 'admin-page-templates'
-          click_link "show-page-template-#{@page_template.id}"
+          click_link "edit-page-template-#{@page_template.id}"
           expect(@page_template.fields.empty?).to be_falsey
           click_link "delete-#{@page_template.id}-foobar"
           @page_template = Cavy::PageTemplate.last
@@ -93,7 +84,7 @@ module Cavy
         it 'should be able to update page template field' do
           visit '/admin'
           click_link 'admin-page-templates'
-          click_link "show-page-template-#{@page_template.id}"
+          click_link "edit-page-template-#{@page_template.id}"
           expect(@page_template.fields['foobar']).to eq('STRING')
           select 'text', from: 'type-foobar'
           click_button 'submit-foobar'

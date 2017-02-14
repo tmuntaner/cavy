@@ -1,5 +1,76 @@
 <div class="page-header">
-  <h1>Editing Page Template</h1>
+  <h1>Page Template: <%= @page_template.name %></h1>
 </div>
 
-<%= render 'form' %>
+<div class="expanded row">
+  <div class="large-9 columns">
+    <div class="form-set">
+
+      <div class="form-set-title">
+        Fields:
+      </div>
+
+      <% if @page_template.fields.nil? || @page_template.fields.empty? %>
+          There are no page template fields set yet.
+      <% else %>
+          <table>
+            <thead>
+            <tr>
+              <th>Name</th>
+              <th>Type</th>
+              <th></th>
+              <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <% @page_template.fields.each do |name, value| %>
+                <tr>
+
+                  <td><%= name %></td>
+                  <td><%= value %></td>
+                  <td>
+                    <%= form_tag admin_create_page_template_field_path(@page_template.id), method: :post do %>
+                        <%= hidden_field_tag 'page_template[name]', name %>
+                        <div class="row">
+                          <div class="large-6 columns">
+                            <%= select_tag 'page_template[type]', options_for_select(Cavy::PageTemplate.get_field_options_for_select, value), id: "type-#{name}" %>
+                          </div>
+                          <div class="large-4 columns">
+                            <%= submit_tag 'Update', class: 'button small success', id: "submit-#{name}" %>
+                          </div>
+                        </div>
+                    <% end %>
+                  </td>
+                  <td>
+                    <%= link_to 'Destroy', admin_delete_page_template_field_path(@page_template.id, name), class: 'button small alert', method: :delete, data: {:confirm => 'Are you sure?'}, id: "delete-#{@page_template.id}-#{name}" %>
+                  </td>
+                </tr>
+            <% end %>
+
+            </tbody>
+          </table>
+      <% end %>
+
+      <div class="form-set-title">
+        Add Field:
+      </div>
+      <%= form_tag admin_create_page_template_field_path(@page_template.id), method: :post do %>
+          <%= label_tag :name %>
+          <%= text_field_tag 'page_template[name]', nil, id: :name %>
+          <%= label_tag :type %>
+          <%= select_tag 'page_template[type]', options_for_select(Cavy::PageTemplate.get_field_options_for_select), id: :type %>
+
+          <%= submit_tag 'Add', class: 'button small success', id: 'submit' %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="large-3 columns">
+    <div class="form-set">
+      <div class="form-set-title">
+        Settings:
+      </div>
+      <%= render 'form' %>
+    </div>
+  </div>
+</div>

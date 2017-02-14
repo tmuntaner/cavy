@@ -32,22 +32,35 @@ module Cavy
         expect(@page.render).to eq('cavy_test/pages/test')
       end
 
-      it 'should be able to edit a page' do
+      it 'should be able to edit page settings' do
         @page = FactoryGirl.create(:cavy_page)
         visit '/admin'
         click_link 'admin-pages'
         click_link "edit-page-#{@page.id}"
         fill_in 'page_title', with: 'foobar'
-        fill_in 'page_render', with: 'cavy_test/pages/test'
         fill_in 'page_tag_string', with: 'foo,bar'
         fill_in 'page_route', with: 'foos'
         fill_in 'page_description', with: 'foo'
-        click_on 'submit_page'
+        click_on 'submit_page_settings'
         @page = Cavy::Page.find(@page.id)
-        expect(@page.render).to eq('cavy_test/pages/test')
         expect(@page.tags).to eq(%w(foo bar))
         expect(@page.route).to eq('foos')
         expect(@page.description).to eq('foo')
+      end
+
+      it 'should be able to edit page content' do
+        @page = FactoryGirl.create(:cavy_page)
+        visit '/admin'
+        click_link 'admin-pages'
+        click_link "edit-page-#{@page.id}"
+        fill_in 'page_title', with: 'title'
+        fill_in 'item[page_elements][content]', with: 'foo'
+        fill_in 'item[page_elements][element]', with: 'bar'
+        click_on 'submit_page_content'
+        @page = Cavy::Page.find(@page.id)
+        expect(@page.get_page_element('content')).to eq('foo')
+        expect(@page.localized_title).to eq('title')
+        expect(@page.get_page_element('element')).to eq('bar')
       end
 
       it 'should be able to go to the list of pages' do
@@ -59,41 +72,12 @@ module Cavy
         @page.destroy
       end
 
-      it 'should allow you go to the page page' do
-        @page = FactoryGirl.create(:cavy_page)
-        visit '/admin'
-        click_link 'admin-pages'
-        click_link "page-#{@page.id}"
-        expect(page).to have_content(@page.description)
-        @page.destroy
-      end
-
-      it 'should allow you go to go to the edit settings page through the show page' do
-        @page = FactoryGirl.create(:cavy_page)
-        visit '/admin'
-        click_link 'admin-pages'
-        click_link "page-#{@page.id}"
-        click_on 'edit-page-settings'
-        expect(page).to have_content('Edit')
-        @page.destroy
-      end
-
-      it 'should allow you go to go to the edit content page through the show page' do
-        @page = FactoryGirl.create(:cavy_page)
-        visit '/admin'
-        click_link 'admin-pages'
-        click_link "page-#{@page.id}"
-        click_on 'edit-page-content'
-        expect(page).to have_content(@page.localized_content)
-        @page.destroy
-      end
-
       it 'should be able to add data' do
         @page = FactoryGirl.create(:cavy_page)
         visit '/admin'
         click_link 'admin-pages'
-        click_link "page-#{@page.id}"
-        click_on 'add-data'
+        click_link "edit-page-#{@page.id}"
+        click_link "edit-page-data-#{@page.id}"
         fill_in 'page[key]', with: 'test'
         fill_in 'page[value]', with: 'value'
         click_button 'submit'

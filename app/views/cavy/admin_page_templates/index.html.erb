@@ -20,13 +20,10 @@
       <% @page_templates.each do |page_template| %>
           <tr>
             <td>
-              <%= link_to page_template.name, admin_show_page_template_path(page_template.id), id: "show-page-template-#{page_template.id}" %>
+              <%= link_to page_template.name, admin_edit_page_template_path(page_template.id), id: "edit-page-template-#{page_template.id}" %>
             </td>
             <td>
               <%= page_template.template %>
-            </td>
-            <td>
-              <%= link_to 'Edit', admin_edit_page_template_path(page_template.id), class: 'button small primary', id: "edit-page-template#{page_template.id}" %>
             </td>
             <% if current_user.dev_team? %>
                 <td>

@@ -4,6 +4,7 @@ module Cavy
     validates :route, uniqueness: true
 
     attr_accessor :tag_string, :key, :value
+    belongs_to :cavy_page_template, class_name: 'Cavy::PageTemplate'
 
     methods = [:make_route, :check_tags, :check_page_elements]
 
@@ -16,8 +17,10 @@ module Cavy
       self.title[I18n.locale.to_s].to_s
     end
 
-    def set_title (new_title)
-      self.title[I18n.locale.to_s] = new_title
+    def set_title (new_title, locale=nil)
+      locale ||= I18n.locale.to_s
+
+      self.title[locale] = new_title
     end
 
     def localized_content
@@ -28,8 +31,19 @@ module Cavy
       end
     end
 
+    def update_page (params, locale)
+      self.set_title params[:title], locale
+      self.update_elements(params[:page_elements], locale)
+      self.update_attributes(params.except(:title, :page_elements))
+    end
+
     def set_content (new_content)
       self.content[I18n.locale.to_s] = new_content
+    end
+
+    def get_page_element(element, locale=nil)
+      locale ||= I18n.locale.to_s
+      self.page_elements[element + '_' + locale]
     end
 
     def update_elements(params, locale = '')

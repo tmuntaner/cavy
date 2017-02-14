@@ -25,19 +25,11 @@
               </ul>
             </div>
         <% end %>
-        <div class="row">
-          <div class="large-4 columns">
-            <%= f.label :name, class: 'control-label' %>
-            <%= f.text_field :name, class: 'form-control' %>
-          </div>
-        </div>
-        <div class="row">
-          <div class="large-4 columns">
-            <%= f.label :template, class: 'control-label' %>
-            <%= f.text_field :template, class: 'form-control' %>
-          </div>
-        </div>
-        <%= f.submit submit_text, class: 'button small success', id: 'submit' %>
+        <%= f.label :name, class: 'control-label' %>
+        <%= f.text_field :name, class: 'form-control' %>
+        <%= f.label :template, class: 'control-label' %>
+        <%= f.text_field :template, class: 'form-control' %>
+        <%= f.submit submit_text, class: 'button small success', id: 'add' %>
     <% end %>
   </div>
 </div>

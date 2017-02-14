@@ -15,15 +15,6 @@
 
 <header>
   <%= render 'layouts/cavy/admin_header' %>
-  <% flash.each do |key, value| %>
-      <div class="callout <%= key %>" data-closable>
-        <%= value %>
-
-        <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-  <% end %>
 </header>
 
 <main id="content">
@@ -32,6 +23,15 @@
       <%= render 'layouts/cavy/admin_sidebar' %>
     </div>
     <div class="large-10 columns">
+      <% flash.each do |key, value| %>
+          <div class="callout <%= key %>" style="margin-top: 1em;" data-closable>
+            <%= value %>
+
+            <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+      <% end %>
       <%= yield %>
     </div>
   </div>

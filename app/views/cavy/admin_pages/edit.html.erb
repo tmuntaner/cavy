@@ -2,65 +2,87 @@
   <h1>Edit Page</h1>
 </div>
 
-<%= form_for(@page, url: admin_update_page_path, method: :put) do |f| %>
-    <% if @page.errors.any? %>
-        <div id="error_explanation">
-          <h2>
-            <%= pluralize(@page.errors.count, "error") %>
-            prohibited this page from being saved:
-          </h2>
-          <ul>
-            <% @page.errors.full_messages.each do |msg| %>
-                <li>
-                  <%= msg %>
-                </li>
-            <% end %>
-          </ul>
-        </div>
-    <% end %>
+<div class="button-group" style="margin-bottom: 2rem;">
+  <a href="<%= admin_add_page_data_path(@page.id) %>" id="edit-page-data-<%= @page.id %>" class="button small">
+    <i class="fa fa-database" aria-hidden="true"></i>
+    Add Data Field
+  </a>
+</div>
 
-    <div class="row">
-      <div class="large-6 columns">
-        <fieldset class="fieldset">
-          <legend>SEO</legend>
+<% if @page.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@page.errors.count, 'error') %>
+        prohibited this page from being saved:
+      </h2>
+      <ul>
+        <% @page.errors.full_messages.each do |msg| %>
+            <li>
+              <%= msg %>
+            </li>
+        <% end %>
+      </ul>
+    </div>
+<% end %>
+
+<div class="expanded row">
+  <div class="large-9 columns">
+    <div class="form-set">
+      <%= form_for(@page, url: admin_update_page_path, method: :put) do |f| %>
+          <div class="form-set-title">
+            Page Content
+          </div>
+
+          <%= f.label :title, class: 'control-label' %>
+          <%= f.text_field :title, class: 'form-control', value: @page.localized_title %>
+
+          <% @page.cavy_page_template.fields.try(:each) do |key, value| %>
+              <%= f.label key, class: 'control-label' %>
+              <% if value == 'TEXT' %>
+                  <%= f.text_area key, class: 'form-control', value: @page.get_page_element(key), name: "page[page_elements][#{key}]", id: "item[page_elements][#{key}]" %>
+              <% elsif value == 'STRING' %>
+                  <%= f.text_field key, class: 'form-control', value: @page.get_page_element(key), name: "page[page_elements][#{key}]", id: "item[page_elements][#{key}]" %>
+              <% end %>
+          <% end unless @page.cavy_page_template.nil? %>
+
+          <% unless @page.data == nil || @page.data == {} %>
+              <div class="form-set-title">
+                Page Data
+              </div>
+              <% @page.data.try(:each) do |key, value| %>
+                  <%= f.label key, class: 'control-label' %>
+                  <%= f.text_field key, class: 'form-control', value: value, name: "page[data][#{key}]", id: "item[data][#{key}]" %>
+              <% end %>
+          <% end %>
+
+          <%= f.submit('Submit', class: 'success button', id: 'submit_page_content') %>
+      <% end %>
+    </div>
+  </div>
+  <div class="large-3 columns">
+    <div class="form-set">
+      <%= form_for(@page, url: admin_update_page_path, method: :put) do |f| %>
+
+          <div class="form-set-title">
+            Page Settings
+          </div>
+          <%= f.label :cavy_page_template_id, 'Page Template' %>
+          <%= f.collection_select :cavy_page_template_id, Cavy::PageTemplate.all, :id, :name, {selected: @page.cavy_page_template_id} %>
+          <%= f.label :route, class: 'control-label' %>
+          <%= f.text_field :route, class: 'form-control' %>
+
+          <div class="form-set-title">
+            SEO
+          </div>
           <%= f.label :meta_tags, class: 'control-label' %>
           <%= f.text_field :tag_string, value: "#{@page.tags.join(',') if @page.tags.to_s != ''}", class: 'form-control', id: 'page_tag_string' %>
           <%= f.label :meta_description, class: 'control-label' %>
           <%= f.text_area :description, class: 'form-control' %>
-        </fieldset>
-      </div>
-      <div class="large-6 columns">
-        <% if current_user.dev_team? %>
-            <fieldset class="fieldset">
-              <legend>Page Settings</legend>
-              <%= f.label :render, class: 'control-label' %>
-              <%= f.text_field :render, class: 'form-control' %>
-              <%= f.label :route, class: 'control-label' %>
-              <%= f.text_field :route, class: 'form-control' %>
-            </fieldset>
-        <% end %>
-      </div>
+
+          <%= f.submit('Submit', class: 'success button', id: 'submit_page_settings') %>
+      <% end %>
     </div>
+  </div>
+</div>
 
-    <fieldset class="fieldset">
-      <legend>Page Content</legend>
-      <%= f.label :title, class: 'control-label' %>
-      <%= f.text_field :title, class: 'form-control', value: @page.localized_title %>
-      <% @page.data.try(:each) do |key, value| %>
-          <%= f.label key, class: 'control-label' %>
-          <%= f.text_field key, class: 'form-control', value: value, name: "page[data][#{key}]", id: "item[data][#{key}]" %>
-      <% end %>
-      <% unless @page_template.nil? %>
-           <% @page_template.fields.try(:each) do |key, value| %>
-              <%= f.label key, class: 'control-label' %>
-              <% if value == 'TEXT' %>
-                  <%= f.text_area key, class: 'form-control', value: '', name: "page[page_elements][#{key}]", id: "item[page_elements][#{key}]" %>
-              <% elsif value == 'STRING' %>
-                  <%= f.text_field key, class: 'form-control', value: '', name: "page[page_elements][#{key}]", id: "item[page_elements][#{key}]" %>
-              <% end %>
-          <% end %>
-      <% end %>
-    </fieldset>
 
-    <%= f.submit('Submit', class: 'success button', id: 'submit_page') %>
-<% end %>

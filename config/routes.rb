@@ -21,8 +21,7 @@ Cavy::Engine.routes.draw do
     get '/admin/page_templates', to: 'admin_page_templates#index', as: 'admin_page_templates'
     get '/admin/page_template/new', to: 'admin_page_templates#new', as: 'admin_new_page_template'
     post '/admin/page_template', to: 'admin_page_templates#create', as: 'admin_create_page_template'
-    get '/admin/page_template/:id/edit', to: 'admin_page_templates#edit', as: 'admin_edit_page_template'
-    get '/admin/page_template/:id', to: 'admin_page_templates#show', as: 'admin_show_page_template'
+    get '/admin/page_template/:id', to: 'admin_page_templates#edit', as: 'admin_edit_page_template'
     patch '/admin/page_template/:id', to: 'admin_page_templates#update', as: 'admin_update_page_template'
     delete '/admin/page_template/:id', to: 'admin_page_templates#delete', as: 'admin_delete_page_template'
 
@@ -30,10 +29,9 @@ Cavy::Engine.routes.draw do
     get '/admin/pages', to: 'admin_pages#index', as: 'admin_pages'
     get '/admin/new_page', to: 'admin_pages#new', as: 'admin_new_page'
     post '/admin/page', to: 'admin_pages#create', as: 'admin_create_page'
-    get '/admin/page/edit/:id', to: 'admin_pages#edit', as: 'admin_edit_page'
     get '/admin/page/data/:id', to: 'admin_page_data#new', as: 'admin_add_page_data'
     post '/admin/page/data/:id', to: 'admin_page_data#create', as: 'admin_create_page_data'
-    get '/admin/page/:id', to: 'admin_pages#show', as: 'admin_page'
+    get '/admin/page/:id', to: 'admin_pages#edit', as: 'admin_edit_page'
     put '/admin/page/:id', to: 'admin_pages#update', as: 'admin_update_page'
     delete '/admin/page/:id', to: 'admin_pages#delete', as: 'admin_delete_page'
 

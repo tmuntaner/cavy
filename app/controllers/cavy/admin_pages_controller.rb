@@ -27,10 +27,6 @@ module Cavy
       @page = Cavy::Page.new
     end
 
-    def show
-      @page = Cavy::Page.find(params[:id])
-    end
-
     def create
       @page = Page.new(params[:page])
       @page.set_title params[:page][:title]
@@ -49,28 +45,23 @@ module Cavy
 
     def update
       @page = Cavy::Page.find(params[:id])
-      @page_template = Cavy::PageTemplate.first
-      @page_templates = Cavy::PageTemplate.all
-      @page.set_title params[:page][:title]
-      @page.update_elements(params[:page][:page_elements], params[:locale])
-      if @page.update_attributes(params[:page].except(:title, :page_elements))
-        redirect_to admin_page_path(@page), flash: {success: 'Successfully updated page.'}
+      if @page.update_page(page_params, params[:locale])
+        redirect_to admin_edit_page_path(@page), flash: {success: 'Successfully updated page.'}
       else
         render action: 'edit'
       end
     end
 
     def edit
-      @page = Cavy::Page.find(params[:id])
-      @page_template = Cavy::PageTemplate.first
-      @page_templates = Cavy::PageTemplate.all
+      @page = Cavy::Page.joins(:cavy_page_template).find(params[:id])
     end
 
     private
 
     def page_params
-      # TODO Find a way to use hstore with strong parameters
-      # params.require(:page).permit(:title, :render, :route, :tag_string, :description, :key, :value, :data)
+      params.require(:page).permit(:title, :page_elements, :cavy_page_template_id, :route, :tag_string, :description).tap do |whitelisted|
+        whitelisted[:page_elements] = params[:page][:page_elements]
+      end
     end
 
   end
