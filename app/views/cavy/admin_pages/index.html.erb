@@ -16,16 +16,21 @@
       <tr>
         <th>Title</th>
         <th>Route</th>
+        <th></th>
       </tr>
       </thead>
       <tbody>
       <% @pages.each do |page| %>
           <tr>
             <td>
-              <a href="<%= admin_edit_page_path(page.id) %>" id="edit-page-<%= page.id %>"><%= page.localized_title %></a>
+              <a href="<%= admin_edit_page_path(page.id) %>"><%= page.localized_title %></a>
+
             </td>
             <td>
               /<%= page.route %>
+            </td>
+            <td>
+              <a href="<%= admin_edit_page_path(page.id) %>" id="edit-page-<%= page.id %>" class="button small">Edit</a>
             </td>
           </tr>
       <% end %>

@@ -40,6 +40,11 @@
               <%= f.label key, class: 'control-label' %>
               <% if value == 'TEXT' %>
                   <%= f.text_area key, class: 'form-control', value: @page.get_page_element(key), name: "page[page_elements][#{key}]", id: "item[page_elements][#{key}]" %>
+                  <script>
+                    CKEDITOR.replace('<%= "item[page_elements][#{key}]" %>', {
+                        language: '<%= I18n.locale %>',
+                    })
+                  </script>
               <% elsif value == 'STRING' %>
                   <%= f.text_field key, class: 'form-control', value: @page.get_page_element(key), name: "page[page_elements][#{key}]", id: "item[page_elements][#{key}]" %>
               <% end %>
