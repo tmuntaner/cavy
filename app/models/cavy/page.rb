@@ -13,8 +13,21 @@ module Cavy
       before_create method
     end
 
-    def localized_title
-      self.title[I18n.locale.to_s].to_s
+    def localized_title (locale = nil)
+      locale ||= I18n.locale.to_s
+      text   = self.title[locale]
+
+      if text.to_s == '' and locale != Cavy.default_locale.to_s
+        text = self.title[Cavy.default_locale.to_s]
+      end
+
+      Cavy.locales.try(:each) do |alt_locale|
+        unless alt_locale.to_s == Cavy.default_locale.to_s or alt_locale.to_s == locale
+          text = self.title[alt_locale.to_s]
+        end
+        break if text.to_s != ''
+      end if text.to_s == ''
+      text.to_s
     end
 
     def set_title (new_title, locale=nil)
@@ -43,7 +56,20 @@ module Cavy
 
     def get_page_element(element, locale=nil)
       locale ||= I18n.locale.to_s
-      self.page_elements[element + '_' + locale]
+      text   = localized_page_element(element, locale)
+
+      if text.to_s == '' and locale != Cavy.default_locale.to_s
+        text = localized_page_element(element, Cavy.default_locale)
+      end
+
+      Cavy.locales.try(:each) do |alt_locale|
+        unless alt_locale.to_s == Cavy.default_locale.to_s or alt_locale.to_s == locale
+          text = localized_page_element(element, alt_locale)
+        end
+        break if text.to_s != ''
+      end if text.to_s == ''
+
+      text.to_s
     end
 
     def update_elements(params, locale = '')
@@ -67,6 +93,10 @@ module Cavy
     end
 
     private
+
+    def localized_page_element (element, locale)
+      self.page_elements[element + '_' + locale.to_s]
+    end
 
     def check_page_elements
       self.page_elements = {} if self.page_elements == nil
