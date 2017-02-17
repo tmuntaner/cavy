@@ -53,7 +53,7 @@ module Cavy
     end
 
     def edit
-      @page = Cavy::Page.joins(:cavy_page_template).find(params[:id])
+      @page = Cavy::Page.find(params[:id])
     end
 
     private

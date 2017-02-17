@@ -45,7 +45,7 @@ module Cavy
     end
 
     def update_page (params, locale)
-      self.set_title params[:title], locale
+      self.set_title params[:title], locale if params[:title] != nil
       self.update_elements(params[:page_elements], locale)
       self.update_attributes(params.except(:title, :page_elements))
     end
