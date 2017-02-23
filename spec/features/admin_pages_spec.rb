@@ -34,11 +34,14 @@ module Cavy
 
       it 'should be able to edit page settings' do
         @page = FactoryGirl.create(:cavy_page)
+        @page_template = FactoryGirl.create(:cavy_page_template)
+        expect(@page.render).to_not eq(@page_template.template)
         visit '/admin'
         click_link 'admin-pages'
         click_link "edit-page-#{@page.id}"
         fill_in 'page_title', with: 'foobar'
         fill_in 'page_tag_string', with: 'foo,bar'
+        select @page_template.name, from: :page_cavy_page_template_id
         fill_in 'page_route', with: 'foos'
         fill_in 'page_description', with: 'foo'
         click_on 'submit_page_settings'
@@ -46,6 +49,7 @@ module Cavy
         expect(@page.tags).to eq(%w(foo bar))
         expect(@page.route).to eq('foos')
         expect(@page.description).to eq('foo')
+        expect(@page.render).to eq(@page_template.template)
       end
 
       it 'should be able to edit page content' do

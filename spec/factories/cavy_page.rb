@@ -13,7 +13,7 @@ FactoryGirl.define do
     page.page_elements {}
     page.tags %w(foo bar)
     page.description "bacon ipsum dolor sit amet #{Cavy::Page.count}"
-    page.association :cavy_page_template
+    page.association :cavy_page_template, factory: :cavy_page_template
 
   end
 end
