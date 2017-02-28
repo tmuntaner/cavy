@@ -27,8 +27,8 @@
         <%= f.text_field :title, class: 'form-control' %>
       </div>
       <div class="form-group">
-        <%= f.label 'Page to Render', class: 'control-label' %>
-        <%= f.text_field :render, class: 'form-control' %>
+        <%= f.label :cavy_page_template_id, 'Page Template' %>
+        <%= f.collection_select :cavy_page_template_id, Cavy::PageTemplate.all, :id, :name %>
       </div>
       <%= f.submit('Submit', class: 'success button', id: 'submit_page') %>
     </fieldset>

@@ -22,14 +22,16 @@ module Cavy
       end
 
       it 'should be able to add a new page' do
+        @page_template = FactoryGirl.create(:cavy_page_template)
         visit '/admin'
         click_link 'admin-pages'
         click_link 'admin-new-page'
         fill_in 'page_title', with: 'foobar'
-        fill_in 'page_render', with: 'cavy_test/pages/test'
+        select @page_template.name, from: :page_cavy_page_template_id
         click_on 'submit_page'
         @page = Cavy::Page.last
-        expect(@page.render).to eq('cavy_test/pages/test')
+        expect(@page.cavy_page_template_id).to eq(@page_template.id)
+        expect(@page.render).to eq(@page_template.template)
       end
 
       it 'should be able to edit page settings' do

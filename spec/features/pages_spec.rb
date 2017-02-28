@@ -5,7 +5,8 @@ module Cavy
 
     before(:each) do
       I18n.locale = :en
-      @page = FactoryGirl.create(:cavy_page, title: {en: 'home', de: 'home'})
+      @page_template = FactoryGirl.create(:cavy_page_template, template: 'cavy/pages/page')
+      @page = FactoryGirl.create(:cavy_page, title: {en: 'home', de: 'home'}, cavy_page_template: @page_template)
       @user = FactoryGirl.create(:cavy_user, password: 'secret', password_confirmation: 'secret')
     end
 
@@ -20,7 +21,7 @@ module Cavy
     end
 
     it 'should be able to click link to new page from home page' do
-      @about = Page.create(title: {en: 'about', de: 'über'}, content: {en: 'foo_about_bar', de: 'foo_über_bar'})
+      @about = Page.create(title: {en: 'about', de: 'über'}, content: {en: 'foo_about_bar', de: 'foo_über_bar', cavy_page_template: @page_template})
       visit '/'
       click_link 'about'
       expect(page).to have_content('foo_about_bar')
@@ -46,7 +47,7 @@ module Cavy
     end
 
     it 'should be able to go to non-root page through url' do
-      @about = Page.create(title: {en: 'about', de: 'über'}, content: {en: 'foo_about_bar', de: 'foo_über_bar'})
+      @about = Page.create(title: {en: 'about', de: 'über'}, content: {en: 'foo_about_bar', de: 'foo_über_bar'}, cavy_page_template: @page_template)
       visit '/about'
       expect(page).to have_content('foo_about_bar')
       @about.destroy
@@ -62,13 +63,13 @@ module Cavy
     describe 'edits' do
       it 'should allow a signed in site manager to go to the edit page' do
         log_in('admin')
-        @page = FactoryGirl.create(:cavy_page)
+        @page = FactoryGirl.create(:cavy_page, cavy_page_template: @page_template)
         visit cavy_edit_page_path({locale: :en, route: @page.route})
         expect(page).to have_content('Back to Content')
         log_out
       end
       it 'should not allow a signed in site manager to go to the edit page' do
-        @page = FactoryGirl.create(:cavy_page)
+        @page = FactoryGirl.create(:cavy_page, cavy_page_template: @page_template)
         visit cavy_edit_page_path({locale: :en, route: @page.route})
         expect(page).not_to have_content('Back to Content')
       end
@@ -76,7 +77,7 @@ module Cavy
 
     describe 'seo' do
       it 'should display the page description and meta tags' do
-        @page = FactoryGirl.create(:cavy_page, title: {en: 'seo', de: 'das seo'}, description: 'guinea pigs are awesome', tags: ['Ghost', 'Summer', 'Pumpkin Spice', 'Greywind'])
+        @page = FactoryGirl.create(:cavy_page, title: {en: 'seo', de: 'das seo'}, description: 'guinea pigs are awesome', tags: ['Ghost', 'Summer', 'Pumpkin Spice', 'Greywind'], cavy_page_template: @page_template)
         visit "/#{@page.route}"
         page.find "meta[content='#{@page.description}']", visible: 'false'
         page.find "meta[content='#{@page.tags.join(', ')}']", visible: 'false'

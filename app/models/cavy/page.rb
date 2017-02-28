@@ -6,7 +6,7 @@ module Cavy
     attr_accessor :tag_string, :key, :value
     belongs_to :cavy_page_template, class_name: 'Cavy::PageTemplate'
 
-    methods = [:make_route, :check_tags, :check_page_elements]
+    methods = [:make_route, :check_tags, :check_page_elements, :update_render]
 
     methods.each do |method|
       before_save method
@@ -15,7 +15,7 @@ module Cavy
 
     def localized_title (locale = nil)
       locale ||= I18n.locale.to_s
-      text   = self.title[locale]
+      text = self.title[locale]
 
       if text.to_s == '' and locale != Cavy.default_locale.to_s
         text = self.title[Cavy.default_locale.to_s]
@@ -45,10 +45,6 @@ module Cavy
     end
 
     def update_page (params, locale)
-      if params['cavy_page_template_id'] != nil
-        template = Cavy::PageTemplate.find(params[:cavy_page_template_id])
-        params['render'] = template.template
-      end
       self.set_title params[:title], locale if params[:title] != nil
       self.update_elements(params[:page_elements], locale)
       self.update_attributes(params.except(:title, :page_elements))
@@ -60,7 +56,7 @@ module Cavy
 
     def get_page_element(element, locale=nil)
       locale ||= I18n.locale.to_s
-      text   = localized_page_element(element, locale)
+      text = localized_page_element(element, locale)
 
       if text.to_s == '' and locale != Cavy.default_locale.to_s
         text = localized_page_element(element, Cavy.default_locale)
@@ -84,7 +80,7 @@ module Cavy
       end
 
       params.try(:each) do |key, value|
-        localized_key                                = locale != '' ? key + '_' + locale : key
+        localized_key = locale != '' ? key + '_' + locale : key
         update_values[:page_elements][localized_key] = (value.kind_of? String) ? value : value['value']
       end
 
@@ -92,7 +88,7 @@ module Cavy
     end
 
     def set_key_value(key, value)
-      self.data      = {} if self.data == nil
+      self.data = {} if self.data == nil
       self.data[key] = value
     end
 
@@ -118,6 +114,13 @@ module Cavy
 
     def make_route
       self.route = self.localized_title.gsub(' ', '_').downcase if self.route.to_s == ''
+    end
+
+    def update_render
+      unless self.cavy_page_template_id.nil?
+        template = Cavy::PageTemplate.find(self.cavy_page_template_id)
+        self.render = template.template unless template.nil?
+      end
     end
 
   end

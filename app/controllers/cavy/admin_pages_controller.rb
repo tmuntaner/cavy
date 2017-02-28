@@ -17,7 +17,7 @@ module Cavy
       @page = Cavy::Page.find(params[:id])
       @page.set_key_value(params[:page][:key], params[:page][:value])
       if @page.save
-        redirect_to admin_page_path(@page.id), notice: 'Page was successfully created.'
+        redirect_to admin_edit_page_path(@page.id), flash: {success: 'Page was successfully created.'}
       else
         render action :create_data
       end
@@ -31,7 +31,7 @@ module Cavy
       @page = Page.new(params[:page])
       @page.set_title params[:page][:title]
       if @page.save
-        redirect_to admin_page_path(@page), notice: 'Page was successfully created.'
+        redirect_to admin_edit_page_path(@page), flash: {success: 'Page was successfully created.'}
       else
         render action: 'new'
       end
