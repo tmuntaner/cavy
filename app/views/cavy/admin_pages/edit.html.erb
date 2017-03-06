@@ -34,21 +34,17 @@
           </div>
 
           <%= f.label 'Title:', class: 'control-label' %>
-          <%= f.text_field :title, class: 'form-control', value: @page.localized_title %>
+          <%= render 'cavy/admin_pages/page_localized_string_field', id: 'page_title', field_name: 'page[title]', translations: @page.get_title_translations %>
 
           <% @page.cavy_page_template.fields.try(:each) do |key, value| %>
               <%= f.label "#{key}:", class: 'control-label' %>
               <% if value == 'TEXT' %>
-                  <%= f.text_area key, class: 'form-control', value: @page.get_page_element(key), name: "page[page_elements][#{key}]", id: "item[page_elements][#{key}]" %>
-                  <script>
-                    CKEDITOR.replace('<%= "item[page_elements][#{key}]" %>', {
-                        language: '<%= I18n.locale %>'
-                    })
-                  </script>
+                  <%= render 'cavy/admin_pages/page_localized_text_field', id: "item_page_elements_#{key}", field_name: "page[page_elements][#{key}]", translations: @page.get_translations(key) %>
               <% elsif value == 'STRING' %>
-                  <%= f.text_field key, class: 'form-control', value: @page.get_page_element(key), name: "page[page_elements][#{key}]", id: "item[page_elements][#{key}]" %>
+                  <%= render 'cavy/admin_pages/page_localized_string_field', id: "item_page_elements_#{key}", field_name: "page[page_elements][#{key}]", translations: @page.get_translations(key) %>
               <% end %>
           <% end unless @page.cavy_page_template.nil? %>
+
 
           <% unless @page.data == nil || @page.data == {} %>
               <div class="form-set-title" style="padding-top: 1em">

@@ -126,3 +126,34 @@
 .page-header {
   padding: 1em 0 1em 0;
 }
+
+ul.localized-field-locale-labels {
+  list-style: none;
+  li {
+    display: inline-block;
+
+    a, a:hover {
+      color: rgb(51,51,51);
+
+      &.empty {
+        color: red;
+      }
+
+      &.filled {
+        color: green;
+      }
+
+      &.active {
+        color: blue;
+      }
+    }
+
+    &:after {
+      content: ' | ';
+    }
+
+    &:last-child:after {
+      content: '';
+    }
+  }
+}

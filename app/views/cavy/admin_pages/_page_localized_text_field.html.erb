@@ -1,0 +1,26 @@
+<div class="row" id="<%= "translation-#{id}" %>">
+  <div class="large-9 columns">
+    <% translations.try(:each) do |key, value| %>
+        <textarea oninput="translationFieldChanged($(this))" data-locale="<%= key %>" id="<%= "translation-#{id}-#{key}" %>" name="<%= "#{field_name}[#{key}]"; %>"><%= value %></textarea>
+        <script>
+        </script>
+    <% end %>
+  </div>
+  <div class="large-3 columns">
+    <ul id="<%= "translation-labels-#{id}" %>" class="localized-field-locale-labels">
+      <% translations.try(:each) do |key, value| %>
+          <li>
+            <a id="<%= "translation-labels-#{id}-#{key}" %>" data-labels="<%= "translation-labels-#{id}" %>" data-locale="<%= key %>" onclick="translationLabelClicked($(this), '<%= "translation-#{id}" %>')">
+              <%= key.upcase %>
+            </a>
+          </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+<script type="application/javascript">
+    $(document).ready(function () {
+        initializeTranslationFields("<%= "translation-#{id}" %>", "<%= "translation-labels-#{id}" %>", "<%= "translation-#{id}-#{I18n.locale}" %>");
+    });
+</script>

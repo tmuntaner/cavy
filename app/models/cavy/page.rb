@@ -45,8 +45,8 @@ module Cavy
     end
 
     def update_page (params, locale)
-      self.set_title params[:title], locale if params[:title] != nil
-      self.update_elements(params[:page_elements], locale)
+      self.title = params[:title] if params[:title].to_h != {}
+      self.update_elements(params[:page_elements].to_h, locale)
       self.update_attributes(params.except(:title, :page_elements))
     end
 
@@ -72,6 +72,22 @@ module Cavy
       text.to_s
     end
 
+    def get_title_translations
+      translations = {}
+      Cavy.locales.try(:each) do |alt_locale|
+        translations[alt_locale] = self.title[alt_locale.to_s].to_s
+      end
+      translations
+    end
+
+    def get_translations (element)
+      translations = {}
+      Cavy.locales.try(:each) do |alt_locale|
+        translations[alt_locale] = localized_page_element(element, alt_locale)
+      end
+      translations
+    end
+
     def update_elements(params, locale = '')
       update_values = {page_elements: {}}
 
@@ -80,8 +96,15 @@ module Cavy
       end
 
       params.try(:each) do |key, value|
-        localized_key = locale != '' ? key + '_' + locale : key
-        update_values[:page_elements][localized_key] = (value.kind_of? String) ? value : value['value']
+        if value.is_a?(Hash)
+          Cavy.locales.try(:each) do |alt_locale|
+          localized_key = key + '_' + alt_locale.to_s
+          update_values[:page_elements][localized_key] = value[alt_locale.to_s]
+          end
+        else
+          localized_key = locale != '' ? key + '_' + locale : key
+          update_values[:page_elements][localized_key] = (value.kind_of? String) ? value : value['value']
+        end
       end
 
       self.update(update_values) if update_values != {}
@@ -95,7 +118,7 @@ module Cavy
     private
 
     def localized_page_element (element, locale)
-      self.page_elements[element + '_' + locale.to_s]
+      self.page_elements[element + '_' + locale.to_s].to_s
     end
 
     def check_page_elements
