@@ -34,14 +34,14 @@
           </div>
 
           <%= f.label 'Title:', class: 'control-label' %>
-          <%= render 'cavy/admin_pages/page_localized_string_field', id: 'page_title', field_name: 'page[title]', translations: @page.get_title_translations %>
+          <%= render 'cavy/admin_pages/page_localized_string_field', id: 'page-title', field_name: 'page[title]', translations: @page.get_title_translations %>
 
           <% @page.cavy_page_template.fields.try(:each) do |key, value| %>
               <%= f.label "#{key}:", class: 'control-label' %>
               <% if value == 'TEXT' %>
-                  <%= render 'cavy/admin_pages/page_localized_text_field', id: "item_page_elements_#{key}", field_name: "page[page_elements][#{key}]", translations: @page.get_translations(key) %>
+                  <%= render 'cavy/admin_pages/page_localized_text_field', id: "page-elements-#{key}", field_name: "page[page_elements][#{key}]", translations: @page.get_translations(key) %>
               <% elsif value == 'STRING' %>
-                  <%= render 'cavy/admin_pages/page_localized_string_field', id: "item_page_elements_#{key}", field_name: "page[page_elements][#{key}]", translations: @page.get_translations(key) %>
+                  <%= render 'cavy/admin_pages/page_localized_string_field', id: "page-elements-#{key}", field_name: "page[page_elements][#{key}]", translations: @page.get_translations(key) %>
               <% end %>
           <% end unless @page.cavy_page_template.nil? %>
 

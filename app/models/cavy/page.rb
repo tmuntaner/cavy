@@ -15,7 +15,7 @@ module Cavy
 
     def localized_title (locale = nil)
       locale ||= I18n.locale.to_s
-      text = self.title[locale]
+      text = self.title[locale.to_s]
 
       if text.to_s == '' and locale != Cavy.default_locale.to_s
         text = self.title[Cavy.default_locale.to_s]
@@ -98,8 +98,8 @@ module Cavy
       params.try(:each) do |key, value|
         if value.is_a?(Hash)
           Cavy.locales.try(:each) do |alt_locale|
-          localized_key = key + '_' + alt_locale.to_s
-          update_values[:page_elements][localized_key] = value[alt_locale.to_s]
+            localized_key = key.to_s + '_' + alt_locale.to_s
+            update_values[:page_elements][localized_key] = value[alt_locale.to_s]
           end
         else
           localized_key = locale != '' ? key + '_' + locale : key

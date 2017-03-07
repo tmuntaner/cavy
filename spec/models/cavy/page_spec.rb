@@ -7,7 +7,7 @@ module Cavy
       it 'should be able to add page content' do
         I18n.locale = :en
         page = Cavy::Page.create('title' => {'en' => 'foo bar', 'de' => 'das foo bar'}, 'content' => {'en' => 'bar', 'de' => 'das bar'})
-        elements = {'title' => 'bar', 'content' => 'foo', 'page' => {'value' => 'element'}}
+        elements = {'title' => {'en' => 'bar'}, 'content' => 'foo', 'page' => 'element'}
         page.update_elements(elements)
         page = Cavy::Page.find(page.id)
         expect(page.localized_title).to eq('foo bar')
@@ -17,7 +17,7 @@ module Cavy
       it 'should not replace past page content when saving, just override' do
         I18n.locale = :en
         page = Cavy::Page.create('title' => {'en' => 'foo bar', 'de' => 'das foo bar'}, 'content' => {'en' => 'bar', 'de' => 'das bar'}, 'page_elements' => {'foo' => 'foo'})
-        elements = {'title' => 'bar', 'content' => 'foo', 'bar' => {'value' => 'bar'}}
+        elements = {'title' => {'en' => 'bar'}, 'content' => 'foo', 'bar' => 'bar'}
         page.update_elements(elements)
         page = Cavy::Page.find(page.id)
         expect(page.localized_title).to eq('foo bar')

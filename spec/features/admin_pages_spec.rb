@@ -41,7 +41,6 @@ module Cavy
         visit '/admin'
         click_link 'admin-pages'
         click_link "edit-page-#{@page.id}"
-        fill_in 'page_title', with: 'foobar'
         fill_in 'page_tag_string', with: 'foo,bar'
         select @page_template.name, from: :page_cavy_page_template_id
         fill_in 'page_route', with: 'foos'
@@ -59,14 +58,16 @@ module Cavy
         visit '/admin'
         click_link 'admin-pages'
         click_link "edit-page-#{@page.id}"
-        fill_in 'page_title', with: 'title'
-        fill_in 'item[page_elements][content]', with: 'foo'
-        fill_in 'item[page_elements][element]', with: 'bar'
+        Cavy.locales.try(:each) do |locale|
+          fill_in "page[title][#{locale}]", with: "foobar #{locale}"
+          fill_in "page[page_elements][content][#{locale}]", with: "foo #{locale}"
+        end
         click_on 'submit_page_content'
         @page = Cavy::Page.find(@page.id)
-        expect(@page.get_page_element('content')).to eq('foo')
-        expect(@page.localized_title).to eq('title')
-        expect(@page.get_page_element('element')).to eq('bar')
+        Cavy.locales.try(:each) do |locale|
+          expect(@page.localized_title(locale)).to eq("foobar #{locale}")
+          expect(@page.get_page_element('content', locale)).to eq("foo #{locale}")
+        end
       end
 
       it 'should be able to go to the list of pages' do
@@ -101,18 +102,6 @@ module Cavy
 
       after(:each) do
         log_out
-      end
-
-      it 'should not allow a client to edit the route' do
-        log_in('client')
-        @page = FactoryGirl.create(:cavy_page)
-        @parameters = {page: {title: 'ghost', tag_string: 'foo,bar,s', description: 'fooghostbarsummer', route: 'ghostenbear'}}
-        put admin_update_page_path({locale: :en, id: @page.id}), params: @parameters
-        @page = Cavy::Page.last
-        expect(@page.tags).to eq(%w(foo bar s))
-        expect(@page.description).to eq('fooghostbarsummer')
-        expect(@page.route).not_to eq('ghostenbear')
-        @page.destroy
       end
 
       it 'should not allow a client to go to the new page route' do

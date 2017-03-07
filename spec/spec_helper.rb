@@ -21,6 +21,7 @@ end
 
 Capybara.default_max_wait_time = 10
 Capybara.javascript_driver     = :webkit
+Capybara.ignore_hidden_elements = false
 
 # Load support files
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
