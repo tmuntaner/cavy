@@ -1,5 +1,6 @@
 var gulp = require('gulp');
 var uglify = require('gulp-uglify');
+var babel = require('gulp-babel');
 var pump = require('pump');
 var $ = require('gulp-load-plugins')();
 
@@ -35,6 +36,15 @@ gulp.task('js', function (cb) {
         ],
         cb
     );
+});
+
+gulp.task('es6', function () {
+    return gulp.src([
+        'resources/js/translations.js'])
+        .pipe(babel({
+            //presets: ['es2015']
+        }))
+        .pipe(gulp.dest('app/assets/javascripts/cavy'));
 });
 
 gulp.task('default', ['sass', 'js'], function () {

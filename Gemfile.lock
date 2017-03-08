@@ -217,6 +217,8 @@ GEM
     tins (1.13.2)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
+    uglifier (3.1.4)
+      execjs (>= 0.3.0, < 3)
     websocket-driver (0.6.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.2)
@@ -243,6 +245,7 @@ DEPENDENCIES
   rails (~> 5.0.0)
   rspec-rails
   simplecov
+  uglifier
 
 BUNDLED WITH
    1.14.3

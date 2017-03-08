@@ -3,7 +3,7 @@ module Cavy
     isolate_namespace Cavy
     require 'jquery-rails'
 
-    config.assets.paths << File.expand_path('../../assets/fonts/cavy', __FILE__)
+    config.assets.paths << File.expand_path('../../assets/nodigest/cavy', __FILE__)
 
     config.generators do |g|
       g.test_framework :rspec, :fixture => false
