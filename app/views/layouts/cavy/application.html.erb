@@ -29,9 +29,8 @@
   <div class="large-12 columns">
     <footer>
 
-      <% if can_edit? && @page && params[:action] == 'edit' %>
-          <%= link_to 'edit', cavy_update_page_path(@page.id), id: 'edit_link', data: {save_url: cavy_update_page_path(@page.id)} %>
-          <%= link_to 'Back to Content', pages_path(@page.title), id: 'back-to-content' %>
+      <% if can_edit? && @page %>
+          <%= link_to 'edit', admin_edit_page_path(@page.id) %>
       <% end %>
       <%= debug(params) if Rails.env.development? %>
 

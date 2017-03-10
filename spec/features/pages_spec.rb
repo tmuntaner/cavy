@@ -60,21 +60,6 @@ module Cavy
       @about.destroy
     end
 
-    describe 'edits' do
-      it 'should allow a signed in site manager to go to the edit page' do
-        log_in('admin')
-        @page = FactoryGirl.create(:cavy_page, cavy_page_template: @page_template)
-        visit cavy_edit_page_path({locale: :en, route: @page.route})
-        expect(page).to have_content('Back to Content')
-        log_out
-      end
-      it 'should not allow a signed in site manager to go to the edit page' do
-        @page = FactoryGirl.create(:cavy_page, cavy_page_template: @page_template)
-        visit cavy_edit_page_path({locale: :en, route: @page.route})
-        expect(page).not_to have_content('Back to Content')
-      end
-    end
-
     describe 'seo' do
       it 'should display the page description and meta tags' do
         @page = FactoryGirl.create(:cavy_page, title: {en: 'seo', de: 'das seo'}, seo_description: {en: 'guinea pigs are awesome'}, seo_keywords: {en: ['Ghost', 'Summer', 'Pumpkin Spice', 'Greywind']}, cavy_page_template: @page_template)

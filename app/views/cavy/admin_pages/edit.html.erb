@@ -78,7 +78,7 @@
           <%= f.label :meta_tags, class: 'control-label' %>
           <%= f.text_field :tag_string, value: "#{@page.seo_keywords.to_h[I18n.locale.to_s].to_a.join(',')}", class: 'form-control', id: 'page_tag_string' %>
           <%= f.label :meta_description, class: 'control-label' %>
-          <%= f.text_area :seo_description_string, class: 'form-control', value: @page.seo_description[I18n.locale.to_s].to_s %>
+          <%= f.text_area :seo_description_string, class: 'form-control', value: @page.seo_description.to_h[I18n.locale.to_s].to_s %>
 
           <%= f.submit('Submit', class: 'success button', id: 'submit_page_settings') %>
       <% end %>
