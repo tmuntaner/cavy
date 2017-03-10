@@ -10,17 +10,12 @@ require 'capybara-screenshot/rspec'
 require 'factory_girl_rails'
 require 'database_cleaner'
 require 'pry'
+require 'simplecov'
 
-if ENV['TRAVIS']
-  require 'coveralls'
-  Coveralls.wear!
-else
-  require 'simplecov'
-  SimpleCov.start
-end
+SimpleCov.start
 
 Capybara.default_max_wait_time = 10
-Capybara.javascript_driver     = :webkit
+Capybara.javascript_driver = :webkit
 Capybara.ignore_hidden_elements = false
 
 # Load support files
@@ -43,11 +38,11 @@ RSpec.configure do |config|
     DatabaseCleaner.clean_with :truncation, except: [ActiveRecord::InternalMetadata.table_name]
     DatabaseCleaner.start
     Cavy.at_least_one_user = false
-    I18n.default_locale    = :en
-    I18n.locale            = :en
+    I18n.default_locale = :en
+    I18n.locale = :en
   end
 
-  config.after(:each) do
+  config.append_after(:each) do
     DatabaseCleaner.clean
     Capybara.reset_sessions!
   end

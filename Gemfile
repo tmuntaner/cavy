@@ -1,4 +1,4 @@
-source "https://rubygems.org"
+source 'https://rubygems.org'
 
 # Declare your gem's dependencies in cavy.gemspec.
 # Bundler will treat runtime dependencies like base dependencies, and
@@ -13,9 +13,8 @@ gemspec
 # To use debugger
 # gem 'debugger'
 
-gem 'simplecov',        require: false, :group => :test
-gem 'coveralls',        require: false
-gem 'rspec-rails',      :group => [:test]
+gem 'simplecov', require: false, group: :test
+gem 'rspec-rails', group: :test
 gem 'rails', '~> 5.0.0'
 gem 'capybara-screenshot'
 gem 'capybara-webkit'

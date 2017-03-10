@@ -43,7 +43,7 @@ module Cavy
     #
     #   meta_tags(page)
     def meta_tags(page)
-      "<meta content='#{page.description}' name='description'> <meta content='#{page_tags(page)}' name='keywords'>".html_safe
+      "<meta content='#{page.seo_description.to_h[I18n.locale.to_s]}' name='description'> <meta content='#{page_tags(page)}' name='keywords'>".html_safe
     end
 
     ##
@@ -70,7 +70,7 @@ module Cavy
     end
 
     def page_tags(page)
-      page.tags ? page.tags.join(', ') : ''
+      page.seo_keywords.to_h.empty? ? '' : page.seo_keywords[I18n.locale.to_s].to_a.join(', ')
     end
 
   end

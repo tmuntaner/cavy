@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170214073143) do
+ActiveRecord::Schema.define(version: 20170309163124) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,14 +60,13 @@ ActiveRecord::Schema.define(version: 20170214073143) do
 
   create_table "cavy_pages", force: :cascade do |t|
     t.hstore  "title"
-    t.hstore  "content"
     t.hstore  "data"
     t.string  "render"
     t.string  "route"
-    t.text    "description"
-    t.string  "tags",                  array: true
     t.json    "page_elements"
     t.integer "cavy_page_template_id"
+    t.hstore  "seo_description"
+    t.jsonb   "seo_keywords"
   end
 
   create_table "cavy_policies", force: :cascade do |t|

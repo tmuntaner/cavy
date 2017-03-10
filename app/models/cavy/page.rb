@@ -4,6 +4,7 @@ module Cavy
     validates :route, uniqueness: true
 
     attr_accessor :tag_string, :key, :value
+    attr_accessor :seo_description_string, :key, :value
     belongs_to :cavy_page_template, class_name: 'Cavy::PageTemplate'
 
     methods = [:make_route, :check_tags, :check_page_elements, :update_render]
@@ -34,14 +35,6 @@ module Cavy
       locale ||= I18n.locale.to_s
 
       self.title[locale] = new_title
-    end
-
-    def localized_content
-      if self.content
-        self.content[I18n.locale.to_s].to_s
-      else
-        ''
-      end
     end
 
     def update_page (params, locale)
@@ -126,13 +119,11 @@ module Cavy
     end
 
     def check_tags
-      unless tag_string == '' or tag_string == nil
-        self.tags = tag_string.split(',')
-      end
+      self.seo_keywords = {} if self.seo_keywords.nil?
+      self.seo_description = {} if self.seo_description.nil?
 
-      if self.tags.kind_of? String
-        self.tags = []
-      end
+      self.seo_keywords[I18n.locale.to_s] = tag_string.split(',') unless tag_string.to_s == ''
+      self.seo_description[I18n.locale.to_s] = seo_description_string unless seo_description_string.to_s == ''
     end
 
     def make_route

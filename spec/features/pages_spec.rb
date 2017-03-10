@@ -17,11 +17,11 @@ module Cavy
 
     it 'should be able to go to the home page' do
       visit '/'
-      expect(page).to have_content(@page.localized_content)
+      expect(page).to have_content(@page.get_page_element('test'))
     end
 
     it 'should be able to click link to new page from home page' do
-      @about = Page.create(title: {en: 'about', de: 'über'}, content: {en: 'foo_about_bar', de: 'foo_über_bar', cavy_page_template: @page_template})
+      @about = FactoryGirl.create(:cavy_page, title: {en: 'about', de: 'über'}, page_elements: {test_en: 'foo_about_bar', test_de: 'foo_über_bar'}, cavy_page_template: @page_template)
       visit '/'
       click_link 'about'
       expect(page).to have_content('foo_about_bar')
@@ -37,7 +37,7 @@ module Cavy
     it 'should render content with cavy/pages/render if no other render was specified' do
       visit '/'
       @page.update(render: '')
-      expect(page).to have_content(@page.localized_content)
+      expect(page).to have_content(@page.get_page_element('test'))
     end
 
     it 'should be able to change render' do
@@ -47,14 +47,14 @@ module Cavy
     end
 
     it 'should be able to go to non-root page through url' do
-      @about = Page.create(title: {en: 'about', de: 'über'}, content: {en: 'foo_about_bar', de: 'foo_über_bar'}, cavy_page_template: @page_template)
+      @about = Page.create(title: {en: 'about', de: 'über'}, page_elements: {test_en: 'foo_about_bar', test_de: 'foo_über_bar'}, cavy_page_template: @page_template)
       visit '/about'
       expect(page).to have_content('foo_about_bar')
       @about.destroy
     end
 
     it 'should be able to go to non-root page through url with spaces in title' do
-      @about = Page.create(title: {en: 'about us', de: 'über uns'}, content: {en: 'foo_about_bar', de: 'foo_über_bar'})
+      @about = Page.create(title: {en: 'about us', de: 'über uns'}, page_elements: {test_en: 'foo_about_bar', test_de: 'foo_über_bar'})
       visit '/about_us'
       expect(page).to have_content('foo_about_bar')
       @about.destroy
@@ -77,10 +77,10 @@ module Cavy
 
     describe 'seo' do
       it 'should display the page description and meta tags' do
-        @page = FactoryGirl.create(:cavy_page, title: {en: 'seo', de: 'das seo'}, description: 'guinea pigs are awesome', tags: ['Ghost', 'Summer', 'Pumpkin Spice', 'Greywind'], cavy_page_template: @page_template)
+        @page = FactoryGirl.create(:cavy_page, title: {en: 'seo', de: 'das seo'}, seo_description: {en: 'guinea pigs are awesome'}, seo_keywords: {en: ['Ghost', 'Summer', 'Pumpkin Spice', 'Greywind']}, cavy_page_template: @page_template)
         visit "/#{@page.route}"
-        page.find "meta[content='#{@page.description}']", visible: 'false'
-        page.find "meta[content='#{@page.tags.join(', ')}']", visible: 'false'
+        page.find "meta[content='#{@page.seo_description['en']}']", visible: 'false'
+        page.find "meta[content='#{@page.seo_keywords['en'].join(', ')}']", visible: 'false'
         @page.destroy
       end
     end

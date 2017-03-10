@@ -59,7 +59,7 @@ module Cavy
     private
 
     def page_params
-      params.require(:page).permit(:title, :page_elements, :cavy_page_template_id, :route, :tag_string, :description).tap do |whitelisted|
+      params.require(:page).permit(:title, :page_elements, :cavy_page_template_id, :route, :tag_string, :seo_description_string).tap do |whitelisted|
         whitelisted[:page_elements] = params[:page][:page_elements]
         whitelisted[:title] = params[:page][:title]
       end

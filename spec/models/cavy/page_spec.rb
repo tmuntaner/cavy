@@ -6,22 +6,20 @@ module Cavy
     describe 'page elements' do
       it 'should be able to add page content' do
         I18n.locale = :en
-        page = Cavy::Page.create('title' => {'en' => 'foo bar', 'de' => 'das foo bar'}, 'content' => {'en' => 'bar', 'de' => 'das bar'})
-        elements = {'title' => {'en' => 'bar'}, 'content' => 'foo', 'page' => 'element'}
+        page = Cavy::Page.create('title' => {en: 'foo bar', de: 'das foo bar'})
+        elements = {title: {en: 'bar'}, content: 'foo', page: 'element'}
         page.update_elements(elements)
         page = Cavy::Page.find(page.id)
         expect(page.localized_title).to eq('foo bar')
-        expect(page.localized_content).to eq('bar')
         expect(page.page_elements['page']).to eq('element')
       end
       it 'should not replace past page content when saving, just override' do
         I18n.locale = :en
-        page = Cavy::Page.create('title' => {'en' => 'foo bar', 'de' => 'das foo bar'}, 'content' => {'en' => 'bar', 'de' => 'das bar'}, 'page_elements' => {'foo' => 'foo'})
-        elements = {'title' => {'en' => 'bar'}, 'content' => 'foo', 'bar' => 'bar'}
+        page = Cavy::Page.create(title: {en: 'foo bar', de: 'das foo bar'}, page_elements: {foo: 'foo'})
+        elements = {title: {en: 'bar'}, content: 'foo', bar: 'bar'}
         page.update_elements(elements)
         page = Cavy::Page.find(page.id)
         expect(page.localized_title).to eq('foo bar')
-        expect(page.localized_content).to eq('bar')
         expect(page.page_elements['foo']).to eq('foo')
         expect(page.page_elements['bar']).to eq('bar')
       end
@@ -30,7 +28,7 @@ module Cavy
     describe 'title' do
       it 'should translate title' do
         I18n.locale = :en
-        @page = Page.create(title: {en: 'home', de: 'Haus'}, content: 'bar')
+        @page = Page.create(title: {en: 'home', de: 'Haus'})
         expect(Cavy::Page.find(@page.id).title[I18n.locale.to_s]).to eq('home')
         I18n.locale = :de
         Cavy::Page.find(@page.id).set_title 'Hause'
@@ -40,7 +38,7 @@ module Cavy
       end
 
       it 'should be able to have a title' do
-        Page.create(title: {en: 'foo', de: 'das foo'}, content: {en: 'bar', de: 'das bar'})
+        Page.create(title: {en: 'foo', de: 'das foo'})
         @page = Page.last
         I18n.locale = :en
         expect(@page.title[I18n.locale.to_s]).to eq('foo')
@@ -50,14 +48,14 @@ module Cavy
 
     describe 'routes' do
       it 'should make a route after saving' do
-        Page.create(title: {en: 'foo', de: 'das foo'}, content: {en: 'bar', de: 'das bar'})
+        Page.create(title: {en: 'foo', de: 'das foo'})
         @page = Page.last
         expect(@page.route).to eq('foo')
         @page.destroy
       end
 
       it 'should take care of spaces in routes' do
-        Page.create(title: {en: 'foo bar', de: 'das foo bar'}, content: {en: 'bar', de: 'das bar'})
+        Page.create(title: {en: 'foo bar', de: 'das foo bar'})
         @page = Page.last
         expect(@page.route).to eq('foo_bar')
         @page.destroy
@@ -70,30 +68,9 @@ module Cavy
       end
     end
 
-    describe 'content' do
-      it 'should translate content' do
-        I18n.locale = :en
-        @page = Page.create(title: {en: 'foo bar', de: 'das foo bar'}, content: {en: 'bar', de: 'das bar'})
-        expect(@page.localized_content).to eq('bar')
-        I18n.locale = :de
-        @page.set_content('foo')
-        expect(@page.localized_content).to eq('foo')
-        I18n.locale = :en
-        expect(@page.localized_content).to eq('bar')
-      end
-
-      it 'should be able to have content' do
-        Page.create(title: {en: 'foo bar', de: 'das foo bar'}, content: {en: 'bar', de: 'das bar'})
-        @page = Page.last
-        I18n.locale = :en
-        expect(@page.localized_content).to eq('bar')
-        @page.destroy
-      end
-    end
-
     describe 'render' do
       it 'should be able to specify a render page' do
-        Page.create(title: {en: 'foo bar', de: 'das foo bar'}, content: 'bar', render: 'foobar')
+        Page.create(title: {en: 'foo bar', de: 'das foo bar'}, render: 'foobar')
         @page = Page.last
         expect(@page.render).to eq('foobar')
         @page.destroy
@@ -102,41 +79,28 @@ module Cavy
 
     describe 'seo' do
       describe 'tags' do
-        it 'should accept no tags' do
-          @page = Page.create(title: {en: 'foo bar', de: 'das foo bar'}, tags: [])
-          expect(@page).to be_valid
-          @page.destroy
-        end
-
         it 'should accept no tag string' do
           @page = Page.create(title: {en: 'foo bar', de: 'das foo bar'}, tag_string: '')
           expect(@page).to be_valid
           @page.destroy
         end
 
-        it 'should accept an array of tags' do
-          @page = Page.create(title: {en: 'foo bar', de: 'das foo bar'}, tags: %w(Ruby Rainbows))
-          expect(@page.tags).to eq(%w(Ruby Rainbows))
-          expect(@page).to be_valid
-          @page.destroy
-        end
-
         it 'should accept an string of tags' do
           @page = Page.create(title: {en: 'foo bar', de: 'das foo bar'}, tag_string: 'Ruby,Rainbows')
-          expect(@page.tags).to eq(%w(Ruby Rainbows))
+          expect(@page.seo_keywords[I18n.locale.to_s]).to eq(%w(Ruby Rainbows))
           expect(@page).to be_valid
           @page.destroy
         end
       end
       describe 'description' do
         it 'should allow a page to have a description' do
-          @page = Page.create(title: {en: 'foo bar', de: 'das foo bar'}, description: 'foobar')
-          expect(@page.description).to eq('foobar')
+          @page = Page.create(title: {en: 'foo bar', de: 'das foo bar'}, seo_description: {en: 'foobar'})
+          expect(@page.seo_description['en']).to eq('foobar')
           expect(@page).to be_valid
           @page.destroy
         end
         it 'should allow a page to have no description' do
-          @page = Page.create(title: {en: 'foo bar', de: 'das foo bar'}, description: '')
+          @page = Page.create(title: {en: 'foo bar', de: 'das foo bar'})
           expect(@page).to be_valid
           @page.destroy
         end

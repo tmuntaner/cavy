@@ -41,7 +41,7 @@ describe 'localizations' do
       config.default_locale = :wk
     end
 
-    @home = Cavy::Page.create(title: 'home', content: 'foo_about_bar')
+    @home = Cavy::Page.create(title: 'home')
     visit '/'
     expect(current_path).to eq('/wk/')
     @home.destroy
@@ -52,7 +52,7 @@ describe 'localizations' do
       config.locales = [:en, :de, :wk]
       config.default_locale = :wk
     end
-    @about = Cavy::Page.create(title: 'about', content: 'foo_about_bar')
+    @about = Cavy::Page.create(title: 'about')
     visit '/about'
     expect(current_path).to eq('/wk/about')
     @about.destroy
@@ -62,7 +62,7 @@ describe 'localizations' do
     Cavy.config do |config|
       config.locales = :en
     end
-    @home = Cavy::Page.create(title: 'home', content: 'foo_about_bar')
+    @home = Cavy::Page.create(title: 'home')
     visit '/'
     expect(current_path).to eq('/')
     @home.destroy
@@ -72,7 +72,7 @@ describe 'localizations' do
     Cavy.config do |config|
       config.locales = :en
     end
-    @about = Cavy::Page.create(title: 'about', content: 'foo_about_bar')
+    @about = Cavy::Page.create(title: 'about')
     visit '/about'
     expect(current_path).to eq('/about')
     @about.destroy

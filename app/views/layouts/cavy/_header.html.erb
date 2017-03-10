@@ -6,13 +6,13 @@
       <span class="icon-bar"></span>
     </button>
     <a class="navbar-brand" href="<%= admin_dashboard_path %>">
-      <%= Cavy.title || "Cavy" %>
+      <%= Cavy.title || 'Cavy' %>
     </a>
     <div class="nav-collapse collapse bs-navbar-collapse">
       <ul class="nav navbar-nav">
         <% Cavy::Page.all.each do |page| %>
             <li>
-              <%= cavy_page(page.route, page.localized_title, id: page.route) %>
+              <%= cavy_page(page.route, page.localized_title, id: page.localized_title) %>
             </li>
         <% end %>
       </ul>

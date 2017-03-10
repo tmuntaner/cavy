@@ -9,7 +9,6 @@ module Cavy
     #   cavy_page('home', 'home', active_check: true)
 
     def cavy_page(route, text, opts={active_check: true})
-      href = ''
       active = false
       opts[:valid_routes] = [route] unless opts[:valid_routes]
 
@@ -19,15 +18,15 @@ module Cavy
         href = I18n.available_locales.count > 1 ? "/#{params[:locale]}/#{route}" : "/#{route}"
       end
 
-      opts[:valid_routes].each do |route|
-        if link_active(route)
+      opts[:valid_routes].each do |valid_route|
+        if link_active(valid_route)
           active = true
           break
         end
       end
 
-      html_class = active ? 'active' : nil
-      html_id = opts[:id] ? opts[:id] : nil
+      html_class = active ? 'active' : ''
+      html_id = opts[:id] ? opts[:id] : ''
 
       make_link(href, text, class: html_class, id: html_id)
     end
