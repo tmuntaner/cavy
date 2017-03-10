@@ -12,7 +12,7 @@
       <ul class="nav navbar-nav">
         <% Cavy::Page.all.each do |page| %>
             <li>
-              <%= cavy_page(page.route, page.title, id: page.route) %>
+              <%= cavy_page(page.route, page.localized_title, id: page.route) %>
             </li>
         <% end %>
       </ul>
