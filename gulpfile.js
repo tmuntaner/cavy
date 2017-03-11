@@ -47,6 +47,7 @@ gulp.task('es6', function () {
         .pipe(gulp.dest('app/assets/javascripts/cavy'));
 });
 
-gulp.task('default', ['sass', 'js'], function () {
+gulp.task('default', ['sass', 'js', 'es6'], function () {
     gulp.watch(['app/assets/stylesheets/cavy/scss/**/*.scss'], ['sass']);
+    gulp.watch(['resources/js/**/*.js'], ['es6']);
 });

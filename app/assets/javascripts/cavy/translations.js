@@ -26,6 +26,10 @@ window.initializeTranslationFields = function (fieldsContainer, labelsContainer,
 
     $('#' + fieldsContainer + ' input, #' + fieldsContainer + ' textarea').each(function () {
         $(this).hide();
+        if ($(this).attr('type') === 'file') {
+            var picture = $('#' + $(this).data('picture'));
+            picture.hide();
+        }
 
         var locale = $(this).data('locale');
         var value = $(this).val();
@@ -42,7 +46,11 @@ window.initializeTranslationFields = function (fieldsContainer, labelsContainer,
     });
     var initialField = $('#' + id);
     localeLabels[initialField.data('locale')].addClass('active');
-    if (initialField.is('textarea')) {
+    if (initialField.attr('type') === 'file') {
+        var picture = $('#' + initialField.data('picture'));
+        picture.show();
+        initialField.show();
+    } else if (initialField.is('textarea')) {
         CKEDITOR.replace(id, {
             language: 'en'
         });
@@ -76,16 +84,22 @@ window.translationLabelClicked = function (label, fieldsContainer) {
     $('#' + fieldsContainer + ' input, #' + fieldsContainer + ' textarea').each(function () {
         $(this).hide();
         var id = $(this).attr('id');
-        if ($(this).is('textarea')) {
-            if (typeof CKEDITOR.instances[id] !== 'undefined') {
-                CKEDITOR.instances[id].updateElement();
-                CKEDITOR.instances[id].destroy();
-            }
+        if ($(this).attr('type') === 'file') {
+            var picture = $('#' + $(this).data('picture'));
+            picture.hide();
+        }
+        if ($(this).is('textarea') && typeof CKEDITOR.instances[id] !== 'undefined') {
+            CKEDITOR.instances[id].updateElement();
+            CKEDITOR.instances[id].destroy();
         }
         $('#' + id).hide();
     });
 
-    if (input.is('textarea')) {
+    if (input.attr('type') === 'file') {
+        var picture = $('#' + input.data('picture'));
+        picture.show();
+        input.show();
+    } else if (input.is('textarea')) {
         CKEDITOR.replace(input.attr('id'), {
             language: 'en'
         });

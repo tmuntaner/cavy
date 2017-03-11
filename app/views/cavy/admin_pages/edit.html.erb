@@ -28,7 +28,7 @@
 <div class="expanded row">
   <div class="large-9 columns">
     <div class="form-set">
-      <%= form_for(@page, url: admin_update_page_path, method: :put) do |f| %>
+      <%= form_for(@page, url: admin_update_page_path, method: :put, html: {multipart: true}) do |f| %>
           <div class="form-set-title">
             Page Content
           </div>
@@ -42,6 +42,8 @@
                   <%= render 'cavy/admin_pages/page_localized_text_field', id: "page-elements-#{key}", field_name: "page[page_elements][#{key}]", translations: @page.get_translations(key) %>
               <% elsif value == 'STRING' %>
                   <%= render 'cavy/admin_pages/page_localized_string_field', id: "page-elements-#{key}", field_name: "page[page_elements][#{key}]", translations: @page.get_translations(key) %>
+              <% elsif value == 'PICTURE' %>
+                  <%= render 'cavy/admin_pages/page_localized_picture_field', id: "page-elements-#{key}", field_name: "page[page_elements][#{key}]", translations: @page.get_translations(key) %>
               <% end %>
           <% end unless @page.cavy_page_template.nil? %>
 

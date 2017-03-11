@@ -20,11 +20,12 @@ Gem::Specification.new do |s|
   s.add_dependency 'pg'
   s.add_dependency 'coffee-script'
   s.add_dependency 'haml'
-  s.add_dependency 'carrierwave'
   s.add_dependency 'mini_magick'
   s.add_dependency 'bcrypt-ruby'
   s.add_dependency 'sass-rails'
   s.add_dependency 'jquery-rails'
+  s.add_dependency 'carrierwave', '~> 1.0'
+
   s.add_development_dependency 'capybara'
   s.add_development_dependency 'meta_request'
   s.add_development_dependency 'factory_girl_rails'

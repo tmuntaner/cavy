@@ -87,12 +87,21 @@ module Cavy
       self.page_elements.try(:each) do |key, value|
         update_values[:page_elements][key] = value
       end
+      picture_fields = self.cavy_page_template.fields.collect { |key, value| (value == 'PICTURE') ? key : nil }.compact
 
       params.try(:each) do |key, value|
         if value.is_a?(Hash)
           Cavy.locales.try(:each) do |alt_locale|
             localized_key = key.to_s + '_' + alt_locale.to_s
-            update_values[:page_elements][localized_key] = value[alt_locale.to_s]
+            if picture_fields.include? key
+              picture = value[alt_locale.to_s]
+              File.open(Rails.root.join('public', 'uploads', picture.original_filename), 'wb') do |file|
+                file.write(picture.read)
+              end unless picture.nil?
+              update_values[:page_elements][localized_key] = (picture.nil?) ? '' : "/uploads/#{picture.original_filename}"
+            else
+              update_values[:page_elements][localized_key] = value[alt_locale.to_s]
+            end
           end
         else
           localized_key = locale != '' ? key + '_' + locale : key
