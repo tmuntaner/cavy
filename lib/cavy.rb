@@ -1,5 +1,6 @@
 require 'cavy/engine'
 require 'cavy/railtie' if defined?(Rails)
+require 'cavy/uploaders/file_uploader'
 
 module Cavy
 

@@ -9,6 +9,8 @@ module Cavy
 
     methods = [:make_route, :check_tags, :check_page_elements, :update_render]
 
+    @uploader = Cavy::FileUploader.new
+
     methods.each do |method|
       before_save method
       before_create method
@@ -81,31 +83,19 @@ module Cavy
       translations
     end
 
-    def update_elements(params, locale = '')
+    def update_elements(params, locale = nil)
+      locale ||= I18n.locale.to_s
       update_values = {page_elements: {}}
 
       self.page_elements.try(:each) do |key, value|
         update_values[:page_elements][key] = value
       end
-      picture_fields = self.cavy_page_template.fields.collect { |key, value| (value == 'PICTURE') ? key : nil }.compact
 
       params.try(:each) do |key, value|
-        if value.is_a?(Hash)
-          Cavy.locales.try(:each) do |alt_locale|
-            localized_key = key.to_s + '_' + alt_locale.to_s
-            if picture_fields.include? key
-              picture = value[alt_locale.to_s]
-              File.open(Rails.root.join('public', 'uploads', picture.original_filename), 'wb') do |file|
-                file.write(picture.read)
-              end unless picture.nil?
-              update_values[:page_elements][localized_key] = (picture.nil?) ? '' : "/uploads/#{picture.original_filename}"
-            else
-              update_values[:page_elements][localized_key] = value[alt_locale.to_s]
-            end
-          end
-        else
-          localized_key = locale != '' ? key + '_' + locale : key
-          update_values[:page_elements][localized_key] = (value.kind_of? String) ? value : value['value']
+        locales = (value.is_a?(Hash)) ? Cavy.locales.collect { |alt_locale| alt_locale.to_s } : [locale]
+        locales.try(:each) do |alt_locale|
+          localized_key, localized_value = parse_page_element key, value, alt_locale
+          update_values[:page_elements][localized_key] = localized_value unless localized_value.nil?
         end
       end
 
@@ -119,8 +109,23 @@ module Cavy
 
     private
 
+    def parse_page_element (key, value, locale)
+      localized_key = key.to_s + '_' + locale
+      localized_value = (value.is_a? Hash) ? value[locale.to_sym] : value
+      unless self.cavy_page_template.nil?
+        picture_fields = self.cavy_page_template.fields.collect { |field_key, field_value| (field_value == 'PICTURE') ? field_key : nil }.compact
+        localized_value = upload_image localized_value if picture_fields.include? key
+      end
+      return localized_key, localized_value
+    end
+
     def localized_page_element (element, locale)
       self.page_elements[element + '_' + locale.to_s].to_s
+    end
+
+    def upload_image (picture)
+      @uploader.store!(picture)
+      @uploader.url
     end
 
     def check_page_elements

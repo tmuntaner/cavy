@@ -14,9 +14,9 @@ module Cavy
       it 'should give a localized page element div' do
         page = create(:cavy_page)
         I18n.locale = :en
-        page.update_elements(title_en: 'foobar_en')
+        page.update_elements(title: 'foobar_en')
         I18n.locale = :de
-        page.update_elements(title_de: 'foobar_de')
+        page.update_elements(title: 'foobar_de')
         element = dummy_class.localized_page_element(id: 'title', page: page)
         expect(element).to eq("<div id='title_de' data-mercury='full'>foobar_de</div>")
         I18n.locale = :en
