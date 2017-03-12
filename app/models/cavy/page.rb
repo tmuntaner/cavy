@@ -9,8 +9,6 @@ module Cavy
 
     methods = [:make_route, :check_tags, :check_page_elements, :update_render]
 
-    @uploader = Cavy::FileUploader.new
-
     methods.each do |method|
       before_save method
       before_create method
@@ -124,8 +122,10 @@ module Cavy
     end
 
     def upload_image (picture)
-      @uploader.store!(picture)
-      @uploader.url
+      return '' if picture.nil?
+      uploader = Cavy.uploader || Cavy::FileUploader.new
+      uploader.store!(picture)
+      uploader.url
     end
 
     def check_page_elements

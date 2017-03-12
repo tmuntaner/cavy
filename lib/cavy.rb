@@ -4,7 +4,7 @@ require 'cavy/uploaders/file_uploader'
 
 module Cavy
 
-  mattr_accessor :root, :title, :locales, :default_locale, :raise_not_found_error, :at_least_one_user
+  mattr_accessor :root, :title, :locales, :default_locale, :raise_not_found_error, :at_least_one_user, :uploader
 
   self.root = 'home'
   self.title = 'cavy'
@@ -13,6 +13,7 @@ module Cavy
   self.default_locale = :en
   self.raise_not_found_error = false
   self.at_least_one_user = false
+  self.uploader = nil
 
   def self.config(&block)
     yield(self)
