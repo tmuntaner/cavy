@@ -125,7 +125,9 @@ module Cavy
       return '' if picture.nil?
       uploader = Cavy.uploader || Cavy::FileUploader.new
       uploader.store!(picture)
-      uploader.url
+      url = uploader.url
+      Cavy::Resource.find_or_create_by(name: picture.original_filename, url: url, file_type: 'IMAGE')
+      url
     end
 
     def check_page_elements
