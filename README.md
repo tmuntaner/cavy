@@ -3,27 +3,10 @@
 
 # Cavy
 
-Cavy is a Ruby on Rails Mountable Engine CMS that strives to make it easier for developers to make better websites for their clients.
+Cavy is a Ruby on Rails Mountable Engine CMS that strives to make it easier for developers to make better localized websites for their clients.
 
-**Warning 1:**
-*Cavy is still in development and in an unpolished state.  Use at your own risk.*
-
-**Warning 2:**
-*This is not an engine designed for the non-developer, it requires you to go into the guts of the CMS to make your pages and add new features.*
-
-**Warning 3:**
-*You will have to remove active record if you don't want to have a secondary useless database.*
-
-## Features
-
-* MongoDB NoSQL database
-* Easy page localization
-* In-Page-Editing with MercuryEditor
-* Administration backend
-    * Partial privileges mode for clients. (To prevent future mistakes)
-    * Analytics dashboard with the Google Analytics API.  *You will need Google Analytics setup for this.*
-    * Editing page meta content (meta title, meta description)
-    * Editing of dynamic content
+**Warning:**
+*Cavy is still in development. Use at your own risk.*
 
 ## Installation
 
@@ -31,7 +14,7 @@ Cavy is a Ruby on Rails Mountable Engine CMS that strives to make it easier for 
 
 I don't have the gem in alpha yet, so you will have to pull it off the github repository.  You can do this with the following line in your `Gemfile`.
 
-    gem 'cavy', github: 'tmuntan1/cavy'
+    gem 'cavy', '0.1.0.beta1'
 
 ### Mounting the Engine to your Application
 
@@ -41,13 +24,14 @@ Go into your `config/routes.rb` file and add the following line near the top.
 
 *Remember to mount the application where you want, `'/'` will mount it to the root of your domain.*
 
-### Mongoid Config
+### Installing the Migrations
 
-Cavy uses MongoDB with Mongoid as a wrapper. In order to connect to your database, a mongoid config file `mongoid.yml` is needed.  You can make a config file with the following command in your console:
+You can get the migrations with the following commands.
 
-    rails g mongoid:config
-
-You can then add your mongodb connection information in the config file.
+```
+bin/rails cavy:install:migrations
+bin/rails db:migrate
+```
 
 ### Cavy Configuration
 
@@ -59,9 +43,6 @@ Cavy.config do |config|
     config.title = 'Cavy Test'
     config.locales = [:en,:de]
     config.default_locale = :en
-    config.google_analytics_username    = ENV['GOOGLE_ANALYTICS_USERNAME']
-    config.google_analytics_password    = ENV['GOOGLE_ANALYTICS_PASSWORD']
-    config.google_analytics_property_id = ENV['GOOGLE_ANALYTICS_PROPERTY_ID']
 end
 ```
 
@@ -69,20 +50,48 @@ Here is the explanation of the configuration variables.
 
 * `config.root` is the root page of the app that you want to load when a user hits your application.
 * `config.title` is the title of your application.  It is not really needed but it will show the name in the backend.
-
-#### Configuration of Features
-
-* Google Analytics
-    * `config.google_analytics_username` is the username for your Google Analytics account.
-    * `config.google_analytics_password` is the password for your Google Analytics account.
-    * `config.google_analytics_property_id` is the property id for your website for Google Analytics.
 * Localization
     * `config.locales` is the list of your supported locales in an array.
     * `config.default_locale` is the default locale for your application.
 
 ### Everything Else
 
-Now when you start the application, you will be asked to make an administration account.  You can also create the administration account yourself through the console or a seed.  If you do this, then you will not be asked to create an account.
+When you start the application, you will be asked to make an administration account. You can also create the administration account yourself through the console or a seed. If you do this, then you will not be asked to create an account.
+
+## Uploading Files to S3
+
+You can upload images to S3 using the gem `fog-aws`
+
+```
+gem 'fog-aws'
+```
+
+Then you can create an initializer to setup your connection.
+```ruby
+require 'carrierwave'
+
+CarrierWave.configure do |config|
+  config.fog_provider = 'fog/aws'
+  config.fog_credentials = {
+      provider: 'AWS',
+      aws_access_key_id: 'Your secret key id',
+      aws_secret_access_key: 'Your secret access key',
+      region: 'Your s3 region',
+      path_style: true
+  }
+  config.fog_directory = 'Your s3 bucket'
+end
+
+module Cavy
+  class FogUploader < CarrierWave::Uploader::Base
+    storage :fog
+  end
+end
+
+Cavy.config do |config|
+  config.uploader = Cavy::FogUploader.new
+end
+```
 
 ## Tutorials
 

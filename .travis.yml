@@ -10,4 +10,4 @@ before_script:
   - RAILS_ENV=test bundle exec rake db:migrate
 script: bundle exec rspec spec
 addons:
-  postgresql: "9.3"
+  postgresql: "9.6"
