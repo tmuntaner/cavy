@@ -12,5 +12,9 @@ module Cavy
       self.data = data
     end
 
+    def get_data(id)
+      data[id]
+    end
+
   end
 end
