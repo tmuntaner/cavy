@@ -32,6 +32,7 @@ RSpec.configure do |config|
   config.include Cavy::Engine.routes.url_helpers
   config.before(:each, type: :controller) { @routes = Cavy::Engine.routes }
   config.before(:each, type: :routing) { @routes = Cavy::Engine.routes }
+  config.include Requests::JsonHelpers, type: :request
 
   config.before(:each) do
     reset_email

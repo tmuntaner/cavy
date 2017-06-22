@@ -14,6 +14,12 @@ module Cavy
       before_create method
     end
 
+    def as_json(options={})
+      super(
+        only: [:id, :title, :route]
+      )
+    end
+
     def localized_title (locale = nil)
       locale ||= I18n.locale.to_s
       text = self.title[locale.to_s]

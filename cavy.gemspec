@@ -25,6 +25,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'sass-rails', '~> 5.0'
   s.add_dependency 'jquery-rails', '~> 4.2'
   s.add_dependency 'carrierwave', '~> 1.0'
+  s.add_dependency 'jwt'
 
   s.add_development_dependency 'capybara', '~> 2.12'
   s.add_development_dependency 'meta_request', '~> 0.4'

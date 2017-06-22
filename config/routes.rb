@@ -4,7 +4,15 @@ end
 
 Cavy::Engine.routes.draw do
 
+  scope :api do
+    namespace :v1 do
+      get '/pages', to: 'admin_pages#index'
+    end
+  end
+
   scope(cavy_locale_scope, locale: /#{I18n.available_locales.join('|')}/) do
+
+
     root to: 'pages#page'
 
     resources :users
@@ -24,6 +32,7 @@ Cavy::Engine.routes.draw do
     get '/admin/page_template/:id', to: 'admin_page_templates#edit', as: 'admin_edit_page_template'
     patch '/admin/page_template/:id', to: 'admin_page_templates#update', as: 'admin_update_page_template'
     delete '/admin/page_template/:id', to: 'admin_page_templates#delete', as: 'admin_delete_page_template'
+
 
 
     get '/admin/pages', to: 'admin_pages#index', as: 'admin_pages'

@@ -1,4 +1,5 @@
 module AuthMacros
+
   def log_in(role, attributes = {})
     @_current_user = FactoryGirl.create(:cavy_user, role: role)
     visit admin_signin_path(locale: :en)
