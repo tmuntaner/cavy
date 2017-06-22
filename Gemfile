@@ -15,11 +15,12 @@ gemspec
 
 gem 'simplecov', require: false, group: :test
 gem 'rspec-rails', group: :test
-gem 'rails', '~> 5.0.0'
+gem 'rails', '~> 5.1'
 gem 'capybara-screenshot'
 gem 'capybara-webkit'
 gem 'uglifier'
 gem 'fog-aws'
+gem 'listen'
 
 platform :ruby do
   gem 'better_errors'
