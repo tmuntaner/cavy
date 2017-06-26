@@ -8,6 +8,7 @@ Cavy::Engine.routes.draw do
     namespace :v1 do
       get '/pages', to: 'admin_pages#index'
       post '/session', to: 'sessions#create'
+      get '/first_time', to: 'first_time#index'
     end
   end
 

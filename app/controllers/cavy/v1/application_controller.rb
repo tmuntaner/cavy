@@ -17,6 +17,10 @@ module Cavy::V1
       # stub
     end
 
+    def check_first_time
+      # stub
+    end
+
     def find_user
       ::Cavy::User.find_by(id: decoded_jwt_token['user']) if jwt_auth_present?
     end

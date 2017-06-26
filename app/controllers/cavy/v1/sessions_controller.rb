@@ -1,5 +1,3 @@
-require_dependency 'cavy/application_controller'
-
 module Cavy::V1
   class SessionsController < ApplicationController
 
