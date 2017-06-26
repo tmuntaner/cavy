@@ -21,6 +21,10 @@ module Cavy::V1
       ::Cavy::User.find_by(id: decoded_jwt_token['user']) if jwt_auth_present?
     end
 
+    def encode_jwt_token(user)
+      ::Cavy::JsonWebToken.encode(user: user.id)
+    end
+
     def decoded_jwt_token
       ::Cavy::JsonWebToken.decode(jwt_token)
     end

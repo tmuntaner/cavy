@@ -7,6 +7,7 @@ Cavy::Engine.routes.draw do
   scope :api do
     namespace :v1 do
       get '/pages', to: 'admin_pages#index'
+      post '/session', to: 'sessions#create'
     end
   end
 

@@ -3,8 +3,6 @@ require_dependency 'cavy/application_controller'
 module Cavy::V1
   class AdminPagesController < ApplicationController
 
-    layout 'cavy/admin_layout'
-
     def index
       @pages = Cavy::Page.all
 
