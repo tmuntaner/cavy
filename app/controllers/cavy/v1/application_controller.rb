@@ -2,8 +2,24 @@ module Cavy::V1
   class ApplicationController < ::Cavy::ApplicationController
 
     before_action :authorize
+    after_action :set_cors
+
+    def check_cors
+      headers['Access-Control-Allow-Origin'] = '*'
+      headers['Access-Control-Allow-Methods'] = 'POST, GET, OPTIONS'
+      headers['Access-Control-Allow-Headers'] = '*'
+      headers['Access-Control-Max-Age'] = '1728000'
+      render plain: '', status: 200
+    end
 
     private
+
+    def set_cors
+      headers['Access-Control-Allow-Origin'] = '*'
+      headers['Access-Control-Allow-Methods'] = 'POST, GET, OPTIONS'
+      headers['Access-Control-Allow-Headers'] = '*'
+      headers['Access-Control-Max-Age'] = '1728000'
+    end
 
     def default_url_options(options = {})
       # stub

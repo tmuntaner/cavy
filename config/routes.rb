@@ -6,6 +6,12 @@ Cavy::Engine.routes.draw do
 
   scope :api do
     namespace :v1 do
+      match '*path', via: [:options], to: lambda { |_|
+        [
+          204, {
+            'Access-Control-Allow-Headers' => 'Origin, Content-Type, Accept, Authorization, Token',
+            'Access-Control-Allow-Origin' => '*' }, []
+        ]}
       get '/pages', to: 'admin_pages#index'
       post '/session', to: 'sessions#create'
       get '/first_time', to: 'first_time#index'
@@ -34,7 +40,6 @@ Cavy::Engine.routes.draw do
     get '/admin/page_template/:id', to: 'admin_page_templates#edit', as: 'admin_edit_page_template'
     patch '/admin/page_template/:id', to: 'admin_page_templates#update', as: 'admin_update_page_template'
     delete '/admin/page_template/:id', to: 'admin_page_templates#delete', as: 'admin_delete_page_template'
-
 
 
     get '/admin/pages', to: 'admin_pages#index', as: 'admin_pages'
