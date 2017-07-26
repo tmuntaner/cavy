@@ -1,4 +1,4 @@
-class AddPagesTable < ActiveRecord::Migration
+class AddPagesTable < ActiveRecord::Migration[4.2]
   def change
     create_table :cavy_pages do |t|
       t.hstore  :title

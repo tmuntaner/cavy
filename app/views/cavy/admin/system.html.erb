@@ -1,6 +1,6 @@
 <h1>System Settings</h1>
 
-<% if current_user and current_user.role == 'admin' %>
+<% if current_user&.role == 'admin' %>
     <div class="card" style="width: 700px;">
       <div class="card-divider">
         <h4>Content</h4>

@@ -1,4 +1,4 @@
-class AddUser < ActiveRecord::Migration
+class AddUser < ActiveRecord::Migration[4.2]
   def change
     create_table :cavy_users do |t|
       t.string :email

@@ -1,4 +1,4 @@
-class AddItemGroups < ActiveRecord::Migration
+class AddItemGroups < ActiveRecord::Migration[4.2]
   def change
     create_table :cavy_item_groups do |t|
       t.string  :title

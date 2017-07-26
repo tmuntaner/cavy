@@ -15,7 +15,7 @@
 
   <% Cavy::ItemSection.all.each do |section| %>
       <li>
-        <%= link_to section.title, cavy_item_section_path(section.id) %>
+        <%= link_to section.title, cavy_edit_items_path(section.id) %>
       </li>
   <% end %>
 
