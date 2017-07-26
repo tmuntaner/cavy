@@ -1,0 +1,55 @@
+<h1>System Settings</h1>
+
+<% if current_user and current_user.role == 'admin' %>
+    <div class="card" style="width: 700px;">
+      <div class="card-divider">
+        <h4>Content</h4>
+      </div>
+      <div class="card-section">
+        <ul class="vertical menu">
+          <li>
+            <a href="<%= cavy_item_sections_path %>" id="admin-item-sections">
+              <i class="fa fa-sitemap" aria-hidden="true"></i>
+              Item Group Sections
+            </a>
+          </li>
+
+          <li>
+            <a href="<%= item_groups_path %>" id="admin-item-groups">
+              <i class="fa fa-object-group" aria-hidden="true"></i>
+              Item Groups
+            </a>
+          </li>
+
+          <li>
+            <a href="<%= admin_page_templates_path %>" id="admin-page-templates">
+              <i class="fa fa-clipboard" aria-hidden="true"></i>
+              Page Templates
+            </a>
+          </li>
+        </ul>
+
+      </div>
+    </div>
+<% end %>
+
+<% if current_user&.site_manager? %>
+    <div class="card" style="width: 700px;">
+      <div class="card-divider">
+        <h4>Content</h4>
+      </div>
+      <div class="card-section">
+
+        <ul class="vertical menu">
+          <li>
+            <a href="<%= cavy_admin_users_path %>" id="admin-users">
+              <i class="fa fa-users" aria-hidden="true"></i>
+              Users
+            </a>
+          </li>
+        </ul>
+
+      </div>
+    </div>
+<% end %>
+

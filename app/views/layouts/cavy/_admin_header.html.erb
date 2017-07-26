@@ -10,12 +10,14 @@
 
   <div class="top-bar-right">
     <ul class="dropdown menu" data-dropdown-menu>
-      <li>
-        <%= render 'cavy/shared/admin_locale_links' %>
+      <li class="locale-links">
+          <% I18n.available_locales.each do |locale| %>
+              <%= link_to locale.upcase, url_for(locale: locale) %>
+          <% end %>
       </li>
       <% if current_user %>
-          <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+          <li>
+            <a href="#">
               <i class="fa fa-user" aria-hidden="true"></i>
               <%= current_user.name %>
             </a>

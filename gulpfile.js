@@ -29,9 +29,9 @@ gulp.task('js', function (cb) {
     pump([
             gulp.src([
                 'bower_components/jquery/dist/jquery.js',
-                'bower_components/foundation-sites/dist/foundation.js']
+                'bower_components/foundation-sites/dist/js/foundation.js']
             ),
-            uglify(),
+            //uglify(),
             gulp.dest('app/assets/javascripts/cavy')
         ],
         cb

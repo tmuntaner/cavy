@@ -4,6 +4,7 @@ end
 
 Cavy::Engine.routes.draw do
 
+=begin
   scope :api do
     namespace :v1 do
       match '*path', via: [:options], to: lambda { |_|
@@ -17,6 +18,7 @@ Cavy::Engine.routes.draw do
       get '/first_time', to: 'first_time#index'
     end
   end
+=end
 
   scope(cavy_locale_scope, locale: /#{I18n.available_locales.join('|')}/) do
 
@@ -30,6 +32,7 @@ Cavy::Engine.routes.draw do
     post '/first_time/user', to: 'first_time#create_user', as: 'cavy_first_time_create_user'
 
     get '/admin', to: 'admin#dashboard', as: 'admin_dashboard'
+    get '/system', to: 'admin#system', as: 'admin_system'
 
     post '/admin/page_templates/:id/field', to: 'admin_page_template_fields#create', as: 'admin_create_page_template_field'
     delete '/admin/page_templates/:id/delete_field/:field', to: 'admin_page_template_fields#delete', as: 'admin_delete_page_template_field'
