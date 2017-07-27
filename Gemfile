@@ -13,6 +13,9 @@ gemspec
 # To use debugger
 # gem 'debugger'
 
+gem 'ruby-debug-ide'
+gem 'debase'
+
 gem 'simplecov', require: false, group: :test
 gem 'rspec-rails', group: :test
 gem 'rails', '~> 5.1'
