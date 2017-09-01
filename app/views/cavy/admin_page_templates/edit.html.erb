@@ -50,15 +50,23 @@
             </tbody>
           </table>
       <% end %>
+    </div>
+    <div class="form-set">
 
       <div class="form-set-title">
         Add Field:
       </div>
       <%= form_tag admin_create_page_template_field_path(@page_template.id), method: :post do %>
-          <%= label_tag :name %>
-          <%= text_field_tag 'page_template[name]', nil, id: :name %>
-          <%= label_tag :type %>
-          <%= select_tag 'page_template[type]', options_for_select(Cavy::PageTemplate.get_field_options_for_select), id: :type %>
+          <div class="row">
+            <div class="large-9 columns">
+              <%= label_tag :name %>
+              <%= text_field_tag 'page_template[name]', nil, id: :name %>
+            </div>
+            <div class="large-3 columns">
+              <%= label_tag :type %>
+              <%= select_tag 'page_template[type]', options_for_select(Cavy::PageTemplate.get_field_options_for_select), id: :type %>
+            </div>
+          </div>
 
           <%= submit_tag 'Add', class: 'button small success', id: 'submit' %>
       <% end %>

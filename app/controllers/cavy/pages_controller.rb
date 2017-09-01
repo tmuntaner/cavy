@@ -5,6 +5,7 @@ module Cavy
 
     def page
       @page = params[:route] ? get_page(params[:route]) : Page.find_by(route: Cavy.root)
+
       if @page
         render @page.render || 'cavy/pages/page'
       else

@@ -3,10 +3,11 @@
   <div class="btn-toolbar">
     <div class="btn-group">
       <a class="button primary small" href="<%= admin_new_item_group_path %>">New Item Group</a>
+      <a class="button primary small" href="<%= cavy_item_sections_path %>">Combine Groups into Sections</a>
     </div>
   </div>
 </div>
-<br/>
+
 <% if @item_groups.count >= 1 %>
   <table class="table table-striped">
     <thead>

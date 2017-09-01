@@ -7,9 +7,7 @@ module Cavy
     attr_accessor :seo_description_string, :key, :value
     belongs_to :cavy_page_template, class_name: 'Cavy::PageTemplate'
 
-    methods = [:make_route, :check_tags, :check_page_elements, :update_render]
-
-    methods.each do |method|
+    %i[make_route check_tags check_page_elements update_render].each do |method|
       before_save method
       before_create method
     end
@@ -90,7 +88,7 @@ module Cavy
       end
 
       params.try(:each) do |key, value|
-        locales = (value.is_a?(Hash)) ? Cavy.locales.collect { |alt_locale| alt_locale.to_s } : [locale]
+        locales = (value.is_a?(Hash)) ? Cavy.locales.collect {|alt_locale| alt_locale.to_s} : [locale]
         locales.try(:each) do |alt_locale|
           localized_key, localized_value = parse_page_element key, value, alt_locale
           update_values[:page_elements][localized_key] = localized_value unless localized_value.nil?
@@ -111,7 +109,7 @@ module Cavy
       localized_key = key.to_s + '_' + locale
       localized_value = (value.is_a? Hash) ? value[locale.to_sym] : value
       unless self.cavy_page_template.nil?
-        picture_fields = self.cavy_page_template.fields.collect { |field_key, field_value| (field_value == 'PICTURE') ? field_key : nil }.compact
+        picture_fields = self.cavy_page_template.fields.collect {|field_key, field_value| (field_value == 'PICTURE') ? field_key : nil}.compact
         localized_value = upload_image localized_value if picture_fields.include? key
       end
       return localized_key, localized_value
@@ -143,7 +141,7 @@ module Cavy
     end
 
     def make_route
-      self.route = self.localized_title.gsub(' ', '_').downcase if self.route.to_s == ''
+      self.route = localized_title.tr(' ', '_').downcase if route.to_s == ''
     end
 
     def update_render
