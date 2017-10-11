@@ -14,6 +14,7 @@ module Cavy
 
     it 'should be able to go to the new page template page' do
       visit '/admin'
+      click_link 'admin-system'
       click_link 'admin-page-templates'
       click_link 'admin-new-page-template'
       expect(page).to have_content('New Page Template')
@@ -22,6 +23,7 @@ module Cavy
     describe 'page templates' do
       before (:each) do
         visit '/admin'
+        click_link 'admin-system'
         click_link 'admin-page-templates'
         click_link 'admin-new-page-template'
         fill_in 'page_template_name', with: 'foobar'
@@ -39,6 +41,7 @@ module Cavy
 
       it 'should be able to add edit page template' do
         visit '/admin'
+        click_link 'admin-system'
         click_link 'admin-page-templates'
         click_link "edit-page-template-#{@page_template.id}"
         fill_in 'page_template_name', with: 'foobar1'
@@ -51,6 +54,7 @@ module Cavy
 
       it 'should be able to delete page template' do
         visit '/admin'
+        click_link 'admin-system'
         click_link 'admin-page-templates'
         click_link "delete-page-template-#{@page_template.id}"
         expect(Cavy::PageTemplate.count).to eq(0)
@@ -60,6 +64,7 @@ module Cavy
         before(:each) do
           expect(@page_template.fields.nil?).to be_truthy
           visit '/admin'
+          click_link 'admin-system'
           click_link 'admin-page-templates'
           click_link "edit-page-template-#{@page_template.id}"
           fill_in 'name', with: 'foobar'
@@ -73,6 +78,7 @@ module Cavy
 
         it 'should be able to delete page template field' do
           visit '/admin'
+          click_link 'admin-system'
           click_link 'admin-page-templates'
           click_link "edit-page-template-#{@page_template.id}"
           expect(@page_template.fields.empty?).to be_falsey
@@ -83,6 +89,7 @@ module Cavy
 
         it 'should be able to update page template field' do
           visit '/admin'
+          click_link 'admin-system'
           click_link 'admin-page-templates'
           click_link "edit-page-template-#{@page_template.id}"
           expect(@page_template.fields['foobar']).to eq('STRING')

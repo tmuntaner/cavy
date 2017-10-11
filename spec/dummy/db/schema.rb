@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170312214504) do
+ActiveRecord::Schema.define(version: 20171011144927) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,29 +25,13 @@ ActiveRecord::Schema.define(version: 20170312214504) do
   end
 
   create_table "cavy_groups_policies", id: false, force: :cascade do |t|
-    t.bigint "cavy_group_id", null: false
-    t.bigint "cavy_policy_id", null: false
+    t.integer "cavy_group_id", null: false
+    t.integer "cavy_policy_id", null: false
   end
 
   create_table "cavy_groups_users", id: false, force: :cascade do |t|
-    t.bigint "cavy_user_id", null: false
-    t.bigint "cavy_group_id", null: false
-  end
-
-  create_table "cavy_item_groups", id: :serial, force: :cascade do |t|
-    t.string "title"
-    t.string "params", array: true
-  end
-
-  create_table "cavy_item_sections", id: :serial, force: :cascade do |t|
-    t.string "title"
-    t.integer "item_groups", array: true
-  end
-
-  create_table "cavy_items", id: :serial, force: :cascade do |t|
-    t.hstore "data"
-    t.integer "position"
-    t.integer "item_group_id"
+    t.integer "cavy_user_id", null: false
+    t.integer "cavy_group_id", null: false
   end
 
   create_table "cavy_page_templates", id: :serial, force: :cascade do |t|

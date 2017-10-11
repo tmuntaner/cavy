@@ -4,22 +4,6 @@ end
 
 Cavy::Engine.routes.draw do
 
-=begin
-  scope :api do
-    namespace :v1 do
-      match '*path', via: [:options], to: lambda { |_|
-        [
-          204, {
-            'Access-Control-Allow-Headers' => 'Origin, Content-Type, Accept, Authorization, Token',
-            'Access-Control-Allow-Origin' => '*' }, []
-        ]}
-      get '/pages', to: 'admin_pages#index'
-      post '/session', to: 'sessions#create'
-      get '/first_time', to: 'first_time#index'
-    end
-  end
-=end
-
   scope(cavy_locale_scope, locale: /#{I18n.available_locales.join('|')}/) do
 
 

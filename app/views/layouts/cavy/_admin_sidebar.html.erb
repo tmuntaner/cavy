@@ -13,12 +13,6 @@
     </a>
   </li>
 
-  <% Cavy::ItemSection.all.each do |section| %>
-      <li>
-        <%= link_to section.title, cavy_edit_items_path(section.id) %>
-      </li>
-  <% end %>
-
   <li>
     <a href="<%= admin_system_path %>" id="admin-system">
       <i class="fa fa-cogs" aria-hidden="true"></i>
