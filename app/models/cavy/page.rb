@@ -89,7 +89,7 @@ module Cavy
 
     def update_elements(params, locale = nil)
       locale ||= I18n.locale.to_s
-      update_values = {page_elements: {}}
+      update_values = { page_elements: {} }
 
       self.page_elements.try(:each) do |key, value|
         update_values[:page_elements][key] = value

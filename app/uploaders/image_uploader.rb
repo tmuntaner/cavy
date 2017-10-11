@@ -29,10 +29,10 @@ class ImageUploader < CarrierWave::Uploader::Base
   # end
 
   # Process files as they are uploaded:
-  def resize(x,y)
+  def resize(x, y)
     process resize_to_fit: [x, y]
   end
-  
+
   #
   # def scale(width, height)
   #   # do something

@@ -30,7 +30,7 @@ module Cavy
       end
 
       get_item_params.try(:each) do |id, item_params|
-        is_empty = item_params.values.inject(false) {|empty_check, value| empty_check = empty_check || value.to_s == ''}
+        is_empty = item_params.values.inject(false) { |empty_check, value| empty_check = empty_check || value.to_s == '' }
         if id.to_i.to_s == id.to_s
           item = Item.find id
           item.update_attributes(data: item_params)

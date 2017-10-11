@@ -2,9 +2,9 @@ module Cavy
   class PageTemplate < ApplicationRecord
 
     @options = [
-        {name: 'string', type: 'STRING'},
-        {name: 'text', type: 'TEXT'},
-        {name: 'picture', type: 'PICTURE'},
+      { name: 'string', type: 'STRING' },
+      { name: 'text', type: 'TEXT' },
+      { name: 'picture', type: 'PICTURE' },
     ]
 
     def self.get_field_options_for_select

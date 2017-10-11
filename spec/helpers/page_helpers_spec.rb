@@ -27,7 +27,7 @@ module Cavy
 
     describe 'seo' do
       it 'should give proper seo tags for a page' do
-        page = Cavy::Page.create(title: {en: 'foo bar', de: 'das foo bar'}, seo_keywords: {en: %w(ghost summer)}, seo_description: {en: 'first piggies'})
+        page = Cavy::Page.create(title: { en: 'foo bar', de: 'das foo bar' }, seo_keywords: { en: %w(ghost summer) }, seo_description: { en: 'first piggies' })
         element = dummy_class.meta_tags(page)
         expect(element).to eq("<meta content='first piggies' name='description'> <meta content='ghost, summer' name='keywords'>")
         page.destroy

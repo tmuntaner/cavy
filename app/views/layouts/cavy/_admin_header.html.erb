@@ -11,9 +11,9 @@
   <div class="top-bar-right">
     <ul class="dropdown menu" data-dropdown-menu>
       <li class="locale-links">
-          <% I18n.available_locales.each do |locale| %>
-              <%= link_to locale.upcase, url_for(locale: locale) %>
-          <% end %>
+        <% I18n.available_locales.each do |locale| %>
+            <%= link_to locale.upcase, url_for(locale: locale) %>
+        <% end %>
       </li>
       <% if current_user %>
           <li>

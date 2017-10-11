@@ -10,7 +10,7 @@
   <%= stylesheet_link_tag 'cavy/application', media: 'all' %>
   <%= javascript_include_tag 'cavy/application' %>
   <%= csrf_meta_tags %>
-  <% unless @page.nil?  %>
+  <% unless @page.nil? %>
       <%= meta_tags(@page) %>
   <% end %>
 

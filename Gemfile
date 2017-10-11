@@ -24,6 +24,7 @@ gem 'capybara-webkit'
 gem 'uglifier'
 gem 'fog-aws'
 gem 'listen'
+gem 'rubocop'
 
 platform :ruby do
   gem 'better_errors'

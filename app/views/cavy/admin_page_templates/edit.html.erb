@@ -42,7 +42,7 @@
                     <% end %>
                   </td>
                   <td>
-                    <%= link_to 'Destroy', admin_delete_page_template_field_path(@page_template.id, name), class: 'button small alert', method: :delete, data: {:confirm => 'Are you sure?'}, id: "delete-#{@page_template.id}-#{name}" %>
+                    <%= link_to 'Destroy', admin_delete_page_template_field_path(@page_template.id, name), class: 'button small alert', method: :delete, data: { :confirm => 'Are you sure?' }, id: "delete-#{@page_template.id}-#{name}" %>
                   </td>
                 </tr>
             <% end %>
