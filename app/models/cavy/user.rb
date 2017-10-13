@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: cavy_users
+#
+#  id              :integer          not null, primary key
+#  email           :string
+#  name            :string
+#  password_digest :string
+#  auth_token      :string
+#  role            :string
+#  created_at      :datetime
+#  updated_at      :datetime
+#
+
 module Cavy
   class User < ::ActiveRecord::Base
 

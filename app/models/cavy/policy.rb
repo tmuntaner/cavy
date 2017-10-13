@@ -1,3 +1,11 @@
+# == Schema Information
+#
+# Table name: cavy_policies
+#
+#  id   :integer          not null, primary key
+#  name :string
+#
+
 module Cavy
   class Policy < ::ActiveRecord::Base
 

@@ -1,5 +1,5 @@
 def cavy_locale_scope
-  (I18n.available_locales.count > 1) ? '(:locale)' : ''
+  I18n.available_locales.count > 1 ? '(:locale)' : ''
 end
 
 Cavy::Engine.routes.draw do

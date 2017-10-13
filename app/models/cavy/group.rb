@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: cavy_groups
+#
+#  id             :integer          not null, primary key
+#  name           :string
+#  is_super_admin :boolean
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#
+
 module Cavy
   class Group < ::ActiveRecord::Base
 

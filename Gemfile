@@ -13,6 +13,8 @@ gemspec
 # To use debugger
 # gem 'debugger'
 
+gem 'annotate', require: false
+
 gem 'ruby-debug-ide'
 gem 'debase'
 
@@ -25,6 +27,7 @@ gem 'uglifier'
 gem 'fog-aws'
 gem 'listen'
 gem 'rubocop'
+gem 'rubocop-rspec'
 
 platform :ruby do
   gem 'better_errors'

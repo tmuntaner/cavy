@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: cavy_pages
+#
+#  id                    :integer          not null, primary key
+#  title                 :hstore
+#  data                  :hstore
+#  render                :string
+#  route                 :string
+#  page_elements         :json
+#  cavy_page_template_id :integer
+#  seo_description       :hstore
+#  seo_keywords          :jsonb
+#
+
 module Cavy
   class Page < ::ActiveRecord::Base
 
@@ -91,7 +106,7 @@ module Cavy
       locale ||= I18n.locale.to_s
       update_values = { page_elements: {} }
 
-      self.page_elements.try(:each) do |key, value|
+      page_elements.try(:each) do |key, value|
         update_values[:page_elements][key] = value
       end
 

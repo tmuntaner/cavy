@@ -10,8 +10,7 @@ module Cavy
       @pages = Cavy::Page.all
     end
 
-    def system
-    end
+    def system; end
 
   end
 end

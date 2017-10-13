@@ -1,9 +1,7 @@
 FactoryGirl.define do
   factory :cavy_page, class: Cavy::Page do |page|
-    page.title { {
-      en: "page #{Cavy::Page.count}",
-      de: "seite #{Cavy::Page.count}"
-    } }
+    page.title { { en: "page #{Cavy::Page.count}",
+                   de: "seite #{Cavy::Page.count}" } }
     page.render 'cavy/pages/page'
     page.data {}
     page.page_elements { { test_en: 'test en', test_de: 'dest de' } }
