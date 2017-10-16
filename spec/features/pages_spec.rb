@@ -21,7 +21,7 @@ module Cavy
     end
 
     it 'should be able to click link to new page from home page' do
-      @about = FactoryGirl.create(:cavy_page, title: { en: 'about', de: 'über' }, page_elements: { test_en: 'foo_about_bar', test_de: 'foo_über_bar' }, cavy_page_template: @page_template)
+      @about = FactoryGirl.create(:cavy_page, title: { en: 'about', de: 'über' }, page_elements: { test: { en: 'foo_about_bar', de: 'foo_über_bar' } }, cavy_page_template: @page_template)
       visit '/'
       click_link 'about'
       expect(page).to have_content('foo_about_bar')
@@ -47,14 +47,14 @@ module Cavy
     end
 
     it 'should be able to go to non-root page through url' do
-      @about = Page.create(title: { en: 'about', de: 'über' }, page_elements: { test_en: 'foo_about_bar', test_de: 'foo_über_bar' }, cavy_page_template: @page_template)
+      @about = Page.create(title: { en: 'about', de: 'über' }, page_elements: { test: { en: 'foo_about_bar', de: 'foo_über_bar' } }, cavy_page_template: @page_template)
       visit '/about'
       expect(page).to have_content('foo_about_bar')
       @about.destroy
     end
 
     it 'should be able to go to non-root page through url with spaces in title' do
-      @about = Page.create(title: { en: 'about us', de: 'über uns' }, page_elements: { test_en: 'foo_about_bar', test_de: 'foo_über_bar' })
+      @about = Page.create(title: { en: 'about us', de: 'über uns' }, page_elements: { test: { en: 'foo_about_bar', de: 'foo_über_bar' } })
       visit '/about_us'
       expect(page).to have_content('foo_about_bar')
       @about.destroy

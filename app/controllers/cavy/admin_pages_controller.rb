@@ -45,7 +45,7 @@ module Cavy
 
     def update
       @page = Cavy::Page.find(params[:id])
-      if @page.update_page(page_params, params[:locale])
+      if @page.update_page(page_params)
         redirect_to admin_edit_page_path(@page), flash: { success: 'Successfully updated page.' }
       else
         render action: 'edit'

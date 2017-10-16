@@ -8,20 +8,18 @@ module Cavy
     describe 'page elements' do
       it 'should give a page element div' do
         element = dummy_class.page_element(id: 'title', content: 'foobar')
-        expect(element).to eq("<div id='title' data-mercury='full'>foobar</div>")
+        expect(element).to eq("<div id='title'>foobar</div>")
       end
 
       it 'should give a localized page element div' do
         page = create(:cavy_page)
-        I18n.locale = :en
-        page.update_elements(title: 'foobar_en')
+        page.update_elements(title: {en: 'foobar_en', de: 'foobar_de'})
         I18n.locale = :de
-        page.update_elements(title: 'foobar_de')
         element = dummy_class.localized_page_element(id: 'title', page: page)
-        expect(element).to eq("<div id='title_de' data-mercury='full'>foobar_de</div>")
+        expect(element).to eq("<div id='title'>foobar_de</div>")
         I18n.locale = :en
         element = dummy_class.localized_page_element(id: 'title', page: page)
-        expect(element).to eq("<div id='title_en' data-mercury='full'>foobar_en</div>")
+        expect(element).to eq("<div id='title'>foobar_en</div>")
       end
     end
 

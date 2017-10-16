@@ -11,7 +11,7 @@ module Cavy
     #
     #   page_element(id: 'title', content: @page.title)
     def page_element(opts) # :args: id, content
-      "<div id='#{opts[:id]}' data-mercury='full'>#{opts[:content]}</div>".html_safe
+      "<div id='#{opts[:id]}'>#{opts[:content]}</div>".html_safe
     end
 
     ##
@@ -22,7 +22,7 @@ module Cavy
     #
     #   localized_page_element(id: 'title', page: @page)
     def localized_page_element(opts) # :args: id, page
-      page_element(id: localized_title_id(opts[:id]), content: localized_text(opts))
+      page_element(id: opts[:id], content: localized_text(opts))
     end
 
     ##
@@ -33,7 +33,7 @@ module Cavy
     #
     #   localized_text(id: 'title', page: @page)
     def localized_text(opts)
-      opts[:page].page_elements[localized_title_id(opts[:id])]
+      opts[:page].get_page_element(opts[:id])
     end
 
     ##
@@ -64,10 +64,6 @@ module Cavy
     end
 
     private
-
-    def localized_title_id(id)
-      "#{id}_#{I18n.locale}"
-    end
 
     def page_tags(page)
       page.seo_keywords.to_h.empty? ? '' : page.seo_keywords[I18n.locale.to_s].to_a.join(', ')

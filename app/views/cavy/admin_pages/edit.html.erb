@@ -34,7 +34,7 @@
           </div>
 
           <%= f.label 'Title:', class: 'control-label' %>
-          <%= render 'cavy/admin_pages/page_localized_string_field', id: 'page-title', field_name: 'page[title]', translations: @page.get_title_translations %>
+          <%= render 'cavy/admin_pages/page_localized_string_field', id: 'page-title', field_name: 'page[title]', translations: @page.title_translations %>
 
           <% @page.cavy_page_template.fields.try(:each) do |key, value| %>
               <%= f.label "#{key}:", class: 'control-label' %>

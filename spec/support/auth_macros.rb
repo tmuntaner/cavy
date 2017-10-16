@@ -7,10 +7,8 @@ module AuthMacros
     click_button 'sign-in'
   end
 
-  def log_in_rack
-    @user = FactoryGirl.create(:cavy_user,
-                               password: 'secret',
-                               password_confirmation: 'secret')
+  def log_in_rack(role)
+    @user = create(:cavy_user, password: 'secret', password_confirmation: 'secret', role: role)
     @session = { email: @user.email, password: 'secret' }
     post admin_create_session_path(locale: :en), params: @session
   end

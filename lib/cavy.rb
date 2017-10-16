@@ -5,12 +5,13 @@ require 'cavy/js_web_token'
 
 module Cavy
 
-  mattr_accessor :root, :title, :locales, :default_locale, :raise_not_found_error, :at_least_one_user, :uploader
+  mattr_accessor :root, :title, :locales, :default_locale,
+                 :raise_not_found_error, :at_least_one_user, :uploader
 
   self.root = 'home'
   self.title = 'cavy'
 
-  self.locales = :en
+  self.locales = [:en]
   self.default_locale = :en
   self.raise_not_found_error = false
   self.at_least_one_user = false

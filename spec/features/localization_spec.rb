@@ -60,7 +60,7 @@ describe 'localizations' do
 
   it 'should redirect to / if only one locale when visiting root' do
     Cavy.config do |config|
-      config.locales = :en
+      config.locales = %i[en]
     end
     @home = Cavy::Page.create(title: 'home')
     visit '/'
@@ -70,7 +70,7 @@ describe 'localizations' do
 
   it 'should redirect to /about if only one locale when visiting /about' do
     Cavy.config do |config|
-      config.locales = :en
+      config.locales = %i[en]
     end
     @about = Cavy::Page.create(title: 'about')
     visit '/about'
