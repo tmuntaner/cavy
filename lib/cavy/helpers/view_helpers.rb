@@ -1,6 +1,5 @@
 module Cavy
   module ViewHelpers
-
     extend self
 
     ##
@@ -52,15 +51,14 @@ module Cavy
     # = Example
     #
     #   chart_tag ('page_vies', 300, 300)
-    def chart_tag (action, width=700, height=300, params = {})
+    def chart_tag(action, _width = 700, height = 300, params = {})
       params[:format] ||= :json
 
       path = url_for controller: :statistics, action: action
 
       content_tag(:div, :'data-chart' => path, :style => "height: #{height}px;") do
-        image_tag('', :size => '24x24', :class => 'spinner')
+        image_tag('', size: '24x24', class: 'spinner')
       end
-
     end
 
     private
@@ -68,6 +66,5 @@ module Cavy
     def page_tags(page)
       page.seo_keywords.to_h.empty? ? '' : page.seo_keywords[I18n.locale.to_s].to_a.join(', ')
     end
-
   end
 end

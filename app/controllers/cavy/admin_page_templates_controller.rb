@@ -2,7 +2,6 @@ require_dependency 'cavy/application_controller'
 
 module Cavy
   class AdminPageTemplatesController < ApplicationController
-
     layout 'cavy/admin_layout'
 
     def index
@@ -47,6 +46,5 @@ module Cavy
     def page_template_params
       params.require(:page_template).permit(:name, :template)
     end
-
   end
 end

@@ -6,7 +6,7 @@ class AddUser < ActiveRecord::Migration[4.2]
       t.string :password_digest
       t.string :auth_token
       t.string :role
- 
+
       t.timestamps
     end
   end

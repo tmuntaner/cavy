@@ -2,8 +2,7 @@ require_dependency 'cavy/application_controller'
 
 module Cavy
   class ItemSectionsController < ApplicationController
-
-    before_action :set_item_section, only: [:show, :edit]
+    before_action :set_item_section, only: %i[show edit]
     layout 'cavy/admin_layout'
 
     def index

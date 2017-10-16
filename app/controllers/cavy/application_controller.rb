@@ -1,6 +1,5 @@
 module Cavy
   class ApplicationController < ActionController::Base
-
     before_action :check_first_time
 
     before_action :authorize
@@ -78,6 +77,5 @@ module Cavy
         end
       end
     end
-
   end
 end

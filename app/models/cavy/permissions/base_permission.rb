@@ -1,7 +1,6 @@
 module Cavy
   module Permissions
     class BasePermission
-
       def allow?(controller, action, resource = nil)
         allowed = @allow_all || @allowed_actions[[controller.to_s, action.to_s]]
         allowed && (allowed == true || resource && allowed.call(resource))
@@ -41,12 +40,11 @@ module Cavy
           params.permit!
         elsif @allowed_params
           @allowed_params.each do |resource, attributes|
-            if params[resource].respond_to? :permit
-              hstore_data = get_hstore_data(attributes, params[resource])
-              params[resource] = params[resource].permit(*attributes)
-              params[resource].merge!(hstore_data)
-              params.permit!
-            end
+            next unless params[resource].respond_to? :permit
+            hstore_data = get_hstore_data(attributes, params[resource])
+            params[resource] = params[resource].permit(*attributes)
+            params[resource].merge!(hstore_data)
+            params.permit!
           end
         end
       end
@@ -56,13 +54,12 @@ module Cavy
       def get_hstore_data(attributes, resource)
         hstore_data = {}
         attributes.each do |attribute|
-          if attribute.class == Hash and resource[attribute.keys.first]
+          if attribute.class == Hash && resource[attribute.keys.first]
             hstore_data[attribute.keys.first] = resource[attribute.keys.first]
           end
         end
         hstore_data
       end
-
     end
   end
 end

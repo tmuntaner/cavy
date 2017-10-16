@@ -1,6 +1,5 @@
 module Cavy
   module LinkHelpers
-
     ##
     # This method creates a page link for a cavy page
     #
@@ -8,7 +7,7 @@ module Cavy
     #
     #   cavy_page('home', 'home', active_check: true)
 
-    def cavy_page(route, text, opts={active_check: true})
+    def cavy_page(route, text, opts = { active_check: true })
       active = false
       opts[:valid_routes] = [route] unless opts[:valid_routes]
 
@@ -40,16 +39,16 @@ module Cavy
     #
     #   make_link('/home', text, class: 'active', id: 'link1')
 
-    def make_link(href, text, opts={})
+    def make_link(href, text, opts = {})
       "<a href='#{href}' #{build_html_class(opts[:class])} #{build_html_id(opts[:id])}> #{text} </a>".html_safe
     end
 
     def build_html_class(html_class)
-      return "class='#{html_class}'" if html_class != nil
+      return "class='#{html_class}'" unless html_class.nil?
     end
 
     def build_html_id(html_id)
-      return "id='#{html_id}'" if html_id != nil
+      return "id='#{html_id}'" unless html_id.nil?
     end
 
     ##
@@ -61,9 +60,8 @@ module Cavy
 
     def link_active(route)
       current_path = params[:route] || Cavy.root
-      return true if params[:controller] == 'cavy/pages' and params[:action] == 'page' and current_path == route
+      return true if params[:controller] == 'cavy/pages' && params[:action] == 'page' && current_path == route
       false
     end
-
   end
 end

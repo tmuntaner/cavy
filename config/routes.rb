@@ -3,10 +3,7 @@ def cavy_locale_scope
 end
 
 Cavy::Engine.routes.draw do
-
   scope(cavy_locale_scope, locale: /#{I18n.available_locales.join('|')}/) do
-
-
     root to: 'pages#page'
 
     resources :users
@@ -65,5 +62,4 @@ Cavy::Engine.routes.draw do
 
     get ':route', to: 'pages#page', as: 'cavy_page'
   end
-
 end

@@ -2,7 +2,6 @@ require_dependency 'cavy/application_controller'
 
 module Cavy
   class PagesController < ApplicationController
-
     def page
       @page = params[:route] ? get_page(params[:route]) : Page.find_by(route: Cavy.root)
       if @page
@@ -15,12 +14,11 @@ module Cavy
     private
 
     def not_found
-      raise ActionController::RoutingError.new('Not Found')
+      raise ActionController::RoutingError, 'Not Found'
     end
 
     def get_page(route)
       Page.find_by(route: route) || not_found
     end
-
   end
 end

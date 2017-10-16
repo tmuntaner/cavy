@@ -2,7 +2,6 @@ require_dependency 'cavy/application_controller'
 
 module Cavy
   class AdminController < ApplicationController
-
     layout 'cavy/admin_layout'
 
     def dashboard
@@ -11,6 +10,5 @@ module Cavy
     end
 
     def system; end
-
   end
 end

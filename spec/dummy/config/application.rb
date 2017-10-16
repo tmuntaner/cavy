@@ -17,6 +17,5 @@ module Dummy
     # -- all .rb files in that directory are automatically loaded.
 
     I18n.enforce_available_locales = false
-
   end
 end

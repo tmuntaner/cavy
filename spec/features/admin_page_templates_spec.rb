@@ -2,17 +2,16 @@ require 'spec_helper'
 
 module Cavy
   describe AdminPageTemplatesController, type: :request do
-
-    before(:each) do
+    before do
       I18n.locale = :en
       log_in('admin')
     end
 
-    after(:each) do
+    after do
       log_out
     end
 
-    it 'should be able to go to the new page template page' do
+    it 'is able to go to the new page template page' do
       visit '/admin'
       click_link 'admin-system'
       click_link 'admin-page-templates'
@@ -35,11 +34,11 @@ module Cavy
         expect(@page_template.template).to eq('cavy_test/pages/test')
       end
 
-      it 'should be able to add a new page template' do
+      it 'is able to add a new page template' do
         expect(@page_template.template).to eq('cavy_test/pages/test')
       end
 
-      it 'should be able to add edit page template' do
+      it 'is able to add edit page template' do
         visit '/admin'
         click_link 'admin-system'
         click_link 'admin-page-templates'
@@ -52,7 +51,7 @@ module Cavy
         expect(@page_template.template).to eq('cavy_test/pages/test1')
       end
 
-      it 'should be able to delete page template' do
+      it 'is able to delete page template' do
         visit '/admin'
         click_link 'admin-system'
         click_link 'admin-page-templates'
@@ -61,7 +60,7 @@ module Cavy
       end
 
       describe 'page template fields' do
-        before(:each) do
+        before do
           expect(@page_template.fields.nil?).to be_truthy
           visit '/admin'
           click_link 'admin-system'
@@ -76,7 +75,7 @@ module Cavy
           expect(@page_template.fields['foobar']).to eq('STRING')
         end
 
-        it 'should be able to delete page template field' do
+        it 'is able to delete page template field' do
           visit '/admin'
           click_link 'admin-system'
           click_link 'admin-page-templates'
@@ -87,7 +86,7 @@ module Cavy
           expect(@page_template.fields.empty?).to be_truthy
         end
 
-        it 'should be able to update page template field' do
+        it 'is able to update page template field' do
           visit '/admin'
           click_link 'admin-system'
           click_link 'admin-page-templates'
@@ -101,6 +100,5 @@ module Cavy
         end
       end
     end
-
   end
 end

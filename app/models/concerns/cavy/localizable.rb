@@ -12,5 +12,4 @@ module Cavy::Localizable
       end
     end
   end
-
 end

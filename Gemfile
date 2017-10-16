@@ -15,19 +15,19 @@ gemspec
 
 gem 'annotate', require: false
 
-gem 'ruby-debug-ide'
 gem 'debase'
+gem 'ruby-debug-ide'
 
-gem 'simplecov', require: false, group: :test
-gem 'rspec-rails', group: :test
-gem 'rails', '~> 5.1'
 gem 'capybara-screenshot'
 gem 'capybara-webkit'
-gem 'uglifier'
 gem 'fog-aws'
 gem 'listen'
+gem 'rails', '~> 5.1'
+gem 'rspec-rails', group: :test
 gem 'rubocop'
 gem 'rubocop-rspec'
+gem 'simplecov', require: false, group: :test
+gem 'uglifier'
 
 platform :ruby do
   gem 'better_errors'

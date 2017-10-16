@@ -46,7 +46,7 @@ module Cavy
     end
 
     def get_page_element(element, locale = nil)
-      element = self.page_elements[element]
+      element = page_elements[element]
       element ||= {}
       localized_hash_value(element, locale).to_s
     end
@@ -68,7 +68,7 @@ module Cavy
     end
 
     def update_elements(params)
-      previous = self.page_elements || {}
+      previous = page_elements || {}
       update_values = { page_elements: previous }
 
       params.try(:each) do |key, value|
@@ -83,16 +83,16 @@ module Cavy
     end
 
     def set_key_value(key, value)
-      self.data = {} if self.data == nil
-      self.data[key] = value
+      self.data = {} if data.nil?
+      data[key] = value
     end
 
     private
 
     def parse_page_element(key, value, locale)
       localized_value = value.is_a?(Hash) ? value[locale.to_sym] : value
-      unless self.cavy_page_template.nil?
-        picture_fields = self.cavy_page_template.fields.collect { |field_key, field_value| (field_value == 'PICTURE') ? field_key : nil }.compact
+      unless cavy_page_template.nil?
+        picture_fields = cavy_page_template.fields.collect { |field_key, field_value| field_value == 'PICTURE' ? field_key : nil }.compact
         localized_value = upload_image localized_value if picture_fields.include? key
       end
 
@@ -109,14 +109,14 @@ module Cavy
     end
 
     def check_page_elements
-      self.page_elements = {} if self.page_elements.nil?
+      self.page_elements = {} if page_elements.nil?
     end
 
     def check_tags
-      self.seo_keywords = {} if self.seo_keywords.nil?
-      self.seo_description = {} if self.seo_description.nil?
-      self.seo_keywords[I18n.locale.to_s] = tag_string.split(',') unless tag_string.to_s == ''
-      self.seo_description[I18n.locale.to_s] = seo_description_string unless seo_description_string.to_s == ''
+      self.seo_keywords = {} if seo_keywords.nil?
+      self.seo_description = {} if seo_description.nil?
+      seo_keywords[I18n.locale.to_s] = tag_string.split(',') unless tag_string.to_s == ''
+      seo_description[I18n.locale.to_s] = seo_description_string unless seo_description_string.to_s == ''
     end
 
     def make_route
@@ -124,14 +124,13 @@ module Cavy
     end
 
     def update_render
-      return if self.cavy_page_template_id.nil?
-      template = Cavy::PageTemplate.find(self.cavy_page_template_id)
+      return if cavy_page_template_id.nil?
+      template = Cavy::PageTemplate.find(cavy_page_template_id)
       self.render = template.template unless template.nil?
     end
 
     def title_with_locale(locale)
       self.title.nil? ? nil : self.title[locale.to_s]
     end
-
   end
 end

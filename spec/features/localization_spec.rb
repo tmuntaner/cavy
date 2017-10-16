@@ -1,43 +1,42 @@
 require 'spec_helper'
 
 describe 'localizations' do
-
   # reset locales
-  before(:each) do
+  before do
     Cavy.config do |config|
-      config.locales = [:en, :de]
+      config.locales = %i[en de]
       config.default_locale = :en
     end
     @user = FactoryGirl.create(:cavy_user, password: 'secret', password_confirmation: 'secret')
   end
 
   # reset locales
-  after(:each) do
+  after do
     Cavy.config do |config|
-      config.locales = [:en, :de]
+      config.locales = %i[en de]
       config.default_locale = :en
     end
     @user.destroy
   end
 
-  it 'should be able to set localizations' do
+  it 'is able to set localizations' do
     Cavy.config do |config|
-      config.locales = [:en, :de, :wk]
+      config.locales = %i[en de wk]
     end
-    expect(I18n.available_locales).to eq([:en, :de, :wk])
+    expect(I18n.available_locales).to eq(%i[en de wk])
   end
 
-  it 'should be able to set default locale' do
+  it 'is able to set default locale' do
     Cavy.config do |config|
-      config.locales = [:en, :de, :wk]
+      config.locales = %i[en de wk]
       config.default_locale = :wk
     end
     I18n.default_locale = :wk
   end
 
-  it 'should redirect to /wk if default_locale is set to wk when visiting root' do
+  it 'redirects to /wk if default_locale is set to wk when visiting root' do
     Cavy.config do |config|
-      config.locales = [:en, :de, :wk]
+      config.locales = %i[en de wk]
       config.default_locale = :wk
     end
 
@@ -47,9 +46,9 @@ describe 'localizations' do
     @home.destroy
   end
 
-  it 'should redirect to /wk/about if default_locale is set to wk when visiting /about' do
+  it 'redirects to /wk/about if default_locale is set to wk when visiting /about' do
     Cavy.config do |config|
-      config.locales = [:en, :de, :wk]
+      config.locales = %i[en de wk]
       config.default_locale = :wk
     end
     @about = Cavy::Page.create(title: 'about')
@@ -58,7 +57,7 @@ describe 'localizations' do
     @about.destroy
   end
 
-  it 'should redirect to / if only one locale when visiting root' do
+  it 'redirects to / if only one locale when visiting root' do
     Cavy.config do |config|
       config.locales = %i[en]
     end
@@ -68,7 +67,7 @@ describe 'localizations' do
     @home.destroy
   end
 
-  it 'should redirect to /about if only one locale when visiting /about' do
+  it 'redirects to /about if only one locale when visiting /about' do
     Cavy.config do |config|
       config.locales = %i[en]
     end

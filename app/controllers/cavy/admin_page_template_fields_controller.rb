@@ -2,7 +2,6 @@ require_dependency 'cavy/application_controller'
 
 module Cavy
   class AdminPageTemplateFieldsController < ApplicationController
-
     layout 'cavy/admin_layout'
 
     def create
@@ -25,6 +24,5 @@ module Cavy
     def page_template_params
       params.require(:page_template).permit(:name, :type)
     end
-
   end
 end

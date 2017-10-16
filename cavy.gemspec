@@ -1,4 +1,4 @@
-$:.push File.expand_path('../lib', __FILE__)
+$LOAD_PATH.push File.expand_path('../lib', __FILE__)
 
 # Maintain your gem's version:
 require 'cavy/version'
@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.name = 'cavy'
   s.version = Cavy::VERSION
   s.authors = ['Thomas Muntaner', 'Susanne Schmidt']
-  s.email = %w(thomas.muntaner@rubyrainbows.com susanne.schmidt@rubyrainbows.com)
+  s.email = %w[thomas.muntaner@rubyrainbows.com susanne.schmidt@rubyrainbows.com]
   s.homepage = 'http://www.rubyrainbows.com'
   s.summary = 'A simple CMS for rails'
   s.description = 'A cms bootstrap for localized client websites.'

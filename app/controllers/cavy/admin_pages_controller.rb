@@ -2,7 +2,6 @@ require_dependency 'cavy/application_controller'
 
 module Cavy
   class AdminPagesController < ApplicationController
-
     layout 'cavy/admin_layout'
 
     def index
@@ -64,6 +63,5 @@ module Cavy
         whitelisted[:title] = params[:page][:title]
       end
     end
-
   end
 end
