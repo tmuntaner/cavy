@@ -2,7 +2,7 @@ require 'spec_helper'
 
 module Cavy
   describe Permissions::ClientPermission do
-    subject { Permissions.permission_for(build(:cavy_user, role: 'client')) }
+    subject(:permission) { Permissions.permission_for(build(:cavy_user, role: 'client')) }
 
     it 'allows admin pages' do
       expect allow('cavy/admin_pages', :index)
@@ -10,11 +10,11 @@ module Cavy
       expect allow('cavy/admin_pages', :update)
       expect allow('cavy/admin_pages', :edit)
 
-      expect(subject).not_to allow('cavy/admin_pages', :new)
-      expect(subject).not_to allow('cavy/admin_pages', :create)
-      expect(subject).not_to allow('cavy/admin_pages', :delete)
-      expect(subject).not_to allow_param(:page, :route)
-      expect(subject).not_to allow_param(:page, :render)
+      expect(permission).not_to allow('cavy/admin_pages', :new)
+      expect(permission).not_to allow('cavy/admin_pages', :create)
+      expect(permission).not_to allow('cavy/admin_pages', :delete)
+      expect(permission).not_to allow_param(:page, :route)
+      expect(permission).not_to allow_param(:page, :render)
     end
 
     it 'allows to view pages' do
@@ -52,6 +52,5 @@ module Cavy
       expect allow('cavy/users', :create)
       expect allow('cavy/users', :update)
     end
-
   end
 end
