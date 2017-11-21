@@ -9,11 +9,6 @@ describe 'signed in client' do
     log_out
   end
 
-  it 'allows the user to go to the admin page' do
-    visit '/admin'
-    expect(page).to have_content('Website Dashboard')
-  end
-
   it 'allows the user to go to the pages page' do
     visit '/admin'
     click_link 'admin-pages'
