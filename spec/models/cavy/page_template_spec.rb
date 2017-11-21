@@ -14,9 +14,5 @@ require 'spec_helper'
 
 describe Cavy::PageTemplate, type: :model do
   describe 'field options' do
-    it 'provides a options array for select boxes' do
-      options = [%w[string STRING], %w[text TEXT], %w[picture PICTURE]]
-      expect(Cavy::PageTemplate.get_field_options_for_select).to eq(options)
-    end
   end
 end

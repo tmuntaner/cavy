@@ -12,15 +12,6 @@
 
 module Cavy
   class PageTemplate < ApplicationRecord
-    @options = [
-      { name: 'string', type: 'STRING' },
-      { name: 'text', type: 'TEXT' },
-      { name: 'picture', type: 'PICTURE' }
-    ]
-
-    def self.get_field_options_for_select
-      @options.map { |o| [o[:name], o[:type]] }
-    end
 
     def add_field(field, type)
       self.fields ||= {}
@@ -33,5 +24,6 @@ module Cavy
       fields.delete field
       save
     end
+
   end
 end
