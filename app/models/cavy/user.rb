@@ -14,8 +14,6 @@
 
 module Cavy
   class User < ::ActiveRecord::Base
-    has_and_belongs_to_many :cavy_groups, class_name: 'Cavy::Group', foreign_key: 'cavy_user_id', association_foreign_key: 'cavy_group_id'
-
     has_secure_password
 
     validates :email, uniqueness: true, presence: true
