@@ -3,14 +3,12 @@ before_install:
   - gem --version
 language: ruby
 rvm:
-  - 2.0.0
+  - 2.3.6
 gemfile: Gemfile
 before_script:
   - psql -c 'create database cavy_test;' -U postgres
   - RAILS_ENV=test bundle exec rake db:migrate
 
 script: bundle exec rspec spec
-services:
-  - mongodb
 addons:
-  postgresql: "9.3"
+  postgresql: "9.6"

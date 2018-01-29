@@ -17,23 +17,23 @@ ActiveRecord::Schema.define(version: 20141116193508) do
   enable_extension "plpgsql"
   enable_extension "hstore"
 
-  create_table "cavy_item_groups", force: :cascade do |t|
+  create_table "cavy_item_groups", force: true do |t|
     t.string "title"
     t.string "params", array: true
   end
 
-  create_table "cavy_item_sections", force: :cascade do |t|
+  create_table "cavy_item_sections", force: true do |t|
     t.string  "title"
     t.integer "item_groups", array: true
   end
 
-  create_table "cavy_items", force: :cascade do |t|
+  create_table "cavy_items", force: true do |t|
     t.hstore  "data"
     t.integer "position"
     t.integer "item_group_id"
   end
 
-  create_table "cavy_pages", force: :cascade do |t|
+  create_table "cavy_pages", force: true do |t|
     t.hstore "title"
     t.hstore "content"
     t.hstore "data"
@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 20141116193508) do
     t.json   "page_elements"
   end
 
-  create_table "cavy_users", force: :cascade do |t|
+  create_table "cavy_users", force: true do |t|
     t.string   "email"
     t.string   "name"
     t.string   "password_digest"

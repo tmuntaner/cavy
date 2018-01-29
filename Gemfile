@@ -1,4 +1,4 @@
-source "https://rubygems.org"
+source 'https://rubygems.org'
 
 # Declare your gem's dependencies in cavy.gemspec.
 # Bundler will treat runtime dependencies like base dependencies, and
@@ -13,16 +13,11 @@ gemspec
 # To use debugger
 # gem 'debugger'
 
-gem 'simplecov',        require: false, :group => :test
-gem 'coveralls',        require: false
+gem 'simplecov', require: false, :group => :test
+gem 'coveralls', '0.8.1', require: false
 gem 'jquery-ui-rails'
-gem 'rails',            '>= 4.1.7'
-gem "rspec-rails",      :group => [:test, :development]
-
-platform :jruby do
-  gem 'therubyrhino', group: :asssets
-  gem 'puma'
-end
+gem 'rails', '~> 4.1.16'
+gem 'rspec-rails', :group => [:test, :development]
 
 platform :ruby do
   gem 'better_errors'
