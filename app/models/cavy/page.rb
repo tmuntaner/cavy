@@ -1,5 +1,5 @@
 module Cavy
-  class Page < ::ActiveRecord::Base
+  class Page < ApplicationRecord
 
     validates :route, uniqueness: true
 

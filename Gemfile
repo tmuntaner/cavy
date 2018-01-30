@@ -14,10 +14,10 @@ gemspec
 # gem 'debugger'
 
 gem 'simplecov', require: false, :group => :test
-gem 'coveralls', '0.8.1', require: false
+gem 'coveralls', '~> 0.8.1', require: false
 gem 'jquery-ui-rails'
-gem 'rails', '~> 4.2.0'
 gem 'factory_girl_rails', require: false
+gem 'haml'
 gem 'rspec-rails', :group => [:test, :development]
 
 platform :ruby do

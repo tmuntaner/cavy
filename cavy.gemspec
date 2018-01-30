@@ -16,18 +16,18 @@ Gem::Specification.new do |s|
   s.files = Dir['{app,config,db,lib}/**/*', 'MIT-LICENSE', 'Rakefile', 'README.rdoc']
   s.test_files = Dir['spec/**/*']
 
-  s.add_dependency 'rails', '~> 4.2.0'
+  s.add_dependency 'rails', '~> 5.0.0'
   s.add_dependency 'pg', '~> 0.18.0'
-  s.add_dependency 'jquery-rails', '~> 3.1.2'
+  s.add_dependency 'jquery-rails', '~> 4.3.0'
   s.add_dependency 'coffee-script'
   s.add_dependency 'haml'
-  s.add_dependency 'haml-rails', '~> 0.9'
+  s.add_dependency 'haml-rails', '~> 1.0.0'
   s.add_dependency 'carrierwave'
   s.add_dependency 'mini_magick'
   s.add_dependency 'bcrypt-ruby'
   s.add_dependency 'garb'
-  s.add_dependency 'jquery-ui-rails', '~> 5.0.2'
-  s.add_dependency 'globalize', '~> 4.0.2'
+  s.add_dependency 'jquery-ui-rails', '~> 6.0.1'
+  s.add_dependency 'globalize', '~> 5.1.0'
   s.add_development_dependency 'capybara'
   s.add_development_dependency 'meta_request'
   s.add_development_dependency 'launchy'

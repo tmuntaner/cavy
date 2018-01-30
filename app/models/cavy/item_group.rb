@@ -1,5 +1,5 @@
 module Cavy
-  class ItemGroup < ::ActiveRecord::Base
+  class ItemGroup <  ApplicationRecord
 
     attr_accessor :param_string
 
