@@ -7,7 +7,7 @@ class AddUser < ActiveRecord::Migration
       t.string :auth_token
       t.string :role
  
-      t.timestamps
+      t.timestamps null: false
     end
   end
 end
