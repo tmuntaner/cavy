@@ -8,9 +8,10 @@ module AuthMacros
   end
 
   def log_in_rack(role, attributes={})
-    @user = FactoryGirl.create(:cavy_user, password: 'secret', password_confirmation: 'secret')
-    @session = {email: @user.email, password: 'secret'}
-    post admin_create_session_path(locale: :en), @session
+    @user = FactoryGirl.create(:cavy_user, password: 'secret', password_confirmation: 'secret', role: role)
+    @session = {email: @user.email, password: 'secret'}.to_json
+    headers = { "CONTENT_TYPE" => "application/json" }
+    post admin_create_session_path(locale: :en), params: @session, headers: headers
   end
 
   def log_out

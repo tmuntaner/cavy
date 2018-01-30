@@ -123,10 +123,10 @@ module Cavy
       end
 
       it 'should not allow a client to edit the route' do
-        log_in('client')
         @page = FactoryGirl.create(:cavy_page)
-        @parameters = { page: { title: 'ghost', tag_string: 'foo,bar,s', description: 'fooghostbarsummer',route: 'ghostenbear'}}
-        put admin_update_page_path({locale: :en, id: @page.id}), @parameters
+        @parameters = { page: { title: 'ghost', tag_string: 'foo,bar,s', description: 'fooghostbarsummer',route: 'ghostenbear'}}.to_json
+        headers = { "CONTENT_TYPE" => "application/json" }
+        put admin_update_page_path({locale: :en, id: @page.id}), params: @parameters, headers: headers
         @page = Cavy::Page.last
         @page.tags.should eq(['foo','bar','s'])
         @page.description.should eq('fooghostbarsummer')
