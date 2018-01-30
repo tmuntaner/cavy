@@ -1,5 +1,5 @@
 module Cavy
-  class Item < ::ActiveRecord::Base
+  class Item < ApplicationRecord
 
     belongs_to :cavy_item_group
 

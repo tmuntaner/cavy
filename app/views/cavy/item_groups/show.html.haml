@@ -23,7 +23,7 @@
         %th
     %tbody
       - @items.each do |item|    
-        = content_tag_for :tr, item do
+        %tr
           - @item_group.params.each do |param|
             %td= item.data[param]
           %td= link_to 'Show', cavy_item_path(item.id)
