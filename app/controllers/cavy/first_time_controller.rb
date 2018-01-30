@@ -11,10 +11,8 @@ module Cavy
 
     def create_user
       @user = Cavy::User.new(name: params[:name], email: params[:email], password: params[:password], password_confirmation: params[:password_confirmation], role: 'admin')
-      @group = Cavy::Group.find_or_create_by(name: 'Admin', is_super_admin: true)
 
       if @user.save
-        @user.cavy_groups << @group
         set_cookie_and_redirect(@user)
       else
         render action: 'new_user'

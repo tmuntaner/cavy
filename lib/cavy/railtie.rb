@@ -1,5 +1,6 @@
 require_relative 'helpers/view_helpers'
 require_relative 'helpers/link_helpers'
+require_relative 'templates'
 
 module Cavy
   class Railtie < Rails::Railtie
