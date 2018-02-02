@@ -11,11 +11,7 @@ module Cavy
       active = false
       opts[:valid_routes] = [route] unless opts[:valid_routes]
 
-      if route == Cavy.root
-        href = I18n.available_locales.count > 1 ? "/#{params[:locale]}/" : '/'
-      else
-        href = I18n.available_locales.count > 1 ? "/#{params[:locale]}/#{route}" : "/#{route}"
-      end
+      href = I18n.available_locales.count > 1 ? "/#{params[:locale]}#{route}" : "#{route}"
 
       opts[:valid_routes].each do |valid_route|
         if link_active(valid_route)
@@ -59,7 +55,7 @@ module Cavy
     #   link_active(route)
 
     def link_active(route)
-      current_path = params[:route] || Cavy.root
+      current_path = params[:route] || '/'
       return true if params[:controller] == 'cavy/pages' && params[:action] == 'page' && current_path == route
       false
     end

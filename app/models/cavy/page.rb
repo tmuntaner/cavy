@@ -23,7 +23,7 @@ module Cavy
     attr_accessor :seo_description_string, :key, :value
     belongs_to :cavy_page_template, class_name: 'Cavy::PageTemplate'
 
-    methods = %i[make_route check_tags check_page_elements update_render]
+    methods = %i[make_route check_tags check_page_elements update_render check_route]
     methods.each do |method|
       before_save method
       before_create method
@@ -121,6 +121,10 @@ module Cavy
 
     def make_route
       self.route ||= localized_title.tr(' ', '_').downcase
+    end
+
+    def check_route
+      self.route = '/' + self.route unless self.route.start_with?('/')
     end
 
     def update_render

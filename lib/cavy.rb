@@ -4,10 +4,9 @@ require 'cavy/uploaders/file_uploader'
 require 'cavy/js_web_token'
 
 module Cavy
-  mattr_accessor :root, :title, :locales, :default_locale,
+  mattr_accessor :title, :locales, :default_locale,
                  :raise_not_found_error, :at_least_one_user, :uploader
 
-  self.root = 'home'
   self.title = 'cavy'
 
   self.locales = [:en]

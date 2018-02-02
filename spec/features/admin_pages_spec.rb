@@ -41,12 +41,12 @@ module Cavy
         click_link "edit-page-#{@page.id}"
         fill_in 'page_tag_string', with: 'foo,bar'
         select @page_template.name, from: :page_cavy_page_template_id
-        fill_in 'page_route', with: 'foos'
+        fill_in 'page_route', with: '/foos'
         fill_in 'page_seo_description_string', with: 'foo'
         click_on 'submit_page_settings'
         @page = Cavy::Page.find(@page.id)
         expect(@page.seo_keywords[I18n.locale.to_s]).to eq(%w[foo bar])
-        expect(@page.route).to eq('foos')
+        expect(@page.route).to eq('/foos')
         expect(@page.seo_description[I18n.locale.to_s]).to eq('foo')
         expect(@page.render).to eq(@page_template.template)
       end

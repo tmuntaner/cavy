@@ -17,13 +17,13 @@ ActiveRecord::Schema.define(version: 20171121075213) do
   enable_extension "hstore"
 
   create_table "cavy_groups_policies", id: false, force: :cascade do |t|
-    t.integer "cavy_group_id", null: false
-    t.integer "cavy_policy_id", null: false
+    t.bigint "cavy_group_id", null: false
+    t.bigint "cavy_policy_id", null: false
   end
 
   create_table "cavy_groups_users", id: false, force: :cascade do |t|
-    t.integer "cavy_user_id", null: false
-    t.integer "cavy_group_id", null: false
+    t.bigint "cavy_user_id", null: false
+    t.bigint "cavy_group_id", null: false
   end
 
   create_table "cavy_page_templates", id: :serial, force: :cascade do |t|

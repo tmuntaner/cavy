@@ -5,7 +5,7 @@ module Cavy
     before do
       I18n.locale = :en
       @page_template = FactoryGirl.create(:cavy_page_template, template: 'cavy/pages/page')
-      @page = FactoryGirl.create(:cavy_page, title: { en: 'home', de: 'home' }, cavy_page_template: @page_template)
+      @page = FactoryGirl.create(:cavy_page, title: { en: 'home', de: 'home' }, route: '', cavy_page_template: @page_template)
       @user = FactoryGirl.create(:cavy_user, password: 'secret', password_confirmation: 'secret')
     end
 
@@ -62,7 +62,7 @@ module Cavy
     describe 'seo' do
       it 'displays the page description and meta tags' do
         @page = FactoryGirl.create(:cavy_page, title: { en: 'seo', de: 'das seo' }, seo_description: { en: 'guinea pigs are awesome' }, seo_keywords: { en: ['Ghost', 'Summer', 'Pumpkin Spice', 'Greywind'] }, cavy_page_template: @page_template)
-        visit "/#{@page.route}"
+        visit @page.route
         page.find "meta[content='#{@page.seo_description['en']}']", visible: 'false'
         page.find "meta[content='#{@page.seo_keywords['en'].join(', ')}']", visible: 'false'
         @page.destroy

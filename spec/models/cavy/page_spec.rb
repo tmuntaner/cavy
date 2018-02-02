@@ -33,12 +33,12 @@ describe Cavy::Page do
 
     it 'makes a route after saving from title' do
       page = create(:cavy_page, title: { en: 'foo' })
-      expect(page.route).to eq('foo')
+      expect(page.route).to eq('/foo')
     end
 
     it 'takes care of spaces in routes' do
       page = create(:cavy_page, title: { en: 'foo bar', de: 'das foo bar' })
-      expect(page.route).to eq('foo_bar')
+      expect(page.route).to eq('/foo_bar')
     end
 
     it 'is able to create two pages with different routes' do

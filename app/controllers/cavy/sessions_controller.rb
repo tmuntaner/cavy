@@ -18,7 +18,7 @@ module Cavy
 
     def destroy
       cookies.delete(:auth_token)
-      redirect_to root_path, notice: 'Logged out!'
+      redirect_to admin_signin_path, notice: 'Logged out!'
     end
 
     private

@@ -22,7 +22,6 @@ gem 'capybara-screenshot'
 gem 'capybara-webkit'
 gem 'fog-aws'
 gem 'listen'
-gem 'rails', '~> 5.1'
 gem 'rspec-rails', group: :test
 gem 'rubocop'
 gem 'rubocop-rspec'
