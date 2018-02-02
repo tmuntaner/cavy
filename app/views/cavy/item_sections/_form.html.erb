@@ -1,0 +1,39 @@
+<% if params[:action] == 'new' or params[:action] == 'create' %>
+  <% url = cavy_create_item_section_path %>
+  <% method = 'post' %>
+<% else %>
+  <% url = cavy_update_item_section_path(@item_section.id) %>
+  <% method = 'patch' %>
+<% end %>
+
+<%= form_for @item_section, url: url, method: method do |f| %>
+  <% if @item_section.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= "#{pluralize(@item_section.errors.count, "error")} prohibited this item_section from being saved:" %>
+      </h2>
+      <ul>
+        <% @item_section.errors.full_messages.each do |msg| %>
+          <li>
+            <%= msg %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="form-group">
+    <%= f.label :title, class: 'control-label' %>
+    <%= f.text_field :title, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label 'Item Groups', class: 'control-label' %>
+    <% Cavy::ItemGroup.all.each do |group| %>
+      <div class="checkbox">
+        <input name="item_section[item_groups][]" type="checkbox" value="<%= group.id %>">
+          <%= group.title %>
+        </input>
+      </div>
+    <% end %>
+  </div>
+  <%= f.submit 'Save', class: 'button success' %>
+<% end %>

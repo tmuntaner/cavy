@@ -19,7 +19,7 @@
         <h3><%= item_group.title %></h3>
       </div>
       <div class="card-section">
-        <form action="<%= cavy_update_item_path(item_section_id: @item_section.id, item_group_id: item_group.id) %>"
+        <form action="<%= cavy_update_items_path(item_section_id: @item_section.id, item_group_id: item_group.id) %>"
               method="post" autocomplete="off" data-dynamic-form>
           <table>
             <thead>

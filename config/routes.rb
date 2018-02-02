@@ -51,7 +51,7 @@ Cavy::Engine.routes.draw do
     delete '/admin/item_section/:id', to: 'item_sections#destroy', as: 'cavy_delete_item_section'
 
     get '/admin/item_sections/:item_section_id/items', to: 'items#edit', as: 'cavy_edit_items'
-    post '/admin/item_sections/:item_section_id/item_groups/:item_group_id/items', to: 'items#update', as: 'cavy_update_item'
+    post '/admin/item_sections/:item_section_id/item_groups/:item_group_id/items', to: 'items#update', as: 'cavy_update_items'
 
     get '/admin/signin', to: 'sessions#new', as: 'admin_signin'
     post '/admin/signin', to: 'sessions#create', as: 'admin_create_session'

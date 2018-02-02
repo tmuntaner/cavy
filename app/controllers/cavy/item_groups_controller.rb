@@ -23,7 +23,7 @@ module Cavy
       @item_group = ItemGroup.new(item_group_params)
 
       if @item_group.save
-        redirect_to cavy_item_group_path(@item_group), flash: { success: 'Admin item group was successfully created.' }
+        redirect_to item_groups_path, flash: { success: 'Admin item group was successfully created.' }
       else
         render action: 'new'
       end
@@ -31,7 +31,7 @@ module Cavy
 
     def update
       if @item_group.update_attributes(item_group_params)
-        redirect_to cavy_item_group_path(@item_group), flash: { success: 'Admin item group was successfully updated.' }
+        redirect_to item_groups_path, flash: { success: 'Admin item group was successfully updated.' }
       else
         render action: 'edit'
       end

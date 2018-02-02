@@ -10,11 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171121075213) do
+ActiveRecord::Schema.define(version: 20170312214504) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "hstore"
+
+  create_table "cavy_groups", id: :serial, force: :cascade do |t|
+    t.string "name"
+    t.boolean "is_super_admin"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_cavy_groups_on_name", unique: true
+  end
 
   create_table "cavy_groups_policies", id: false, force: :cascade do |t|
     t.bigint "cavy_group_id", null: false
@@ -24,6 +32,22 @@ ActiveRecord::Schema.define(version: 20171121075213) do
   create_table "cavy_groups_users", id: false, force: :cascade do |t|
     t.bigint "cavy_user_id", null: false
     t.bigint "cavy_group_id", null: false
+  end
+
+  create_table "cavy_item_groups", id: :serial, force: :cascade do |t|
+    t.string "title"
+    t.string "params", array: true
+  end
+
+  create_table "cavy_item_sections", id: :serial, force: :cascade do |t|
+    t.string "title"
+    t.integer "item_groups", array: true
+  end
+
+  create_table "cavy_items", id: :serial, force: :cascade do |t|
+    t.hstore "data"
+    t.integer "position"
+    t.integer "item_group_id"
   end
 
   create_table "cavy_page_templates", id: :serial, force: :cascade do |t|
@@ -43,6 +67,11 @@ ActiveRecord::Schema.define(version: 20171121075213) do
     t.integer "cavy_page_template_id"
     t.hstore "seo_description"
     t.jsonb "seo_keywords"
+  end
+
+  create_table "cavy_policies", id: :serial, force: :cascade do |t|
+    t.string "name"
+    t.index ["name"], name: "index_cavy_policies_on_name", unique: true
   end
 
   create_table "cavy_resources", id: :serial, force: :cascade do |t|
