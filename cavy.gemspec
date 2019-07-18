@@ -1,4 +1,6 @@
-$LOAD_PATH.push File.expand_path('../lib', __FILE__)
+# frozen_string_literal: true
+
+$LOAD_PATH.push File.expand_path('lib', __dir__)
 
 # Maintain your gem's version:
 require 'cavy/version'
@@ -16,23 +18,23 @@ Gem::Specification.new do |s|
   s.files = Dir['{app,config,db,lib}/**/*', 'MIT-LICENSE', 'Rakefile', 'README.rdoc']
   s.test_files = Dir['spec/**/*']
 
-  s.add_dependency 'rails', '~> 5.1'
-  s.add_dependency 'pg', '~> 0.20'
-  s.add_dependency 'coffee-script', '~> 2.4'
-  s.add_dependency 'haml', '~> 4.0'
-  s.add_dependency 'mini_magick', '~> 4.6'
   s.add_dependency 'bcrypt-ruby', '~> 3.1'
-  s.add_dependency 'sass-rails', '~> 5.0'
-  s.add_dependency 'jquery-rails', '~> 4.2'
   s.add_dependency 'carrierwave', '~> 1.0'
-  s.add_dependency 'jwt'
+  s.add_dependency 'coffee-script', '~> 2.4'
   s.add_dependency 'erubis'
+  s.add_dependency 'haml', '~> 4.0'
+  s.add_dependency 'jquery-rails', '~> 4.2'
+  s.add_dependency 'jwt'
+  s.add_dependency 'mini_magick', '~> 4.6'
+  s.add_dependency 'pg', '~> 0.20'
+  s.add_dependency 'rails', '~> 5.1.0'
+  s.add_dependency 'sass-rails', '~> 5.0'
 
+  s.add_development_dependency 'awesome_print', '~> 1.7'
   s.add_development_dependency 'capybara', '~> 2.12'
-  s.add_development_dependency 'meta_request', '~> 0.4'
+  s.add_development_dependency 'database_cleaner', '~> 1.5'
   s.add_development_dependency 'factory_girl_rails', '~> 4.8'
   s.add_development_dependency 'launchy', '~> 2.4'
-  s.add_development_dependency 'database_cleaner', '~> 1.5'
+  s.add_development_dependency 'meta_request', '~> 0.4'
   s.add_development_dependency 'pry', '~> 0.10'
-  s.add_development_dependency 'awesome_print', '~> 1.7'
 end
