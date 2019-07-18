@@ -2,11 +2,9 @@ require_dependency 'cavy/application_controller'
 
 module Cavy
   class SessionsController < ApplicationController
-
     layout 'cavy/sessions'
 
-    def new
-    end
+    def new; end
 
     def create
       user = User.find_by(email: params[:email])
@@ -20,7 +18,7 @@ module Cavy
 
     def destroy
       cookies.delete(:auth_token)
-      redirect_to root_path, notice: 'Logged out!'
+      redirect_to admin_signin_path, notice: 'Logged out!'
     end
 
     private
@@ -30,6 +28,5 @@ module Cavy
       redirect_to(session[:return_to] || root_path, notice: 'Logged in!')
       session.delete(:return_to)
     end
-
   end
 end

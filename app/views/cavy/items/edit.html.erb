@@ -1,0 +1,52 @@
+<div class="page-header">
+  <h1>
+    <%= @item_section.title %>
+  </h1>
+
+  <% if current_user&.role == 'admin' %>
+      <div class="button-group">
+        <%= link_to 'Edit Item Section', cavy_edit_item_section_path(@item_section), class: 'button small' %>
+        <a href="<%= item_groups_path %>" id="admin-item-groups" class="button primary small">
+          Item Groups
+        </a>
+      </div>
+  <% end %>
+</div>
+
+<% @item_groups.each do |item_group| %>
+    <div class="card">
+      <div class="card-divider">
+        <h3><%= item_group.title %></h3>
+      </div>
+      <div class="card-section">
+        <form action="<%= cavy_update_items_path(item_section_id: @item_section.id, item_group_id: item_group.id) %>"
+              method="post" autocomplete="off" data-dynamic-form>
+          <table>
+            <thead>
+            <tr>
+              <% item_group.params.each do |key| %>
+                  <th><%= key %></th>
+              <% end %>
+              <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr data-dynamic-form-template="item_<%= item_group.id %>" data-dynamic-form-fill="<%= item_group.items_json %>">
+              <% item_group.params.each do |key| %>
+                  <td>
+                    <input name="item[ID][<%= key %>]" value="" type="text" data-dynamic-form-input-id-template="ID" data-dynamic-form-input-name="<%= key %>"/>
+                  </td>
+              <% end %>
+              <td>
+                <button type="button" class="button success tiny" data-dynamic-form-add>Add</button>
+                <button type="button" class="button alert tiny" data-dynamic-form-remove>Remove</button>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+          <input type="submit" value="Submit" class="button small success">
+        </form>
+      </div>
+    </div>
+
+<% end %>

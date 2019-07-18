@@ -4,12 +4,23 @@
   </div>
   <div class="card-section">
     <form action="<%= cavy_first_time_create_user_path %>" id="first_time_user" method="POST">
-      <input class="form-control" id="inputName" name="name" placeholder="Name" type="text"/>
-      <input class="form-control" id="inputEmail" name="email" placeholder="Email" type="text"/>
-      <input class="form-control" id="inputPassword" name="password" placeholder="Password" type="password"/>
-      <input class="form-control" id="inputPasswordConfirmation" name="password_confirmation"
-             placeholder="Password Confirmation" type="password"/>
-      <button class="button success" id="signin" type="submit">Create User</button>
+      <label>
+        Name:
+        <input class="form-control" id="inputName" name="name" type="text"/>
+      </label>
+      <label>
+        Email:
+        <input class="form-control" id="inputEmail" name="email" type="text"/>
+      </label>
+      <label>
+        Password:
+        <input class="form-control" id="inputPassword" name="password" type="password"/>
+      </label>
+      <label>
+        Password Confirmation:
+        <input class="form-control" id="inputPasswordConfirmation" name="password_confirmation" type="password"/>
+      </label>
+      <button class="button success" id="signin">Create User</button>
     </form>
   </div>
 </div>

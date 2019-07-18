@@ -27,7 +27,7 @@
             </td>
             <% if current_user.dev_team? %>
                 <td>
-                  <%= link_to 'Destroy', admin_delete_page_template_path(page_template.id), class: 'button small alert', method: :delete, data: {confirm: 'Are you sure?'}, id: "delete-page-template-#{page_template.id}" %>
+                  <%= link_to 'Destroy', admin_delete_page_template_path(page_template.id), class: 'button small alert', method: :delete, data: { confirm: 'Are you sure?' }, id: "delete-page-template-#{page_template.id}" %>
                 </td>
             <% end %>
           </tr>

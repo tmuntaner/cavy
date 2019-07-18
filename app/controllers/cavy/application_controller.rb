@@ -1,6 +1,5 @@
 module Cavy
   class ApplicationController < ActionController::Base
-
     before_action :check_first_time
 
     before_action :authorize
@@ -24,31 +23,37 @@ module Cavy
     end
 
     def redirect_to_localized_url
-      redirect_to "/#{I18n.default_locale}#{request.path_info}" if params[:locale].blank? and I18n.available_locales.count > 1
+      return unless params[:locale].blank? && I18n.available_locales.count > 1
+      redirect_to "/#{I18n.default_locale}#{request.path_info}"
     end
 
-    def default_url_options(options = {})
-      {locale: I18n.locale} if I18n.available_locales.count > 1
+    def default_url_options
+      { locale: I18n.locale } if I18n.available_locales.count > 1
     end
 
     def can_edit?
-      signed_in? and current_user.site_manager?
-    end
-
-    def current_user
-      @current_user ||= User.includes(cavy_groups: [:cavy_policies]).find_by(auth_token: cookies[:auth_token]) if cookies[:auth_token]
+      signed_in? && current_user.site_manager?
     end
 
     def signed_in?
       !current_user.nil?
     end
 
+    def current_user
+      @current_user ||= find_user
+    end
+
+    def find_user
+      User.find_by(auth_token: cookies[:auth_token]) if cookies[:auth_token]
+    end
+
     def check_first_time
-      return if signed_in? || !(Cavy.is_first_time? and !is_in_first_time_controller?)
+      return if signed_in?
+      return unless Cavy.is_first_time? && !in_first_time_controller?
       redirect_to cavy_first_time_welcome_path
     end
 
-    def is_in_first_time_controller?
+    def in_first_time_controller?
       params[:controller] == 'cavy/first_time'
     end
 
@@ -72,6 +77,5 @@ module Cavy
         end
       end
     end
-
   end
 end

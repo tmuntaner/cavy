@@ -5,8 +5,8 @@ var pump = require('pump');
 var $ = require('gulp-load-plugins')();
 
 var sassPaths = [
-    'bower_components/foundation-sites/scss',
-    'bower_components/motion-ui/src'
+    'node_modules/foundation-sites/scss',
+    'node_modules/motion-ui/src'
 ];
 
 gulp.task('sass', function () {
@@ -28,10 +28,12 @@ gulp.task('sass', function () {
 gulp.task('js', function (cb) {
     pump([
             gulp.src([
-                'bower_components/jquery/dist/jquery.js',
-                'bower_components/foundation-sites/dist/foundation.js']
-            ),
-            uglify(),
+                'node_modules/jquery/dist/jquery.js',
+                'node_modules/foundation-sites/dist/js/foundation.js',
+                'node_modules/dynamic-forms/dist/dynamic_forms.js'
+
+            ]),
+            //uglify(),
             gulp.dest('app/assets/javascripts/cavy')
         ],
         cb

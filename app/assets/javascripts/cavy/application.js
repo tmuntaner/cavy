@@ -14,7 +14,11 @@
 //= require jquery_ujs
 //= require cavy/foundation
 //= require cavy/translations
+//= require cavy/dynamic_forms
 
 $(document).ready(function () {
     $(document).foundation();
+
+    var dynamicForms = new DynamicForms();
+    dynamicForms.automaticallySetupForm();
 });

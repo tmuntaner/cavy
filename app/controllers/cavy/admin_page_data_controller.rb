@@ -2,7 +2,6 @@ require_dependency 'cavy/application_controller'
 
 module Cavy
   class AdminPageDataController < ApplicationController
-
     layout 'cavy/admin_layout'
 
     def new
@@ -14,7 +13,7 @@ module Cavy
       @page = Cavy::Page.find(params[:id])
       @page.set_key_value(params[:page][:key], params[:page][:value])
       if @page.save
-        redirect_to admin_edit_page_path(@page.id), flash: {success: 'Successfully updated page.'}
+        redirect_to admin_edit_page_path(@page.id), flash: { success: 'Successfully updated page.' }
       else
         render action :new
       end
@@ -23,9 +22,8 @@ module Cavy
     private
 
     def page_params
-      # TODO Find a way to use hstore with strong parameters
+      # TODO: Find a way to use hstore with strong parameters
       # params.require(:page).permit(:title, :render, :route, :tag_string, :description, :key, :value, :data)
     end
-
   end
 end

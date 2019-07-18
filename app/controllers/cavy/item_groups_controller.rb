@@ -2,8 +2,7 @@ require_dependency 'cavy/application_controller'
 
 module Cavy
   class ItemGroupsController < ApplicationController
-
-    before_action :set_item_group, only: [:show, :edit, :update, :destroy]
+    before_action :set_item_group, only: %i[show edit update destroy]
     layout 'cavy/admin_layout'
 
     def index
@@ -18,14 +17,13 @@ module Cavy
       @item_group = ItemGroup.new
     end
 
-    def edit
-    end
+    def edit; end
 
     def create
       @item_group = ItemGroup.new(item_group_params)
 
       if @item_group.save
-        redirect_to cavy_item_group_path(@item_group), flash: {success: 'Admin item group was successfully created.'}
+        redirect_to item_groups_path, flash: { success: 'Admin item group was successfully created.' }
       else
         render action: 'new'
       end
@@ -33,7 +31,7 @@ module Cavy
 
     def update
       if @item_group.update_attributes(item_group_params)
-        redirect_to cavy_item_group_path(@item_group), flash: {success: 'Admin item group was successfully updated.'}
+        redirect_to item_groups_path, flash: { success: 'Admin item group was successfully updated.' }
       else
         render action: 'edit'
       end
@@ -41,14 +39,14 @@ module Cavy
 
     def update_order
       params[:item].each_with_index do |id, index|
-        Cavy::Item.find(id).set(position: index+1)
+        Cavy::Item.find(id).set(position: index + 1)
       end
       render nothing: true
     end
 
     def destroy
       @item_group.destroy
-      redirect_to item_groups_url, flash: {success: 'Admin item group was successfully destroyed.'}
+      redirect_to item_groups_url, flash: { success: 'Admin item group was successfully destroyed.' }
     end
 
     private

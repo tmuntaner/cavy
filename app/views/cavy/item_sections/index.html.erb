@@ -19,13 +19,13 @@
     <% @item_sections.each do |item_section| %>
       <tr>
         <td>
-          <%= link_to item_section.title, cavy_item_section_path(item_section) %>
+          <%= item_section.title %>
         </td>
         <td>
           <%= link_to 'Edit', cavy_edit_item_section_path(item_section), class: 'button primary small' %>
         </td>
         <td>
-          <%= link_to 'Destroy', cavy_item_section_path(item_section), class: 'button alert small', :method => :delete, :data => { :confirm => 'Are you sure?' } %>
+          <%= link_to 'Destroy', cavy_delete_item_section_path(item_section), class: 'button alert small', :method => :delete, :data => { :confirm => 'Are you sure?' } %>
         </td>
       </tr>
     <% end %>

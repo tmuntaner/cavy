@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 
 # Declare your gem's dependencies in cavy.gemspec.
@@ -13,13 +15,20 @@ gemspec
 # To use debugger
 # gem 'debugger'
 
-gem 'simplecov', require: false, group: :test
-gem 'rspec-rails', group: :test
-gem 'rails', '~> 5.0.0'
+gem 'annotate', require: false
+
+gem 'debase'
+gem 'ruby-debug-ide'
+
 gem 'capybara-screenshot'
 gem 'capybara-webkit'
-gem 'uglifier'
 gem 'fog-aws'
+gem 'listen'
+gem 'rspec-rails', group: :test
+gem 'rubocop'
+gem 'rubocop-rspec'
+gem 'simplecov', require: false, group: :test
+gem 'uglifier'
 
 platform :ruby do
   gem 'better_errors'

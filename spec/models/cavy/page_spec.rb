@@ -1,125 +1,97 @@
 require 'spec_helper'
 
-module Cavy
-  describe Page do
+describe Cavy::Page do
+  subject(:page) { create(:cavy_page) }
 
-    describe 'page elements' do
-      it 'should be able to add page content' do
-        I18n.locale = :en
-        page = Cavy::Page.create(title: {en: 'foo bar', de: 'das foo bar'})
-        elements = {title: {en: 'bar'}, content: 'foo', page: 'element'}
-        page.update_elements(elements)
-        page = Cavy::Page.find(page.id)
-        expect(page.localized_title).to eq('foo bar')
-        expect(page.get_page_element 'page').to eq('element')
+  before do
+    I18n.locale = :en
+  end
+
+  describe 'page elements' do
+    it 'is able to add page content' do
+      elements = { title: { en: 'bar' }, content: 'foo', page: 'element' }
+      page.update_elements(elements)
+      expect(page.get_page_element('page')).to eq('element')
+    end
+  end
+
+  describe 'title' do
+    subject(:page) { create(:cavy_page, title: { en: 'Home', de: 'Haus' }) }
+
+    it 'has a german title' do
+      I18n.locale = :de
+      expect(page.localized_title).to eq('Haus')
+    end
+
+    it 'has a english title' do
+      expect(page.localized_title).to eq('Home')
+    end
+  end
+
+  describe 'routes' do
+    subject(:page) { create(:cavy_page, route: '/foobar') }
+
+    it 'makes a route after saving from title' do
+      page = create(:cavy_page, title: { en: 'foo' })
+      expect(page.route).to eq('/foo')
+    end
+
+    it 'takes care of spaces in routes' do
+      page = create(:cavy_page, title: { en: 'foo bar', de: 'das foo bar' })
+      expect(page.route).to eq('/foo_bar')
+    end
+
+    it 'is able to create two pages with different routes' do
+      page = described_class.create(route: 'foo2')
+      expect(page).to be_valid
+    end
+
+    it 'is not able to create two pages with the same route' do
+      page.save
+      new_page = described_class.create(route: '/foobar')
+      expect(new_page).not_to be_valid
+    end
+  end
+
+  describe 'seo' do
+    describe 'tags' do
+      subject(:page) { create(:cavy_page, tag_string: 'Ruby,Rainbows') }
+
+      it 'accepts an empty tag string' do
+        page = described_class.create(tag_string: '')
+        expect(page).to be_valid
       end
-      it 'should not replace past page content when saving, just override' do
-        I18n.locale = :en
-        page = Cavy::Page.create({title: {en: 'foo bar', de: 'das foo bar'}, page_elements: {foo_en: 'foo'}})
-        elements = {title: {en: 'bar'}, content: 'foo', bar: 'bar'}
-        page.update_elements(elements)
-        page = Cavy::Page.find(page.id)
-        expect(page.localized_title).to eq('foo bar')
-        expect(page.get_page_element 'foo').to eq('foo')
-        expect(page.get_page_element 'bar').to eq('bar')
+
+      it 'accepts an string of tags' do
+        expect(page.seo_keywords[I18n.locale.to_s]).to eq(%w[Ruby Rainbows])
       end
     end
 
-    describe 'title' do
-      it 'should translate title' do
-        I18n.locale = :en
-        @page = Page.create(title: {en: 'home', de: 'Haus'})
-        expect(Cavy::Page.find(@page.id).title[I18n.locale.to_s]).to eq('home')
-        I18n.locale = :de
-        Cavy::Page.find(@page.id).set_title 'Hause'
-        expect(Cavy::Page.find(@page.id).title[I18n.locale.to_s]).to eq('Haus')
-        I18n.locale = :en
-        expect(Cavy::Page.find(@page.id).title[I18n.locale.to_s]).to eq('home')
+    describe 'description' do
+      subject(:page) { create(:cavy_page, seo_description: { en: 'foobar' }) }
+
+      it 'has a seo have a description' do
+        expect(page.seo_description['en']).to eq('foobar')
       end
 
-      it 'should be able to have a title' do
-        Page.create(title: {en: 'foo', de: 'das foo'})
-        @page = Page.last
-        I18n.locale = :en
-        expect(@page.title[I18n.locale.to_s]).to eq('foo')
-        @page.destroy
+      it 'is allowed to have no description' do
+        page = create(:cavy_page, seo_description: '')
+        expect(page).to be_valid
       end
     end
+  end
 
-    describe 'routes' do
-      it 'should make a route after saving' do
-        Page.create(title: {en: 'foo', de: 'das foo'})
-        @page = Page.last
-        expect(@page.route).to eq('foo')
-        @page.destroy
-      end
+  describe 'data' do
+    subject(:page) { create(:cavy_page, data: { name: 'ruby rainbows' }) }
 
-      it 'should take care of spaces in routes' do
-        Page.create(title: {en: 'foo bar', de: 'das foo bar'})
-        @page = Page.last
-        expect(@page.route).to eq('foo_bar')
-        @page.destroy
-      end
-
-      it 'should not be able to create two pages with the same route' do
-        @page1 = Page.create(title: {en: 'foo bar', de: 'das foo bar'}, route: 'bar')
-        @page2 = Page.create(title: {en: 'foo bar2', de: 'das foo bar2'}, route: 'bar')
-        expect(@page2).not_to be_valid
-      end
+    it 'accepts a key and value to update data' do
+      page.set_key_value('foo', 'bar')
+      expect(page.data['foo']).to eq('bar')
     end
 
-    describe 'render' do
-      it 'should be able to specify a render page' do
-        Page.create(title: {en: 'foo bar', de: 'das foo bar'}, render: 'foobar')
-        @page = Page.last
-        expect(@page.render).to eq('foobar')
-        @page.destroy
-      end
+    it 'does not override data' do
+      page.set_key_value('foo', 'bar')
+      expect(page.data['name']).to eq('ruby rainbows')
     end
-
-    describe 'seo' do
-      describe 'tags' do
-        it 'should accept no tag string' do
-          @page = Page.create(title: {en: 'foo bar', de: 'das foo bar'}, tag_string: '')
-          expect(@page).to be_valid
-          @page.destroy
-        end
-
-        it 'should accept an string of tags' do
-          @page = Page.create(title: {en: 'foo bar', de: 'das foo bar'}, tag_string: 'Ruby,Rainbows')
-          expect(@page.seo_keywords[I18n.locale.to_s]).to eq(%w(Ruby Rainbows))
-          expect(@page).to be_valid
-          @page.destroy
-        end
-      end
-      describe 'description' do
-        it 'should allow a page to have a description' do
-          @page = Page.create(title: {en: 'foo bar', de: 'das foo bar'}, seo_description: {en: 'foobar'})
-          expect(@page.seo_description['en']).to eq('foobar')
-          expect(@page).to be_valid
-          @page.destroy
-        end
-        it 'should allow a page to have no description' do
-          @page = Page.create(title: {en: 'foo bar', de: 'das foo bar'})
-          expect(@page).to be_valid
-          @page.destroy
-        end
-      end
-    end
-
-    describe 'data' do
-      it 'should accept a hash of data' do
-        @page = Page.create(title: {en: 'foo bar', de: 'das foo bar'}, data: {name: 'ruby rainbows'})
-        expect(@page.data['name']).to eq('ruby rainbows')
-      end
-
-      it 'should accept a key and value to update data' do
-        @page = Page.create(title: {en: 'foo bar', de: 'das foo bar'}, data: {name: 'ruby rainbows'})
-        @page.set_key_value('foo', 'bar')
-        expect(@page.data['foo']).to eq('bar')
-        expect(@page.data['name']).to eq('ruby rainbows')
-      end
-    end
-
   end
 end

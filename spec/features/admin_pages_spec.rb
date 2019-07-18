@@ -2,26 +2,24 @@ require 'spec_helper'
 
 module Cavy
   describe AdminPagesController, type: :request do
-
     describe 'admin/developer/designer user role' do
-
-      before(:each) do
+      before do
         I18n.locale = :en
         log_in('admin')
       end
 
-      after(:each) do
+      after do
         log_out
       end
 
-      it 'should be able to go to the new page page' do
+      it 'is able to go to the new page page' do
         visit '/admin'
         click_link 'admin-pages'
         click_link 'admin-new-page'
         expect(page).to have_content('New Page')
       end
 
-      it 'should be able to add a new page' do
+      it 'is able to add a new page' do
         @page_template = FactoryGirl.create(:cavy_page_template)
         visit '/admin'
         click_link 'admin-pages'
@@ -34,26 +32,26 @@ module Cavy
         expect(@page.render).to eq(@page_template.template)
       end
 
-      it 'should be able to edit page settings' do
+      it 'is able to edit page settings' do
         @page = FactoryGirl.create(:cavy_page)
         @page_template = FactoryGirl.create(:cavy_page_template)
-        expect(@page.render).to_not eq(@page_template.template)
+        expect(@page.render).not_to eq(@page_template.template)
         visit '/admin'
         click_link 'admin-pages'
         click_link "edit-page-#{@page.id}"
         fill_in 'page_tag_string', with: 'foo,bar'
         select @page_template.name, from: :page_cavy_page_template_id
-        fill_in 'page_route', with: 'foos'
+        fill_in 'page_route', with: '/foos'
         fill_in 'page_seo_description_string', with: 'foo'
         click_on 'submit_page_settings'
         @page = Cavy::Page.find(@page.id)
-        expect(@page.seo_keywords[I18n.locale.to_s]).to eq(%w(foo bar))
-        expect(@page.route).to eq('foos')
+        expect(@page.seo_keywords[I18n.locale.to_s]).to eq(%w[foo bar])
+        expect(@page.route).to eq('/foos')
         expect(@page.seo_description[I18n.locale.to_s]).to eq('foo')
         expect(@page.render).to eq(@page_template.template)
       end
 
-      it 'should be able to edit page content' do
+      it 'is able to edit page content' do
         @page = FactoryGirl.create(:cavy_page)
         visit '/admin'
         click_link 'admin-pages'
@@ -70,7 +68,7 @@ module Cavy
         end
       end
 
-      it 'should be able to go to the list of pages' do
+      it 'is able to go to the list of pages' do
         @page = FactoryGirl.create(:cavy_page)
         visit '/admin'
         click_link 'admin-pages'
@@ -79,7 +77,7 @@ module Cavy
         @page.destroy
       end
 
-      it 'should be able to add data' do
+      it 'is able to add data' do
         @page = FactoryGirl.create(:cavy_page)
         visit '/admin'
         click_link 'admin-pages'
@@ -95,20 +93,18 @@ module Cavy
     end
 
     describe 'client user role' do
-
-      before(:each) do
+      before do
         log_in_rack('client')
       end
 
-      after(:each) do
+      after do
         log_out
       end
 
-      it 'should not allow a client to go to the new page route' do
+      it 'does not allow a client to go to the new page route' do
         visit admin_new_page_path
         expect(page).to have_content('Please Sign In to Continue')
       end
     end
-
   end
 end

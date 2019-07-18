@@ -32,10 +32,13 @@ RSpec.configure do |config|
   config.include Cavy::Engine.routes.url_helpers
   config.before(:each, type: :controller) { @routes = Cavy::Engine.routes }
   config.before(:each, type: :routing) { @routes = Cavy::Engine.routes }
+  config.include Requests::JsonHelpers, type: :request
 
   config.before(:each) do
     reset_email
-    DatabaseCleaner.clean_with :truncation, except: [ActiveRecord::InternalMetadata.table_name]
+    DatabaseCleaner.clean_with :truncation, except: [
+      ActiveRecord::InternalMetadata.table_name
+    ]
     DatabaseCleaner.start
     Cavy.at_least_one_user = false
     I18n.default_locale = :en

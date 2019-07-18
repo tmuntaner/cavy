@@ -1,19 +1,26 @@
-default: &default
+development:
   adapter: postgresql
   encoding: unicode
-  pool: 5
-  host: localhost
-  username: cavy
-  password: secret
-
-development:
-  <<: *default
   database: cavy_development
+  host: localhost
+  user: cavy
+  password: secret
+  pool: 5
 
 test:
-  <<: *default
+  adapter: postgresql
+  encoding: unicode
   database: cavy_test
+  host: localhost
+  user: cavy
+  password: secret
+  pool: 5
 
 production:
-  <<: *default
+  adapter: postgresql
+  encoding: unicode
   database: cavy_production
+  host: localhost
+  user: cavy
+  pool: 5
+  password: secret
