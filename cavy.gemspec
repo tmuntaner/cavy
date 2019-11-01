@@ -22,7 +22,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'carrierwave', '~> 1.0'
   s.add_dependency 'coffee-script', '~> 2.4'
   s.add_dependency 'erubis'
-  s.add_dependency 'haml', '~> 4.0'
+  s.add_dependency 'haml', '>= 4', '< 6'
   s.add_dependency 'jquery-rails', '~> 4.2'
   s.add_dependency 'jwt'
   s.add_dependency 'mini_magick', '~> 4.6'
