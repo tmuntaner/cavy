@@ -21,7 +21,6 @@ gem 'debase'
 gem 'ruby-debug-ide'
 
 gem 'capybara-screenshot'
-gem 'capybara-webkit'
 gem 'fog-aws'
 gem 'listen'
 gem 'rspec-rails', group: :test
