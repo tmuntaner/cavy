@@ -2,6 +2,7 @@ require 'cavy/engine'
 require 'cavy/railtie' if defined?(Rails)
 require 'cavy/uploaders/file_uploader'
 require 'cavy/js_web_token'
+require 'haml'
 
 module Cavy
   mattr_accessor :title, :locales, :default_locale,
