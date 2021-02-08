@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
   s.test_files = Dir['spec/**/*']
 
   s.add_dependency 'bcrypt-ruby', '~> 3.1'
-  s.add_dependency 'carrierwave', '~> 1.0'
+  s.add_dependency 'carrierwave', '>= 1', '< 3'
   s.add_dependency 'coffee-script', '~> 2.4'
   s.add_dependency 'erubis'
   s.add_dependency 'haml', '~> 4.0'
